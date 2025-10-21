@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & AI - Class #1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #00d4ff;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .column h3 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .hardware { border-left: 4px solid #00d4ff; padding-left: 30px; }
+        .software { border-left: 4px solid #0ff; padding-left: 30px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .flow-step {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00d4ff;
+            flex: 1;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .arrow {
+            color: #00d4ff;
+            font-size: 2em;
+        }
+
+        .quiz-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-size: 1.3em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .check { color: #00ff88; font-size: 1.5em; }
+        .cross { color: #ff4444; font-size: 1.5em; }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .icon-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 1.2em;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            min-width: 50px;
+        }
+
+        .tip {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .fun-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>Tech & AI – Class #1</h1>
+                <div class="subtitle">Grades 7–8 | Ages 13–14</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+                <div class="quote" style="border: none; margin-top: 60px;">
+                    "Tech isn't just about gadgets — it's about solving real problems."
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Let's Get to Know Each Other! 👋</h2>
+            <ul style="font-size: 1.4em; line-height: 2.2;">
+                <li>What's your name?</li>
+                <li>What's one tech thing you use every single day?</li>
+                <li>What's something cool you want to learn this term?</li>
+                <li>Have you ever tried making something with tech (coding, videos, art, etc.)?</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>So... What Even IS a Computer? 🤔</h2>
+            <p style="font-size: 1.4em;">A computer is an <strong>electronic device</strong> that processes information using instructions. Here's how it works:</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step"><strong>Input</strong><br>Data enters<br>(keyboard, sensors)</div>
+                <div class="arrow">→</div>
+                <div class="flow-step"><strong>Processing</strong><br>CPU executes<br>instructions</div>
+                <div class="arrow">→</div>
+                <div class="flow-step"><strong>Storage</strong><br>Data saved<br>(RAM/SSD)</div>
+                <div class="arrow">→</div>
+                <div class="flow-step"><strong>Output</strong><br>Results shown<br>(screen/speakers)</div>
+            </div>
+
+            <div class="fun-box">
+                <p style="font-size: 1.3em;">💡 <strong>Key Concept:</strong> Computers are <em>deterministic machines</em> — they follow precise logical instructions at incredible speeds (billions per second). They don't actually "think" — they execute programmed algorithms.</p>
+            </div>
+
+            <p class="quote">Every device with a processor — phones, gaming consoles, smartwatches — is fundamentally a computer!</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Why Are Computers Everywhere? 🌍</h2>
+            
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="icon">🎨</span>
+                    <div>
+                        <strong>Create & Design:</strong> Digital art, 3D modeling, music production, video editing, game development
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">💬</span>
+                    <div>
+                        <strong>Communication:</strong> Real-time messaging, video conferencing, social platforms, cloud collaboration
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📚</span>
+                    <div>
+                        <strong>Learning:</strong> Online courses, research databases, educational simulations, interactive tutorials
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">⚙️</span>
+                    <div>
+                        <strong>Automation:</strong> Data processing, task scheduling, workflow optimization, repetitive calculations
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎮</span>
+                    <div>
+                        <strong>Entertainment:</strong> Gaming graphics, streaming services, content creation, virtual experiences
+                    </div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🤖</span>
+                    <div>
+                        <strong>AI & Machine Learning:</strong> Voice recognition (Siri/Alexa), recommendation algorithms, image recognition
+                    </div>
+                </div>
+            </div>
+
+            <p class="quote">Computers power critical systems: medical diagnostics, weather prediction, space exploration, financial markets, and scientific research.</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Hardware vs. Software 🔧💻</h2>
+            
+            <div class="two-column">
+                <div class="column hardware">
+                    <h3>Hardware (Physical Layer)</h3>
+                    <p style="font-size: 1.3em;">Physical components you can <strong>touch</strong>:</p>
+                    <ul style="margin-top: 15px; font-size: 1.2em;">
+                        <li>CPU (Central Processing Unit)</li>
+                        <li>RAM (Random Access Memory)</li>
+                        <li>Storage drives (SSD/HDD)</li>
+                        <li>GPU (Graphics Processing Unit)</li>
+                        <li>Input/Output devices</li>
+                        <li>Motherboard, power supply</li>
+                    </ul>
+                </div>
+                <div class="column software">
+                    <h3>Software (Logical Layer)</h3>
+                    <p style="font-size: 1.3em;">Programs and instructions:</p>
+                    <ul style="margin-top: 15px; font-size: 1.2em;">
+                        <li>Operating Systems (Windows, macOS)</li>
+                        <li>Applications (games, browsers)</li>
+                        <li>Programming languages</li>
+                        <li>Algorithms & data structures</li>
+                        <li>Firmware & drivers</li>
+                        <li>AI models & neural networks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip">
+                💡 <strong>The Relationship:</strong> Software gets compiled into <em>machine code</em> (binary instructions) that hardware can execute. They work together — software tells hardware what to do!
+            </div>
+
+            <p class="quote">Hardware without software is useless. Software without hardware can't run. They're symbiotic!</p>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Inside the Computer: Core Components 🔍</h2>
+            
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Function</th>
+                    <th>Technical Details</th>
+                    <th>Analogy</th>
+                </tr>
+                <tr>
+                    <td><strong>CPU</strong></td>
+                    <td>Executes instructions sequentially</td>
+                    <td>3-5 GHz clock speed<br>Multiple cores (4-16 typical)</td>
+                    <td>🧠 The brain</td>
+                </tr>
+                <tr>
+                    <td><strong>RAM</strong></td>
+                    <td>Volatile temporary memory</td>
+                    <td>8-32 GB typical<br>Cleared when powered off</td>
+                    <td>📝 Active workspace</td>
+                </tr>
+                <tr>
+                    <td><strong>Storage</strong></td>
+                    <td>Non-volatile permanent data</td>
+                    <td>256 GB - 2 TB typical<br>SSD (fast) or HDD (slower)</td>
+                    <td>🗄️ Filing cabinet</td>
+                </tr>
+                <tr>
+                    <td><strong>GPU</strong></td>
+                    <td>Parallel processing for graphics & AI</td>
+                    <td>Thousands of cores<br>Handles matrix operations</td>
+                    <td>🎨 Specialized artist</td>
+                </tr>
+            </table>
+
+            <div class="fun-box">
+                <p style="font-size: 1.2em;"><strong>Performance Tips:</strong> More RAM = better multitasking. Faster CPU = quicker processing. Better GPU = smoother graphics and faster AI/rendering tasks.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Input & Output: The I/O Interface 🎤🔊</h2>
+            
+            <div class="two-column">
+                <div class="column hardware">
+                    <h3>Input Devices</h3>
+                    <p style="font-size: 1.3em;">Convert external signals into digital data:</p>
+                    <ul style="margin-top: 15px; font-size: 1.2em;">
+                        <li>⌨️ Keyboard — character input</li>
+                        <li>🖱️ Mouse — pointer coordinates</li>
+                        <li>🎤 Microphone — audio waveforms</li>
+                        <li>📷 Camera — captures pixel arrays</li>
+                        <li>👆 Touchscreen — capacitive sensing</li>
+                        <li>🎮 Game controller — button states</li>
+                    </ul>
+                </div>
+                <div class="column software">
+                    <h3>Output Devices</h3>
+                    <p style="font-size: 1.3em;">Convert digital data into perceivable forms:</p>
+                    <ul style="margin-top: 15px; font-size: 1.2em;">
+                        <li>🖥️ Display — renders pixels</li>
+                        <li>🔊 Speakers — produces sound waves</li>
+                        <li>🖨️ Printer — physical documents</li>
+                        <li>📳 Haptic feedback — vibrations</li>
+                        <li>💡 LED indicators — status lights</li>
+                        <li>🥽 VR headset — immersive visuals</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fun-box">
+                <p style="font-size: 1.2em;"><strong>Fun Fact:</strong> Modern smartphones are bidirectional I/O devices — they both receive input (touch, voice) and provide output (screen, sound, vibration) simultaneously!</p>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Quick Quiz! Test Your Knowledge 🧠</h2>
+            
+            <div class="quiz-item">
+                <span>1. Smartphones contain CPU, GPU, RAM, and storage — making them full computers.</span>
+                <span class="check">✅ TRUE</span>
+            </div>
+            <div class="quiz-item">
+                <span>2. Computers can think creatively and understand context like humans do.</span>
+                <span class="cross">❌ FALSE — They execute programmed logic</span>
+            </div>
+            <div class="quiz-item">
+                <span>3. RAM is volatile memory that loses data when powered off.</span>
+                <span class="check">✅ TRUE</span>
+            </div>
+            <div class="quiz-item">
+                <span>4. Software can run independently without any hardware.</span>
+                <span class="cross">❌ FALSE — Software needs hardware to execute</span>
+            </div>
+            <div class="quiz-item">
+                <span>5. Voice assistants like Siri use machine learning algorithms to process speech.</span>
+                <span class="check">✅ TRUE</span>
+            </div>
+            <div class="quiz-item">
+                <span>6. A GPU is only useful for gaming and has no other applications.</span>
+                <span class="cross">❌ FALSE — Also used for AI, video editing, scientific computing</span>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Human Brain vs. Computer: A Comparison 🥊</h2>
+            
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>🧠 Human Brain</th>
+                    <th>💻 Computer</th>
+                </tr>
+                <tr>
+                    <td><strong>Processing Speed</strong></td>
+                    <td>Relatively slow (~200 Hz)</td>
+                    <td>Extremely fast (3-5 GHz)</td>
+                </tr>
+                <tr>
+                    <td><strong>Parallel Processing</strong></td>
+                    <td>86 billion neurons working together</td>
+                    <td>4-16 CPU cores, thousands of GPU cores</td>
+                </tr>
+                <tr>
+                    <td><strong>Creativity</strong></td>
+                    <td>High — makes novel connections</td>
+                    <td>None — follows algorithms</td>
+                </tr>
+                <tr>
+                    <td><strong>Energy Efficiency</strong></td>
+                    <td>~20 watts (very efficient)</td>
+                    <td>100-1000+ watts</td>
+                </tr>
+                <tr>
+                    <td><strong>Learning Style</strong></td>
+                    <td>Few examples with context</td>
+                    <td>Requires massive datasets</td>
+                </tr>
+                <tr>
+                    <td><strong>Arithmetic</strong></td>
+                    <td>Slow and error-prone</td>
+                    <td>Perfect accuracy at high speed</td>
+                </tr>
+            </table>
+
+            <div class="fun-box">
+                <h3 style="color: #00d4ff;">🏆 The Verdict:</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">Neither is "better" — they're complementary! Humans excel at creativity, context, and adaptability. Computers excel at speed, precision, and data processing. Together, they're powerful! 🤝</p>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Binary: The Computer's Language 💻</h2>
+            
+            <div class="fun-box">
+                <p style="font-size: 1.3em;"><strong>Why Binary (0s and 1s)?</strong></p>
+                <p style="font-size: 1.2em; margin-top: 15px;">Computers use transistors (tiny electronic switches) that have two states: <strong>ON (1)</strong> or <strong>OFF (0)</strong>. Everything in a computer — text, images, videos, programs — is represented using just these two digits!</p>
+            </div>
+
+            <h3>How Binary Works:</h3>
+            <div class="two-column" style="margin-top: 20px;">
+                <div>
+                    <h4 style="color: #0ff;">Numbers in Binary</h4>
+                    <p style="font-size: 1.2em; margin-top: 10px;">
+                        Decimal 5 = Binary 101<br>
+                        Decimal 10 = Binary 1010<br>
+                        Decimal 255 = Binary 11111111
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: #0ff;">Text in Binary</h4>
+                    <p style="font-size: 1.2em; margin-top: 10px;">
+                        'A' = 01000001<br>
+                        'B' = 01000010<br>
+                        Each character has a code!
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">Data Units:</h3>
+            <ul style="font-size: 1.2em; margin-top: 15px;">
+                <li><strong>Bit:</strong> Single 0 or 1</li>
+                <li><strong>Byte:</strong> 8 bits (can represent 256 values)</li>
+                <li><strong>Kilobyte (KB):</strong> 1,024 bytes</li>
+                <li><strong>Megabyte (MB):</strong> 1,024 KB (a photo is ~5 MB)</li>
+                <li><strong>Gigabyte (GB):</strong> 1,024 MB (a movie is ~4 GB)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Homework Challenges! 📝</h2>
+            
+            <h3>🔍 Investigation Tasks:</h3>
+            <ul style="font-size: 1.3em; margin-bottom: 40px;">
+                <li><strong>System Specs:</strong> Find your device's CPU model, RAM amount, storage capacity, and GPU (check Settings → About or System Info)</li>
+                <li><strong>Data Journey:</strong> Map out how a photo travels from your phone's camera → cloud storage → friend's device. Include all the steps!</li>
+                <li><strong>Binary Challenge:</strong> Convert your age to binary. Then try to decode: 01001000 01101001 (Hint: look up ASCII table)</li>
+            </ul>
+
+            <h3>🤔 Think About:</h3>
+            <ul style="font-size: 1.3em;">
+                <li>Why do computers process data so much faster than humans but struggle with creativity?</li>
+                <li>What's one new input or output device you wish existed? What would it do?</li>
+                <li>Research one real-world application of AI (in medicine, education, or environment)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Next Time... 🚀</h2>
+            
+            <div class="fun-box" style="padding: 50px;">
+                <h1 style="font-size: 2.8em; text-align: center; margin-bottom: 30px; color: #00d4ff;">How Do Computers Think? 🧠⚡</h1>
+                
+                <p style="font-size: 1.4em; text-align: center; line-height: 1.8;">
+                    We'll explore how computers use 1s and 0s to do everything, learn about logic gates (the tiny building blocks), and even build our own simple circuits!
+                </p>
+
+                <p style="font-size: 1.5em; text-align: center; margin-top: 40px; color: #0ff;">
+                    Get ready to think like a computer! 🤖💭
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1 style="font-size: 3.5em;">Thanks Everyone! 🎉</h1>
+                <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">— Mr. Yousef Younis</div>
+                <div class="tagline">Stay curious. Stay creative. Stay awesome! ✨</div>
+                
+                <div style="margin-top: 60px; font-size: 1.3em; color: #00d4ff;">
+                    <p>Got questions? Let's chat! 💬</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+    
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Top</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Track which slide is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
