@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & AI Classes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .grade-section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .grade-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .grade-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .grade-header:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+        }
+
+        .grade-title {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+            font-size: 1.2em;
+        }
+
+        .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .class-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .class-list.open {
+            max-height: 1000px;
+        }
+
+        .class-content {
+            padding: 25px;
+        }
+
+        .class-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.2s;
+        }
+
+        .class-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .class-item a {
+            text-decoration: none;
+            color: #495057;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        .class-item a:hover {
+            color: #667eea;
+        }
+
+        .class-number {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Tech & AI Classes</h1>
+            <p class="subtitle">Explore coding, technology, and artificial intelligence</p>
+        </header>
+
+        <!-- Grade 3-4 -->
+        <div class="grade-section">
+            <div class="grade-header" onclick="toggleSection('grade34')">
+                <span class="grade-title">Grade 3-4</span>
+                <span class="arrow" id="arrow-grade34">▼</span>
+            </div>
+            <div class="class-list" id="grade34">
+                <div class="class-content">
+                    <div class="class-item">
+                        <a href="gr34-class1.html"><span class="class-number">Class #1:</span> Introduction to Computers</a>
+                    </div>
+                    <div class="class-item">
+                        <a href="gr34-class2.html"><span class="class-number">Class #2:</span> Coding Basics</a>
+                    </div>
+                    <!-- Add more classes here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade 5-6 -->
+        <div class="grade-section">
+            <div class="grade-header" onclick="toggleSection('grade56')">
+                <span class="grade-title">Grade 5-6</span>
+                <span class="arrow" id="arrow-grade56">▼</span>
+            </div>
+            <div class="class-list" id="grade56">
+                <div class="class-content">
+                    <div class="class-item">
+                        <a href="gr56-class1.html"><span class="class-number">Class #1:</span> Digital Citizenship</a>
+                    </div>
+                    <div class="class-item">
+                        <a href="gr56-class2.html"><span class="class-number">Class #2:</span> Introduction to Programming</a>
+                    </div>
+                    <!-- Add more classes here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade 7-8 -->
+        <div class="grade-section">
+            <div class="grade-header" onclick="toggleSection('grade78')">
+                <span class="grade-title">Grade 7-8</span>
+                <span class="arrow" id="arrow-grade78">▼</span>
+            </div>
+            <div class="class-list" id="grade78">
+                <div class="class-content">
+                    <div class="class-item">
+                        <a href="gr78-class1.html"><span class="class-number">Class #1:</span> What's a Computer?</a>
+                    </div>
+                    <div class="class-item">
+                        <a href="gr78-class2.html"><span class="class-number">Class #2:</span> Web Development Basics</a>
+                    </div>
+                    <!-- Add more classes here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade 10-11-12 -->
+        <div class="grade-section">
+            <div class="grade-header" onclick="toggleSection('grade101112')">
+                <span class="grade-title">Grade 10-11-12</span>
+                <span class="arrow" id="arrow-grade101112">▼</span>
+            </div>
+            <div class="class-list" id="grade101112">
+                <div class="class-content">
+                    <div class="class-item">
+                        <a href="gr101112-class1.html"><span class="class-number">Class #1:</span> Introduction to AI</a>
+                    </div>
+                    <div class="class-item">
+                        <a href="gr101112-class2.html"><span class="class-number">Class #2:</span> Advanced Programming</a>
+                    </div>
+                    <!-- Add more classes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const arrow = document.getElementById('arrow-' + id);
+            
+            section.classList.toggle('open');
+            arrow.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
