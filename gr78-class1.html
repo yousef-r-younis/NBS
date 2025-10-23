@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -313,6 +314,106 @@
 
         em {
             color: #00d4ff;
+        }
+
+        /* Binary Form Styling */
+        .binary-form {
+            max-width: 1280px;
+            width: 95%;
+            margin: 20px auto;
+            background: rgba(0, 212, 255, 0.05);
+            padding: 3rem 4rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #00d4ff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            background: rgba(26, 26, 46, 0.8);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .binary-output {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            word-break: break-all;
+            min-height: 60px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: #00ff88;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        #submitBtn {
+            background: #00d4ff;
+            color: #1a1a2e;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #submitBtn:hover {
+            background: #00b3ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        #submitBtn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #statusMsg {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            min-height: 1.5em;
         }
     </style>
 </head>
@@ -703,6 +804,46 @@
                 </div>
             </div>
         </div>
+
+        <!-- Binary Name Conversion Exercise -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Convert Your Name to Binary! 🔢</h2>
+            
+            <div class="binary-form">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required oninput="updateBinary()" placeholder="Enter your first name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required oninput="updateBinary()" placeholder="Enter your last name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gradeSection">Grade & Section</label>
+                        <select id="gradeSection" required>
+                            <option value="">Select your grade & section</option>
+                            <option value="7A">Grade 7A</option>
+                            <option value="7B">Grade 7B</option>
+                            <option value="8A">Grade 8A</option>
+                            <option value="8B">Grade 8B</option>
+                            <option value="8C">Grade 8C</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Name in Binary:</label>
+                        <div id="binaryOutput" class="binary-output"></div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+                    <div id="statusMsg" style="margin-top: 15px;"></div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
@@ -768,6 +909,77 @@
                 document.querySelector('.scroll-indicator').style.opacity = '0.6';
             }
         });
+    // Binary conversion function
+    function textToBinary(text) {
+        return text.split('').map(char => {
+            return char.charCodeAt(0).toString(2).padStart(8, '0');
+        }).join(' ');
+    }
+
+    // Update binary output in real-time
+    function updateBinary() {
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const binaryOutput = document.getElementById('binaryOutput');
+        const fullName = (firstName + ' ' + lastName).trim();
+        if (fullName) {
+            binaryOutput.textContent = textToBinary(fullName);
+        } else {
+            binaryOutput.textContent = '';
+        }
+    }
+
+    // Handle form submission
+    function submitForm(event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        const form = event.target;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        // Create a hidden iframe for submission
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        // Handle response from iframe
+        iframe.onload = function() {
+            statusMsg.textContent = 'Successfully submitted!';
+            statusMsg.style.color = '#00ff00';
+            form.reset();
+            document.getElementById('binaryOutput').textContent = '';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+            setTimeout(() => document.body.removeChild(iframe), 1000);
+        };
+
+        // Create form data
+        const formData = new FormData();
+        formData.append('firstName', document.getElementById('firstName').value);
+        formData.append('lastName', document.getElementById('lastName').value);
+        formData.append('binaryConversion', document.getElementById('binaryOutput').textContent);
+        formData.append('gradeSection', document.getElementById('gradeSection').value);
+
+        // Create a temporary form in the iframe
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = 'https://script.google.com/macros/s/AKfycby5UTQ7ZSt5v9iltkFFYT73RKbMrteH7Zd1mcy1JzT-6jO3Q7ppyld0-YyT5KWvwdZZ/exec';
+        
+        // Add form data as hidden inputs
+        for(let pair of formData.entries()) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = pair[0];
+            input.value = pair[1];
+            tempForm.appendChild(input);
+        }
+
+        // Submit the form through iframe
+        iframe.contentDocument.body.appendChild(tempForm);
+        tempForm.submit();
+    }
     </script>
-</body>
-</html>
+    </body>
+    </html>
