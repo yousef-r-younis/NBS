@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 AI Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            min-height: 100vh;
+            padding: 60px;
+            position: relative;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 4em;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-size: 3em;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .bullet {
+            font-size: 1.8em;
+            margin: 25px 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 15px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 0 5px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            color: white;
+            font-size: 1.5em;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .icon-item {
+            text-align: center;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .icon-item .emoji {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .title-slide {
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 2em;
+            color: white;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tech-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, white 48%, white 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, white 48%, white 52%, transparent 52%);
+            background-size: 60px 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-pattern"></div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="title-slide">
+            <h1>🤖 Welcome to AI Course!</h1>
+            <div class="subtitle">Grade 7 • Exploring the Future of Technology</div>
+            <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">Your child's journey into artificial intelligence</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: What is a Computer -->
+    <div class="slide">
+        <h2>💻 What is a Computer?</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">🔍</span> Understanding the basics of computing</div>
+            <div class="bullet"><span class="emoji">⚡</span> Hardware vs. Software</div>
+            <div class="bullet"><span class="emoji">🧠</span> How computers process information</div>
+            <div class="bullet"><span class="emoji">🌐</span> Real-world applications</div>
+        </div>
+    </div>
+
+    <!-- Slide 3: How Do Computers Think -->
+    <div class="slide">
+        <h2>🤔 How Do Computers Think?</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">1️⃣</span> Binary language (0s and 1s)</div>
+            <div class="bullet"><span class="emoji">📊</span> Logic gates and algorithms</div>
+            <div class="bullet"><span class="emoji">⚙️</span> Following instructions step-by-step</div>
+            <div class="bullet"><span class="emoji">🎯</span> Problem-solving processes</div>
+        </div>
+    </div>
+
+    <!-- Slide 4: What is AI -->
+    <div class="slide">
+        <h2>🌟 What is AI?</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">🤖</span> Artificial Intelligence explained</div>
+            <div class="bullet"><span class="emoji">📱</span> AI in everyday life (Siri, recommendations)</div>
+            <div class="bullet"><span class="emoji">🎮</span> Smart technology around us</div>
+            <div class="bullet"><span class="emoji">🚀</span> The future of AI</div>
+        </div>
+    </div>
+
+    <!-- Slide 5: How Do Machines Learn -->
+    <div class="slide">
+        <h2>📚 How Do Machines Learn?</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">🧪</span> Machine Learning basics</div>
+            <div class="bullet"><span class="emoji">📈</span> Learning from data and patterns</div>
+            <div class="bullet"><span class="emoji">🎓</span> Training AI models</div>
+            <div class="bullet"><span class="emoji">✨</span> Making predictions</div>
+        </div>
+    </div>
+
+    <!-- Slide 6: How Do Machines Create -->
+    <div class="slide">
+        <h2>🎨 How Do Machines Create?</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">🖼️</span> AI-generated art and images</div>
+            <div class="bullet"><span class="emoji">✍️</span> Writing and text generation</div>
+            <div class="bullet"><span class="emoji">🎵</span> Music and creative AI</div>
+            <div class="bullet"><span class="emoji">💡</span> The creative process in machines</div>
+        </div>
+    </div>
+
+    <!-- Slide 7: The Brain Behind the Bot -->
+    <div class="slide">
+        <h2>🧠 The Brain Behind the Bot</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">🕸️</span> Neural networks explained</div>
+            <div class="bullet"><span class="emoji">🔗</span> How AI mimics the human brain</div>
+            <div class="bullet"><span class="emoji">⚡</span> Deep learning concepts</div>
+            <div class="bullet"><span class="emoji">🎯</span> Decision-making in AI</div>
+        </div>
+    </div>
+
+    <!-- Slide 8: ChatGPT in Schools -->
+    <div class="slide">
+        <h2>🎓 ChatGPT in Schools</h2>
+        <div class="content">
+            <div class="bullet"><span class="emoji">✅</span> Responsible AI use</div>
+            <div class="bullet"><span class="emoji">🛡️</span> Digital citizenship and ethics</div>
+            <div class="bullet"><span class="emoji">📝</span> AI as a learning tool</div>
+            <div class="bullet"><span class="emoji">⚖️</span> Understanding limitations and biases</div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Programming -->
+    <div class="slide">
+        <h2>👨‍💻 Introduction to Programming</h2>
+        <div class="content">
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">🐍</span>
+                    <div>Python Basics</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🌐</span>
+                    <div>Web Development</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">💻</span>
+                    <div>Coding Projects</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🎯</span>
+                    <div>Problem Solving</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Closing -->
+    <div class="slide">
+        <div class="title-slide">
+            <h1>🚀 Ready for the Future!</h1>
+            <div class="content" style="margin-top: 40px;">
+                <div class="bullet" style="text-align: center;"><span class="emoji">🎯</span> Hands-on learning experience</div>
+                <div class="bullet" style="text-align: center;"><span class="emoji">🤝</span> Collaborative projects</div>
+                <div class="bullet" style="text-align: center;"><span class="emoji">🌟</span> Future-ready skills</div>
+                <div class="subtitle" style="color: #667eea; margin-top: 30px; text-shadow: none;">Questions?</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">
+        <span id="current">1</span> / <span id="total">10</span>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Click to advance
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+                nextSlide();
+            }
+        });
+    </script>
+</body>
+</html>
