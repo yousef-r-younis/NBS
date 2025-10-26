@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: What is AI?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #00d4ff;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .fun-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .tip {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .big-idea-card {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            margin: 15px 0;
+        }
+
+        .big-idea-card h4 {
+            margin-top: 0;
+            color: #0ff;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .flow-step {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00d4ff;
+            flex: 1;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .arrow {
+            color: #00d4ff;
+            font-size: 2em;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>Chapter 1: What is AI? 🧠</h1>
+                <div class="subtitle">Grades 10–12 | Ages 15–18</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+                <div class="quote" style="border: none; margin-top: 60px;">
+                    "Artificial Intelligence isn't about replacing human thinking — it's about augmenting human capability."
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is AI? - Definition -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🤖 Lesson 1: What Is Artificial Intelligence?</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Breaking Down "AI"</h3>
+                <div class="two-column" style="margin-top: 20px;">
+                    <div>
+                        <h4>Artificial</h4>
+                        <p style="font-size: 1.2em;">Not natural — created by humans, not occurring in nature</p>
+                    </div>
+                    <div>
+                        <h4>Intelligence</h4>
+                        <p style="font-size: 1.2em;">The ability to learn, understand, reason, and solve problems</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>The Definition:</h3>
+            <p style="font-size: 1.35em; line-height: 1.8;">
+                <strong>Artificial Intelligence</strong> is a computer program created by humans that performs tasks requiring intelligence — similar to how humans think, learn, or act. AI systems can perceive their environment, make decisions, and adapt based on data.
+            </p>
+
+            <div class="tip">
+                💡 <strong>Key Insight:</strong> AI doesn't actually "think" like humans. It processes vast amounts of data through mathematical algorithms to simulate intelligent behavior.
+            </div>
+        </div>
+
+        <!-- Slide 3: Examples of AI -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>AI in Your Daily Life 🌐</h2>
+            
+            <p style="font-size: 1.3em;">AI is everywhere — often invisible but constantly working:</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>🗺️ Digital Maps</h4>
+                    <p>Google Maps uses AI to analyze traffic patterns, predict delays, and suggest optimal routes in real-time.</p>
+                </div>
+                <div class="card">
+                    <h4>🌤️ Weather Apps</h4>
+                    <p>AI models process atmospheric data to predict weather patterns with increasing accuracy.</p>
+                </div>
+                <div class="card">
+                    <h4>🎵 Streaming Services</h4>
+                    <p>Spotify, Netflix, YouTube use AI recommendation algorithms to personalize content.</p>
+                </div>
+                <div class="card">
+                    <h4>🚗 Self-Driving Cars</h4>
+                    <p>Tesla's Autopilot uses computer vision and machine learning to navigate roads autonomously.</p>
+                </div>
+                <div class="card">
+                    <h4>💬 Chatbots & Assistants</h4>
+                    <p>ChatGPT, Siri, Alexa use natural language processing to understand and respond to queries.</p>
+                </div>
+                <div class="card">
+                    <h4>📱 Face Recognition</h4>
+                    <p>Your phone uses AI to identify your face and unlock securely.</p>
+                </div>
+            </div>
+
+            <p class="quote">AI has transitioned from science fiction to an integral part of modern technology infrastructure.</p>
+        </div>
+
+        <!-- Slide 4: The 5 Big Ideas - Part 1 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>The 5 Big Ideas of AI (Part 1) 🎯</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Every AI system operates using these fundamental concepts:</p>
+
+            <div class="big-idea-card">
+                <h4>1️⃣ Perception</h4>
+                <p style="font-size: 1.2em;">The ability to <strong>sense and interpret</strong> the world using sensors, cameras, microphones, or data inputs.</p>
+                <p style="font-size: 1.15em; margin-top: 10px; color: #aaa;"><em>Example:</em> Self-driving cars use cameras, radar, and LiDAR to "see" pedestrians, other vehicles, and road conditions.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>2️⃣ Representation & Reasoning</h4>
+                <p style="font-size: 1.2em;">Making sense of perceived data by organizing it into <strong>representations</strong> (models of the world) and using <strong>logic</strong> to decide actions.</p>
+                <p style="font-size: 1.15em; margin-top: 10px; color: #aaa;"><em>Example:</em> When a car detects a pedestrian crossing, it reasons: "Object ahead = pedestrian. Pedestrian in crosswalk = I must stop."</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>3️⃣ Learning</h4>
+                <p style="font-size: 1.2em;">Improving performance over time by <strong>learning from data</strong> and experience, without being explicitly programmed for every scenario.</p>
+                <p style="font-size: 1.15em; margin-top: 10px; color: #aaa;"><em>Example:</em> Spam filters learn which emails are spam by analyzing thousands of examples, getting better over time.</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: The 5 Big Ideas - Part 2 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>The 5 Big Ideas of AI (Part 2) 🎯</h2>
+
+            <div class="big-idea-card">
+                <h4>4️⃣ Natural Interaction</h4>
+                <p style="font-size: 1.2em;">Communicating with humans or the environment through natural interfaces like <strong>speech, text, gestures,</strong> or <strong>visual displays</strong>.</p>
+                <p style="font-size: 1.15em; margin-top: 10px; color: #aaa;"><em>Example:</em> Voice assistants understand spoken commands and respond with synthesized speech. Chatbots converse in natural language.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>5️⃣ Societal Impact</h4>
+                <p style="font-size: 1.2em;">AI affects society in <strong>profound ways</strong> — both positive (medical diagnostics, accessibility) and negative (job displacement, bias, privacy concerns).</p>
+                <p style="font-size: 1.15em; margin-top: 10px; color: #aaa;"><em>Example:</em> Self-driving cars could reduce traffic deaths but also eliminate millions of driving jobs. AI medical tools improve diagnoses but raise questions about data privacy.</p>
+            </div>
+
+            <div class="tip">
+                🎓 <strong>Critical Thinking:</strong> Every AI application involves ethical considerations. Who benefits? Who might be harmed? What are the long-term consequences?
+            </div>
+        </div>
+
+        <!-- Slide 6: Case Study Activity -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>📚 Case Study Activity</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Your Task: Analyze Real AI Systems</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">Choose one of these AI systems and explain how it demonstrates each of the <strong>5 Big Ideas</strong>:</p>
+            </div>
+
+            <div class="three-column">
+                <div class="card">
+                    <h4>💬 ChatGPT</h4>
+                    <p>Large language model for conversations</p>
+                </div>
+                <div class="card">
+                    <h4>🗣️ Siri / Alexa</h4>
+                    <p>Voice-activated assistants</p>
+                </div>
+                <div class="card">
+                    <h4>🏥 AI in Medicine</h4>
+                    <p>Diagnostic imaging analysis</p>
+                </div>
+                <div class="card">
+                    <h4>🎮 AI in Gaming</h4>
+                    <p>NPCs with adaptive behavior</p>
+                </div>
+                <div class="card">
+                    <h4>📸 Instagram Filters</h4>
+                    <p>Face detection & AR effects</p>
+                </div>
+                <div class="card">
+                    <h4>🛒 Amazon</h4>
+                    <p>Product recommendations</p>
+                </div>
+            </div>
+
+            <div class="tip">
+                For your chosen system, answer: How does it <strong>perceive</strong>? How does it <strong>reason</strong>? How does it <strong>learn</strong>? How does it <strong>interact</strong>? What's its <strong>impact</strong>?
+            </div>
+        </div>
+
+        <!-- Slide 7: Lesson 2 - Can Machines Learn? -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🤖 Lesson 2: Can Machines Really Learn?</h2>
+            
+            <h3>The Key Concept:</h3>
+            <p style="font-size: 1.35em; line-height: 1.8;">
+                Humans <strong>program</strong> computers with algorithms, but machines become "intelligent" through <strong>learning from data</strong> rather than explicit instructions for every scenario.
+            </p>
+
+            <div class="fun-box">
+                <h4>Traditional Programming vs. Machine Learning</h4>
+                <div class="two-column" style="margin-top: 20px;">
+                    <div>
+                        <h4 style="color: #0ff;">Traditional Programming</h4>
+                        <p style="font-size: 1.15em;">Programmer writes explicit rules:<br>"IF temperature > 30°C, THEN turn on AC"</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #0ff;">Machine Learning</h4>
+                        <p style="font-size: 1.15em;">Algorithm learns patterns from data:<br>"Here are 10,000 examples — figure out the pattern yourself"</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="quote">Machine learning enables computers to improve at tasks through experience, without being explicitly programmed for every possible situation.</p>
+        </div>
+
+        <!-- Slide 8: ML Process -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>The Machine Learning Process 🔄</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <strong>1. Dataset</strong><br><br>
+                    Training examples with inputs and correct outputs
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-step">
+                    <strong>2. Learning Algorithm</strong><br><br>
+                    Finds patterns and relationships in data
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-step">
+                    <strong>3. Model</strong><br><br>
+                    Mathematical representation of learned patterns
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-step">
+                    <strong>4. Prediction</strong><br><br>
+                    Makes decisions on new, unseen data
+                </div>
+            </div>
+
+            <h3>Example: Email Spam Filter</h3>
+            <ul style="font-size: 1.2em; margin-top: 20px;">
+                <li><strong>Dataset:</strong> 10,000 emails labeled as "spam" or "not spam"</li>
+                <li><strong>Algorithm:</strong> Analyzes word patterns, sender info, links</li>
+                <li><strong>Model:</strong> Learns that certain words/patterns indicate spam</li>
+                <li><strong>Prediction:</strong> Classifies new emails as spam or legitimate</li>
+            </ul>
+
+            <div class="tip">
+                💡 The model gets better with more data. This is why AI systems improve over time!
+            </div>
+        </div>
+
+        <!-- Slide 9: Google Quick Draw -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Case Study: Google Quick, Draw! 🎨</h2>
+            
+            <p style="font-size: 1.3em;">Google's Quick, Draw! is a game where users draw objects and AI tries to guess what they're drawing.</p>
+
+            <h3>How It Works:</h3>
+            <ul style="font-size: 1.25em;">
+                <li>Collected <strong>millions of doodles</strong> from players worldwide</li>
+                <li>Trained a neural network to recognize patterns in how people draw different objects</li>
+                <li>Learned that people draw houses, cats, trees differently across cultures</li>
+                <li>Uses this knowledge to predict what you're drawing in real-time</li>
+            </ul>
+
+            <h3 style="margin-top: 30px;">The Learning Process:</h3>
+            <div class="fun-box">
+                <p style="font-size: 1.2em;">
+                    <strong>Dataset:</strong> 50 million+ drawings of 345 categories<br>
+                    <strong>Learning:</strong> Neural network identifies common features (loops, lines, angles)<br>
+                    <strong>Prediction:</strong> Matches your drawing to learned patterns<br>
+                    <strong>Improvement:</strong> Gets better as more people play
+                </p>
+            </div>
+
+            <p class="quote">This demonstrates how AI learns from human-generated data to make increasingly accurate predictions.</p>
+        </div>
+
+        <!-- Slide 10: Bias in AI -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚠️ The Problem of Bias in AI</h2>
+            
+            <p style="font-size: 1.3em;">AI systems can inherit and amplify biases present in their training data.</p>
+
+            <h3>Types of Bias in Quick, Draw!:</h3>
+
+            <div class="big-idea-card">
+                <h4>Cultural Bias</h4>
+                <p style="font-size: 1.15em;">If most drawings of "house" come from one region, AI may not recognize architectural styles from other cultures (e.g., Western houses vs. Asian pagodas vs. African huts).</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>Style Bias</h4>
+                <p style="font-size: 1.15em;">If training data contains mostly simple stick figures, detailed artistic drawings might not be recognized.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>Age Bias</h4>
+                <p style="font-size: 1.15em;">Children and adults draw differently. If the dataset skews toward one age group, recognition accuracy suffers for others.</p>
+            </div>
+
+            <div class="tip">
+                🚨 <strong>Critical Issue:</strong> Biased AI systems can perpetuate discrimination in hiring, lending, criminal justice, and healthcare. Data diversity is crucial for fairness!
+            </div>
+        </div>
+
+        <!-- Slide 11: AI vs Non-AI -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>AI Tools vs. Non-AI Tools 🔍</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Not every software tool uses AI. Here's the difference:</p>
+
+            <table>
+                <tr>
+                    <th>AI Tools (Learn & Adapt)</th>
+                    <th>Non-AI Tools (Fixed Rules)</th>
+                </tr>
+                <tr>
+                    <td>Siri / Alexa — Learn your voice patterns</td>
+                    <td>Calculator — Same formula every time</td>
+                </tr>
+                <tr>
+                    <td>Netflix Recommendations — Adapt to your tastes</td>
+                    <td>Spell Checker — Fixed dictionary rules</td>
+                </tr>
+                <tr>
+                    <td>Face Recognition — Improves with more photos</td>
+                    <td>Password Validator — Checks fixed criteria</td>
+                </tr>
+                <tr>
+                    <td>Spam Filter — Learns new spam patterns</td>
+                    <td>Text Editor — Same features always</td>
+                </tr>
+                <tr>
+                    <td>ChatGPT — Generates contextual responses</td>
+                    <td>Search Engine (basic) — Keyword matching</td>
+                </tr>
+            </table>
+
+            <div class="fun-box">
+                <h4>The Key Difference:</h4>
+                <p style="font-size: 1.2em; margin-top: 15px;">
+                    <strong>AI tools</strong> use machine learning to improve and adapt based on data.<br>
+                    <strong>Non-AI tools</strong> follow predetermined logic that doesn't change.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Lesson 3 - What is an Algorithm? -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚙️ Lesson 3: What Is an Algorithm?</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Definition</h3>
+                <p style="font-size: 1.3em; margin-top: 15px;">
+                    An <strong>algorithm</strong> is a step-by-step set of instructions or rules designed to solve a problem or accomplish a specific goal.
+                </p>
+            </div>
+
+            <h3>The 3 Parts of Every Algorithm:</h3>
+
+            <div class="flow-diagram" style="margin-top: 30px;">
+                <div class="flow-step">
+                    <strong>1. Inputs</strong><br><br>
+                    Data or materials that go IN
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-step">
+                    <strong>2. Process</strong><br><br>
+                    The steps or operations performed
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-step">
+                    <strong>3. Outputs</strong><br><br>
+                    The result or goal achieved
+                </div>
+            </div>
+
+            <p class="quote">Algorithms aren't just for computers — any set of instructions is an algorithm!</p>
+        </div>
+
+        <!-- Slide 13: Algorithm Examples -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Everyday Algorithms 📋</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Algorithms exist everywhere in daily life:</p>
+
+            <div class="three-column">
+                <div class="card">
+                    <h4>🍰 Baking a Cake</h4>
+                    <p><strong>Inputs:</strong> Flour, eggs, sugar, milk</p>
+                    <p><strong>Process:</strong> Mix, pour, bake at 180°C</p>
+                    <p><strong>Output:</strong> Delicious cake!</p>
+                </div>
+                <div class="card">
+                    <h4>🌱 Planting a Seed</h4>
+                    <p><strong>Inputs:</strong> Seed, soil, water, sunlight</p>
+                    <p><strong>Process:</strong> Dig hole, plant, water daily</p>
+                    <p><strong>Output:</strong> Growing plant!</p>
+                </div>
+                <div class="card">
+                    <h4>🧼 Washing Hands</h4>
+                    <p><strong>Inputs:</strong> Hands, soap, water</p>
+                    <p><strong>Process:</strong> Wet, lather, scrub 20 seconds, rinse</p>
+                    <p><strong>Output:</strong> Clean hands!</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">Computers and Algorithms:</h3>
+            <div class="tip">
+                <p style="font-size: 1.2em;">
+                    Computers execute algorithms written in programming languages (Python, JavaScript, Java, etc.). They follow instructions <strong>literally</strong> — only what's programmed, nothing more.
+                </p>
+                <p style="font-size: 1.2em; margin-top: 15px;">
+                    This is why programming requires precision. A computer won't "figure out what you meant" — it does exactly what you tell it to do!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Optimized Algorithms -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Optimized Algorithms: Different Goals 🎯</h2>
+            
+            <p style="font-size: 1.3em;">The same task can have different algorithms depending on what you're optimizing for:</p>
+
+            <h3>Example: Recipe for Making Breakfast</h3>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div class="comparison-box">
+                    <h4 style="color: #0ff;">Optimized for Speed ⚡</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li>Microwave oatmeal (2 min)</li>
+                        <li>Instant coffee</li>
+                        <li>Pre-cut fruit</li>
+                        <li>No cleanup during cooking</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #aaa;">Result: 5-minute breakfast</p>
+                </div>
+                <div class="comparison-box">
+                    <h4 style="color: #0ff;">Optimized for Taste 😋</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li>Fresh-ground coffee beans</li>
+                        <li>Homemade pancakes from scratch</li>
+                        <li>Caramelized bananas</li>
+                        <li>Whipped cream topping</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #aaa;">Result: 45-minute gourmet breakfast</p>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="comparison-box">
+                    <h4 style="color: #0ff;">Optimized for Health 🥗</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li>Whole grain toast</li>
+                        <li>Avocado and tomato</li>
+                        <li>Poached eggs (no oil)</li>
+                        <li>Green smoothie</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #aaa;">Result: Nutritious, balanced meal</p>
+                </div>
+                <div class="comparison-box">
+                    <h4 style="color: #0ff;">Optimized for Tidiness 🧹</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li>One-pot smoothie bowl</li>
+                        <li>Eat with one spoon</li>
+                        <li>Clean as you go</li>
+                        <li>Disposable napkin only</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #aaa;">Result: Minimal cleanup required</p>
+                </div>
+            </div>
+
+            <p class="quote">Different optimization goals lead to different algorithmic approaches. The "best" algorithm depends on your priorities!</p>
+        </div>
+
+        <!-- Slide 15: Algorithms in Real World -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🌍 Algorithms in the Real World</h2>
+            
+            <p style="font-size: 1.3em;">AI algorithms shape what we see, read, and experience online:</p>
+
+            <div class="big-idea-card">
+                <h4>🎵 TikTok's "For You" Algorithm</h4>
+                <p style="font-size: 1.15em;">Tracks what you watch, like, share, and how long you watch. Uses this data to show you more of what keeps you engaged — optimized for <em>maximum screen time</em>.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>📺 Netflix Recommendations</h4>
+                <p style="font-size: 1.15em;">Analyzes viewing history, ratings, and what similar users watched. Predicts what you'll enjoy next — optimized for <em>continued subscriptions</em>.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>🔍 Google Search Results</h4>
+                <p style="font-size: 1.15em;">Ranks billions of pages using complex algorithms considering relevance, authority, freshness, and personalization — optimized for <em>useful information retrieval</em>.</p>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>📰 Facebook/Instagram Feed</h4>
+                <p style="font-size: 1.15em;">Determines which posts you see based on engagement predictions. Shows content likely to keep you scrolling — optimized for <em>user engagement and ad revenue</em>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 16: Ethical Questions -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚖️ The Ethics of Algorithmic Control</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Critical Question:</h3>
+                <p style="font-size: 1.35em; margin-top: 20px; line-height: 1.8;">
+                    These algorithms influence what millions of people see, think about, and believe. They can shape opinions, create echo chambers, and affect democracy itself.
+                </p>
+                <h3 style="margin-top: 30px; color: #0ff; text-align: center; font-size: 1.6em;">
+                    Should companies decide what's "best" for us,<br>or should users have more control?
+                </h3>
+            </div>
+
+            <h3 style="margin-top: 40px;">Consider These Perspectives:</h3>
+
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="card">
+                    <h4>🏢 Company Perspective</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Algorithms help users find relevant content</li>
+                        <li>Personalization improves user experience</li>
+                        <li>Companies need revenue to provide free services</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>👥 User Perspective</h4>
+                    <ul style="font-size: 1.1em;">
+                        <li>Algorithms can create filter bubbles</li>
+                        <li>Limited transparency about how they work</li>
+                        <li>Users should control their own information diet</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="quote">As future technology leaders, you'll need to grapple with these ethical questions. What kind of AI future do you want to build?</p>
+        </div>
+
+        <!-- Slide 17: Activity - Write Your Algorithm -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>✍️ Activity: Design Your Own Algorithm</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Your Task:</h3>
+                <p style="font-size: 1.3em; margin-top: 15px;">Write a recipe algorithm for making your favorite meal or snack. Then create THREE different versions optimized for different goals:</p>
+            </div>
+
+            <div class="grid-3" style="margin-top: 30px;">
+                <div class="card">
+                    <h4>Version 1: Speed ⚡</h4>
+                    <p>Minimize preparation and cooking time. What shortcuts can you take?</p>
+                </div>
+                <div class="card">
+                    <h4>Version 2: Taste 😋</h4>
+                    <p>Maximize flavor and quality. What extra steps make it better?</p>
+                </div>
+                <div class="card">
+                    <h4>Version 3: Your Choice</h4>
+                    <p>Health? Creativity? Cost? Fun? You decide!</p>
+                </div>
+            </div>
+
+            <div class="tip" style="margin-top: 30px;">
+                <strong>Format Required:</strong>
+                <p style="margin-top: 10px; font-size: 1.15em;">
+                    <strong>Inputs:</strong> List all ingredients/materials<br>
+                    <strong>Process:</strong> Step-by-step instructions<br>
+                    <strong>Output:</strong> What you end up with<br>
+                    <strong>Optimization Goal:</strong> What you prioritized
+                </p>
+            </div>
+
+            <p class="quote">This exercise demonstrates how the same problem can have multiple algorithmic solutions depending on objectives!</p>
+        </div>
+
+        <!-- Slide 18: Unit Review -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>📚 Unit Review: What We Learned</h2>
+            
+            <div class="big-idea-card">
+                <h4>🧠 Lesson 1: What is AI?</h4>
+                <ul style="font-size: 1.15em; margin-top: 10px;">
+                    <li>AI = computer programs that perform intelligent tasks</li>
+                    <li>The 5 Big Ideas: Perception, Reasoning, Learning, Interaction, Impact</li>
+                    <li>AI exists in maps, streaming, self-driving cars, assistants, and more</li>
+                </ul>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>🤖 Lesson 2: Can Machines Learn?</h4>
+                <ul style="font-size: 1.15em; margin-top: 10px;">
+                    <li>Machine learning enables computers to improve from data</li>
+                    <li>Process: Dataset → Learning Algorithm → Model → Prediction</li>
+                    <li>Bias in training data leads to biased AI systems</li>
+                    <li>AI tools learn and adapt; non-AI tools follow fixed rules</li>
+                </ul>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>⚙️ Lesson 3: What is an Algorithm?</h4>
+                <ul style="font-size: 1.15em; margin-top: 10px;">
+                    <li>Algorithms are step-by-step instructions to solve problems</li>
+                    <li>Every algorithm has: Inputs → Process → Outputs</li>
+                    <li>Algorithms can be optimized for different goals</li>
+                    <li>Recommendation algorithms shape what we see and influence society</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 19: Key Takeaways -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🎯 Key Takeaways</h2>
+            
+            <div class="card" style="padding: 40px; margin: 30px 0;">
+                <h3 style="margin-top: 0; font-size: 1.8em; color: #00d4ff; text-align: center;">Essential Concepts to Remember:</h3>
+                
+                <ul style="font-size: 1.3em; margin-top: 30px; line-height: 2.2;">
+                    <li>AI is not magic — it's mathematics, data, and algorithms</li>
+                    <li>Machine learning enables AI to improve without explicit programming</li>
+                    <li>AI systems reflect the biases present in their training data</li>
+                    <li>Algorithms optimize for specific goals — those goals matter</li>
+                    <li>AI has profound societal impacts, both positive and negative</li>
+                    <li>Understanding AI is essential for participating in modern society</li>
+                    <li>Ethical considerations must guide AI development and deployment</li>
+                </ul>
+            </div>
+
+            <p class="quote" style="font-size: 1.5em; text-align: center;">You are the generation that will shape AI's future. What kind of future will you build?</p>
+        </div>
+
+       
+
+        <!-- Slide 23: Thank You -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1 style="font-size: 3.5em;">Excellent Work! 🎉</h1>
+                <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">— Mr. Yousef Younis</div>
+                <div class="tagline">Stay curious. Think critically. Build responsibly. ✨</div>
+                
+                <div style="margin-top: 60px; font-size: 1.3em; color: #00d4ff;">
+                    <p>Questions? Insights? Debates?</p>
+                    <p style="margin-top: 10px;">Let's discuss! 💬</p>
+                </div>
+
+                <p style="margin-top: 60px; font-size: 1.2em; color: #aaa;">
+                    See you in Chapter 2: How Does AI Actually Work? 🚀
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+    
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Top</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Track which slide is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
