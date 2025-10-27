@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: How Do Computers Think?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #00d4ff;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        ol {
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #fff;
+        }
+
+        ol li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .fun-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .tip {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .code-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #0ff;
+            border-radius: 10px;
+            padding: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #0ff;
+        }
+
+        .flow-step {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #00d4ff;
+            text-align: center;
+            font-size: 1.15em;
+            margin: 10px 0;
+        }
+
+        .arrow-down {
+            text-align: center;
+            color: #00d4ff;
+            font-size: 2em;
+            margin: 10px 0;
+        }
+
+        .quiz-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.3em;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ff4444;
+        }
+
+        .comparison-box.good {
+            border-left-color: #00ff88;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .flow-horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .arrow-right {
+            color: #00d4ff;
+            font-size: 2em;
+        }
+
+        .decision-box {
+            background: rgba(255, 212, 0, 0.1);
+            border: 2px solid #ffd400;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.15em;
+            color: #ffd400;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>Chapter 2: How Do Computers Think? 🧠</h1>
+                <div class="subtitle">Grades 7–8 | Ages 13–14</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+                <div class="quote" style="border: none; margin-top: 60px;">
+                    "Computers don't understand — they follow instructions perfectly, one step at a time."
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Big Idea -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🎯 The Big Idea</h2>
+            
+            <div class="fun-box">
+                <p style="font-size: 1.5em; line-height: 1.9; text-align: center;">
+                    Computers don't actually <strong>"understand"</strong> anything.<br><br>
+                    They follow instructions <em>exactly</em>, step by step.<br><br>
+                    If the steps are clear → the computer does the job ✅<br>
+                    If the steps are unclear → it gets stuck ❌
+                </p>
+            </div>
+
+            <h3>Think About This:</h3>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Humans 🧠</h4>
+                    <p style="font-size: 1.2em;">Can guess what you mean, fill in missing info, adapt on the fly</p>
+                </div>
+                <div class="card">
+                    <h4>Computers 💻</h4>
+                    <p style="font-size: 1.2em;">Do EXACTLY what you tell them — nothing more, nothing less</p>
+                </div>
+            </div>
+
+            <p class="quote">This is why programming requires precision. Every single step matters!</p>
+        </div>
+
+        <!-- Slide 3: What's an Algorithm? -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>✅ What's an Algorithm?</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0; font-size: 1.8em; text-align: center;">An algorithm is like a recipe 📝</h3>
+                <p style="font-size: 1.3em; text-align: center; margin-top: 20px;">
+                    A clear, step-by-step list of instructions to solve a problem or complete a task.
+                </p>
+            </div>
+
+            <h3>Example: Real Life Algorithm</h3>
+            <div class="card">
+                <h4>🦷 Brushing Your Teeth</h4>
+                <ol style="font-size: 1.2em; margin-top: 15px;">
+                    <li>Put toothpaste on brush</li>
+                    <li>Brush teeth for 2 minutes</li>
+                    <li>Rinse mouth with water</li>
+                    <li>Put brush back in holder</li>
+                </ol>
+            </div>
+
+            <p style="font-size: 1.25em; margin-top: 30px;">Every algorithm has a <strong>clear beginning</strong>, <strong>specific steps</strong>, and an <strong>end goal</strong>!</p>
+        </div>
+
+        <!-- Slide 4: Computer Algorithm Example -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>💻 Computer-Style Algorithm</h2>
+            
+            <p style="font-size: 1.3em;">Here's how a computer might control a fan based on temperature:</p>
+
+            <div class="code-box">
+<strong>STEPS:</strong><br>
+1. Read temperature from sensor<br>
+2. IF temperature > 30°C THEN turn_on_fan<br>
+3. ELSE turn_off_fan<br>
+4. Wait 5 minutes<br>
+5. REPEAT from step 1
+            </div>
+
+            <div class="tip">
+                💡 <strong>Notice:</strong> The computer follows these steps in order, over and over. It doesn't "know" it's hot outside — it just checks numbers and follows rules!
+            </div>
+
+            <h3>Why This Works:</h3>
+            <ul style="font-size: 1.2em; margin-top: 15px;">
+                <li>Each step is <strong>clear and specific</strong></li>
+                <li>No guessing required</li>
+                <li>Repeats automatically</li>
+                <li>Makes a decision based on data</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Order Matters (Sequence) -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🔁 Order Matters! (Sequence)</h2>
+            
+            <p style="font-size: 1.35em;">Computers run instructions in order: <strong>1 → 2 → 3 → 4</strong></p>
+            <p style="font-size: 1.3em;">If you swap steps, the results change completely!</p>
+
+            <h3 style="margin-top: 40px;">❌ Bad Example: Baking a Cake</h3>
+            <div class="comparison-box">
+                <ol style="font-size: 1.2em; color: #ff4444;">
+                    <li>Put in oven and bake for 30 minutes</li>
+                    <li>Mix flour, eggs, and sugar</li>
+                    <li>Pour into pan</li>
+                </ol>
+                <p style="margin-top: 15px; font-size: 1.2em;">😱 <strong>Result:</strong> No cake! You baked an empty oven!</p>
+            </div>
+
+            <h3 style="margin-top: 30px;">✅ Good Example: Baking a Cake</h3>
+            <div class="comparison-box good">
+                <ol style="font-size: 1.2em; color: #00ff88;">
+                    <li>Mix flour, eggs, and sugar</li>
+                    <li>Pour into pan</li>
+                    <li>Put in oven and bake for 30 minutes</li>
+                </ol>
+                <p style="margin-top: 15px; font-size: 1.2em;">🎉 <strong>Result:</strong> Delicious cake!</p>
+            </div>
+
+            <p class="quote">Sequence is everything! Computers can't "figure out" the right order — you have to tell them.</p>
+        </div>
+
+        <!-- Slide 6: Decisions (IF-THEN-ELSE) -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🚦 Making Decisions (IF–THEN–ELSE)</h2>
+            
+            <p style="font-size: 1.3em;">Computers make simple <strong>yes/no</strong> choices based on conditions.</p>
+
+            <div class="fun-box">
+                <h3 style="margin-top: 0; text-align: center;">The Pattern:</h3>
+                <div class="code-box" style="font-size: 1.3em; margin-top: 20px;">
+<strong>IF</strong> condition is true <strong>THEN</strong><br>
+    do this<br>
+<strong>ELSE</strong><br>
+    do that
+                </div>
+            </div>
+
+            <h3>Real Examples:</h3>
+            <div class="card" style="margin-top: 20px;">
+                <h4>🔐 Password Check</h4>
+                <div class="code-box" style="font-size: 1.15em;">
+IF password matches THEN<br>
+    allow login<br>
+ELSE<br>
+    show error message
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h4>🎮 Game Score</h4>
+                <div class="code-box" style="font-size: 1.15em;">
+IF score ≥ 100 THEN<br>
+    show "You Win!" 🏆<br>
+ELSE<br>
+    continue game
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Mini Exercise -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>✍️ Mini Exercise Time!</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0; font-size: 1.6em;">🔋 Battery Saver Challenge</h3>
+                <p style="font-size: 1.3em; margin-top: 20px;">
+                    Write an IF–THEN–ELSE statement for this scenario:
+                </p>
+                <div class="card" style="margin-top: 25px; background: rgba(0, 212, 255, 0.1);">
+                    <p style="font-size: 1.35em; line-height: 1.8;">
+                        <strong>Scenario:</strong> Your phone needs to save battery when it's running low.
+                    </p>
+                    <p style="font-size: 1.3em; margin-top: 15px;">
+                        <strong>Task:</strong> If battery is less than 20%, enable power-saving mode. Otherwise, keep normal mode.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">💭 Think About:</h3>
+            <ul style="font-size: 1.25em;">
+                <li>What's the <strong>condition</strong> you're checking?</li>
+                <li>What happens if it's <strong>true</strong>?</li>
+                <li>What happens if it's <strong>false</strong>?</li>
+            </ul>
+
+            <div class="tip">
+                ⏰ <strong>Time:</strong> 2 minutes — Write your answer on paper or discuss with a partner!
+            </div>
+        </div>
+
+        <!-- Slide 8: Exercise Solution -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>✅ Solution: Battery Saver</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Here's one way to write it:</h3>
+                <div class="code-box" style="font-size: 1.4em; margin-top: 25px;">
+<strong>IF</strong> battery < 20% <strong>THEN</strong><br>
+    enable power-saving mode<br>
+<strong>ELSE</strong><br>
+    keep normal mode
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">Let's Break It Down:</h3>
+            <ul style="font-size: 1.25em; line-height: 2;">
+                <li><strong>Condition:</strong> battery < 20% (checking if battery is low)</li>
+                <li><strong>TRUE path:</strong> Turn on power-saving mode</li>
+                <li><strong>FALSE path:</strong> Stay in normal mode</li>
+            </ul>
+
+            <p class="quote">This is exactly how your phone's battery saver works! It constantly checks the battery level and makes this decision.</p>
+        </div>
+
+        <!-- Slide 9: Loops Introduction -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🔄 Repeating Steps (Loops)</h2>
+            
+            <p style="font-size: 1.35em;">Sometimes computers need to repeat the same steps over and over until something changes.</p>
+
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Two Types of Loops:</h3>
+                
+                <div class="card" style="margin-top: 25px;">
+                    <h4>1️⃣ WHILE Loop (repeat until condition changes)</h4>
+                    <p style="font-size: 1.2em; margin-top: 15px;"><strong>In plain words:</strong></p>
+                    <p style="font-size: 1.15em; color: #aaa; margin-top: 10px;">
+                        "While there are unread messages, keep doing: open one message, mark it as read."
+                    </p>
+                    <div class="code-box" style="margin-top: 15px; font-size: 1.15em;">
+WHILE unread_messages > 0<br>
+    open next message<br>
+    mark as read
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 25px;">
+                    <h4>2️⃣ FOR Loop (repeat a specific number of times)</h4>
+                    <p style="font-size: 1.2em; margin-top: 15px;"><strong>In plain words:</strong></p>
+                    <p style="font-size: 1.15em; color: #aaa; margin-top: 10px;">
+                        "Do this 10 times: add one star to the screen."
+                    </p>
+                    <div class="code-box" style="margin-top: 15px; font-size: 1.15em;">
+FOR 10 times<br>
+    add one star ⭐
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Loop Examples -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🔄 Loops in Real Life</h2>
+            
+            <h3>Example 1: Waiting for Download ⬇️</h3>
+            <div class="card">
+                <div class="code-box" style="font-size: 1.2em;">
+WHILE download not complete<br>
+    show progress bar<br>
+    check download status<br>
+    wait 1 second
+                </div>
+                <p style="margin-top: 15px; font-size: 1.15em; color: #aaa;">
+                    The computer keeps checking until the download finishes!
+                </p>
+            </div>
+
+            <h3 style="margin-top: 30px;">Example 2: Countdown Timer ⏱️</h3>
+            <div class="card">
+                <div class="code-box" style="font-size: 1.2em;">
+FOR 10 times<br>
+    display number<br>
+    subtract 1<br>
+    wait 1 second<br>
+THEN show "Time's up!"
+                </div>
+                <p style="margin-top: 15px; font-size: 1.15em; color: #aaa;">
+                    Repeats exactly 10 times: 10... 9... 8... 7... etc.
+                </p>
+            </div>
+
+            <p class="quote">Loops save time! Instead of writing the same instruction 100 times, just use a loop.</p>
+        </div>
+
+        <!-- Slide 11: Flowchart Introduction -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🗺️ Visualizing Computer Logic (Flowcharts)</h2>
+            
+            <p style="font-size: 1.3em;">Flowcharts help us see the flow of computer thinking using boxes and arrows.</p>
+
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">The Pattern: Input → Process → Output</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">Every computer program follows this basic flow!</p>
+            </div>
+
+            <h3>Flowchart Shapes:</h3>
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="flow-step">Start / End</div>
+                    <p style="margin-top: 10px; text-align: center;">Oval shape</p>
+                </div>
+                <div class="card">
+                    <div class="flow-step">Do Something</div>
+                    <p style="margin-top: 10px; text-align: center;">Rectangle shape</p>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="decision-box">Make Decision?</div>
+                    <p style="margin-top: 10px; text-align: center;">Diamond shape</p>
+                </div>
+                <div class="card">
+                    <p style="font-size: 3em; text-align: center; color: #00d4ff;">→</p>
+                    <p style="margin-top: 10px; text-align: center;">Arrows show flow</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Login Flowchart Example -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🔐 Example: Login Flowchart</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Let's visualize how a login system works:</p>
+
+            <div class="flowchart">
+                <div class="flow-step" style="border-radius: 50px;">START</div>
+                <div class="arrow-down">↓</div>
+                <div class="flow-step">Get username & password</div>
+                <div class="arrow-down">↓</div>
+                <div class="decision-box">Is password correct?</div>
+                
+                <div class="flow-horizontal">
+                    <div style="flex: 1;">
+                        <p style="color: #00ff88; font-size: 1.2em; text-align: center; margin-bottom: 15px;">✅ YES</p>
+                        <div class="flow-step" style="border-color: #00ff88;">Open home screen</div>
+                        <div class="arrow-down">↓</div>
+                        <div class="flow-step" style="border-radius: 50px; border-color: #00ff88;">END</div>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <p style="color: #ff4444; font-size: 1.2em; text-align: center; margin-bottom: 15px;">❌ NO</p>
+                        <div class="flow-step" style="border-color: #ff4444;">Show error message</div>
+                        <div class="arrow-down">↓</div>
+                        <div class="flow-step" style="border-color: #ff4444;">Ask to try again</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip">
+                💡 <strong>Notice:</strong> The flowchart splits into two paths based on the YES/NO decision. This is how IF-THEN-ELSE works visually!
+            </div>
+        </div>
+
+        <!-- Slide 13: Quick Check Quiz -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🧪 Quick Check! (2 minutes)</h2>
+            
+            <div class="quiz-item">
+                <h4>Question 1:</h4>
+                <p style="font-size: 1.25em; margin-top: 10px;">An algorithm is…</p>
+                <p style="margin-top: 15px; font-size: 1.2em;">
+                    <strong>a)</strong> A random idea<br>
+                    <strong>b)</strong> A clear step-by-step plan ✅
+                </p>
+            </div>
+
+            <div class="quiz-item">
+                <h4>Question 2:</h4>
+                <p style="font-size: 1.25em; margin-top: 10px;">Fill in the blanks:</p>
+                <div class="code-box" style="margin-top: 15px; font-size: 1.2em;">
+IF traffic light is <strong style="color: #ff4444;">red</strong> THEN <strong style="color: #00ff88;">stop</strong><br>
+ELSE <strong style="color: #00ff88;">go</strong>
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <h4>Question 3:</h4>
+                <p style="font-size: 1.25em; margin-top: 10px;">True or False:</p>
+                <p style="font-size: 1.2em; margin-top: 10px;">
+                    "Computers can guess what you mean."
+                </p>
+                <p style="margin-top: 15px; font-size: 1.3em; color: #ff4444;">
+                    <strong>FALSE ❌</strong> — Computers only do exactly what they're told!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Putting It All Together -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🎯 Putting It All Together</h2>
+            
+            <p style="font-size: 1.35em; margin-bottom: 30px;">A good algorithm uses all three concepts:</p>
+
+            <div class="card" style="margin: 20px 0;">
+                <h4>1️⃣ Sequence (Order)</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Steps happen in the right order</p>
+            </div>
+
+            <div class="card" style="margin: 20px 0;">
+                <h4>2️⃣ Decisions (IF-THEN-ELSE)</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Make choices based on conditions</p>
+            </div>
+
+            <div class="card" style="margin: 20px 0;">
+                <h4>3️⃣ Loops (Repetition)</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Repeat steps as needed</p>
+            </div>
+
+            <h3 style="margin-top: 40px;">Example: Smart Home Thermostat 🌡️</h3>
+            <div class="code-box" style="font-size: 1.15em;">
+<strong>START</strong><br>
+REPEAT forever:<br>
+    1. Read current temperature<br>
+    2. IF temperature > 25°C THEN<br>
+        turn on air conditioning<br>
+    3. ELSE IF temperature < 18°C THEN<br>
+        turn on heating<br>
+    4. ELSE<br>
+        keep everything off<br>
+    5. Wait 10 minutes<br>
+<strong>END</strong>
+            </div>
+
+            <p class="quote">This uses sequence, decisions, AND loops — just like real smart home systems!</p>
+        </div>
+
+        <!-- Slide 15: Homework Assignment -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🏠 Homework Time!</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0; font-size: 1.8em; text-align: center;">🥪 Make a Sandwich Algorithm</h3>
+                <p style="font-size: 1.3em; margin-top: 20px; text-align: center;">
+                    Your task: Write a step-by-step algorithm for making your favorite sandwich!
+                </p>
+            </div>
+
+            <h3>Requirements:</h3>
+            <div class="card" style="margin-top: 20px;">
+                <h4>✅ Part 1: Basic Steps (5-7 steps)</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Write the steps in order. Be specific!</p>
+                <p style="font-size: 1.15em; color: #aaa; margin-top: 10px;">
+                    Example start: 1) Get two slices of bread, 2) Put peanut butter on one slice...
+                </p>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h4>✅ Part 2: Add ONE Decision (IF-THEN-ELSE)</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Include a choice in your algorithm.</p>
+                <p style="font-size: 1.15em; color: #aaa; margin-top: 10px;">
+                    Example: "IF no cheese available THEN use tomato ELSE use cheese"
+                </p>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h4>🌟 Part 3: OPTIONAL Challenge</h4>
+                <p style="font-size: 1.2em; margin-top: 10px;">Draw a small flowchart with boxes and arrows!</p>
+            </div>
+        </div>
+
+        <!-- Slide 16: Homework Tips -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>💡 Homework Tips & Examples</h2>
+            
+            <h3>Good Algorithm Example: PB&J Sandwich</h3>
+            <div class="code-box" style="font-size: 1.15em;">
+<strong>SANDWICH ALGORITHM:</strong><br><br>
+1. Get two slices of bread<br>
+2. Get peanut butter and jelly<br>
+3. Spread peanut butter on slice 1<br>
+4. IF jelly jar is empty THEN<br>
+       use honey instead<br>
+   ELSE<br>
+       use jelly<br>
+5. Spread jelly (or honey) on slice 2<br>
+6. Put the two slices together<br>
+7. Cut in half<br>
+8. ENJOY! 🎉
+            </div>
+
+            <div class="tip" style="margin-top: 30px;">
+                <strong>Pro Tips:</strong>
+                <ul style="font-size: 1.15em; margin-top: 15px; line-height: 1.9;">
+                    <li>Be specific! "Put stuff on bread" is too vague</li>
+                    <li>Think about order — what HAS to happen first?</li>
+                    <li>Your IF-THEN-ELSE should make sense (like checking if you have ingredients)</li>
+                    <li>Test it! Could someone else follow your steps?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 17: Why This Matters -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🌟 Why Does This Matter?</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Everything runs on algorithms! 🚀</h3>
+            </div>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div class="card">
+                    <h4>📱 Your Phone</h4>
+                    <p style="font-size: 1.15em;">Algorithms decide which apps to show, how to save battery, when to update</p>
+                </div>
+                <div class="card">
+                    <h4>🎮 Video Games</h4>
+                    <p style="font-size: 1.15em;">Every character, enemy, and event follows programmed algorithms</p>
+                </div>
+                <div class="card">
+                    <h4>🚗 Self-Driving Cars</h4>
+                    <p style="font-size: 1.15em;">Use algorithms to detect obstacles, make decisions, and navigate safely</p>
+                </div>
+                <div class="card">
+                    <h4>🎵 Music Apps</h4>
+                    <p style="font-size: 1.15em;">Algorithms recommend songs based on what you've listened to before</p>
+                </div>
+            </div>
+
+            <p class="quote" style="margin-top: 40px; font-size: 1.4em;">
+                Understanding algorithms is the first step to understanding how ALL technology works!
+            </p>
+        </div>
+
+        <!-- Slide 18: Real Programming Preview -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>👀 Sneak Peek: Real Programming</h2>
+            
+            <p style="font-size: 1.3em;">Here's what the fan algorithm looks like in actual code (Python):</p>
+
+            <div class="code-box" style="font-size: 1.1em; color: #0ff;">
+<span style="color: #ff79c6;">import</span> time<br><br>
+
+<span style="color: #ff79c6;">while</span> <span style="color: #bd93f9;">True</span>:<br>
+    temperature = <span style="color: #50fa7b;">read_sensor()</span><br>
+    <br>
+    <span style="color: #ff79c6;">if</span> temperature > <span style="color: #bd93f9;">30</span>:<br>
+        <span style="color: #50fa7b;">turn_on_fan()</span><br>
+    <span style="color: #ff79c6;">else</span>:<br>
+        <span style="color: #50fa7b;">turn_off_fan()</span><br>
+    <br>
+    time.<span style="color: #50fa7b;">sleep</span>(<span style="color: #bd93f9;">300</span>)  <span style="color: #6272a4;"># wait 5 minutes</span>
+            </div>
+
+            <div class="tip" style="margin-top: 30px;">
+                <strong>See the patterns?</strong>
+                <ul style="font-size: 1.15em; margin-top: 15px;">
+                    <li><strong>while True</strong> = loop forever</li>
+                    <li><strong>if</strong> = decision making</li>
+                    <li>Everything happens in <strong>sequence</strong></li>
+                    <li>Same concepts, just different syntax!</li>
+                </ul>
+            </div>
+
+            <p class="quote">You're already thinking like a programmer! 🎉</p>
+        </div>
+
+        <!-- Slide 19: Summary -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>📚 Chapter Summary</h2>
+            
+            <div class="card" style="padding: 40px;">
+                <h3 style="margin-top: 0; color: #00d4ff; text-align: center; font-size: 1.8em;">What We Learned:</h3>
+                
+                <div class="big-idea-card" style="margin-top: 30px;">
+                    <h4>🧠 How Computers Think</h4>
+                    <p style="font-size: 1.2em;">Computers don't understand — they follow precise instructions step-by-step</p>
+                </div>
+
+                <div class="big-idea-card">
+                    <h4>📝 Algorithms</h4>
+                    <p style="font-size: 1.2em;">Step-by-step instructions to solve problems (like recipes!)</p>
+                </div>
+
+                <div class="big-idea-card">
+                    <h4>🔁 Sequence</h4>
+                    <p style="font-size: 1.2em;">Order matters! Steps must happen in the right order</p>
+                </div>
+
+                <div class="big-idea-card">
+                    <h4>🚦 Decisions</h4>
+                    <p style="font-size: 1.2em;">IF-THEN-ELSE lets computers make choices based on conditions</p>
+                </div>
+
+                <div class="big-idea-card">
+                    <h4>🔄 Loops</h4>
+                    <p style="font-size: 1.2em;">Repeat steps multiple times (WHILE and FOR loops)</p>
+                </div>
+
+                <div class="big-idea-card">
+                    <h4>🗺️ Flowcharts</h4>
+                    <p style="font-size: 1.2em;">Visual way to see algorithm flow with boxes and arrows</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Next Time Preview -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🔮 Coming Up Next...</h2>
+            
+            <div class="fun-box" style="padding: 50px;">
+                <h1 style="font-size: 2.8em; text-align: center; margin-bottom: 30px; color: #00d4ff;">Chapter 3: Let's Start Coding! 💻</h1>
+                
+                <p style="font-size: 1.4em; text-align: center; line-height: 1.9;">
+                    Now that you understand how computers think, it's time to actually <strong>program them</strong>!
+                </p>
+
+                <div class="three-column" style="margin-top: 40px;">
+                    <div class="card">
+                        <h4>🎨 Scratch</h4>
+                        <p>Visual programming with blocks</p>
+                    </div>
+                    <div class="card">
+                        <h4>🐍 Python Basics</h4>
+                        <p>Your first text-based code</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎮 Make a Game</h4>
+                        <p>Build something fun!</p>
+                    </div>
+                </div>
+
+                <p style="font-size: 1.5em; text-align: center; margin-top: 40px; color: #0ff;">
+                    Get ready to become a creator! 🚀
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 21: Discussion Questions -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>💬 Let's Discuss!</h2>
+            
+            <div class="card" style="padding: 30px;">
+                <h4 style="margin-top: 0;">Think about these questions:</h4>
+                
+                <div class="quiz-item">
+                    <p style="font-size: 1.25em;">1. What's one algorithm you follow every day without thinking about it?</p>
+                </div>
+
+                <div class="quiz-item">
+                    <p style="font-size: 1.25em;">2. Why is it important that computers can't "guess" what you mean?</p>
+                </div>
+
+                <div class="quiz-item">
+                    <p style="font-size: 1.25em;">3. Can you think of a situation where changing the order of steps would cause a problem?</p>
+                </div>
+
+                <div class="quiz-item">
+                    <p style="font-size: 1.25em;">4. What's something you wish computers could do that they can't (yet)?</p>
+                </div>
+            </div>
+
+            <div class="tip" style="margin-top: 30px;">
+                💭 <strong>Remember:</strong> Every app, game, and website you use is built from algorithms just like the ones we learned today!
+            </div>
+        </div>
+
+        <!-- Slide 22: Thank You -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1 style="font-size: 3.5em;">Great Job Today! 🎉</h1>
+                <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">— Mr. Yousef Younis</div>
+                <div class="tagline">Stay curious. Keep questioning. Start creating! ✨</div>
+                
+                <div style="margin-top: 60px; font-size: 1.3em; color: #00d4ff;">
+                    <p>Don't forget your homework! 📝</p>
+                    <p style="margin-top: 10px;">Questions? Let's talk! 💬</p>
+                </div>
+
+                <p style="margin-top: 60px; font-size: 1.2em; color: #aaa;">
+                    See you next time when we start coding! 🚀
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+    
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Top</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Track which slide is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
