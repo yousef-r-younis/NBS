@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary: How Computers Work & Think</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        ul li:before {
+            content: "→";
+            color: #00d4ff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+
+        code {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Title Slide -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>Chapters 1 & 2 Summary 📚</h1>
+                <div class="subtitle">How Computers Work & Think</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+            </div>
+        </div>
+
+        <!-- What Is a Computer -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>What Is a Computer? 🧠</h2>
+            
+            <div class="info-box">
+                <p>A <strong>computer</strong> is an electronic device that <em>processes information</em> using clear <em>instructions</em>.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>The Four Steps:</h3>
+                <p style="font-size: 1.6em; text-align: center; color: #00d4ff;">
+                    Input → Processing → Storage → Output
+                </p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Key Point:</strong> Computers don't think — they follow rules quickly and exactly.</p>
+            </div>
+        </div>
+
+        <!-- Hardware vs Software -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Hardware vs Software ⚙️</h2>
+            
+            <div class="two-column">
+                <div class="info-box">
+                    <h3>Hardware</h3>
+                    <ul>
+                        <li>CPU (brain)</li>
+                        <li>RAM (memory)</li>
+                        <li>Storage drives</li>
+                        <li>Screen & keyboard</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Software</h3>
+                    <ul>
+                        <li>Programs</li>
+                        <li>Applications</li>
+                        <li>Operating systems</li>
+                        <li>Games & tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Remember:</strong> They always work together — one can't work without the other!</p>
+            </div>
+        </div>
+
+        <!-- Main Parts & Binary -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Main Parts & Binary 💾</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3>Core Components</h3>
+                    <ul>
+                        <li><strong>CPU:</strong> The brain (processes instructions)</li>
+                        <li><strong>RAM:</strong> Short-term memory</li>
+                        <li><strong>Storage:</strong> Long-term memory</li>
+                        <li><strong>GPU:</strong> Graphics & AI helper</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Binary (0s and 1s)</h3>
+                    <div class="info-box">
+                        <p>Computers use binary to represent everything:</p>
+                        <ul>
+                            <li>Text</li>
+                            <li>Images</li>
+                            <li>Sound</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Algorithms & Key Ideas -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Algorithms & Key Ideas 🔁</h2>
+            
+            <div class="info-box">
+                <h3>What is an Algorithm?</h3>
+                <p>A <strong>step-by-step plan</strong> to solve a problem (like a recipe)</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Example:</h3>
+                <code>
+                    IF temperature > 30°C → turn on fan<br>
+                    ELSE → turn off fan
+                </code>
+            </div>
+
+            <h3>Key Ideas in Computer Thinking:</h3>
+            <ul>
+                <li><strong>Sequence:</strong> Steps in correct order</li>
+                <li><strong>Decision:</strong> IF-THEN-ELSE choices</li>
+                <li><strong>Loop:</strong> Repeat until done</li>
+            </ul>
+        </div>
+
+        <!-- Humans vs Computers -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Humans vs Computers 🤝</h2>
+            
+            <div class="two-column">
+                <div class="info-box">
+                    <h3>Humans</h3>
+                    <ul>
+                        <li>Creative thinking</li>
+                        <li>Can make guesses</li>
+                        <li>Understand context</li>
+                        <li>Adapt to new situations</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Computers</h3>
+                    <ul>
+                        <li>Lightning-fast calculations</li>
+                        <li>Perfect accuracy</li>
+                        <li>Never get tired</li>
+                        <li>Follow exact instructions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Together they make powerful teams!</strong></p>
+            </div>
+        </div>
+
+        <!-- Final Summary -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Final Summary 🌟</h2>
+            
+            <div class="info-box">
+                <h3>Computers:</h3>
+                <ul>
+                    <li>Work in clear steps</li>
+                    <li>Follow algorithms</li>
+                    <li>Use sequence, decisions, and loops</li>
+                    <li>Think in binary</li>
+                    <li>Need hardware + software</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="text-align: center;">
+                <p style="font-size: 1.4em;">
+                    <strong>Programming</strong> is how we tell computers what to do! 💡
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Track which slide is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
