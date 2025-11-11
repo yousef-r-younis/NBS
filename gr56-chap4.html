@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is AI? - Grades 5-6 - Chapter 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .quote-box {
+            font-style: italic;
+            color: #00d4ff;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul, ol {
+            list-style-position: inside;
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        ul li, ol li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        ul li:before {
+            content: "→";
+            color: #00d4ff;
+            position: absolute;
+            left: 0;
+        }
+
+        ol {
+            list-style: none;
+            counter-reset: item;
+        }
+
+        ol li {
+            counter-increment: item;
+        }
+
+        ol li:before {
+            content: counter(item) ".";
+            color: #00d4ff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .table td {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .icon-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 1.2em;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            min-width: 50px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .highlight {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .emphasis {
+            color: #0ff;
+            font-style: italic;
+        }
+
+        code {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #0ff;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .activity-box {
+            background: rgba(0, 255, 200, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 100, 100, 0.05);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ffaaaa;
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Title Slide -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>What Is AI? 🧠</h1>
+                <div class="subtitle">3 Lessons for Grades 5–6</div>
+                <div class="subtitle">Understanding Artificial Intelligence</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+            </div>
+        </div>
+
+        <!-- ========== LESSON 1 ========== -->
+
+        <!-- Lesson 1: Title -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>🧠 Lesson 1</h1>
+                <h2 style="font-size: 2.5em; margin-top: 20px;">What Is AI? (Getting to Know It)</h2>
+                <div class="subtitle" style="margin-top: 40px; color: #aaa;">Goal: Understand what AI means and recognize it in everyday life.</div>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Warm-Up -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🗣 Warm-Up (5 min)</h2>
+            
+            <div class="info-box">
+                <h3>Let's Start with Questions!</h3>
+                <ul style="font-size: 1.4em; line-height: 2;">
+                    <li>Who has ever talked to <strong>Siri or Google Assistant</strong>? 🗣️</li>
+                    <li>Who's seen <strong>YouTube recommend videos</strong> you like? 🎬</li>
+                    <li>Who plays games where the computer plays <strong>against you</strong>? 🎮</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <p style="font-size: 1.4em; text-align: center;">
+                    Those are all examples of something called <span class="highlight">Artificial Intelligence</span> — or <span class="highlight">AI</span>!
+                </p>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Main Idea -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>💡 What Is Artificial Intelligence?</h2>
+
+            <div class="concept-box">
+                <h3>The Big Idea</h3>
+                <p style="font-size: 1.4em; margin: 20px 0;">
+                    <strong>Artificial Intelligence</strong> means teaching a computer to <em>think and act smart</em> — almost like a human.
+                </p>
+                <p class="quote-box" style="border: none; margin: 0; color: #00d4ff;">
+                    "AI helps computers see, hear, talk, and make decisions."
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>In Other Words</h3>
+                <ul>
+                    <li><strong>Artificial</strong> = man-made, not natural</li>
+                    <li><strong>Intelligence</strong> = the ability to learn, understand, and make decisions</li>
+                    <li><strong>AI</strong> = computer programs that perform human-like intelligent tasks</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Everyday Examples -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>📱 AI All Around You</h2>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="icon">🗣️</span>
+                    <div><strong>Voice Assistants:</strong> Siri, Alexa, Google Assistant</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">😃</span>
+                    <div><strong>Face Unlock:</strong> Your phone recognizes your face!</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎬</span>
+                    <div><strong>Recommendations:</strong> YouTube, TikTok suggest videos for you</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🚗</span>
+                    <div><strong>Self-Driving Cars:</strong> Robots that drive themselves</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎮</span>
+                    <div><strong>Smart Games:</strong> Game characters that learn and adapt</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🗺️</span>
+                    <div><strong>Maps & Navigation:</strong> Apps that find the fastest route</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Mini-Game -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🎲 Mini-Game: "AI or Not?"</h2>
+
+            <p style="font-size: 1.3em; margin-bottom: 30px;">
+                For each example, say <span class="highlight">AI!</span> or <span class="highlight">Not AI!</span>
+            </p>
+
+            <div class="info-box">
+                <h3>1. A Calculator</h3>
+                <p style="font-size: 1.3em; color: #ff6464;">❌ Not AI — it just follows fixed rules (2 + 2 = 4, always)</p>
+            </div>
+
+            <div class="info-box">
+                <h3>2. A Robot Vacuum Cleaner</h3>
+                <p style="font-size: 1.3em; color: #00ff88;">✅ AI — it learns your floor layout and improves its cleaning path</p>
+            </div>
+
+            <div class="info-box">
+                <h3>3. Turning On a Light Switch</h3>
+                <p style="font-size: 1.3em; color: #ff6464;">❌ Not AI — it's just on/off (no learning)</p>
+            </div>
+
+            <div class="info-box">
+                <h3>4. ChatGPT or Writing AI</h3>
+                <p style="font-size: 1.3em; color: #00ff88;">✅ AI — it learns from millions of texts and can write new things</p>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Wrap-Up -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>❤️ Lesson 1 Wrap-Up</h2>
+
+            <div class="concept-box">
+                <div class="quote-box" style="border: none; font-size: 1.5em;">
+                    "AI is when computers do <strong>smart things</strong> — but they learn it from people like us!"
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Remember:</h3>
+                <ul>
+                    <li>AI is <strong>artificial</strong> (man-made) intelligence</li>
+                    <li>You use AI <strong>every day</strong> — phones, apps, games, videos</li>
+                    <li>AI learns from <strong>examples</strong>, not just rules</li>
+                    <li><strong>Humans</strong> teach computers how to be smart</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========== LESSON 2 ========== -->
+
+        <!-- Lesson 2: Title -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>🤖 Lesson 2</h1>
+                <h2 style="font-size: 2.5em; margin-top: 20px;">How AI Learns (Like Us!)</h2>
+                <div class="subtitle" style="margin-top: 40px; color: #aaa;">Goal: Understand that AI learns from examples — just like humans do.</div>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Explain Simply -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🧠 How Do Computers Learn?</h2>
+
+            <div class="concept-box">
+                <h3>Think About Yourself</h3>
+                <p style="font-size: 1.4em; margin: 20px 0;">
+                    When you <strong>learn math</strong> 📐 or <strong>draw better</strong> 🎨 with practice, you're learning from <em>examples</em>.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>AI Learns the Same Way!</h3>
+                <p style="font-size: 1.3em;">
+                    <strong>AI</strong> learns by seeing <strong>many examples</strong> again and again, then finding <em>patterns</em>.
+                </p>
+                <p class="quote-box" style="border: none; margin-top: 25px;">
+                    More examples = Smarter AI 🎓
+                </p>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Example Story -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🐾 Example: Cats vs. Dogs</h2>
+
+            <div class="info-box">
+                <h3>The Story</h3>
+                <p style="font-size: 1.3em;">
+                    Imagine we show AI 10 pictures of 🐱 <strong>cats</strong> and 10 pictures of 🐶 <strong>dogs</strong>.
+                </p>
+            </div>
+
+            <div class="concept-box">
+                <h3>What AI Does</h3>
+                <ol style="font-size: 1.3em;">
+                    <li>AI <strong>studies</strong> all the pictures</li>
+                    <li>AI <strong>finds patterns</strong>:
+                        <ul style="margin-left: 40px; margin-top: 10px;">
+                            <li>Cats have pointy 👂 ears</li>
+                            <li>Dogs have longer 👃 snouts</li>
+                            <li>Tails are shaped differently</li>
+                        </ul>
+                    </li>
+                    <li>Next time AI sees a <strong>NEW picture</strong>, it can guess: "That's a cat!" or "That's a dog!"</li>
+                </ol>
+            </div>
+
+            <div class="quote-box">
+                "AI practices with examples to learn patterns, then uses those patterns to make smart guesses!"
+            </div>
+        </div>
+
+        <!-- Lesson 2: Compare -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>📘 Regular Computer vs. AI</h2>
+
+            <table class="table">
+                <tr>
+                    <th>Regular Computer 🖥️</th>
+                    <th>Artificial Intelligence 🤖</th>
+                </tr>
+                <tr>
+                    <td>Follows <strong>fixed rules</strong></td>
+                    <td><strong>Learns</strong> from data & patterns</td>
+                </tr>
+                <tr>
+                    <td>Example: Adds 2 + 2 = 4, always</td>
+                    <td>Example: Recognizes a face (learns from millions of faces)</td>
+                </tr>
+                <tr>
+                    <td>Can't improve by itself</td>
+                    <td>Gets <strong>smarter</strong> with more examples</td>
+                </tr>
+                <tr>
+                    <td>Works the same way forever</td>
+                    <td>Adapts and changes over time</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Lesson 2: Creative Activity -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>✏️ Creative Activity: Robot Learner</h2>
+
+            <div class="activity-box">
+                <h3>Your Task:</h3>
+                <p style="font-size: 1.3em; margin-bottom: 20px;">
+                    Draw a 🤖 <strong>robot learner</strong> and around it, write or draw what it can <em>learn</em>:
+                </p>
+            </div>
+
+            <div class="icon-grid" style="margin-top: 30px;">
+                <div class="icon-item">
+                    <span class="icon">🗣️</span>
+                    <div><strong>Understand Speech</strong> (hear words)</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🐾</span>
+                    <div><strong>Recognize Animals</strong> (see pictures)</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎮</span>
+                    <div><strong>Play Games</strong> (get better with practice)</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🌍</span>
+                    <div><strong>Translate Words</strong> (learn languages)</div>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em; text-align: center;">
+                    💡 <strong>Key Idea:</strong> AI can learn almost <em>anything</em> if we give it enough examples!
+                </p>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Wrap-Up -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>❤️ Lesson 2 Wrap-Up</h2>
+
+            <div class="concept-box">
+                <div class="quote-box" style="border: none; font-size: 1.5em;">
+                    "AI gets smarter the more <strong>examples it sees</strong> — but it still needs <strong>humans</strong> to guide it."
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Remember:</h3>
+                <ul>
+                    <li>AI learns from <strong>many examples</strong></li>
+                    <li>AI finds <strong>patterns</strong> in data</li>
+                    <li>More examples = <strong>Smarter AI</strong></li>
+                    <li><strong>Humans</strong> teach AI what to learn</li>
+                    <li>AI can improve <strong>over time</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========== LESSON 3 ========== -->
+
+        <!-- Lesson 3: Title -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>🌍 Lesson 3</h1>
+                <h2 style="font-size: 2.5em; margin-top: 20px;">AI in Our World (Using It Wisely)</h2>
+                <div class="subtitle" style="margin-top: 40px; color: #aaa;">Goal: Identify how AI is used and learn to use it safely.</div>
+            </div>
+        </div>
+
+        <!-- Lesson 3: AI All Around -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>💡 Where Do We Find AI?</h2>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="icon">🗺️</span>
+                    <div><strong>Google Maps:</strong> Finds the fastest way to go</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📸</span>
+                    <div><strong>Smart Cameras:</strong> Focus on faces automatically</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🏥</span>
+                    <div><strong>Hospitals:</strong> Helps doctors read x-rays</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🗣️</span>
+                    <div><strong>Voice-to-Text:</strong> Helps people type faster by voice</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🔧</span>
+                    <div><strong>Factory Robots:</strong> Build cars and products</div>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎓</span>
+                    <div><strong>Smart Learning:</strong> Apps that teach at your pace</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Good vs. Bad Use -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚖️ Using AI: Good vs. Not Good</h2>
+
+            <table class="table">
+                <tr>
+                    <th>Good Uses ✅</th>
+                    <th>Risky Uses ❌</th>
+                </tr>
+                <tr>
+                    <td>Helping people <strong>learn faster</strong></td>
+                    <td><strong>Copying</strong> others' work (cheating)</td>
+                </tr>
+                <tr>
+                    <td>Making <strong>driving safer</strong></td>
+                    <td><strong>Sharing personal info</strong> (address, phone)</td>
+                </tr>
+                <tr>
+                    <td>Helping <strong>doctors</strong> save lives</td>
+                    <td>Believing <strong>false information</strong> online</td>
+                </tr>
+                <tr>
+                    <td>Creating <strong>art & music</strong></td>
+                    <td>Using AI to <strong>hurt</strong> or trick people</td>
+                </tr>
+                <tr>
+                    <td><strong>Connecting</strong> people worldwide</td>
+                    <td><strong>Cheating</strong> on tests or homework</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Lesson 3: Group Activity -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🧩 Group Activity (10 min)</h2>
+
+            <div class="activity-box">
+                <h3>Your Mission:</h3>
+                <p style="font-size: 1.3em; margin-bottom: 25px;">
+                    Pick one place below. Draw or explain <strong>one way AI helps</strong> there:
+                </p>
+
+                <ul style="font-size: 1.3em;">
+                    <li>🏫 <strong>School:</strong> How does AI help learning?</li>
+                    <li>🏠 <strong>Home:</strong> What AI devices do you have?</li>
+                    <li>🏥 <strong>Hospital:</strong> How does AI help doctors?</li>
+                    <li>🎮 <strong>Games & Fun:</strong> How does AI make games smarter?</li>
+                    <li>🚀 <strong>Space:</strong> How do robots explore?</li>
+                </ul>
+            </div>
+
+            <div class="info-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em; text-align: center;">
+                    💡 Then, share your ideas with the class! 🎤
+                </p>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Safety Rules -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚠️ AI Safety Rules</h2>
+
+            <div class="warning-box">
+                <h3>🔒 Rule 1: Protect Your Privacy</h3>
+                <p style="font-size: 1.3em;">
+                    Don't share: your address, phone number, school name, or passwords with AI apps.
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <h3>✓ Rule 2: Double-Check Information</h3>
+                <p style="font-size: 1.3em;">
+                    AI sometimes makes mistakes! Always check facts with teachers, books, or trusted sources.
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <h3>👨‍🏫 Rule 3: Ask Adults & Teachers</h3>
+                <p style="font-size: 1.3em;">
+                    If you're not sure if something is safe or right, ask an adult first!
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <h3>❤️ Rule 4: Use AI Kindly</h3>
+                <p style="font-size: 1.3em;">
+                    Don't cheat, copy, or use AI to hurt or trick people. Use it to help and learn!
+                </p>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Wrap-Up -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>❤️ Lesson 3 Wrap-Up</h2>
+
+            <div class="concept-box">
+                <div class="quote-box" style="border: none; font-size: 1.5em;">
+                    "AI is <strong>powerful</strong> — but <strong>humans</strong> are the real brains behind it. We use it to make the world better."
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Remember:</h3>
+                <ul>
+                    <li>AI is used <strong>everywhere</strong> — schools, hospitals, games, maps</li>
+                    <li>We can use AI for <strong>good things</strong> or <strong>risky things</strong></li>
+                    <li>Always <strong>protect your privacy</strong></li>
+                    <li><strong>Double-check</strong> what AI tells you</li>
+                    <li>Use AI <strong>kindly & responsibly</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Final Summary -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>🎓 3 Lessons Summary</h2>
+
+            <div class="three-column">
+                <div class="info-box">
+                    <h3>Lesson 1 🧠</h3>
+                    <p><strong>What Is AI?</strong></p>
+                    <ul>
+                        <li>AI is smart computers</li>
+                        <li>You use it every day</li>
+                        <li>Humans teach it</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Lesson 2 🤖</h3>
+                    <p><strong>How AI Learns</strong></p>
+                    <ul>
+                        <li>Learns from examples</li>
+                        <li>Finds patterns</li>
+                        <li>Gets smarter over time</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Lesson 3 🌍</h3>
+                    <p><strong>Using AI Wisely</strong></p>
+                    <ul>
+                        <li>AI helps everywhere</li>
+                        <li>Use it responsibly</li>
+                        <li>Protect your privacy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="concept-box" style="margin-top: 40px;">
+                <div class="quote-box" style="border: none; font-size: 1.4em; text-align: center;">
+                    "You now understand AI! 🎉 Keep learning, stay curious, and use technology wisely!"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
