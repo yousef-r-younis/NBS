@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Minds, Changing Lives - BCI Presentation</title>
+    <title>The Last Message - A BCI Story</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #000;
             color: white;
             overflow: hidden;
             height: 100vh;
@@ -23,192 +23,285 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            padding: 2rem;
+            position: relative;
         }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: all 1s ease;
+        }
+
+        .bg-black { background: #000; }
+        .bg-dark-blue { background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%); }
+        .bg-hope { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .bg-future { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .bg-tech { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .bg-challenge { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .bg-final { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
 
         .slide-content {
             flex: 1;
-            background: rgba(30, 30, 46, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 4rem;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
         .slide {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: slideIn 0.8s ease-out;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .slide.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(100px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.6); }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #3b82f6;
+            white-space: nowrap;
+            animation: typewriter 2s steps(40) 1s forwards, blink 0.75s step-end infinite;
+            display: inline-block;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
         }
 
         .pulse {
-            animation: pulse 2s infinite;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .glow {
+            animation: glow 2s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             color: #60a5fa;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
+            color: #93c5fd;
         }
 
-        .grid-2 {
+        .story-box {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .story-text {
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: #60a5fa;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+
+        .dramatic {
+            font-size: 2rem;
+            color: #f472b6;
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 0 0 20px rgba(244, 114, 182, 0.5);
+        }
+
+        .grid-showcase {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
             margin-top: 2rem;
         }
 
-        .grid-3 {
+        .showcase-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .card-blue { border-color: #3b82f6; }
+        .card-purple { border-color: #a855f7; }
+        .card-pink { border-color: #ec4899; }
+        .card-green { border-color: #10b981; }
+        .card-yellow { border-color: #f59e0b; }
+        .card-red { border-color: #ef4444; }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(20px);
+            border-left-width: 8px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .quote-large {
+            font-size: 2.5rem;
+            font-style: italic;
+            text-align: center;
+            color: #e5e7eb;
+            margin: 3rem 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            line-height: 1.6;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
-        .card {
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 2px solid;
-        }
-
-        .card-red {
-            background: rgba(127, 29, 29, 0.3);
-            border-color: #ef4444;
-        }
-
-        .card-blue {
-            background: rgba(30, 58, 138, 0.3);
-            border-color: #3b82f6;
-        }
-
-        .card-green {
-            background: rgba(21, 128, 61, 0.3);
-            border-color: #10b981;
-        }
-
-        .card-purple {
-            background: rgba(88, 28, 135, 0.3);
-            border-color: #a855f7;
-        }
-
-        .card-yellow {
-            background: rgba(133, 77, 14, 0.3);
-            border-color: #f59e0b;
-        }
-
-        .card-pink {
-            background: rgba(131, 24, 67, 0.3);
-            border-color: #ec4899;
-        }
-
-        .card-orange {
-            background: rgba(154, 52, 18, 0.3);
-            border-color: #f97316;
-        }
-
-        .gradient-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
-            border: 2px solid #3b82f6;
+        .stat-box {
+            text-align: center;
             padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 2px solid #3b82f6;
+            transition: all 0.3s;
         }
 
-        .quote {
-            font-size: 1.5rem;
-            font-style: italic;
+        .stat-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #60a5fa;
+            text-shadow: 0 0 30px rgba(96, 165, 250, 0.8);
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
             color: #e5e7eb;
-            margin: 2rem 0;
-        }
-
-        .quote-author {
-            text-align: right;
-            color: #f472b6;
             margin-top: 1rem;
         }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            padding: 0.5rem 0;
-            color: #e5e7eb;
-        }
-
-        .icon {
-            display: inline-block;
-            width: 120px;
-            height: 120px;
-            margin: 2rem auto;
-            text-align: center;
-        }
-
-        .icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
         .controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: space-between;
+            gap: 1rem;
             align-items: center;
-            gap: 2rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         button {
             padding: 0.75rem 2rem;
             font-size: 1rem;
             border: none;
-            border-radius: 8px;
-            background: #3b82f6;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: white;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
 
         button:hover:not(:disabled) {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
         }
 
         button:disabled {
             background: #4b5563;
             cursor: not-allowed;
-            opacity: 0.5;
+            opacity: 0.3;
         }
 
         .indicators {
@@ -217,304 +310,376 @@
         }
 
         .indicator {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #4b5563;
+            background: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .indicator.active {
             background: #3b82f6;
-            width: 32px;
-            border-radius: 6px;
-        }
-
-        .indicator:hover {
-            background: #6b7280;
-        }
-
-        .counter {
-            text-align: center;
-            color: #9ca3af;
-            margin-top: 1rem;
+            width: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
         }
 
         .center {
             text-align: center;
         }
 
-        .space-y-4 > * + * {
-            margin-top: 1rem;
+        .reveal {
+            opacity: 0;
+            animation: reveal 1s ease-out 0.5s forwards;
         }
 
-        .space-y-6 > * + * {
-            margin-top: 1.5rem;
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .space-y-8 > * + * {
-            margin-top: 2rem;
+        .interactive-brain {
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            position: relative;
+            cursor: pointer;
         }
 
-        .alert {
-            padding: 1rem;
-            border-left: 4px solid;
-            border-radius: 4px;
-            margin: 1.5rem 0;
+        .brain-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #3b82f6;
+            border-radius: 50%;
+            animation: brainPulse 2s infinite;
         }
 
-        .alert-yellow {
-            background: rgba(133, 77, 14, 0.2);
-            border-color: #f59e0b;
+        @keyframes brainPulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
 
-        .text-lg {
-            font-size: 1.125rem;
-            line-height: 1.75;
-        }
-
-        .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.75;
-        }
-
-        .text-2xl {
-            font-size: 1.5rem;
-            line-height: 2;
-        }
-
-        .text-3xl {
-            font-size: 1.875rem;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .closing-statement {
-            font-size: 2rem;
-            font-weight: 700;
+        .impact-number {
+            font-size: 6rem;
+            font-weight: bold;
             background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-top: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            animation: countUp 2s ease-out;
         }
 
-        .brain-icon {
-            fill: #60a5fa;
+        @keyframes countUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .final-call {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #60a5fa;
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
+        <div class="background bg-black" id="background"></div>
+        
         <div class="slide-content">
-            <!-- Slide 1: Title -->
-            <div class="slide active" data-slide="0">
-                <div class="center space-y-8">
-                    <div class="icon pulse">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="brain-icon">
+            <!-- Slide 1: The Hook - Ian's Story Begins -->
+            <div class="slide active" data-slide="0" data-bg="bg-dark-blue">
+                <div class="story-box">
+                    <h2 class="center glow">December 2019</h2>
+                    <p class="story-text">
+                        Ian Burkhart was <span class="highlight">19 years old</span> when a wave knocked him down at the beach.
+                    </p>
+                    <p class="story-text">
+                        His neck broke. In an instant, his hands stopped working. His legs stopped moving.
+                    </p>
+                    <p class="story-text">
+                        The doctors told him he'd never walk again. Never hold his mother's hand. Never type a message to his friends.
+                    </p>
+                    <p class="dramatic pulse">
+                        His mind was a prisoner in his own body.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 2: The Problem - Make it Personal -->
+            <div class="slide" data-slide="1" data-bg="bg-dark-blue">
+                <div class="story-box">
+                    <h2 class="center">The Prison Inside Your Head</h2>
+                    <div class="stats-grid">
+                        <div class="stat-box pulse">
+                            <div class="stat-number">5.4M</div>
+                            <div class="stat-label">Americans living with paralysis</div>
+                        </div>
+                        <div class="stat-box pulse" style="animation-delay: 0.2s;">
+                            <div class="stat-number">100B</div>
+                            <div class="stat-label">Neurons firing in your brain right now</div>
+                        </div>
+                        <div class="stat-box pulse" style="animation-delay: 0.4s;">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Ways for Ian to use them</div>
+                        </div>
+                    </div>
+                    <p class="quote-large reveal">
+                        "I could think. I could dream. I could scream inside my head... but the world couldn't hear me."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Impossible Question -->
+            <div class="slide" data-slide="2" data-bg="bg-hope">
+                <div class="story-box center">
+                    <div class="interactive-brain float">
+                        <div class="brain-pulse"></div>
+                        <div class="brain-pulse" style="animation-delay: 0.5s;"></div>
+                        <div class="brain-pulse" style="animation-delay: 1s;"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" style="width: 100%; height: 100%;">
                             <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
                             <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
-                            <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
-                            <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
-                            <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
-                            <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
-                            <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
                         </svg>
                     </div>
-                    <h1>Reading Minds, Changing Lives</h1>
-                    <h2 style="color: #93c5fd;">The Future of Brain-Computer Interfaces</h2>
-                    <p class="text-xl" style="margin-top: 2rem;">Imagine controlling the world with just your thoughts...</p>
-                </div>
-            </div>
-
-            <!-- Slide 2: The Problem -->
-            <div class="slide" data-slide="1">
-                <h2>The Barrier Between Mind and Machine</h2>
-                <div class="grid-2">
-                    <div class="card card-red">
-                        <h3 style="color: #fca5a5;">Today's Reality</h3>
-                        <ul class="space-y-4">
-                            <li>• 5.4 million people live with paralysis</li>
-                            <li>• Communication requires physical movement</li>
-                            <li>• Technology still needs hands, voices, touch</li>
-                            <li>• Thoughts remain locked inside our skulls</li>
-                        </ul>
-                    </div>
-                    <div class="card card-blue">
-                        <h3 style="color: #93c5fd;">The Question</h3>
-                        <p class="text-xl">
-                            What if we could bypass our bodies entirely and connect our thoughts directly to computers?
-                        </p>
-                        <p class="text-lg" style="color: #93c5fd; margin-top: 1.5rem; font-style: italic;">
-                            This isn't science fiction anymore.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3: The Breakthrough -->
-            <div class="slide" data-slide="2">
-                <h2>⚡ The Breakthrough is Happening NOW</h2>
-                <div class="grid-3">
-                    <div class="card card-purple">
-                        <h3 style="color: #e9d5ff;">2024: Neuralink</h3>
-                        <p>First human patient controls a computer cursor and plays video games using only thoughts</p>
-                    </div>
-                    <div class="card card-green">
-                        <h3 style="color: #86efac;">2023: Stanford</h3>
-                        <p>Paralyzed woman types 62 words per minute with her mind - 3x faster than typing on a phone</p>
-                    </div>
-                    <div class="card card-blue">
-                        <h3 style="color: #93c5fd;">2024: Synchron</h3>
-                        <p>Non-invasive BCI allows ALS patients to text, email, and browse the web</p>
-                    </div>
-                </div>
-                <div class="alert alert-yellow">
-                    <p class="text-lg">
-                        <span class="font-bold" style="color: #fcd34d;">How it works:</span> Tiny electrodes read electrical signals from neurons, AI decodes these patterns into commands, and computers respond in milliseconds.
+                    <h1 class="glow">What if we could read minds?</h1>
+                    <p class="story-text reveal" style="font-size: 1.8rem; margin-top: 2rem;">
+                        Not metaphorically. Not eventually.
+                    </p>
+                    <p class="dramatic" style="font-size: 2.5rem;">
+                        What if we could do it <span class="highlight">today</span>?
                     </p>
                 </div>
             </div>
 
-            <!-- Slide 4: Real Impact -->
-            <div class="slide" data-slide="3">
-                <h2>❤️ Real People, Real Impact</h2>
-                <div class="gradient-card">
-                    <p class="quote">
-                        "I'm texting my friends again. I can order my own groceries. I have my independence back."
+            <!-- Slide 4: The Breakthrough - Ian's Miracle -->
+            <div class="slide" data-slide="3" data-bg="bg-tech">
+                <div class="story-box">
+                    <h2 class="center">2024: The Impossible Happened</h2>
+                    <p class="story-text center" style="font-size: 2rem; color: #60a5fa; margin: 2rem 0;">
+                        Ian Burkhart moved his hand.
                     </p>
-                    <p class="quote-author">- BCI Clinical Trial Participant, 2024</p>
-                </div>
-                <div class="grid-2">
-                    <div class="space-y-4">
-                        <h3 style="color: #93c5fd;">Medical Miracles</h3>
-                        <ul>
-                            <li>✓ Paralyzed patients walking with robotic exoskeletons</li>
-                            <li>✓ Locked-in syndrome patients communicating</li>
-                            <li>✓ Stroke victims regaining motor control</li>
-                            <li>✓ Amputees controlling prosthetic limbs naturally</li>
-                        </ul>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 style="color: #86efac;">Beyond Medicine</h3>
-                        <ul>
-                            <li>✓ Pilots training in flight simulators with thought</li>
-                            <li>✓ Gamers competing in BCI-based esports</li>
-                            <li>✓ Artists creating music with mental commands</li>
-                            <li>✓ Students with ADHD improving focus</li>
-                        </ul>
+                    <p class="story-text">
+                        Not with muscles. Not with nerves. With a <span class="highlight">chip the size of a pea</span> implanted in his brain.
+                    </p>
+                    <div class="grid-showcase">
+                        <div class="showcase-card card-blue">
+                            <h3>🧠 The Chip</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">96 electrodes reading 100 neurons simultaneously</p>
+                        </div>
+                        <div class="showcase-card card-purple">
+                            <h3>⚡ The Speed</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">Thought to movement in 100 milliseconds</p>
+                        </div>
+                        <div class="showcase-card card-pink">
+                            <h3>🎮 The Result</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">Ian played Guitar Hero. With his mind.</p>
+                        </div>
+                        <div class="showcase-card card-green">
+                            <h3>💪 The Future</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">He's regaining control, nerve by nerve</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 5: The Future -->
-            <div class="slide" data-slide="4">
-                <h2>🚀 The Next 10 Years</h2>
-                <div class="space-y-4">
-                    <div class="card card-blue" style="border-left-width: 4px;">
-                        <h3 style="color: #93c5fd;">2025-2027: Mainstream Medicine</h3>
-                        <p>BCIs become standard treatment for paralysis, approved by FDA, covered by insurance</p>
+            <!-- Slide 5: The Revolution - What's Happening NOW -->
+            <div class="slide" data-slide="4" data-bg="bg-tech">
+                <div class="story-box">
+                    <h2 class="center">This Isn't Science Fiction</h2>
+                    <p class="story-text center" style="font-size: 1.5rem; margin-bottom: 2rem;">
+                        These breakthroughs happened in the <span class="highlight">last 12 months</span>:
+                    </p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>🎯 Stanford University - March 2024</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">Paralyzed woman types <span class="highlight">62 words per minute</span> with her thoughts - faster than she ever typed with her hands</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>🚀 Neuralink - January 2024</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">First patient controls computer cursor, plays video games, and browses the internet using only his mind</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>🧬 Synchron - Ongoing</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">Non-invasive brain implants allow ALS patients to text, email, and control smart homes</p>
+                        </div>
                     </div>
-                    <div class="card card-purple" style="border-left-width: 4px;">
-                        <h3 style="color: #e9d5ff;">2028-2030: Consumer Tech</h3>
-                        <p>Non-invasive headbands for thought-controlled smartphones, smart homes, and virtual reality</p>
-                    </div>
-                    <div class="card card-pink" style="border-left-width: 4px;">
-                        <h3 style="color: #fbcfe8;">2030-2035: Enhanced Cognition</h3>
-                        <p>Memory augmentation, direct brain-to-brain communication, accelerated learning</p>
-                    </div>
-                </div>
-                <div class="card card-orange" style="margin-top: 2rem;">
-                    <p class="text-lg">
-                        <span class="font-bold" style="color: #fdba74;">The Big Question:</span> When everyone can upgrade their brain, what does it mean to be human?
+                    <p class="dramatic">
+                        We're not preparing for the future. We're living in it.
                     </p>
                 </div>
             </div>
 
-            <!-- Slide 6: Challenges -->
-            <div class="slide" data-slide="5">
-                <h2>The Challenges Ahead</h2>
-                <div class="grid-2">
-                    <div class="space-y-4">
-                        <div class="card card-red">
-                            <h3 style="color: #fca5a5;">⚠️ Safety & Ethics</h3>
-                            <ul style="font-size: 0.9rem;">
-                                <li>• Brain surgery risks</li>
-                                <li>• Long-term effects unknown</li>
-                                <li>• Who owns your brain data?</li>
-                                <li>• Could thoughts be hacked?</li>
+            <!-- Slide 6: The Impact - Show the Scale -->
+            <div class="slide" data-slide="5" data-bg="bg-future">
+                <div class="story-box">
+                    <h2 class="center">Beyond Ian: The Ripple Effect</h2>
+                    <div class="split-view">
+                        <div>
+                            <h3 style="color: #f472b6;">Medical Miracles</h3>
+                            <ul style="font-size: 1.2rem; line-height: 2; color: #e5e7eb; list-style: none;">
+                                <li>🚶 <span class="highlight">Paralyzed patients</span> walking with exoskeletons</li>
+                                <li>🗣️ <span class="highlight">Locked-in patients</span> speaking for the first time in years</li>
+                                <li>🎨 <span class="highlight">Stroke victims</span> regaining motor control</li>
+                                <li>🤝 <span class="highlight">Amputees</span> feeling through prosthetic hands</li>
                             </ul>
                         </div>
-                        <div class="card card-yellow">
-                            <h3 style="color: #fcd34d;">💰 Access & Equity</h3>
-                            <ul style="font-size: 0.9rem;">
-                                <li>• Currently costs $100,000+</li>
-                                <li>• Will create "enhanced" vs "natural" divide</li>
-                                <li>• Global access inequality</li>
+                        <div>
+                            <h3 style="color: #60a5fa;">Beyond Medicine</h3>
+                            <ul style="font-size: 1.2rem; line-height: 2; color: #e5e7eb; list-style: none;">
+                                <li>✈️ Fighter pilots training with thought</li>
+                                <li>🎮 Gamers competing in mind-controlled esports</li>
+                                <li>🎵 Musicians composing with pure imagination</li>
+                                <li>🧠 Students enhancing focus and memory</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="card card-purple">
-                            <h3 style="color: #e9d5ff;">🔬 Technical Limits</h3>
-                            <ul style="font-size: 0.9rem;">
-                                <li>• Resolution still limited</li>
-                                <li>• Scar tissue forms around implants</li>
-                                <li>• Signal degradation over time</li>
-                                <li>• AI interpretation errors</li>
-                            </ul>
+                    <div class="impact-number">$500B</div>
+                    <p class="center" style="font-size: 1.5rem; color: #e5e7eb;">
+                        Projected market value by 2030
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 7: The Timeline - Your Lifetime -->
+            <div class="slide" data-slide="6" data-bg="bg-future">
+                <div class="story-box">
+                    <h2 class="center">Your Future Timeline</h2>
+                    <p class="story-text center" style="font-size: 1.5rem; margin-bottom: 2rem;">
+                        This will happen in <span class="highlight">your lifetime</span>:
+                    </p>
+                    <div class="timeline">
+                        <div class="timeline-item" style="border-color: #60a5fa;">
+                            <h3>📅 2025-2027: It Goes Mainstream</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">FDA approval, insurance coverage, standard hospital treatment for paralysis</p>
                         </div>
-                        <div class="card card-blue">
-                            <h3 style="color: #93c5fd;">⚖️ Regulation</h3>
-                            <ul style="font-size: 0.9rem;">
-                                <li>• Laws haven't caught up</li>
-                                <li>• Privacy protections needed</li>
-                                <li>• International standards required</li>
-                            </ul>
+                        <div class="timeline-item" style="border-color: #a855f7;">
+                            <h3>📅 2028-2030: It Comes Home</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">Consumer headbands for thought-controlled phones, homes, and VR. Price drops to $1,000</p>
+                        </div>
+                        <div class="timeline-item" style="border-color: #ec4899;">
+                            <h3>📅 2030-2035: It Changes Everything</h3>
+                            <p style="color: #e5e7eb; margin-top: 0.5rem;">Memory augmentation, brain-to-brain communication, downloaded skills like The Matrix</p>
+                        </div>
+                    </div>
+                    <p class="dramatic" style="color: #f59e0b;">
+                        The question isn't IF this happens. It's WHO gets access.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 8: The Challenge - Be Honest -->
+            <div class="slide" data-slide="7" data-bg="bg-challenge">
+                <div class="story-box">
+                    <h2 class="center">But Here's What Keeps Me Up at Night...</h2>
+                    <div class="grid-showcase">
+                        <div class="showcase-card card-red">
+                            <h3>🔒 Privacy</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">If companies can read your clicks, imagine if they could read your <span class="highlight">thoughts</span></p>
+                        </div>
+                        <div class="showcase-card card-yellow">
+                            <h3>⚖️ Inequality</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">Will this create a world of enhanced "superhumans" and natural "normals"?</p>
+                        </div>
+                        <div class="showcase-card card-purple">
+                            <h3>🧬 Identity</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">If we can upgrade our brains like computers, what does it mean to be <span class="highlight">human</span>?</p>
+                        </div>
+                        <div class="showcase-card card-blue">
+                            <h3>🔐 Security</h3>
+                            <p style="color: #e5e7eb; margin-top: 1rem;">We worry about passwords being hacked. Now imagine your <span class="highlight">memories</span> being hacked.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 7: Closing -->
-            <div class="slide" data-slide="6">
-                <div class="center space-y-8">
-                    <h1 style="font-size: 3rem;">The Future is Thought</h1>
-                    <div class="gradient-card">
-                        <p class="text-2xl" style="margin-bottom: 2rem;">
-                            We're living through a transformation as profound as the invention of language or the internet.
+            <!-- Slide 9: The Return to Ian -->
+            <div class="slide" data-slide="8" data-bg="bg-hope">
+                <div class="story-box center">
+                    <h2 class="glow">Remember Ian?</h2>
+                    <p class="quote-large">
+                        "For the first time in 8 years, I poured myself a glass of water."
+                    </p>
+                    <p class="story-text reveal" style="font-size: 1.5rem; margin: 2rem 0;">
+                        That simple act. Something you did this morning without thinking.
+                    </p>
+                    <p class="story-text" style="font-size: 1.5rem;">
+                        For Ian, it was <span class="highlight">impossible</span> for 8 years.
+                    </p>
+                    <p class="story-text" style="font-size: 1.5rem;">
+                        Now it's <span class="highlight" style="color: #10b981;">his reality</span>.
+                    </p>
+                    <p class="dramatic" style="margin-top: 3rem; font-size: 2rem;">
+                        This is why we build this technology.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 10: The Call to Action -->
+            <div class="slide" data-slide="9" data-bg="bg-final">
+                <div class="story-box center">
+                    <h1 style="font-size: 3.5rem; margin-bottom: 2rem;">The Future Isn't Coming...</h1>
+                    <div class="final-call">
+                        It's Already Inside Our Heads
+                    </div>
+                    <div class="reveal" style="margin-top: 3rem;">
+                        <p class="story-text" style="font-size: 1.8rem; margin-bottom: 1.5rem;">
+                            <span class="highlight" style="color: #10b981;">The engineers</span> who build this responsibly
                         </p>
-                        <p class="text-2xl font-bold" style="color: #93c5fd;">
-                            For the first time in history, the barrier between mind and machine is dissolving.
+                        <p class="story-text" style="font-size: 1.8rem; margin-bottom: 1.5rem;">
+                            <span class="highlight" style="color: #f59e0b;">The ethicists</span> who guide its use
+                        </p>
+                        <p class="story-text" style="font-size: 1.8rem; margin-bottom: 1.5rem;">
+                            <span class="highlight" style="color: #ec4899;">The citizens</span> who demand equal access
+                        </p>
+                        <p class="dramatic" style="font-size: 2.5rem; margin-top: 3rem; color: white;">
+                            That's <span class="highlight">us</span>. That's <span class="highlight">you</span>.
                         </p>
                     </div>
-                    <div class="space-y-4" style="text-align: left; max-width: 900px; margin: 0 auto;">
-                        <p class="text-xl">
-                            <span class="font-bold" style="color: #86efac;">The Question:</span> Will we use this power to heal, to connect, to enhance our humanity?
-                        </p>
-                        <p class="text-xl">
-                            <span class="font-bold" style="color: #fcd34d;">The Answer:</span> That depends on us—the engineers, doctors, ethicists, and citizens who shape this technology.
-                        </p>
-                    </div>
-                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #4b5563;">
-                        <p class="closing-statement">
-                            The future isn't just coming. It's already inside our heads.
-                        </p>
-                    </div>
+                    <p style="font-size: 2rem; margin-top: 3rem; color: #60a5fa; font-weight: bold;">
+                        The barrier between mind and machine is dissolving.
+                    </p>
+                    <p style="font-size: 2rem; margin-top: 1rem; color: #e5e7eb;">
+                        What we do next will define what it means to be human.
+                    </p>
                 </div>
             </div>
         </div>
 
         <!-- Controls -->
         <div class="controls">
-            <button id="prevBtn" onclick="changeSlide(-1)">◀ Previous</button>
+            <button id="prevBtn" onclick="changeSlide(-1)">◀</button>
             <div class="indicators" id="indicators"></div>
-            <button id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+            <button id="nextBtn" onclick="changeSlide(1)">▶</button>
         </div>
-        <div class="counter" id="counter"></div>
     </div>
 
     <script>
@@ -618,65 +783,3 @@
             firstSlide.style.opacity = '1';
         }, 100);
     </script>
-document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-
-        function showSlide(n) {
-            if (n >= totalSlides) n = totalSlides - 1;
-            if (n < 0) n = 0;
-            
-            currentSlide = n;
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[currentSlide].classList.add('active');
-            
-            updateControls();
-            updateIndicators();
-            updateCounter();
-        }
-
-        function changeSlide(direction) {
-            showSlide(currentSlide + direction);
-        }
-
-        function goToSlide(n) {
-            showSlide(n);
-        }
-
-        function updateControls() {
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-        }
-
-        function updateIndicators() {
-            const indicatorsContainer = document.getElementById('indicators');
-            indicatorsContainer.innerHTML = '';
-            
-            for (let i = 0; i < totalSlides; i++) {
-                const indicator = document.createElement('div');
-                indicator.className = 'indicator';
-                if (i === currentSlide) {
-                    indicator.classList.add('active');
-                }
-                indicator.onclick = () => goToSlide(i);
-                indicatorsContainer.appendChild(indicator);
-            }
-        }
-
-        function updateCounter() {
-            document.getElementById('counter').textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-        });
-
-        // Initialize
-        updateControls();
-        updateIndicators();
-        updateCounter();
-    </script>
-</body>
-</html>
