@@ -46,12 +46,13 @@
 
         .slide-content {
             flex: 1;
-            padding: 4rem;
+            padding: 2rem 4rem;
             z-index: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow-y: auto;
         }
 
         .slide {
@@ -121,14 +122,14 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }
 
         h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
             color: #60a5fa;
         }
 
@@ -141,17 +142,19 @@
         .story-box {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
-            padding: 3rem;
+            padding: 2rem 3rem;
             border-radius: 20px;
             border: 2px solid rgba(59, 130, 246, 0.3);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
         }
 
         .story-text {
-            font-size: 1.5rem;
-            line-height: 2;
+            font-size: 1.3rem;
+            line-height: 1.8;
             color: #e5e7eb;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .highlight {
@@ -161,11 +164,11 @@
         }
 
         .dramatic {
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: #f472b6;
             font-weight: bold;
             text-align: center;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             text-shadow: 0 0 20px rgba(244, 114, 182, 0.5);
         }
 
