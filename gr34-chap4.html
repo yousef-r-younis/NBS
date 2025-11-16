@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Grades 3-4 - Chapter 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 80px;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+            border-bottom: 3px solid #4CA9FF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 4em;
+            color: #4CA9FF;
+            margin-bottom: 20px;
+            animation: floatIn 0.7s ease-out;
+        }
+
+        .title-slide h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 2.8em;
+            color: #4CA9FF;
+            margin-bottom: 30px;
+            animation: floatIn 0.7s ease-out;
+        }
+
+        .title-slide h2 {
+            color: #A48CFF;
+            font-size: 2.2em;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.6em;
+            color: #666;
+            margin-bottom: 15px;
+            animation: floatIn 0.8s ease-out 0.2s both;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.8em;
+        }
+
+        p {
+            font-size: 1.4em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        ul, ol {
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        ul li:before {
+            content: "⭐ ";
+            margin-right: 10px;
+            color: #FFF48E;
+        }
+
+        .content-box {
+            background: rgba(76, 169, 255, 0.08);
+            border-left: 5px solid #4CA9FF;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .purple-box {
+            background: rgba(164, 140, 255, 0.08);
+            border-left: 5px solid #A48CFF;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .yellow-box {
+            background: rgba(255, 244, 142, 0.3);
+            border-left: 5px solid #FFF48E;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .center-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .image-item {
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
+
+        .image-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .image-item p {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
+
+        .icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .icon-label {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #A48CFF 0%, #4CA9FF 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .challenge-box p {
+            color: white;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .speech-bubble {
+            background: #4CA9FF;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            position: relative;
+            font-size: 1.2em;
+            animation: floatIn 0.6s ease-out;
+        }
+
+        .speech-bubble.robot {
+            background: #A48CFF;
+            margin-left: 40px;
+        }
+
+        .speech-bubble.human {
+            background: #4CA9FF;
+            margin-right: 40px;
+        }
+
+        .drawing-box {
+            border: 3px dashed #A48CFF;
+            padding: 40px;
+            border-radius: 10px;
+            background: rgba(255, 244, 142, 0.1);
+            margin: 30px 0;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #666;
+        }
+
+        .form-item {
+            background: white;
+            border: 2px solid #4CA9FF;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 1.3em;
+        }
+
+        .form-item input {
+            width: 100%;
+            border: 1px solid #A48CFF;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        .game-card {
+            background: white;
+            border: 3px solid #4CA9FF;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            text-align: center;
+            display: inline-block;
+            animation: popIn 0.6s ease-out;
+            min-width: 200px;
+        }
+
+        .game-card h3 {
+            color: #4CA9FF;
+            margin-bottom: 15px;
+        }
+
+        .emoji-large {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: #4CA9FF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(76, 169, 255, 0.3);
+        }
+
+        button:hover {
+            background: #A48CFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(164, 140, 255, 0.4);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4CA9FF;
+            font-size: 1.5em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .strong-blue {
+            color: #4CA9FF;
+            font-weight: 600;
+        }
+
+        .strong-purple {
+            color: #A48CFF;
+            font-weight: 600;
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #FFF48E 0%, #A48CFF 100%);
+            border: 5px solid #4CA9FF;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 30px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .certificate h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .certificate p {
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        strong {
+            color: #4CA9FF;
+            font-weight: 700;
+        }
+
+        em {
+            color: #A48CFF;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- TITLE SLIDE -->
+        <div class="slide title-slide center-content">
+            <h1>AI for Grades 3-4! 🤖</h1>
+            <div class="subtitle">Let's Discover Artificial Intelligence Together!</div>
+            <div class="emoji-large">🧠 👀 🗣️ 🎨 🚀</div>
+            <div class="subtitle" style="margin-top: 40px;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+        </div>
+
+        <!-- ===== SESSION 1: AI AROUND US ===== -->
+
+        <!-- Session 1 Title Slide -->
+        <div class="slide center-content">
+            <h1>🧠 Session 1</h1>
+            <h2 style="font-size: 2.5em; margin-top: 30px;">AI Around Us!</h2>
+            <div class="subtitle" style="margin-top: 40px; color: #666;">Where do we see smart machines?</div>
+            <div class="emoji-large">🤖 💡 🎯</div>
+        </div>
+
+        <!-- Slide 1: AI Around Us! -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h1>AI Around Us!</h1>
+                    <div class="subtitle">Where do we see smart machines?</div>
+                    <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                        Did you know? AI is already in your home, your school, and even your backpack! Smart computers are everywhere, helping people every single day. Some are obvious like robots, but many are hidden inside everyday things like your phone or TV. Today, we're going to find them all and learn how they work!
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large">🤖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Warm-Up Question -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">What things around you feel smart?</h2>
+            <p style="margin-top: 30px;">Look at these things. Which one feels like it can think?</p>
+            <div class="image-row">
+                <div class="image-item">
+                    <div class="emoji-large">📱</div>
+                    <p>Smartphone</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">📱</div>
+                    <p>Tablet</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🧺</div>
+                    <p>Washing Machine</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">📺</div>
+                    <p>TV</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🤖</div>
+                    <p>Robot Vacuum</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What Is AI? -->
+        <div class="slide">
+            <h2>What Is AI?</h2>
+            <div class="subtitle" style="color: #333; margin-bottom: 30px;">AI = Computers that learn patterns</div>
+            <p style="font-size: 1.2em; color: #666; margin-bottom: 25px;">
+                AI stands for <strong>Artificial Intelligence</strong>. It's a computer program that can learn and make smart decisions, kind of like how your brain learns new things! Unlike regular calculators that always do the same thing, AI can recognize patterns and improve over time.
+            </p>
+            <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;"><strong>AI does amazing things like:</strong></p>
+            <ul>
+                <li><strong>Recognizing faces</strong> 👤 - It knows who you are from a photo!</li>
+                <li><strong>Choosing videos for you</strong> 🎬 - It learns what you like to watch</li>
+                <li><strong>Helping you search</strong> 🔍 - It guesses what you're looking for</li>
+                <li><strong>Understanding your voice</strong> 🎤 - It knows what you're saying, even with accents!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: AI or NOT AI? Game Title -->
+        <div class="slide center-content">
+            <h2 style="color: #A48CFF; font-size: 3.5em;">AI or NOT AI?</h2>
+            <div style="margin-top: 40px; font-size: 2em;">
+                <div style="margin: 20px; color: #333;">
+                    🟩 <span class="strong-blue">Green = AI</span>
+                </div>
+                <div style="margin: 20px; color: #333;">
+                    🟥 <span class="strong-purple">Red = Not AI</span>
+                </div>
+            </div>
+            <div class="emoji-large" style="margin-top: 50px;">✅ ❌</div>
+        </div>
+
+        <!-- Slide 5: AI or Not AI? Round 1 -->
+        <div class="slide">
+            <h2>Round 1</h2>
+            <div class="image-row" style="font-size: 1.8em;">
+                <div class="image-item">
+                    <div class="emoji-large">🗺️</div>
+                    <p>Google Maps</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🧮</div>
+                    <p>Calculator</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🚦</div>
+                    <p>Traffic Light</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; color: #666; font-style: italic;">
+                📝 Which one uses AI? Why?
+            </p>
+        </div>
+
+        <!-- Slide 6: AI or Not AI? Round 2 -->
+        <div class="slide">
+            <h2>Round 2</h2>
+            <div class="image-row" style="font-size: 1.8em;">
+                <div class="image-item">
+                    <div class="emoji-large">🗣️</div>
+                    <p>Siri</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🧊</div>
+                    <p>Fridge</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">📱</div>
+                    <p>TikTok</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; color: #666; font-style: italic;">
+                📝 Which ones use AI?
+            </p>
+        </div>
+
+        <!-- Slide 7: AI at Home -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">AI at Home!</h2>
+            <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">
+                Your home is probably smarter than you think! Many everyday devices use AI to help you and your family. Let me show you where AI is hiding in your house right now!
+            </p>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🔊</div>
+                    <div class="icon-label">Smart Speaker</div>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">Listens and responds to you!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">☀️</div>
+                    <div class="icon-label">Auto-Brightness</div>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">Adjusts screen brightness</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">⌨️</div>
+                    <div class="icon-label">Keyboard Suggestions</div>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">Guesses words you want to type</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">▶️</div>
+                    <div class="icon-label">YouTube Recommends</div>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">Suggests videos you'll love</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; color: #333; font-size: 1.3em; font-weight: 600;">
+                "AI helps us every day — even in simple things!"
+            </p>
+        </div>
+
+        <!-- Slide 8: AI Scavenger Hunt -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h2>AI Scavenger Hunt!</h2>
+                    <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                        Your challenge: Look around your home and find something that has AI inside! It could be on your phone, tablet, TV, or smart device.
+                    </p>
+                    <p style="font-size: 1.2em; color: #333; margin-top: 20px; font-weight: 600;">Circle something that…</p>
+                    <ul style="font-size: 1.3em;">
+                        <li>Talks 🗣️ (responds to you)</li>
+                        <li>Listens 👂 (hears what you say)</li>
+                        <li>Suggests 💡 (gives ideas)</li>
+                        <li>Guesses 🤔 (predicts what you want)</li>
+                        <li>Controls itself 🎮 (makes decisions)</li>
+                    </ul>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 5em;">🔍</div>
+                    <p style="font-size: 1.2em; color: #666; margin-top: 30px;">Find hidden AI around you!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Create Your Own AI -->
+        <div class="slide">
+            <h2>Create Your Own AI Machine!</h2>
+            <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
+                Now it's YOUR turn to be creative! Imagine you could design your own AI robot or smart machine. What would it look like? What would it do? Fill in these blanks and then draw it below!
+            </p>
+            <p style="margin-top: 25px; font-size: 1.3em; font-weight: 600; color: #333;">Your AI Creation:</p>
+            <div class="form-item">
+                <p><strong>Name of your AI:</strong> _________________________________________</p>
+                <p style="font-size: 0.95em; color: #666; margin-top: 5px;">Example: "RoboHelper", "DancingBot", "SuperDrawer"</p>
+            </div>
+            <div class="form-item">
+                <p><strong>What it does:</strong> _________________________________________</p>
+                <p style="font-size: 0.95em; color: #666; margin-top: 5px;">Example: "Helps with homework", "Cleans the room", "Tells jokes"</p>
+            </div>
+            <div class="form-item">
+                <p><strong>Why it's smart:</strong> _________________________________________</p>
+                <p style="font-size: 0.95em; color: #666; margin-top: 5px;">Example: "Learns from mistakes", "Listens to me", "Remembers my favorite things"</p>
+            </div>
+            <div class="drawing-box">
+                ✏️ Draw your AI here!<br>
+                <span style="font-size: 0.9em; margin-top: 10px;">Make it colorful and fun!</span>
+            </div>
+        </div>
+
+        <!-- Slide 10: Session 1 Closing -->
+        <div class="slide center-content">
+            <h2>Great Job, Junior AI Detectives! 🎉</h2>
+            <div class="emoji-large">🤖</div>
+            <p style="margin-top: 30px; font-size: 1.5em;">
+                AI is everywhere and helps us every day.<br>
+                Next time: How AI sees!
+            </p>
+        </div>
+
+        <!-- ===== SESSION 2: HOW AI SEES ===== -->
+
+        <!-- Session 2 Title Slide -->
+        <div class="slide center-content">
+            <h1>👀 Session 2</h1>
+            <h2 style="font-size: 2.5em; margin-top: 30px;">How AI Sees!</h2>
+            <div class="subtitle" style="margin-top: 40px; color: #666;">AI uses patterns to recognize things</div>
+            <div class="emoji-large">👁️ 🔍 🧠</div>
+        </div>
+
+        <!-- Slide 1: How AI Sees! -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h1>How AI Sees!</h1>
+                    <div class="subtitle">AI uses patterns to recognize things</div>
+                    <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                        Did you know? AI doesn't have eyes like you do! But it can still "see" pictures and recognize what's in them. It learns by looking at patterns and shapes. Let's discover how!
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 6em;">🤖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: How Do YOU Know This Is a Dog? -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">How do YOU know this is a dog?</h2>
+            <div style="text-align: center; font-size: 5em; margin: 40px 0;">🐶</div>
+            <p style="text-align: center; margin-top: 30px; font-size: 1.4em;">When you look at a dog, what do you see?</p>
+            <ul style="font-size: 1.3em;">
+                <li>Ears 👂</li>
+                <li>Eyes 👁️</li>
+                <li>Tail 📍</li>
+                <li>Shape 🔶</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: How AI "Sees" (Simple) -->
+        <div class="slide">
+            <h2 style="color: #4CA9FF;">How AI "Sees"</h2>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Here's the secret: <strong>AI does NOT use eyes!</strong> Instead, it looks at patterns in pictures, just like clues in a mystery game.
+            </p>
+            <p style="margin-top: 20px; font-size: 1.2em; color: #333; font-weight: 600;">AI looks for patterns like:</p>
+            <ul>
+                <li><strong>Colors</strong> 🌈 - Is it brown and fluffy? Might be a dog!</li>
+                <li><strong>Shapes</strong> 🔷 - Does it have pointy ears? That's a clue!</li>
+                <li><strong>Lines</strong> 📏 - Straight edges or curved? That helps too!</li>
+                <li><strong>Textures</strong> 🪢 - Is it smooth or bumpy? Fuzzy or rough?</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666; font-style: italic;">
+                When AI sees enough patterns, it can guess: "That's a dog!" or "That's a cat!" Just like you do with your eyes!
+            </p>
+        </div>
+
+        <!-- Slide 4: Zoom-In Challenge #1 -->
+        <div class="slide center-content challenge-box">
+            <h2 style="color: white; margin-bottom: 30px;">Zoom-In Challenge!</h2>
+            <div style="font-size: 3em;">🔍</div>
+            <p style="margin-top: 30px;">Close-up image here (furry texture)</p>
+            <p style="margin-top: 40px; font-size: 1.8em; color: white;">Guess what this is!</p>
+        </div>
+
+        <!-- Slide 5: Reveal - Dog! -->
+        <div class="slide center-content">
+            <h1 style="color: #A48CFF; font-size: 3.5em;">It was… a DOG! 🐶</h1>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🐶</div>
+        </div>
+
+        <!-- Slide 6: Zoom-In Challenge #2 -->
+        <div class="slide center-content challenge-box">
+            <h2 style="color: white; margin-bottom: 30px;">Zoom-In Challenge #2!</h2>
+            <div style="font-size: 3em;">🔍</div>
+            <p style="margin-top: 30px;">Close-up image here (bumpy red texture)</p>
+            <p style="margin-top: 40px; font-size: 1.8em; color: white;">Guess what this is!</p>
+        </div>
+
+        <!-- Slide 7: Reveal - Apple! -->
+        <div class="slide center-content">
+            <h1 style="color: #4CA9FF; font-size: 3.5em;">It was… an APPLE! 🍎</h1>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🍎</div>
+        </div>
+
+        <!-- Slide 8: How AI Learns Examples -->
+        <div class="slide">
+            <h2>How AI Learns From Examples</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Think of AI like a student learning something new. The more examples it sees, the smarter it gets! Here's how it works:
+            </p>
+            <div class="image-row" style="margin-top: 40px;">
+                <div class="image-item">
+                    <div class="emoji-large">🐱</div>
+                    <p><strong>Cat #1</strong></p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🐱</div>
+                    <p><strong>Cat #2</strong></p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🐱</div>
+                    <p><strong>Cat #3</strong></p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🐶</div>
+                    <p><strong>DOG??</strong></p>
+                </div>
+            </div>
+            <div class="content-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em;">
+                    "AI thinks: Cat → Cat → Cat… then suddenly: DOG?? 
+                </p>
+                <p style="font-size: 1.2em; margin-top: 10px;">
+                    Sometimes AI gets confused because it learned the pattern was all cats! But don't worry — the more examples we show it, the better it gets at spotting the difference!"
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Teach-The-Machine Game -->
+        <div class="slide">
+            <h2>Teach-The-Machine Game!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Here's something really cool: YOU can teach AI! Right now, we're going to play a game where you show me pictures, and I'll act like the AI trying to guess what they are. Let's see if I can learn your patterns!
+            </p>
+            <div class="content-box" style="margin-top: 30px;">
+                <h3 style="color: #4CA9FF; margin-bottom: 20px;">How it works:</h3>
+                <ol style="font-size: 1.2em;">
+                    <li><strong>You pick an object</strong> (anything around you!)</li>
+                    <li><strong>You describe it or show a picture</strong></li>
+                    <li><strong>I try to guess what it is</strong> (like AI would!)</li>
+                    <li><strong>We see if I can learn!</strong></li>
+                </ol>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <div class="emoji-large" style="font-size: 5em;">🤖</div>
+                <p style="font-size: 1.2em; color: #666; margin-top: 15px;">Ready to teach me something?</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: QuickDraw Demo -->
+        <div class="slide">
+            <h2>AI Guessing Game: QuickDraw!</h2>
+            <div class="purple-box">
+                <p style="font-size: 1.4em;">
+                    AI tries to guess your drawing… sometimes it's right, sometimes it's silly!
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <div class="emoji-large" style="font-size: 5em;">✏️🤔</div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Session 2 Closing -->
+        <div class="slide center-content">
+            <h1 style="color: #4CA9FF; font-size: 3.5em;">AI sees with patterns, not eyes!</h1>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">😎</div>
+            <p style="margin-top: 40px; font-size: 1.5em;">Great job today!</p>
+        </div>
+
+        <!-- ===== SESSION 3: HOW AI TALKS ===== -->
+
+        <!-- Session 3 Title Slide -->
+        <div class="slide center-content">
+            <h1>🗣️ Session 3</h1>
+            <h2 style="font-size: 2.5em; margin-top: 30px;">How AI Talks!</h2>
+            <div class="subtitle" style="margin-top: 40px; color: #666;">Chatbots and talking robots</div>
+            <div class="emoji-large">💬 🎤 🤖</div>
+        </div>
+
+        <!-- Slide 1: How AI Talks! -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h1>How AI Talks!</h1>
+                    <div class="subtitle">Chatbots and talking robots</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 6em;">🤖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Do Robots Talk Like Us? -->
+        <div class="slide center-content">
+            <h2 style="color: #A48CFF;">Do robots talk like us?</h2>
+            <div style="text-align: center; font-size: 5em; margin: 60px 0;">🎤</div>
+            <p style="font-size: 1.6em;">What do you think?</p>
+        </div>
+
+        <!-- Slide 3: What Is a Chatbot? -->
+        <div class="slide">
+            <h2>What Is a Chatbot?</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                A chatbot is a computer program that can talk to you! It's like having a friend inside your phone or computer that can answer questions, help you, and have conversations. Unlike regular apps that just follow buttons, chatbots can understand what you're saying and respond!
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">A chatbot can:</p>
+            <ul style="font-size: 1.2em;">
+                <li><strong>Answer questions</strong> ❓ - "What's the weather like?"</li>
+                <li><strong>Have conversations</strong> 💬 - It talks like a real person!</li>
+                <li><strong>Help you</strong> 🤝 - "How do I solve this math problem?"</li>
+                <li><strong>Learn from you</strong> � - It gets better each time you chat</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.3em; color: #666;"><strong>Popular chatbots you might know:</strong></p>
+            <div class="image-row" style="margin-top: 15px;">
+                <div class="image-item">
+                    <div class="emoji-large">🗣️</div>
+                    <p><strong>Siri</strong> (Apple)</p>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">On iPhones & iPads</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🔊</div>
+                    <p><strong>Alexa</strong> (Amazon)</p>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Smart speakers</p>
+                </div>
+                <div class="image-item">
+                    <div class="emoji-large">🤖</div>
+                    <p><strong>ChatGPT</strong></p>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Online AI assistant</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How AI Learns Words -->
+        <div class="slide">
+            <h2>How AI Learns Words</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                You know how you learn new words by reading books or listening to people talk? AI does the same thing! It reads millions and millions of words to understand language and learn how to talk back to you.
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">AI learns from reading:</p>
+            <ul style="font-size: 1.2em;">
+                <li><strong>Books</strong> 📚 - Thousands of stories and facts</li>
+                <li><strong>Messages</strong> 💬 - How people really talk on social media</li>
+                <li><strong>Stories</strong> 📖 - All kinds of adventures and experiences</li>
+                <li><strong>Conversations</strong> 🗨️ - Real chats between people</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666; font-style: italic;">
+                By seeing so many words and sentences, AI learns patterns in language — just like you did when you learned to read and write!
+            </p>
+        </div>
+
+        <!-- Slide 5: Robot Conversation Game -->
+        <div class="slide">
+            <h2>Robot Conversation Game 🤖</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Let's act out how a chatbot thinks and talks! One student will be the robot, and one will be the human. The robot has some special rules to follow:
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">Setup:</p>
+            <ul style="font-size: 1.2em;">
+                <li><strong>1 student = Robot</strong> 🤖</li>
+                <li><strong>1 student = Human</strong> 👤</li>
+            </ul>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">Robot's Rules (you must):</p>
+            <ul style="font-size: 1.2em;">
+                <li>Answer <strong>simply</strong> (short and clear)</li>
+                <li><strong>NOT have feelings</strong> (say "I don't feel anything")</li>
+                <li>Be <strong>silly but simple</strong> (use basic words)</li>
+                <li><strong>Only know things from your training</strong> (don't make things up!)</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666; font-style: italic;">
+                This is how real chatbots work! They respond with what they learned but can't really understand feelings like we do.
+            </p>
+        </div>
+
+        <!-- Slide 6: Example Conversations -->
+        <div class="slide">
+            <h2>Examples</h2>
+            <div class="speech-bubble human">
+                <strong>Human:</strong> "Hello!"
+            </div>
+            <div class="speech-bubble robot">
+                <strong>Robot:</strong> "Hello human."
+            </div>
+            <div class="speech-bubble human">
+                <strong>Human:</strong> "How are you?"
+            </div>
+            <div class="speech-bubble robot">
+                <strong>Robot:</strong> "I don't have feelings."
+            </div>
+            <p style="text-align: center; margin-top: 30px; color: #666; font-style: italic;">
+                Kids LOVE this slide! 😄
+            </p>
+        </div>
+
+        <!-- Slide 7: Fix the Robot Sentence #1 -->
+        <div class="slide center-content">
+            <h2>Fix the Robot Sentence!</h2>
+            <div class="challenge-box" style="margin-top: 40px;">
+                <p>"I am eat pizza now."</p>
+            </div>
+            <div style="font-size: 4em; margin-top: 40px;">🤔</div>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">What's wrong?</p>
+        </div>
+
+        <!-- Slide 8: Fix the Robot Sentence #2 -->
+        <div class="slide center-content">
+            <h2>Fix the Robot Sentence #2</h2>
+            <div class="challenge-box" style="margin-top: 40px;">
+                <p>"Today school no I like chicken."</p>
+            </div>
+            <div style="font-size: 4em; margin-top: 40px;">❓</div>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">Can you fix it?</p>
+        </div>
+
+        <!-- Slide 9: Story Builder -->
+        <div class="slide">
+            <h2>Make a Human + Robot Story!</h2>
+            <p style="margin-top: 30px; font-size: 1.3em;">Write 3 sentences:</p>
+            <ol style="font-size: 1.3em; margin-top: 20px;">
+                <li>A human</li>
+                <li>A robot</li>
+                <li>Something funny happens</li>
+            </ol>
+            <div class="yellow-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em;">
+                    <strong>Example:</strong><br>
+                    "Luna the robot wanted to dance.<br>
+                    She tried spinning but fell over.<br>
+                    The human taught her!"
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Session 3 Closing -->
+        <div class="slide center-content">
+            <h1 style="color: #4CA9FF; font-size: 3.5em;">AI talks using patterns — not feelings!</h1>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">👋</div>
+            <p style="margin-top: 40px; font-size: 1.5em;">Amazing session!</p>
+        </div>
+
+        <!-- ===== SESSION 4: AI ART & MUSIC ===== -->
+
+        <!-- Session 4 Title Slide -->
+        <div class="slide center-content">
+            <h1>🎨 Session 4</h1>
+            <h2 style="font-size: 2.5em; margin-top: 30px;">AI Art & Music!</h2>
+            <div class="subtitle" style="margin-top: 40px; color: #666;">Can computers create?</div>
+            <div class="emoji-large">🎨 🎵 🖌️</div>
+        </div>
+
+        <!-- Slide 1: AI Art & Music! -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h1>AI Art & Music!</h1>
+                    <div class="subtitle">Can computers create?</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 6em;">🎨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What Is AI Art? -->
+        <div class="slide">
+            <h2>What Is AI Art?</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Here's something amazing: AI can create beautiful pictures! It doesn't use a paintbrush like you do, but it can understand your ideas and turn them into images. You just give it instructions, and it creates art!
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">AI uses these tools to make pictures:</p>
+            <ul style="font-size: 1.2em;">
+                <li><strong>Patterns</strong> 🔵 - Shapes and forms from thousands of images</li>
+                <li><strong>Colors</strong> 🌈 - Different color combinations it learned</li>
+                <li><strong>Shapes</strong> 🔷 - How to draw recognizable objects</li>
+                <li><strong>Your instructions!</strong> 📝 - What you want it to make</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666; font-style: italic;">
+                For example: If you say "Draw a dancing panda wearing a tuxedo," AI can actually do it!
+            </p>
+        </div>
+
+        <!-- Slide 3: Guess the AI Artwork #1 -->
+        <div class="slide center-content">
+            <h2>Guess the AI Art!</h2>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Is this made by a human or AI?
+            </p>
+            <div style="text-align: center; margin-top: 40px;">
+                <div class="emoji-large" style="font-size: 5em;">🎨</div>
+                <p style="margin-top: 20px; font-size: 1.3em;">Colorful AI artwork here</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Guess the AI Artwork #2 -->
+        <div class="slide center-content">
+            <h2>Guess the AI Art #2</h2>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Is this made by a human or AI?
+            </p>
+            <div style="text-align: center; margin-top: 40px;">
+                <div class="emoji-large" style="font-size: 5em;">🖼️</div>
+                <p style="margin-top: 20px; font-size: 1.3em;">Another AI artwork</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: How AI Art Works -->
+        <div class="slide">
+            <h2>How AI Makes Art</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Creating AI art is like telling a really creative story! Here's how the process works:
+            </p>
+            <div class="content-box" style="margin-top: 30px;">
+                <ol style="font-size: 1.2em;">
+                    <li><strong>YOU describe an idea</strong> 💭 (Example: "A robot painting a rainbow")</li>
+                    <li><strong>AI understands your words</strong> and turns them into a picture 🤖</li>
+                    <li><strong>You see the result</strong> 🎨 (A picture of a robot painting!)</li>
+                    <li><strong>You decide if you like it!</strong> ✅ (Yes! / Try again / Make it different)</li>
+                </ol>
+            </div>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666;">
+                The cool part? You can give it more instructions to make it even better: "Make the rainbow more colorful!" or "Make the robot have 10 arms!" AI will try to create exactly what you imagine!
+            </p>
+        </div>
+
+        <!-- Slide 6: Make AI Art! -->
+        <div class="slide">
+            <h2>Make AI Art!</h2>
+            <p style="margin-top: 30px; font-size: 1.4em;">Choose a FUN idea:</p>
+            <ul style="font-size: 1.3em;">
+                <li>"A dancing panda chef" 🐼👨‍🍳</li>
+                <li>"A robot playing football" 🤖⚽</li>
+                <li>"A giraffe astronaut" 🦒🚀</li>
+            </ul>
+            <p style="margin-top: 40px; font-size: 1.3em; color: #666;">Use AI to make the picture!</p>
+        </div>
+
+        <!-- Slide 7: AI Music -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h2>AI Can Make Music!</h2>
+                    <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                        Just like AI can create pictures, it can also compose music! You choose what kind of music you want, and AI creates original melodies and beats that have never been heard before.
+                    </p>
+                    <p style="margin-top: 20px; font-size: 1.2em; color: #333; font-weight: 600;">Here's how it works:</p>
+                    <ol style="font-size: 1.1em;">
+                        <li><strong>Choose a beat</strong> 🎵 (Fast? Slow? Bouncy?)</li>
+                        <li><strong>Choose a mood</strong> 😊😢🕺 (Happy? Sad? Fun?)</li>
+                        <li><strong>AI makes music</strong> just for you!</li>
+                        <li><strong>Listen and enjoy!</strong> 🎧</li>
+                    </ol>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 6em;">🎵</div>
+                    <p style="font-size: 1.2em; color: #666; margin-top: 30px;">Music without instruments!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Create a Class Song -->
+        <div class="slide">
+            <h2>Let's Make a Class Song!</h2>
+            <p style="margin-top: 30px; font-size: 1.4em;">Steps:</p>
+            <ol style="font-size: 1.3em;">
+                <li>Pick a style (happy/sad/dance) 😊😢🕺</li>
+                <li>Pick a mood 🎭</li>
+                <li>Play the AI song 🎧</li>
+            </ol>
+        </div>
+
+        <!-- Slide 9: Mini Art Gallery -->
+        <div class="slide">
+            <h2>Our AI Art Gallery</h2>
+            <p style="margin-top: 30px; font-size: 1.3em;">
+                We'll show some of the best artworks you created!
+            </p>
+            <div style="text-align: center; margin-top: 60px;">
+                <div class="game-card" style="width: 150px; height: 150px; margin-bottom: 20px;">
+                    🖼️
+                </div>
+                <div class="game-card" style="width: 150px; height: 150px; margin-bottom: 20px;">
+                    🎨
+                </div>
+                <div class="game-card" style="width: 150px; height: 150px;">
+                    🌈
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Session 4 Closing -->
+        <div class="slide center-content">
+            <h1 style="color: #A48CFF; font-size: 3.5em;">AI helps humans be creative!</h1>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🎨✨</div>
+            <p style="margin-top: 40px; font-size: 1.5em;">Fantastic work!</p>
+        </div>
+
+        <!-- ===== SESSION 5: AI PROJECT DAY ===== -->
+
+        <!-- Session 5 Title Slide -->
+        <div class="slide center-content">
+            <h1>🚀 Session 5</h1>
+            <h2 style="font-size: 2.5em; margin-top: 30px;">AI Project Day!</h2>
+            <div class="subtitle" style="margin-top: 40px; color: #666;">Let's build something smart!</div>
+            <div class="emoji-large">🔨 💡 🏆</div>
+        </div>
+
+        <!-- Slide 1: Our AI Project Day! -->
+        <div class="slide center-content">
+            <h1>Our AI Project Day!</h1>
+            <div class="subtitle" style="margin-top: 30px;">Let's build something smart!</div>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🤖</div>
+        </div>
+
+        <!-- Slide 2: What We Learned So Far -->
+        <div class="slide">
+            <h2>What We Learned So Far</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                Wow! You've learned SO much about AI already! Let's recap all the amazing things we discovered in the last four sessions:
+            </p>
+            <ul style="font-size: 1.3em; margin-top: 30px;">
+                <li><strong>AI Sees 👀</strong> - Using patterns and colors to recognize things</li>
+                <li><strong>AI Talks 🗣️</strong> - Chatbots that understand and respond to humans</li>
+                <li><strong>AI Makes Art 🎨</strong> - Creates beautiful pictures from your ideas</li>
+                <li><strong>AI Makes Music 🎵</strong> - Composes unique songs and beats</li>
+                <li><strong>AI Guesses Patterns 🧠</strong> - Learns from examples to make smart decisions</li>
+            </ul>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666; font-style: italic;">
+                And the best part? YOU are now ready to CREATE with AI! Let's build something amazing today!
+            </p>
+        </div>
+
+        <!-- Slide 3: Choose Your Project -->
+        <div class="slide">
+            <h2>Choose Your Project!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666; text-align: center;">
+                Pick ONE project that looks most fun to you. All three will help you practice and understand AI even better!
+            </p>
+            <div style="display: flex; justify-content: space-around; margin-top: 40px; flex-wrap: wrap;">
+                <div class="game-card">
+                    <h3>Project A</h3>
+                    <div class="emoji-large">📄🤖</div>
+                    <p><strong>Paper AI Robot</strong></p>
+                    <p style="font-size: 0.95em; color: #666; margin-top: 10px;">Design & draw your own robot</p>
+                </div>
+                <div class="game-card">
+                    <h3>Project B</h3>
+                    <div class="emoji-large">💻</div>
+                    <p><strong>Teachable Machine</strong></p>
+                    <p style="font-size: 0.95em; color: #666; margin-top: 10px;">Train AI to recognize you!</p>
+                </div>
+                <div class="game-card">
+                    <h3>Project C</h3>
+                    <div class="emoji-large">🐱</div>
+                    <p><strong>Scratch Smart Pet</strong></p>
+                    <p style="font-size: 0.95em; color: #666; margin-top: 10px;">Code a pet that responds</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Paper AI Robot Instructions -->
+        <div class="slide">
+            <h2>Build a Paper AI Robot!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                This is a fun project where you get to be creative! You'll design your own AI robot from scratch using just paper, markers, and your imagination!
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">Steps to build your robot:</p>
+            <ol style="font-size: 1.2em;">
+                <li><strong>Draw a robot body</strong> 🤖 - Head, arms, legs, body - make it unique!</li>
+                <li><strong>Add buttons and controls</strong> 🔘 - What can your robot do?</li>
+                <li><strong>Give it special powers</strong> 💪 - Flies? Draws? Tells jokes? Shoots lasers?</li>
+                <li><strong>Name it!</strong> 📝 - What will you call your creation?</li>
+                <li><strong>Write descriptions</strong> 💬 - Explain what each button does</li>
+            </ol>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666; font-style: italic;">
+                Remember: This robot should represent AI! Make sure it has features that AI might have, like recognition abilities or the ability to learn!
+            </p>
+        </div>
+
+        <!-- Slide 5: Example Paper Robots -->
+        <div class="slide center-content">
+            <h2>Example Paper Robots</h2>
+            <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 4em;">🤖</div>
+                    <p style="margin-top: 20px; font-size: 1.2em;">Robot 1</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 4em;">🦾</div>
+                    <p style="margin-top: 20px; font-size: 1.2em;">Robot 2</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 4em;">🛸</div>
+                    <p style="margin-top: 20px; font-size: 1.2em;">Robot 3</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Teachable Machine Option -->
+        <div class="slide">
+            <h2>Train an AI Model!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                This is the COOLEST project! You'll actually train a real AI model to recognize things. We'll use something called "Teachable Machine" which you can use right on your computer or tablet.
+            </p>
+            <div class="content-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em; font-weight: 600; margin-bottom: 20px;">How it works:</p>
+                <ol style="font-size: 1.1em;">
+                    <li>Show your <strong>facial expressions</strong> to the camera (Happy 😊, Sad 😢, Peace sign ✌️)</li>
+                    <li>The AI <strong>learns to recognize</strong> each expression</li>
+                    <li>Then test it: Make expressions and see if AI guesses right!</li>
+                    <li>The more examples you show, the <strong>smarter it gets!</strong></li>
+                </ol>
+            </div>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666;">
+                This is REAL AI training! You're teaching a machine to recognize things just like Google Photos learns to recognize your friends!
+            </p>
+        </div>
+
+        <!-- Slide 7: Scratch Smart Pet -->
+        <div class="slide">
+            <h2>Make a Smart Pet in Scratch!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666;">
+                In this project, you'll use Scratch (a visual programming tool) to create a digital pet that responds to your clicks. Your pet will have AI-like behaviors!
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 25px; font-weight: 600;">Your pet can:</p>
+            <ul style="font-size: 1.2em;">
+                <li><strong>Jump</strong> 🦘 - When you click it</li>
+                <li><strong>Speak</strong> 💬 - Say something funny or smart</li>
+                <li><strong>Play sounds</strong> 🔊 - Different sounds for different actions</li>
+                <li><strong>Change colors</strong> 🎨 - React to different things</li>
+                <li><strong>Move around</strong> � - Your pet can walk or dance!</li>
+            </ul>
+            <p style="margin-top: 25px; font-size: 1.1em; color: #666;">
+                This teaches you how AI systems respond to user input and make decisions based on what the user does. It's the foundation of how chatbots and interactive AI works!
+            </p>
+        </div>
+
+        <!-- Slide 8: Project Time! -->
+        <div class="slide center-content challenge-box">
+            <h2 style="color: white; font-size: 2.8em; margin-bottom: 30px;">Project Time!</h2>
+            <p style="color: white; font-size: 2em;">⏱️ 15 Minutes</p>
+            <div style="font-size: 3em; margin-top: 30px;">🛠️</div>
+        </div>
+
+        <!-- Slide 9: Presentations -->
+        <div class="slide">
+            <h2>Show Us Your AI!</h2>
+            <p style="margin-top: 25px; font-size: 1.2em; color: #666; text-align: center;">
+                Now comes the fun part: sharing what you created with the class! Use the form below to organize your presentation. You'll have about 1-2 minutes to show and explain your project.
+            </p>
+            <p style="font-size: 1.3em; color: #333; margin-top: 30px; font-weight: 600;">Fill these out before presenting:</p>
+            <div class="form-item" style="margin-top: 20px;">
+                <p><strong>Name:</strong> ___________________________</p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 5px;">What's your AI or project called?</p>
+            </div>
+            <div class="form-item">
+                <p><strong>What it does:</strong> ___________________________</p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Describe what your AI can do</p>
+            </div>
+            <div class="form-item">
+                <p><strong>Why it's smart:</strong> ___________________________</p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 5px;">How does it show AI abilities? (learning, recognizing, deciding, creating?)</p>
+            </div>
+            <div class="form-item">
+                <p><strong>What I learned:</strong> ___________________________</p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 5px;">What's one thing you discovered about AI?</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Certificates -->
+        <div class="slide center-content">
+            <div class="certificate">
+                <h2 style="font-size: 2.5em;">🏆 Congratulations! 🏆</h2>
+                <p style="margin-top: 30px; font-size: 1.6em;">
+                    <strong>Junior AI Creators! 🎉</strong>
+                </p>
+                <p style="margin-top: 30px; font-size: 1.3em;">
+                    You've completed the AI Journey!<br>
+                    You now understand how AI works.<br>
+                    Keep learning and creating! ✨
+                </p>
+                <div style="font-size: 3em; margin-top: 30px;">👏👏👏</div>
+            </div>
+        </div>
+
+        <!-- Final Thank You -->
+        <div class="slide center-content" style="background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%); color: white;">
+            <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">Thank You for Exploring AI! 🚀</h1>
+            <p style="margin-top: 40px; font-size: 1.8em;">
+                You are future AI creators and innovators!
+            </p>
+            <div class="emoji-large" style="color: #FFF48E; font-size: 5em; margin-top: 40px;">⭐⭐⭐</div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>
