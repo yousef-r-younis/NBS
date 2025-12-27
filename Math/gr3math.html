@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Formal Math - Addition & Subtraction</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .header-with-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-button {
+            position: absolute;
+            left: 0;
+            background-color: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        .nav-button:hover {
+            background-color: #5568d3;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        #startBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #startBtn:hover {
+            background-color: #45a049;
+        }
+        
+        #startBtn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        #resetBtn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        #resetBtn:hover {
+            background-color: #da190b;
+        }
+        
+        .operation-select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .problems-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .problem {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .problem.completed {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        
+        .problem.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .problem-title {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .formal-math {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .math-row {
+            display: flex;
+            margin-bottom: 5px;
+            align-items: center;
+        }
+        
+        .carry-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        
+        .math-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background: white;
+        }
+        
+        .math-box.borrowable {
+            cursor: long-press;
+            position: relative;
+            user-select: none;
+        }
+        
+        .math-box.borrowable:active {
+            background-color: #e3f2fd;
+        }
+        
+        .carry-box {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #999;
+            font-size: 12px;
+            background: #fff9e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px;
+            font-weight: bold;
+            text-align: center;
+            padding: 0;
+        }
+        
+        .answer-box {
+            background: #f0f0f0;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 0;
+        }
+        
+        .answer-box input,
+        .carry-box input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0;
+        }
+        
+        .correct-box {
+            background-color: #4CAF50 !important;
+            color: white;
+            border-color: #4CAF50 !important;
+        }
+        
+        .incorrect-box {
+            background-color: #f44336 !important;
+            color: white;
+            border-color: #f44336 !important;
+        }
+        
+        .operator {
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .line {
+            width: 100px;
+            border-top: 3px solid #333;
+            margin: 8px 0;
+        }
+        
+        .final-answer-box {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .final-answer-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .final-answer-input {
+            width: 100px;
+            padding: 8px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .feedback.correct {
+            color: #4CAF50;
+        }
+        
+        .feedback.incorrect {
+            color: #f44336;
+        }
+        
+        .check-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .check-btn:hover {
+            background-color: #0b7dda;
+        }
+        
+        .check-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .stats {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stats h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item {
+            font-size: 16px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .final-score {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .student-name-section {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .student-name-section label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .student-name-input {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 16px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .student-display-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-with-nav">
+            <a href="../math-index.html" class="nav-button">📚 Classes</a>
+            <h1>Grade 3 Formal Math</h1>
+        </div>
+        <p class="subtitle">Addition & Subtraction (Numbers up to 9999)</p>
+        
+        <div class="student-name-section">
+            <label for="studentNameInput">Student Name:</label>
+            <input type="text" id="studentNameInput" class="student-name-input" placeholder="Enter your name">
+            <div class="student-display-name" id="studentDisplayName"></div>
+        </div>
+        
+        <div class="controls">
+            <select id="operationSelect" class="operation-select">
+                <option value="addition">Addition</option>
+                <option value="subtraction">Subtraction</option>
+                <option value="mixed">Mixed (Addition & Subtraction)</option>
+            </select>
+            <button id="startBtn">Start</button>
+            <button id="finishBtn" style="display: none;">Finish</button>
+            <button id="resetBtn">Reset</button>
+            <div class="timer-display" id="timerDisplay">00:00</div>
+        </div>
+        
+        <div id="problemsContainer" class="problems-container" style="display: none;"></div>
+        
+        <div class="stats" id="stats" style="display: none;">
+            <h3 id="statsTitle">Session Statistics</h3>
+            <div class="stat-item">Student: <strong id="statsStudentName">-</strong></div>
+            <div class="stat-item">Problems Solved: <strong id="solvedCount">0</strong></div>
+            <div class="stat-item">Correct: <strong id="correctCount">0</strong></div>
+            <div class="stat-item">Time Elapsed: <strong id="elapsedTime">00:00</strong></div>
+            <div class="stat-item">Accuracy: <strong id="accuracyPercent">0</strong>%</div>
+            <div class="final-score" id="finalScore"></div>
+        </div>
+    </div>
+    
+    <script>
+        const NUM_PROBLEMS = 2;
+        let timerInterval = null;
+        let timerSeconds = 0;
+        let sessionActive = false;
+        let problems = [];
+        let completedProblems = 0;
+        let correctProblems = 0;
+        
+        const startBtn = document.getElementById('startBtn');
+        const finishBtn = document.getElementById('finishBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const operationSelect = document.getElementById('operationSelect');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const problemsContainer = document.getElementById('problemsContainer');
+        const statsDiv = document.getElementById('stats');
+        const studentNameInput = document.getElementById('studentNameInput');
+        const studentDisplayName = document.getElementById('studentDisplayName');
+        
+        startBtn.addEventListener('click', startSession);
+        finishBtn.addEventListener('click', finishSession);
+        resetBtn.addEventListener('click', resetSession);
+        
+        // Update student name display as they type
+        studentNameInput.addEventListener('input', (e) => {
+            studentDisplayName.textContent = e.target.value || '';
+        });
+        
+        function startSession() {
+            sessionActive = true;
+            startBtn.disabled = true;
+            finishBtn.style.display = 'inline-block';
+            operationSelect.disabled = true;
+            timerSeconds = 0;
+            completedProblems = 0;
+            correctProblems = 0;
+            problems = [];
+            
+            // Clear previous problems
+            problemsContainer.innerHTML = '';
+            problemsContainer.style.display = 'grid';
+            statsDiv.style.display = 'none';
+            
+            // Generate problems
+            for (let i = 0; i < NUM_PROBLEMS; i++) {
+                const problem = generateProblem();
+                problems.push(problem);
+                createProblemElement(problem, i);
+            }
+            
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        function generateProblem() {
+            const operations = operationSelect.value === 'mixed' 
+                ? ['addition', 'subtraction']
+                : [operationSelect.value];
+            
+            const operation = operations[Math.floor(Math.random() * operations.length)];
+            
+            let num1, num2;
+            
+            if (operation === 'addition') {
+                num1 = Math.floor(Math.random() * 9000) + 100; // 100-9099
+                num2 = Math.floor(Math.random() * 9000) + 100; // 100-9099
+                // Ensure sum doesn't exceed 9999
+                if (num1 + num2 > 9999) {
+                    num1 = Math.floor(Math.random() * 5000);
+                    num2 = Math.floor(Math.random() * 5000);
+                }
+            } else {
+                num1 = Math.floor(Math.random() * 9000) + 1000; // 1000-9999
+                num2 = Math.floor(Math.random() * num1); // Ensure num2 <= num1
+            }
+            
+            return {
+                operation,
+                num1,
+                num2,
+                digits: 4,
+                correctAnswer: operation === 'addition' ? num1 + num2 : num1 - num2,
+                digitAnswers: [],
+                carryAnswers: [],
+                solved: false,
+                correct: false
+            };
+        }
+        
+        function createProblemElement(problem, index) {
+            const problemDiv = document.createElement('div');
+            problemDiv.className = 'problem';
+            problemDiv.id = `problem-${index}`;
+            
+            const operation = problem.operation === 'addition' ? '+' : '−';
+            const num1Str = String(problem.num1).padStart(4, '0');
+            const num2Str = String(problem.num2).padStart(4, '0');
+            
+            let html = `
+                <div class="problem-title">${problem.operation === 'addition' ? 'Addition' : 'Subtraction'} Problem ${index + 1}</div>`;
+            
+            // Add hint for subtraction
+            if (problem.operation === 'subtraction') {
+                html += `<div style="font-size: 12px; color: #999; margin-bottom: 10px; font-style: italic;">💡 Long-tap a number to borrow</div>`;
+            }
+            
+            html += `
+                <div class="formal-math">
+                    <div class="carry-row"${problem.operation === 'subtraction' ? ' style="display: none;"' : ''}>
+            `;
+            
+            // Add carry row only for addition
+            if (problem.operation === 'addition') {
+                for (let i = 0; i < 4; i++) {
+                    html += `<input type="text" class="carry-box" data-problem="${index}" data-digit="${i}" data-type="carry" maxlength="1" placeholder="c">`;
+                }
+            }
+            
+            html += `
+                    </div>
+                    <div class="math-row">
+                        <div class="operator">${operation}</div>
+                        <div style="display: flex;">
+            `;
+            
+            // First number
+            for (let i = 0; i < 4; i++) {
+                const boxClass = problem.operation === 'subtraction' ? 'borrowable' : '';
+                html += `<div class="math-box ${boxClass}" data-problem="${index}" data-digit="${i}">${num1Str[i]}</div>`;
+            }
+            
+            html += `
+                        </div>
+                    </div>
+                    <div class="math-row">
+                        <div class="operator"></div>
+                        <div style="display: flex;">
+            `;
+            
+            // Second number
+            for (let i = 0; i < 4; i++) {
+                html += `<div class="math-box">${num2Str[i]}</div>`;
+            }
+            
+            html += `
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="math-row">
+                        <div class="operator"></div>
+                        <div style="display: flex;">
+            `;
+            
+            // Answer boxes
+            for (let i = 0; i < 4; i++) {
+                html += `<input type="text" class="answer-box" data-problem="${index}" data-digit="${i}" data-type="answer" maxlength="1">`;
+            }
+            
+            html += `
+                        </div>
+                    </div>
+                </div>
+                <div class="final-answer-box">
+                    <span class="final-answer-label">Final Answer:</span>
+                    <input type="text" class="final-answer-input" data-problem="${index}" data-type="final" placeholder="0" maxlength="4">
+                </div>
+                <button class="check-btn" data-problem="${index}">Check Answer</button>
+                <div class="feedback" id="feedback-${index}"></div>
+            `;
+            
+            problemDiv.innerHTML = html;
+            problemsContainer.appendChild(problemDiv);
+            
+            // Add event listeners
+            const inputs = problemDiv.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', handleInput);
+                input.addEventListener('keypress', handleKeyPress);
+            });
+            
+            // Add check button listener
+            const checkBtn = problemDiv.querySelector('.check-btn');
+            checkBtn.addEventListener('click', () => {
+                validateProblem(index);
+            });
+            
+            // Add borrowing for subtraction problems
+            if (problem.operation === 'subtraction') {
+                const borrowableBoxes = problemDiv.querySelectorAll('.math-box.borrowable');
+                borrowableBoxes.forEach((box, i) => {
+                    let longPressTimer;
+                    
+                    box.addEventListener('mousedown', (e) => {
+                        longPressTimer = setTimeout(() => {
+                            performBorrow(problemDiv, i);
+                        }, 500);
+                    });
+                    
+                    box.addEventListener('mouseup', () => {
+                        clearTimeout(longPressTimer);
+                    });
+                    
+                    box.addEventListener('mouseleave', () => {
+                        clearTimeout(longPressTimer);
+                    });
+                    
+                    // Touch support
+                    box.addEventListener('touchstart', (e) => {
+                        longPressTimer = setTimeout(() => {
+                            performBorrow(problemDiv, i);
+                        }, 500);
+                    });
+                    
+                    box.addEventListener('touchend', () => {
+                        clearTimeout(longPressTimer);
+                    });
+                });
+            }
+        }
+        
+        function performBorrow(problemDiv, digitIndex) {
+            const boxes = problemDiv.querySelectorAll('.math-box.borrowable');
+            
+            // Can't borrow from the first digit
+            if (digitIndex === 0) return;
+            
+            const currentBox = boxes[digitIndex];
+            const previousBox = boxes[digitIndex - 1];
+            
+            let currentValue = parseInt(currentBox.textContent);
+            let previousValue = parseInt(previousBox.textContent);
+            
+            // Only borrow if previous digit is greater than 0
+            if (previousValue > 0) {
+                previousValue--;
+                currentValue += 10;
+                
+                previousBox.textContent = previousValue;
+                currentBox.textContent = currentValue;
+                
+                // Flash the boxes to indicate the change
+                currentBox.style.backgroundColor = '#fff59d';
+                previousBox.style.backgroundColor = '#fff59d';
+                
+                setTimeout(() => {
+                    currentBox.style.backgroundColor = 'white';
+                    previousBox.style.backgroundColor = 'white';
+                }, 300);
+            }
+        }
+        
+        function handleInput(e) {
+            // Allow only digits
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            
+            if (e.target.value.length === 1 && e.target.getAttribute('data-type') !== 'final') {
+                // Move to next input
+                const nextInput = e.target.nextElementSibling;
+                if (nextInput && nextInput.getAttribute('data-type') !== 'final') {
+                    nextInput.focus();
+                }
+            }
+            
+            // If student is editing after checking, remove the colored styling
+            const problemIndex = e.target.getAttribute('data-problem');
+            if (problemIndex !== null && problems[problemIndex].solved) {
+                e.target.classList.remove('correct-box', 'incorrect-box');
+                problems[problemIndex].solved = false;
+                problems[problemIndex].correct = false;
+                
+                // Remove problem styling
+                const problemDiv = document.getElementById(`problem-${problemIndex}`);
+                problemDiv.classList.remove('completed', 'incorrect');
+                
+                // Clear feedback
+                const feedbackDiv = document.getElementById(`feedback-${problemIndex}`);
+                feedbackDiv.textContent = '';
+                feedbackDiv.className = 'feedback';
+                
+                // Re-enable check button
+                const checkBtn = problemDiv.querySelector('.check-btn');
+                checkBtn.disabled = false;
+                
+                completedProblems--;
+                if (problems[problemIndex].correct) {
+                    correctProblems--;
+                }
+            }
+        }
+        
+        function handleKeyPress(e) {
+            if (e.key === 'Backspace' && e.target.value === '') {
+                e.target.value = '';
+                const prevInput = e.target.previousElementSibling;
+                if (prevInput) {
+                    prevInput.focus();
+                }
+            }
+        }
+        
+        function checkProblemCompletion(problemIndex) {
+            // No longer auto-validating - user must click Check Answer button
+        }
+        
+        function validateProblem(problemIndex) {
+            const problem = problems[problemIndex];
+            const problemDiv = document.getElementById(`problem-${problemIndex}`);
+            const answerInputs = problemDiv.querySelectorAll('input[data-type="answer"]');
+            const finalInput = problemDiv.querySelector('input[data-type="final"]');
+            
+            const userFinalAnswer = parseInt(finalInput.value);
+            const correctFinalAnswer = problem.correctAnswer;
+            
+            // Get the digit answers
+            const userDigitAnswers = Array.from(answerInputs).map(inp => parseInt(inp.value));
+            
+            // Calculate correct digit answers
+            const correctDigitAnswers = calculateCorrectDigitAnswers(problem);
+            
+            let allCorrect = true;
+            
+            // Check and color each digit answer box
+            for (let i = 0; i < 4; i++) {
+                const isCorrect = userDigitAnswers[i] === correctDigitAnswers[i];
+                if (!isCorrect) allCorrect = false;
+                answerInputs[i].classList.toggle('correct-box', isCorrect);
+                answerInputs[i].classList.toggle('incorrect-box', !isCorrect);
+            }
+            
+            // Check and color final answer box
+            const finalCorrect = userFinalAnswer === correctFinalAnswer;
+            if (!finalCorrect) allCorrect = false;
+            finalInput.classList.toggle('correct-box', finalCorrect);
+            finalInput.classList.toggle('incorrect-box', !finalCorrect);
+            
+            if (allCorrect) {
+                problemDiv.classList.add('completed');
+                correctProblems++;
+            } else {
+                problemDiv.classList.add('incorrect');
+            }
+            
+            const feedbackDiv = document.getElementById(`feedback-${problemIndex}`);
+            feedbackDiv.textContent = allCorrect ? '✓ Correct!' : '✗ Needs Review';
+            feedbackDiv.className = 'feedback ' + (allCorrect ? 'correct' : 'incorrect');
+            
+            problem.solved = true;
+            problem.correct = allCorrect;
+            completedProblems++;
+            
+            checkSessionComplete();
+        }
+        
+        function calculateCorrectDigitAnswers(problem) {
+            const result = problem.correctAnswer;
+            const resultStr = String(result).padStart(4, '0');
+            return resultStr.split('').map(d => parseInt(d));
+        }
+        
+        function calculateCorrectCarries(problem) {
+            const num1Str = String(problem.num1).padStart(4, '0');
+            const num2Str = String(problem.num2).padStart(4, '0');
+            const carries = [0, 0, 0, 0];
+            
+            let carry = 0;
+            for (let i = 3; i >= 0; i--) {
+                carries[i] = carry;
+                
+                if (problem.operation === 'addition') {
+                    const sum = parseInt(num1Str[i]) + parseInt(num2Str[i]) + carry;
+                    carry = sum >= 10 ? 1 : 0;
+                } else {
+                    const digit1 = parseInt(num1Str[i]);
+                    const digit2 = parseInt(num2Str[i]);
+                    if (digit1 - carry < digit2) {
+                        carry = 1;
+                    } else {
+                        carry = 0;
+                    }
+                }
+            }
+            
+            return carries;
+        }
+        
+        function updateTimer() {
+            timerSeconds++;
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            timerDisplay.textContent = 
+                String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        }
+        
+        function checkSessionComplete() {
+            if (completedProblems === NUM_PROBLEMS) {
+                finishBtn.style.display = 'inline-block';
+            }
+        }
+        
+        function createConfetti() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.opacity = Math.random();
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                
+                // Animate falling
+                const duration = 2000 + Math.random() * 1000;
+                const xOffset = (Math.random() - 0.5) * 200;
+                const rotation = Math.random() * 720;
+                
+                confetti.animate([
+                    {
+                        transform: `translateY(0) translateX(0) rotate(0deg)`,
+                        opacity: 1
+                    },
+                    {
+                        transform: `translateY(${window.innerHeight}px) translateX(${xOffset}px) rotate(${rotation}deg)`,
+                        opacity: 0
+                    }
+                ], {
+                    duration: duration,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, duration);
+            }
+        }
+        
+        function finishSession() {
+            // Automatically check all unsolved problems
+            for (let i = 0; i < problems.length; i++) {
+                if (!problems[i].solved) {
+                    validateProblem(i);
+                }
+            }
+            endSession();
+        }
+        
+        function endSession() {
+            sessionActive = false;
+            clearInterval(timerInterval);
+            startBtn.disabled = false;
+            finishBtn.style.display = 'none';
+            operationSelect.disabled = false;
+            
+            // Show stats
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            const accuracy = completedProblems === 0 ? 0 : Math.round((correctProblems / completedProblems) * 100);
+            
+            document.getElementById('solvedCount').textContent = completedProblems;
+            document.getElementById('correctCount').textContent = correctProblems;
+            document.getElementById('elapsedTime').textContent = 
+                String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+            document.getElementById('accuracyPercent').textContent = accuracy;
+            document.getElementById('statsStudentName').textContent = studentNameInput.value || 'Student';
+            
+            // Calculate and display final score
+            const finalScoreDiv = document.getElementById('finalScore');
+            if (accuracy === 100) {
+                finalScoreDiv.textContent = `🎉 Perfect Score! ${correctProblems}/${completedProblems} ✓`;
+                // Trigger confetti for perfect score
+                createConfetti();
+            } else if (accuracy >= 80) {
+                finalScoreDiv.textContent = `Great Job! ${correctProblems}/${completedProblems} Correct`;
+            } else if (accuracy >= 50) {
+                finalScoreDiv.textContent = `Good Try! ${correctProblems}/${completedProblems} Correct`;
+            } else {
+                finalScoreDiv.textContent = `Keep Practicing! ${correctProblems}/${completedProblems} Correct`;
+            }
+            
+            statsDiv.style.display = 'block';
+        }
+        
+        function resetSession() {
+            sessionActive = false;
+            clearInterval(timerInterval);
+            timerSeconds = 0;
+            completedProblems = 0;
+            correctProblems = 0;
+            problems = [];
+            
+            timerDisplay.textContent = '00:00';
+            problemsContainer.innerHTML = '';
+            problemsContainer.style.display = 'none';
+            statsDiv.style.display = 'none';
+            finishBtn.style.display = 'none';
+            
+            startBtn.disabled = false;
+            operationSelect.disabled = false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: AI Ethics Debate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="common logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide:first-of-type {
+            margin-top: 80px;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #00d4ff;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .fun-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .tip {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .big-idea-card {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            margin: 15px 0;
+        }
+
+        .big-idea-card h4 {
+            margin-top: 0;
+            color: #0ff;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .flow-step {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00d4ff;
+            flex: 1;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .arrow {
+            color: #00d4ff;
+            font-size: 2em;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .debate-topic {
+            background: rgba(0, 212, 255, 0.08);
+            border: 2px solid rgba(0, 212, 255, 0.4);
+            padding: 35px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .debate-topic h4 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #0ff;
+        }
+
+        .debate-question {
+            font-size: 1.35em;
+            font-style: italic;
+            color: #00d4ff;
+            margin: 15px 0;
+            padding-left: 15px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .pro-con {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .pro-section, .con-section {
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .pro-section {
+            background: rgba(0, 255, 100, 0.08);
+            border: 2px solid rgba(0, 255, 100, 0.3);
+        }
+
+        .con-section {
+            background: rgba(255, 100, 100, 0.08);
+            border: 2px solid rgba(255, 100, 100, 0.3);
+        }
+
+        .pro-section h4, .con-section h4 {
+            font-size: 1.4em;
+            margin-top: 0;
+        }
+
+        .pro-section h4 {
+            color: #0f0;
+        }
+
+        .con-section h4 {
+            color: #ff6b6b;
+        }
+
+        .debate-round {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .debate-round h4 {
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        .device-note {
+            background: rgba(255, 200, 0, 0.15);
+            border-left: 4px solid #ffc800;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 1.2em;
+        }
+
+        .device-note strong {
+            color: #ffc800;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Navigation Bar -->
+        <div style="position: fixed; top: 0; left: 0; right: 0; background: rgba(26, 26, 46, 0.95); padding: 15px 30px; z-index: 2000; border-bottom: 2px solid #00d4ff; display: flex; justify-content: space-between; align-items: center;">
+            <a href="../index.html" style="background: #00d4ff; color: #1a1a2e; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s;">← Back to Home</a>
+            <span style="color: #00d4ff; font-family: 'Poppins', sans-serif; font-size: 0.9em;">Tech & AI Classes</span>
+        </div>
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1>AI Ethics Debate 🤖</h1>
+                <div class="subtitle">Should We or Shouldn't We?</div>
+                <div class="subtitle" style="margin-top: 20px;"><strong>Grades 10–12</strong></div>
+                <div class="quote" style="border: none; margin-top: 60px;">
+                    "Using what we know about AI to tackle real-world questions"
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: How This Works -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>How This Works 🎯</h2>
+            
+            <h3 style="color: #0ff; margin-top: 0;">Today's Format (50 minutes):</h3>
+            <ul style="font-size: 1.25em; line-height: 2.5;">
+                <li>I'll present a debate topic</li>
+                <li>Class splits into PRO and CON sides (randomly assigned)</li>
+                <li>You'll prepare arguments with your team</li>
+                <li>We'll debate!</li>
+                <li>Repeat with new topics if time allows</li>
+            </ul>
+
+            <div class="fun-box" style="margin-top: 40px;">
+                <h3 style="margin-top: 0;">Debate Rules:</h3>
+                <ul style="font-size: 1.25em; line-height: 2.2;">
+                    <li><strong>Respect each other</strong> — disagree on ideas, not people</li>
+                    <li><strong>Use evidence and examples</strong> — back up your claims</li>
+                    <li><strong>It's okay to argue for something you don't personally believe</strong> — this is about critical thinking</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 This debate isn't about finding a "right" answer — it's about exploring the complexity of AI ethics!
+            </div>
+        </div>
+
+        <!-- Slide 3: Pick Your Topic -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Pick Your Topic 🎲</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 20px;">Choose ONE to start (or let the class vote):</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>1️⃣ AI Cheating Detection</h4>
+                    <p style="font-size: 1.15em;">Should schools use AI to monitor students for cheating?</p>
+                </div>
+                <div class="card">
+                    <h4>2️⃣ AI Job Screening</h4>
+                    <p style="font-size: 1.15em;">Should companies use AI to screen job applications?</p>
+                </div>
+                <div class="card">
+                    <h4>3️⃣ AI-Generated Content</h4>
+                    <p style="font-size: 1.15em;">Should AI-generated work compete in competitions?</p>
+                </div>
+                <div class="card">
+                    <h4>4️⃣ AI Content Moderation</h4>
+                    <p style="font-size: 1.15em;">Should AI automatically remove harmful content?</p>
+                </div>
+                <div class="card">
+                    <h4>5️⃣ AI in Healthcare</h4>
+                    <p style="font-size: 1.15em;">Should AI decide which patients get treated first?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Topic 1 - AI Cheating Detection -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topic 1: AI Cheating Detection 🚨</h2>
+            
+            <div class="debate-topic">
+                <h4>Debate Question:</h4>
+                <div class="debate-question">"Should schools be allowed to use AI to monitor students for cheating on tests and assignments?"</div>
+                
+                <h4 style="margin-top: 30px;">Think About:</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>Privacy vs. academic integrity</li>
+                    <li>AI accuracy and false accusations</li>
+                    <li>Trust between students and teachers</li>
+                    <li>Cost and effectiveness</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 Remember: AI systems can make mistakes. What happens if a student is falsely accused of cheating?
+            </div>
+        </div>
+
+        <!-- Slide 5: Topic 2 - AI Job Screening -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topic 2: AI Job Screening 💼</h2>
+            
+            <div class="debate-topic">
+                <h4>Debate Question:</h4>
+                <div class="debate-question">"Should companies use AI to automatically screen job applications and decide who gets interviewed?"</div>
+                
+                <h4 style="margin-top: 30px;">Think About:</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>Efficiency vs. fairness</li>
+                    <li>Bias in training data (remember our lessons!)</li>
+                    <li>Missing unique candidates</li>
+                    <li>Human judgment vs. AI patterns</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 We've learned that training data can contain bias. What if the AI was trained on historical hiring data that discriminated against certain groups?
+            </div>
+        </div>
+
+        <!-- Slide 6: Topic 3 - AI-Generated Content -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topic 3: AI-Generated Content 🎨</h2>
+            
+            <div class="debate-topic">
+                <h4>Debate Question:</h4>
+                <div class="debate-question">"Should AI-generated art, music, or writing be allowed to compete in contests against human-created work?"</div>
+                
+                <h4 style="margin-top: 30px;">Think About:</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>What counts as "creativity"?</li>
+                    <li>Fairness to human artists</li>
+                    <li>Who owns AI-generated work?</li>
+                    <li>Technology vs. tradition</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 Is it fair for AI art (trained on millions of human works) to compete against artists who spent years developing their craft?
+            </div>
+        </div>
+
+        <!-- Slide 7: Topic 4 - AI Content Moderation -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topic 4: AI Content Moderation 📱</h2>
+            
+            <div class="debate-topic">
+                <h4>Debate Question:</h4>
+                <div class="debate-question">"Should social media platforms use AI to automatically remove posts it thinks are harmful, without human review?"</div>
+                
+                <h4 style="margin-top: 30px;">Think About:</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>Free speech vs. safety</li>
+                    <li>AI mistakes and context</li>
+                    <li>Speed vs. accuracy</li>
+                    <li>Who decides what's "harmful"?</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 AI struggles with sarcasm, context, and cultural nuance. Can it really decide what's "harmful"?
+            </div>
+        </div>
+
+        <!-- Slide 8: Topic 5 - AI in Healthcare -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topic 5: AI in Healthcare 🏥</h2>
+            
+            <div class="debate-topic">
+                <h4>Debate Question:</h4>
+                <div class="debate-question">"Should hospitals use AI systems to decide which emergency patients get treated first?"</div>
+                
+                <h4 style="margin-top: 30px;">Think About:</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>Life-or-death accuracy</li>
+                    <li>Bias affecting vulnerable groups</li>
+                    <li>Speed in emergencies</li>
+                    <li>Doctor expertise vs. AI data</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                💡 This is the most serious. What if the AI was trained on data that prioritizes certain populations over others?
+            </div>
+        </div>
+
+        <!-- Slide 9: Divide & Prepare -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Divide & Prepare ⏱️</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 20px;"><strong>Duration: 15 minutes</strong></p>
+
+            <div class="pro-con">
+                <div class="pro-section">
+                    <h4>LEFT SIDE = PRO (For the idea)</h4>
+                    <p style="font-size: 1.2em; margin-top: 15px;">Come up with:</p>
+                    <ul style="font-size: 1.15em;">
+                        <li>3 strong arguments WHY this should happen</li>
+                        <li>Real examples or evidence</li>
+                        <li>Responses to concerns</li>
+                    </ul>
+                </div>
+
+                <div class="con-section">
+                    <h4>RIGHT SIDE = CON (Against the idea)</h4>
+                    <p style="font-size: 1.2em; margin-top: 15px;">Come up with:</p>
+                    <ul style="font-size: 1.15em;">
+                        <li>3 strong arguments WHY this should NOT happen</li>
+                        <li>Real examples or evidence</li>
+                        <li>Responses to the benefits</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="device-note">
+                <strong>💻 Devices Encouraged:</strong> You can use tablets/laptops to research, ChatGPT, Google — find real examples and statistics! This makes arguments stronger and turns it from "making stuff up" to real research.
+            </div>
+
+            <div class="tip">
+                💡 Bonus irony: You're using AI to debate about AI ethics! Use what we've learned about algorithms, bias, training data, and neural networks!
+            </div>
+        </div>
+
+        <!-- Slide 10: Debate Format -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Debate Format 🎤</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 20px;"><strong>Duration: 25 minutes</strong></p>
+
+            <div class="debate-round">
+                <h4>ROUND 1: Opening Statements (8 minutes)</h4>
+                <ul style="font-size: 1.2em;">
+                    <li><strong>PRO side</strong> presents main arguments (2–3 mins)</li>
+                    <li><strong>CON side</strong> presents main arguments (2–3 mins)</li>
+                </ul>
+            </div>
+
+            <div class="debate-round">
+                <h4>ROUND 2: Rebuttals (8 minutes)</h4>
+                <ul style="font-size: 1.2em;">
+                    <li><strong>PRO</strong> responds to CON's concerns (2–3 mins)</li>
+                    <li><strong>CON</strong> responds to PRO's points (2–3 mins)</li>
+                </ul>
+            </div>
+
+            <div class="debate-round">
+                <h4>ROUND 3: Open Discussion (8 minutes)</h4>
+                <ul style="font-size: 1.2em;">
+                    <li>Anyone can speak (raise hands)</li>
+                    <li>Ask questions to the other side</li>
+                    <li>Challenge arguments with evidence</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                🎓 <strong>Teacher's Role:</strong> Keep time strictly, prompt shy students, write key arguments on the board, remind about respect if debate gets heated.
+            </div>
+        </div>
+
+        <!-- Slide 11: Reflection Questions -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Reflection Questions 🧠</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;"><strong>Duration: 5 minutes</strong></p>
+
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Let's Discuss:</h3>
+                <ul style="font-size: 1.2em;">
+                    <li>Did anyone's real opinion change during the debate?</li>
+                    <li>What was the strongest argument from either side?</li>
+                    <li>How did our AI lessons (bias, algorithms, neural networks) help you argue?</li>
+                    <li>Is there a "right" answer to these questions?</li>
+                </ul>
+            </div>
+
+            <div class="big-idea-card">
+                <h4>Key Takeaway:</h4>
+                <p style="font-size: 1.2em;">Understanding how AI works is just the beginning. The harder questions are about <strong>when and how we should use it</strong>.</p>
+            </div>
+
+            <div class="tip">
+                💡 Be ready to share your own thoughts. Acknowledge there are no easy answers. Praise good critical thinking!
+            </div>
+        </div>
+
+        <!-- Slide 12: Connection to What We've Learned -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Connection to What We've Learned 🔗</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Remember our previous lessons?</p>
+
+            <div class="three-column">
+                <div class="big-idea-card">
+                    <h4>Algorithms</h4>
+                    <p style="font-size: 1.15em;">Can make biased decisions if not designed carefully</p>
+                </div>
+                <div class="big-idea-card">
+                    <h4>How Machines Learn</h4>
+                    <p style="font-size: 1.15em;">Training data affects outcomes and can perpetuate bias</p>
+                </div>
+                <div class="big-idea-card">
+                    <h4>Bias</h4>
+                    <p style="font-size: 1.15em;">Can discriminate against entire groups of people</p>
+                </div>
+            </div>
+
+            <div class="big-idea-card" style="margin-top: 30px;">
+                <h4>Neural Networks</h4>
+                <p style="font-size: 1.15em;">Complex but not perfect — they make mistakes and lack true understanding</p>
+            </div>
+
+            <div class="tip" style="margin-top: 40px;">
+                🎯 <strong>The Bigger Picture:</strong> Technical knowledge + ethical thinking = responsible AI use
+            </div>
+        </div>
+
+        <!-- Slide 13: If Time Allows -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>If Time Allows... ⏰</h2>
+            
+            <div class="fun-box">
+                <h3 style="margin-top: 0;">Option 1: Quick Vote</h3>
+                <p style="font-size: 1.2em;">Want to debate another topic? Pick from the remaining ones!</p>
+                <p style="font-size: 1.15em; color: #aaa;">This works especially well if you have engaged participants ready for more.</p>
+            </div>
+
+            <div class="fun-box">
+                <h3>Option 2: Quick Reflection Activity</h3>
+                <p style="font-size: 1.2em;"><strong>"In 2 minutes, write down:"</strong></p>
+                <ul style="font-size: 1.15em;">
+                    <li>One AI use that worries you</li>
+                    <li>One AI use that excites you</li>
+                </ul>
+                <p style="font-size: 1.15em; color: #aaa; margin-top: 15px;">Share responses with the class if time permits.</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Closing -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h2>Why This Matters 🌍</h2>
+                
+                <div style="text-align: left; margin-top: 40px; font-size: 1.2em; line-height: 2;">
+                    <p><strong>→ You'll encounter AI</strong> in jobs, school, and daily life</p>
+                    <p><strong>→ Understanding the technology</strong> helps you ask better questions</p>
+                    <p><strong>→ You have a voice</strong> in how AI gets used in society</p>
+                </div>
+
+                <div class="quote" style="margin-top: 60px; border: none;">
+                    "The future of AI isn't decided by computer scientists alone — it's shaped by people who understand both the technology AND the ethics."
+                </div>
+
+                <p style="font-size: 1.3em; margin-top: 40px; color: #aaa;">Thanks for debating! Questions? Thoughts?</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑ Back to Top</a>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button id="prevBtn" onclick="navigatePrevious()">← Previous</button>
+        <button id="nextBtn" onclick="navigateNext()">Next →</button>
+    </div>
+
+    <script>
+        // Slide Navigation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function navigateNext() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                scrollToSlide(currentSlide);
+                updateButtonStates();
+            }
+        }
+
+        function navigatePrevious() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                scrollToSlide(currentSlide);
+                updateButtonStates();
+            }
+        }
+
+        function scrollToSlide(index) {
+            const slide = slides[index];
+            slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function updateButtonStates() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+
+            prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') navigateNext();
+            if (event.key === 'ArrowLeft') navigatePrevious();
+        });
+
+        // Detect current slide on scroll
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.scrollY + window.innerHeight / 2;
+            for (let i = 0; i < slides.length; i++) {
+                const slide = slides[i];
+                if (scrollPosition >= slide.offsetTop && scrollPosition < slide.offsetTop + slide.offsetHeight) {
+                    currentSlide = i;
+                    updateButtonStates();
+                    break;
+                }
+            }
+        });
+
+        // Initialize button states
+        updateButtonStates();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide scroll indicator
+        window.addEventListener('scroll', function() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                if (window.scrollY > 300) {
+                    scrollIndicator.style.display = 'none';
+                } else {
+                    scrollIndicator.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

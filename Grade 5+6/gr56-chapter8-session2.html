@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfakes & Misinformation - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Chapter 2: AI in Action</span></div>
+        <div class="slide title-slide center-content">
+            <h1>Deepfakes & Misinformation 🎬</h1>
+            <div class="subtitle">Detecting AI-Generated Fake Content</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 8: Critical Thinking in the AI Age</p>
+        </div>
+        <div class="slide">
+            <h2>What Are Deepfakes? 🤖</h2>
+            <p>A <span class="tech-term">deepfake</span> is a video or image created or manipulated by AI to make it
+                look like someone did something they didn't do.</p>
+            <div class="info-box">
+                <h3>How Deepfakes Are Created:</h3>
+                <ul>
+                    <li>AI uses thousands of photos/videos of a person</li>
+                    <li>AI learns how they move, speak, and look</li>
+                    <li>AI creates a fake video that looks real</li>
+                    <li>Can make anyone say anything or do anything</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Why Deepfakes Are Dangerous ⚠️</h2>
+            <p>Deepfakes can cause serious problems:</p>
+            <div class="key-point">
+                <h3>Real Dangers:</h3>
+                <ul>
+                    <li><strong>Political:</strong> Fake videos of politicians before elections</li>
+                    <li><strong>Fraud:</strong> Fake CEO videos trick companies into sending money</li>
+                    <li><strong>Harassment:</strong> Non-consensual fake intimate videos of real people</li>
+                    <li><strong>Misinformation:</strong> Spread false news that looks real</li>
+                    <li><strong>Trust breakdown:</strong> Hard to believe videos even when real</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Real Deepfake Examples 😨</h2>
+            <div class="info-box">
+                <h3>Deepfakes That Happened:</h3>
+                <ul>
+                    <li><strong>2019:</strong> Fake Obama video went viral (as example)</li>
+                    <li><strong>2020:</strong> Fake Zuckerberg video about controlling people</li>
+                    <li><strong>2023:</strong> Fake Drake rap song created with AI voice</li>
+                    <li><strong>Celebrity scams:</strong> Deepfake videos used to trick fans out of money</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Problem:</strong> Even when clearly fake, these videos spread on social
+                media before being debunked!</p>
+        </div>
+        <div class="slide">
+            <h2>How to Spot a Deepfake 🔍</h2>
+            <p>With practice, you can often tell deepfakes from real videos. Look for these signs:</p>
+            <div class="concept-box">
+                <h3>Red Flags:</h3>
+                <ul>
+                    <li><strong>Blinking:</strong> Deepfakes often miss natural blinking patterns</li>
+                    <li><strong>Eyes:</strong> Strange pupil reflection or unnatural eye movement</li>
+                    <li><strong>Mouth:</strong> Lips don't sync perfectly with audio</li>
+                    <li><strong>Hair/edges:</strong> Fuzzy around face edges or strange hair movements</li>
+                    <li><strong>Facial expressions:</strong> Wrong emotion for what's being said</li>
+                    <li><strong>Lighting:</strong> Face lit differently from background</li>
+                    <li><strong>Skin texture:</strong> Unrealistic skin or weird aging</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Detection Tools for Deepfakes 🛠️</h2>
+            <p>Scientists are creating AI tools that detect deepfakes.</p>
+            <div class="info-box">
+                <h3>Detection Methods:</h3>
+                <ul>
+                    <li><strong>AI detection software:</strong> Programs that analyze video for deepfake markers</li>
+                    <li><strong>Metadata analysis:</strong> Check when/where video was created</li>
+                    <li><strong>Audio analysis:</strong> Check if voice is natural or synthetic</li>
+                    <li><strong>Blockchain verification:</strong> Digital signatures proving authenticity</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Challenge:</strong> As AI gets better at making deepfakes, detection must
+                improve too!</p>
+        </div>
+        <div class="slide">
+            <h2>Misinformation & Fake News 📰</h2>
+            <p>Deepfakes are just one type of misinformation. AI also helps create fake text and images.</p>
+            <div class="key-point">
+                <h3>AI-Generated Misinformation:</h3>
+                <ul>
+                    <li><strong>Fake articles:</strong> AI writes convincing but false news</li>
+                    <li><strong>Fake images:</strong> AI creates fake photos of events</li>
+                    <li><strong>Bot comments:</strong> AI pretends to be real people on social media</li>
+                    <li><strong>Targeted ads:</strong> False claims designed to manipulate you</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Source Verification: Check the Source 📋</h2>
+            <p>Before believing content, always check if the source is trustworthy.</p>
+            <div class="info-box">
+                <h3>Verification Checklist:</h3>
+                <ul>
+                    <li><strong>Author:</strong> Who created this? Do they have credibility?</li>
+                    <li><strong>Original source:</strong> Where did it first come from?</li>
+                    <li><strong>Date:</strong> Is it recent? Old news taken out of context?</li>
+                    <li><strong>Fact-check:</strong> Look it up on Snopes, FactCheck.org, or Google</li>
+                    <li><strong>Cross-reference:</strong> Do other trusted sources report this?</li>
+                    <li><strong>Expertise:</strong> Is the author an expert on this topic?</li>
+                    <li><strong>Bias:</strong> Does the source have a political bias?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Reverse Image Search 🔎</h2>
+            <p>You can use <span class="tech-term">reverse image search</span> to check if an image is fake or from
+                somewhere else.</p>
+            <div class="concept-box">
+                <h3>How to Use It:</h3>
+                <ul>
+                    <li>Go to Google Images</li>
+                    <li>Click the camera icon (search by image)</li>
+                    <li>Upload the image or paste the URL</li>
+                    <li>Google shows where the image came from</li>
+                    <li>If an image is from a different story, it's misleading!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Critical Thinking Rules 🧠</h2>
+            <p>The best defense against misinformation is critical thinking:</p>
+            <div class="discussion-box">
+                <h3>Always Ask Yourself:</h3>
+                <ul>
+                    <li>"Does this match what I know to be true?"</li>
+                    <li>"Why would this person/company tell me this?"</li>
+                    <li>"What emotion is this content trying to trigger?"</li>
+                    <li>"Would this be reported by trusted news sources?"</li>
+                    <li>"Is this too good (or bad) to be true?"</li>
+                    <li>"Am I believing this just because friends shared it?"</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li><span class="tech-term">Deepfakes</span> are AI-created videos that look real</li>
+                    <li>Deepfakes can be detected by looking for <strong>unnatural movements, blinking, eye
+                            reflections</strong></li>
+                    <li><strong>Verify sources</strong> before believing content</li>
+                    <li><strong>Reverse image search</strong> reveals where images come from</li>
+                    <li><strong>Misinformation</strong> is widespread - stay skeptical</li>
+                    <li><strong>Critical thinking</strong> is your best protection</li>
+                    <li><strong>If it seems fake, it probably is!</strong></li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>Stay Critical! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">Deepfakes and misinformation are real threats - but
+                you have tools to fight back</p>
+            <p style="margin-top:40px;color:#aaa">Next Session: Microsoft Word Advanced Skills</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

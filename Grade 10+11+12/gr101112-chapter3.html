@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="common logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 Building Your First AI Chatbot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #00d4ff;
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .fun-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .tip {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .center-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .big-idea-card {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            margin: 15px 0;
+        }
+
+        .big-idea-card h4 {
+            margin-top: 0;
+            color: #0ff;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .flow-step {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00d4ff;
+            flex: 1;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .arrow {
+            color: #00d4ff;
+            font-size: 2em;
+        }
+
+        .phone-mockup {
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.1) 100%);
+            border: 3px solid #00d4ff;
+            border-radius: 24px;
+            padding: 32px;
+            width: 360px;
+            height: 640px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-header {
+            background: #00d4ff;
+            color: #1a1a2e;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+
+        .phone-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .phone-button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 24px;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 212, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .phone-button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+
+        .phone-textbox {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            flex: 1;
+        }
+
+        .comparison-box {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00d4ff;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        .logo-top-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background-image: url('common logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 500;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        strong {
+            color: #0ff;
+        }
+
+        em {
+            color: #00d4ff;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+
+            .grid-3, .three-column, .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h1>Building Your First AI Chatbot 🤖</h1>
+            <div class="subtitle">Using MIT App Inventor</div>
+            <p style="font-size: 1.4em; margin-top: 40px; color: #aaa;">Grades 10-12 | AI & Mobile Development</p>
+        </div>
+
+        <!-- Slide 2: Setup - Project Link & API Key -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Setup: Your Credentials 🔑</h2>
+            
+            <div style="margin-top: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <div class="big-idea-card" style="margin-bottom: 30px;">
+                    <h4>MIT App Inventor Project Link</h4>
+                    <a href="https://ai2.appinventor.mit.edu" target="_blank" style="display: inline-block; text-decoration: none;">
+                        <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.1em; word-break: break-all; border-left: 4px solid #00d4ff; margin-top: 15px; border: 2px solid rgba(0, 212, 255, 0.3); cursor: pointer; transition: all 0.3s; color: #fff;" onmouseover="this.style.background='rgba(0, 212, 255, 0.2)'; this.style.borderColor='#00d4ff';" onmouseout="this.style.background='rgba(0, 212, 255, 0.1)'; this.style.borderColor='rgba(0, 212, 255, 0.3)';" id="projectLinkDisplay">
+                            https://ai2.appinventor.mit.edu
+                        </div>
+                    </a>
+                </div>
+
+                <div class="big-idea-card" style="margin-bottom: 30px;">
+                    <h4>Get Your Gemini Free API Key 🔑</h4>
+                    <p style="margin: 15px 0; font-size: 1.1em;">Follow these steps to get your own free Gemini API key:</p>
+                    <ol style="font-size: 1.1em; line-height: 2; margin-left: 30px; margin-top: 15px;">
+                        <li>Go to <a href="https://aistudio.google.com/apikey" target="_blank" style="color: #00d4ff; text-decoration: underline;">aistudio.google.com/apikey</a></li>
+                        <li>Sign in with your Google account (create one if you don't have)</li>
+                        <li>Click on <strong>"Create API Key"</strong> button</li>
+                        <li>Select <strong>"Create API Key in new project"</strong> option</li>
+                        <li>Copy the API Key that appears</li>
+                        <li>Paste it into your MIT App Inventor chatbot project</li>
+                        <li>Save your API key in a safe place (never share it!)</li>
+                    </ol>
+                    <div style="background: rgba(255, 193, 7, 0.1); padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 20px;">
+                        <p style="margin: 0; color: #ffcc00; font-size: 1.1em;"><strong>⚠️ Important:</strong> Keep your API key private! Never share it in public repositories or with others.</p>
+                    </div>
+                </div>
+
+                <div class="big-idea-card" style="margin-bottom: 30px;">
+                    <h4>Wi-Fi Network</h4>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 15px;">
+                        <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.1em; word-break: break-all; border-left: 4px solid #00d4ff; flex: 1; border: 2px solid rgba(0, 212, 255, 0.3);" id="wifiNameDisplay">
+                            LNS-G11-G12
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; margin-bottom: 10px;"><strong>Password:</strong></p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.1em; word-break: break-all; border-left: 4px solid #00d4ff; flex: 1; border: 2px solid rgba(0, 212, 255, 0.3);" id="wifiPassDisplay">
+                            ManagE@1941@
+                        </div>
+                        <button onclick="copyWifiPassword(this)" style="background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 2px solid #00d4ff; padding: 15px 20px; border-radius: 8px; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s; font-weight: 600; white-space: nowrap; min-width: 100px; font-size: 1em;">
+                            📋 Copy
+                        </button>
+                    </div>
+                    <button onclick="connectToWifi()" style="background: rgba(0, 100, 200, 0.3); color: #00d4ff; border: 2px solid #00d4ff; padding: 15px 30px; border-radius: 8px; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1.1em; margin-top: 15px; width: 100%;">
+                        🌐 Connect to Network
+                    </button>
+                    <div id="wifiStatus" style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); display: none;">
+                        <p id="wifiStatusText" style="margin: 0; color: #00d4ff;"></p>
+                    </div>
+                </div>
+
+                <div class="tip" style="margin-top: 30px;">
+                    <p style="font-size: 1.2em;">💡 <strong>Tip:</strong> These credentials are already loaded. You'll use them when building your app blocks. Keep them safe!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What is a Chatbot? -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>What is a Chatbot? 💬</h2>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">A <strong>chatbot</strong> is a computer program that simulates human conversation through text or voice interactions.</p>
+            
+            <div class="big-idea-card">
+                <h4>Real-World Examples:</h4>
+                <p style="font-size: 1.15em;">Siri, Alexa, customer service bots, ChatGPT, virtual assistants on websites</p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>Why are they useful?</h4>
+                <p style="font-size: 1.15em;">24/7 availability, instant responses, handle multiple conversations, automate repetitive tasks</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: MIT App Inventor Overview -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>What is MIT App Inventor? 📱</h2>
+            
+            <div class="three-column">
+                <div class="card">
+                    <h4>Visual Programming Platform</h4>
+                    <p>Created by MIT to help anyone build mobile apps without traditional coding experience</p>
+                </div>
+                
+                <div class="card">
+                    <h4>Block-Based Coding</h4>
+                    <p>Drag and drop blocks like puzzle pieces to create app logic and functionality</p>
+                </div>
+                
+                <div class="card">
+                    <h4>AI Components</h4>
+                    <p>Built-in AI features like ChatBot, speech recognition, and image classification</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Our Chatbot App Design -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Our Chatbot App Design 🎨</h2>
+            
+            <div class="phone-mockup">
+                <div class="phone-header">Screen1</div>
+                <div class="phone-content">
+                    <button class="phone-button" style="cursor: default;">SPEAK</button>
+                    <div class="phone-textbox"></div>
+                    <button class="phone-button" style="cursor: default;">SEND TO GEMINI</button>
+                    <div class="phone-textbox"></div>
+                    <button class="phone-button" style="cursor: default;">READ</button>
+                </div>
+            </div>
+            <p class="quote" style="text-align: center; border: none;">Simple, clean interface with speech input/output and AI conversation</p>
+        </div>
+
+        <!-- Slide 6: Components Needed -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Components We'll Use 🔧</h2>
+            
+            <div class="two-column">
+                <div class="card">
+                    <h4>User Interface</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li><strong>speakButton</strong> - Button to start voice input</li>
+                        <li><strong>sendButton</strong> - Button to send to AI</li>
+                        <li><strong>readButton</strong> - Button to read response aloud</li>
+                        <li><strong>speakTextBox</strong> - Display what user said</li>
+                        <li><strong>responseTextBox</strong> - Display AI response</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4>AI & Voice Components</h4>
+                    <ul style="font-size: 1.1em; margin-top: 10px;">
+                        <li><strong>SpeechRecognizer1</strong> - Converts speech to text</li>
+                        <li><strong>TextToSpeech1</strong> - Reads text aloud</li>
+                        <li><strong>ChatBot1</strong> - Gemini AI conversation engine</li>
+                        <li><strong>Notifier1</strong> - Shows progress dialogs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <p style="font-size: 1.2em;">💡 <strong>Tip:</strong> All these components can be found in the Designer view's Palette on the left side</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Code Block 1 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Block 1: Speak Button Click 🎤</h2>
+            
+            <div class="fun-box">
+                <h4 style="margin-top: 0;">The Code:</h4>
+                <p style="font-family: 'Courier New', monospace; margin-top: 15px; font-size: 1.2em;">
+                    when speakButton.Click<br/>
+                    &nbsp;&nbsp;do SpeechRecognizer1.GetText
+                </p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>What does this do?</h4>
+                <p style="font-size: 1.15em;">When the user clicks the "SPEAK" button, it activates the phone's speech recognition to listen to what they say.</p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>Real-world analogy:</h4>
+                <p style="font-size: 1.15em;">Like pressing a microphone button to start recording your voice - the app is now listening!</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Code Block 2 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Block 2: After Getting Speech 📝</h2>
+            
+            <div class="fun-box">
+                <h4 style="margin-top: 0;">The Code:</h4>
+                <p style="font-family: 'Courier New', monospace; margin-top: 15px; font-size: 1.15em;">
+                    when SpeechRecognizer1.AfterGettingText<br/>
+                    &nbsp;&nbsp;do set speakTextBox.Text to result<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set responseTextBox.Text to ""<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call ChatBot1.Converse<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question: speakTextBox.Text
+                </p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>What does this do?</h4>
+                <p style="font-size: 1.15em;">After speech is converted to text, this block:</p>
+                <ul style="font-size: 1.1em; margin-top: 10px;">
+                    <li>1. Displays what you said in the speakTextBox</li>
+                    <li>2. Clears the previous response (makes it empty)</li>
+                    <li>3. Sends your question to the Gemini AI chatbot</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 9: Code Block 3 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Block 3: Send Button Click ✉️</h2>
+            
+            <div class="fun-box">
+                <h4 style="margin-top: 0;">The Code:</h4>
+                <p style="font-family: 'Courier New', monospace; margin-top: 15px; font-size: 1.1em;">
+                    when sendButton.Click<br/>
+                    &nbsp;&nbsp;do if speakTextBox.Text is not empty<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then call Notifier1.ShowProgressDialog<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: "Generating a response"<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "Please wait..."<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call ChatBot1.Converse<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question: speakTextBox.Text
+                </p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>What does this do?</h4>
+                <p style="font-size: 1.15em;">When clicking "SEND TO GEMINI":</p>
+                <ul style="font-size: 1.1em; margin-top: 10px;">
+                    <li>1. Checks if there's actually text to send</li>
+                    <li>2. Shows a "Please wait..." dialog while AI thinks</li>
+                    <li>3. Sends the question to the chatbot</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Code Block 4 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Block 4: After AI Responds 🤖</h2>
+            
+            <div class="fun-box">
+                <h4 style="margin-top: 0;">The Code:</h4>
+                <p style="font-family: 'Courier New', monospace; margin-top: 15px; font-size: 1.2em;">
+                    when ChatBot1.GotResponse<br/>
+                    &nbsp;&nbsp;do call Notifier1.DismissProgressDialog<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set responseTextBox.Text to get response
+                </p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>What does this do?</h4>
+                <p style="font-size: 1.15em;">When Gemini AI finishes thinking and responds:</p>
+                <ul style="font-size: 1.1em; margin-top: 10px;">
+                    <li>1. Closes the "Please wait..." dialog</li>
+                    <li>2. Displays the AI's response in the responseTextBox</li>
+                </ul>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>Think of it as:</h4>
+                <p style="font-size: 1.15em;">Like waiting for a friend to text back - when they reply, you see their message!</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Code Block 5 -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Block 5: Read Button Click 🔊</h2>
+            
+            <div class="fun-box">
+                <h4 style="margin-top: 0;">The Code:</h4>
+                <p style="font-family: 'Courier New', monospace; margin-top: 15px; font-size: 1.2em;">
+                    when readButton.Click<br/>
+                    &nbsp;&nbsp;do call TextToSpeech1.Speak<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: responseTextBox.Text
+                </p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>What does this do?</h4>
+                <p style="font-size: 1.15em;">When clicking the "READ" button, it uses text-to-speech to read the AI's response out loud.</p>
+            </div>
+            
+            <div class="big-idea-card">
+                <h4>Complete the conversation loop!</h4>
+                <p style="font-size: 1.15em;">Now you can have a fully voice-based conversation: speak your question, get a text response, and have it read back to you!</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: The Complete Flow -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>The Complete Flow 🔄</h2>
+            
+            <div class="flow-diagram" style="margin-top: 40px; flex-direction: column; gap: 20px; align-items: stretch;">
+                <div class="flow-step" style="text-align: left;">
+                    <strong style="color: #0ff; font-size: 1.3em;">1. User clicks SPEAK</strong><br><br>
+                    <p style="font-size: 1.1em; margin: 0;">Phone starts listening to what you say</p>
+                </div>
+                
+                <div class="flow-step" style="text-align: left;">
+                    <strong style="color: #0ff; font-size: 1.3em;">2. User speaks</strong><br><br>
+                    <p style="font-size: 1.1em; margin: 0;">Speech is converted to text, then automatically sent to AI</p>
+                </div>
+                
+                <div class="flow-step" style="text-align: left;">
+                    <strong style="color: #0ff; font-size: 1.3em;">3. AI processes your question</strong><br><br>
+                    <p style="font-size: 1.1em; margin: 0;">"Please wait..." dialog shows, Gemini generates response</p>
+                </div>
+                
+                <div class="flow-step" style="text-align: left;">
+                    <strong style="color: #0ff; font-size: 1.3em;">4. Response arrives</strong><br><br>
+                    <p style="font-size: 1.1em; margin: 0;">Dialog closes, AI's response is displayed on screen</p>
+                </div>
+                
+                <div class="flow-step" style="text-align: left;">
+                    <strong style="color: #0ff; font-size: 1.3em;">5. User clicks READ</strong><br><br>
+                    <p style="font-size: 1.1em; margin: 0;">Response is spoken aloud through text-to-speech!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Let's Build It! -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Let's Build It Together! 🚀</h2>
+            
+            <div class="three-column">
+                <div class="fun-box">
+                    <h4 style="margin-top: 0;">Step 1: Design View</h4>
+                    <p style="margin-top: 15px; font-size: 1.15em;">Add all the buttons and text boxes to match the design</p>
+                </div>
+                
+                <div class="fun-box">
+                    <h4 style="margin-top: 0;">Step 2: Add Components</h4>
+                    <p style="margin-top: 15px; font-size: 1.15em;">Add the invisible components (SpeechRecognizer, TextToSpeech, ChatBot, Notifier)</p>
+                </div>
+                
+                <div class="fun-box">
+                    <h4 style="margin-top: 0;">Step 3: Blocks View</h4>
+                    <p style="margin-top: 15px; font-size: 1.15em;">Build the 5 code blocks we just learned about!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Thank You -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <div class="center-text">
+                <h1 style="font-size: 3.5em;">Excellent Work! 🎉</h1>
+                <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">Building the Future with AI</div>
+                <div class="tagline">Stay curious. Think critically. Build responsibly. ✨</div>
+                
+                <div style="margin-top: 60px; font-size: 1.3em; color: #00d4ff;">
+                    <p>Questions? Insights? Debates?</p>
+                    <p style="margin-top: 10px;">Let's discuss! 💬</p>
+                </div>
+
+                <p style="margin-top: 60px; font-size: 1.2em; color: #aaa;">
+                    Ready to create amazing AI applications? 🚀
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="logo-top-right"></div>
+
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+    
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Top</button>
+
+    <script>
+        function copyWifiPassword(button) {
+            const password = document.getElementById('wifiPassDisplay').innerText;
+            navigator.clipboard.writeText(password).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = '✓ Copied!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        function connectToWifi() {
+            const statusDiv = document.getElementById('wifiStatus');
+            const statusText = document.getElementById('wifiStatusText');
+            const wifiName = 'LNS-G11-G12';
+            const wifiPassword = 'ManagE@1941@';
+            
+            statusDiv.style.display = 'block';
+            statusText.innerHTML = '⏳ Attempting to connect to ' + wifiName + '...';
+            statusText.style.color = '#00d4ff';
+            
+            // Check if WiFi Management API is available (for MIT App Inventor or similar)
+            if (navigator.wifi) {
+                navigator.wifi.connect({
+                    ssid: wifiName,
+                    password: wifiPassword,
+                    successCallback: function() {
+                        statusText.innerHTML = '✓ Successfully connected to ' + wifiName + '!';
+                        statusText.style.color = '#00ff00';
+                    },
+                    errorCallback: function(error) {
+                        statusText.innerHTML = '✗ Connection failed. Please connect manually using the credentials above. Error: ' + error;
+                        statusText.style.color = '#ff6b6b';
+                    }
+                });
+            } else {
+                // Fallback message for browsers that don't support WiFi API
+                statusText.innerHTML = '⚠️ Automatic connection not available on this device. Please connect manually to <strong>' + wifiName + '</strong> using password: <strong>' + wifiPassword + '</strong>';
+                statusText.style.color = '#ffcc00';
+            }
+        }
+
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                scrollToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                scrollToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Track which slide is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    currentSlide = Array.from(slides).indexOf(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.querySelector('.scroll-indicator').style.opacity = '0.3';
+            } else {
+                document.querySelector('.scroll-indicator').style.opacity = '0.6';
+            }
+        });
+    </script>
+</body>
+</html>

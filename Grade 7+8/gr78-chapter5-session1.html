@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Programming - Grades 7-8</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .code-block {
+            background: #0a0a1a;
+            border: 1px solid #0ff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            margin: 15px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 7-8 | Chapter 1: Python Basics</span></div>
+        <div class="slide title-slide center-content">
+            <h1>Introduction to Python 🐍</h1>
+            <div class="subtitle">Start Coding Today</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 1: Python Fundamentals</p>
+        </div>
+        <div class="slide">
+            <h2>What Is Python? 🤔</h2>
+            <p><span class="tech-term">Python</span> is a programming language - a way to tell computers exactly what to
+                do, step by step.</p>
+            <div class="info-box">
+                <h3>Why Python?</h3>
+                <ul>
+                    <li><strong>Easy to read:</strong> Python code looks almost like English</li>
+                    <li><strong>Powerful:</strong> Used in AI, data science, web development, games</li>
+                    <li><strong>Beginner-friendly:</strong> Perfect for learning programming</li>
+                    <li><strong>In-demand skill:</strong> Companies hire Python programmers everywhere</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Fun fact:</strong> Python is named after Monty Python, not the snake!</p>
+        </div>
+        <div class="slide">
+            <h2>Your First Program: Print 📤</h2>
+            <p>The simplest Python program uses <span class="tech-term">print()</span> - this tells Python to display
+                text on the screen.</p>
+            <div class="concept-box">
+                <h3>Code Example:</h3>
+                <div class="code-block">print("Hello, World!")</div>
+                <p style="margin-top:15px"><strong>Output:</strong> <span style="color:#00d4ff">Hello, World!</span></p>
+                <p style="margin-top:15px">Notice: Text inside quotes is called a <span class="tech-term">string</span>
+                    - it's just text data.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Variables: Storing Information 💾</h2>
+            <p>A <span class="tech-term">variable</span> is a container that holds information. You can store numbers,
+                text, and more.</p>
+            <div class="concept-box">
+                <h3>Code Example:</h3>
+                <div class="code-block">name = "Alice"<br>age = 13<br>print(name)<br>print(age)</div>
+                <p style="margin-top:15px"><strong>Output:</strong><br><span style="color:#00d4ff">Alice</span><br><span
+                        style="color:#00d4ff">13</span></p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Input: Getting Information from Users 🎤</h2>
+            <p>The <span class="tech-term">input()</span> function lets you ask users to type information.</p>
+            <div class="concept-box">
+                <h3>Code Example:</h3>
+                <div class="code-block">name = input("What's your name? ")<br>print("Hello, " + name + "!")</div>
+                <p style="margin-top:15px"><strong>Interaction:</strong><br>Computer asks: <span
+                        style="color:#00d4ff">What's your name? </span><br>You type: <span
+                        style="color:#00d4ff">Bob</span><br>Computer says: <span style="color:#00d4ff">Hello,
+                        Bob!</span></p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Math Operations 🔢</h2>
+            <p>Python can do math! Use +, -, *, / for add, subtract, multiply, divide.</p>
+            <div class="concept-box">
+                <h3>Code Examples:</h3>
+                <div class="code-block">x = 10<br>y = 5<br>print(x + y) # Shows 15<br>print(x - y) # Shows 5<br>print(x
+                    * y) # Shows 50<br>print(x / y) # Shows 2.0</div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Project 1: Age Calculator 🎂</h2>
+            <p>Let's create a program that calculates how old you'll be in 10 years!</p>
+            <div class="concept-box">
+                <h3>Code:</h3>
+                <div class="code-block">age = input("How old are you? ")<br>age = int(age) # Convert text to
+                    number<br>future_age = age + 10<br>print("In 10 years, you'll be " + str(future_age))</div>
+                <p style="margin-top:15px"><strong>New concepts:</strong> <span class="tech-term">int()</span> converts
+                    text to numbers, <span class="tech-term">str()</span> converts numbers to text</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Project 2: Simple Math Quiz 🧮</h2>
+            <div class="concept-box">
+                <h3>Code:</h3>
+                <div class="code-block">answer = input("What is 7 + 3? ")<br>answer = int(answer)<br>if answer ==
+                    10:<br>&nbsp;&nbsp;print("Correct!")<br>else:<br>&nbsp;&nbsp;print("Wrong! The answer is 10")</div>
+                <p style="margin-top:15px"><strong>This introduces if/else!</strong> More on that next session.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Try It Yourself! 💪</h2>
+            <div class="info-box">
+                <h3>Online Python Editors (No Installation!):</h3>
+                <ul>
+                    <li><strong>Replit.com:</strong> Create free account, start coding instantly</li>
+                    <li><strong>Trinket.io:</strong> Simple and beginner-friendly</li>
+                    <li><strong>Python.org:</strong> Official Python editor online</li>
+                </ul>
+            </div>
+            <div class="discussion-box">
+                <h3>Your Challenge:</h3>
+                <p>Write a program that:</p>
+                <ul>
+                    <li>Asks for your name</li>
+                    <li>Asks for your favorite number</li>
+                    <li>Multiplies that number by 2</li>
+                    <li>Prints "Hi [name], your number times 2 is [result]!"</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li><strong>Python</strong> is a beginner-friendly programming language</li>
+                    <li><strong>print()</strong> displays text on screen</li>
+                    <li><strong>Variables</strong> store information</li>
+                    <li><strong>input()</strong> gets information from users</li>
+                    <li><strong>Math operations</strong> (+, -, *, /) do calculations</li>
+                    <li><strong>int() and str()</strong> convert between numbers and text</li>
+                    <li>You can write REAL programs right now!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>You Can Code! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">You've written your first Python programs</p>
+            <p style="margin-top:40px;color:#aaa">Next Session: Make Programs Smarter with If/Else Logic</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

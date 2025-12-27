@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recommendations - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px;
+            margin-top: 30px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Chapter 2: AI in Action</span></div>
+        <div class="slide title-slide center-content">
+            <h1>AI Recommendations 🎬</h1>
+            <div class="subtitle">How YouTube, Netflix, TikTok Know What You Like</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 4: Recommendation Algorithms</p>
+        </div>
+        <div class="slide">
+            <h2>The Recommendation Problem 🤔</h2>
+            <p>Netflix has 10,000 hours of content. YouTube has 500 hours uploaded EVERY SECOND. How do these platforms
+                know what YOU want to watch?</p>
+            <div class="key-point">
+                <h3>The Solution: AI Recommendations</h3>
+                <p>AI builds a profile of your interests based on:</p>
+                <ul>
+                    <li>What videos you watch</li>
+                    <li>How long you watch each video</li>
+                    <li>What you like/dislike (thumbs up/down)</li>
+                    <li>What you skip</li>
+                    <li>What you search for</li>
+                    <li>When you watch (time of day, season, holidays)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Collaborative Filtering 👥</h2>
+            <p>Netflix uses a technique called <span class="tech-term">collaborative filtering</span> - finding people
+                similar to you and recommending what THEY liked.</p>
+            <div class="info-box">
+                <h3>How It Works:</h3>
+                <ol>
+                    <li>You watch "Breaking Bad" and like it</li>
+                    <li>AI finds 10,000 other users with similar taste</li>
+                    <li>AI checks what those users also liked</li>
+                    <li>Recommends those shows to you</li>
+                </ol>
+            </div>
+            <div class="concept-box">
+                <p><strong>Example:</strong> If 95% of people who liked "The Office" also liked "Parks and Recreation",
+                    the algorithm will recommend it to you!</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Your Digital Profile 📊</h2>
+            <p>Every platform creates a detailed <span class="tech-term">user profile</span> based on your behavior:</p>
+            <div class="info-box">
+                <h3>What's In Your Profile?</h3>
+                <ul>
+                    <li>Your watch history (every video you've clicked)</li>
+                    <li>Time spent on each video</li>
+                    <li>Videos you paused, rewound, or skipped</li>
+                    <li>Likes and comments</li>
+                    <li>Shares and saves</li>
+                    <li>Search queries</li>
+                    <li>Device type and internet speed</li>
+                    <li>Location and time zone</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>The Filter Bubble Problem ⚠️</h2>
+            <p>Here's the dark side: recommendation algorithms can trap you in a <span class="tech-term">filter
+                    bubble</span>.</p>
+            <div class="key-point">
+                <h3>How Filter Bubbles Work:</h3>
+                <ul>
+                    <li>Algorithm shows you more of what you like</li>
+                    <li>You only see content matching your interests</li>
+                    <li>You never encounter opposing viewpoints</li>
+                    <li>Your beliefs get reinforced, not challenged</li>
+                    <li>Over time, your views become more extreme</li>
+                </ul>
+            </div>
+            <div class="concept-box">
+                <p><strong>Example:</strong> If you watch one conspiracy theory video, YouTube's algorithm might
+                    recommend increasingly extreme videos, trapping you in a rabbit hole.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Algorithm Addiction 🎮</h2>
+            <p>Tech companies use AI to keep you engaged as long as possible. This is called <span
+                    class="tech-term">engagement maximization</span>.</p>
+            <div class="info-box">
+                <h3>Tactics Used:</h3>
+                <ul>
+                    <li>Auto-play next video (without asking)</li>
+                    <li>Ending videos with cliffhangers</li>
+                    <li>Showing notifications about new videos</li>
+                    <li>A/B testing (trying different thumbnails to see what gets more clicks)</li>
+                    <li>Infinite scroll (never reaching the end)</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <p><strong>Why?</strong> More time watching = more ads shown = more money made!</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Critical Thinking Questions 🤔</h2>
+            <div class="discussion-box">
+                <h3>Consider This:</h3>
+                <ul>
+                    <li><strong>Is personalization good or bad?</strong> It's convenient, but limits your world view
+                    </li>
+                    <li><strong>Who benefits?</strong> You get content you like. Companies make money from ads</li>
+                    <li><strong>The cost:</strong> Your data. Algorithms track everything you do</li>
+                    <li><strong>Solution:</strong> Be intentional. Seek diverse content. Don't just follow
+                        recommendations</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li>Recommendation algorithms use your behavior to predict preferences</li>
+                    <li><strong>Collaborative filtering</strong> finds similar users and recommends their favorites</li>
+                    <li>Platforms create detailed <strong>user profiles</strong> to predict preferences</li>
+                    <li><strong>Filter bubbles</strong> trap you in one viewpoint</li>
+                    <li>Algorithms are optimized for <strong>engagement</strong>, which means keeping you watching</li>
+                    <li>Be aware and seek diverse content intentionally</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>Understand Recommendations! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">AI predictions are powerful but come with hidden costs
+            </p>
+            <p style="margin-top:40px;color:#aaa">Next Session: How AI Sees Images</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

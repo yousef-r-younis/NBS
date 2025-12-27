@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites & How They Work - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #1a1a2e; color: #fff; overflow-x: hidden; }
+        .presentation { width: 100%; min-height: 100vh; }
+        .presentation::before { content: ''; display: block; margin-top: 80px; }
+        .slide { width: 100%; min-height: 100vh; padding: 80px 100px; position: relative; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-bottom: 2px solid rgba(0, 212, 255, 0.1); display: none; flex-direction: column; justify-content: center; }
+        .slide:first-of-type { display: flex; }
+        .title-slide { background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); text-align: center; align-items: center; }
+        h1 { font-size: 3.5em; font-weight: 700; color: #00d4ff; text-shadow: 0 0 30px rgba(0, 212, 255, 0.5); margin-bottom: 20px; }
+        h2 { font-size: 2.8em; font-weight: 700; color: #00d4ff; margin-bottom: 40px; }
+        h3 { font-size: 1.8em; color: #0ff; margin-bottom: 20px; margin-top: 30px; }
+        .subtitle { font-size: 1.4em; color: #aaa; margin-bottom: 10px; }
+        p { font-size: 1.2em; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+        ul, ol { font-size: 1.2em; line-height: 2; margin-left: 40px; color: #ccc; margin-bottom: 20px; }
+        li { margin-bottom: 15px; }
+        .info-box { background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); padding: 25px; border-radius: 10px; margin: 20px 0; }
+        .concept-box { background: rgba(0, 255, 255, 0.05); border-left: 4px solid #0ff; padding: 20px; margin: 20px 0; }
+        .key-point { background: rgba(255, 100, 100, 0.1); border-left: 4px solid #ff6464; padding: 20px; margin: 20px 0; }
+        .tech-term { color: #00d4ff; font-weight: 600; }
+        .flow-diagram { background: rgba(0, 212, 255, 0.08); padding: 30px; border-radius: 10px; margin: 30px 0; text-align: center; font-size: 1.1em; }
+        .flow-item { color: #00d4ff; font-weight: 600; margin: 10px 0; }
+        .discussion-box { background: rgba(100, 200, 255, 0.1); border: 1px solid rgba(100, 200, 255, 0.3); padding: 25px; border-radius: 10px; margin: 20px 0; }
+        .comparison-table { width: 100%; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td { padding: 15px; text-align: left; border: 1px solid rgba(0, 212, 255, 0.1); }
+        .comparison-table th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        .center-content { text-align: center; }
+        strong { color: #00d4ff; }
+        .slide-nav { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; }
+        .nav-btn { background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%); color: #1a1a2e; border: none; padding: 12px 30px; border-radius: 25px; font-size: 1.1em; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3); }
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div style="position: fixed; top: 0; left: 0; right: 0; background: rgba(26, 26, 46, 0.95); padding: 20px 40px; z-index: 2000; border-bottom: 2px solid #00d4ff; display: flex; justify-content: space-between; align-items: center;">
+            <a href="../index.html" style="background: #00d4ff; color: #1a1a2e; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer;">← Back to Home</a>
+            <span style="color: #00d4ff; font-size: 0.95em;">Grades 5-6 AI Class | Chapter 1: Internet & Web</span>
+        </div>
+
+        <div class="slide title-slide center-content">
+            <h1>What Are Websites? 🌐</h1>
+            <div class="subtitle">Understanding URLs, Domains, and Web Servers</div>
+            <p style="margin-top: 40px; font-size: 1.3em;">Session 2: How Websites Work</p>
+        </div>
+
+        <div class="slide">
+            <h2>Websites Live on Servers 🖥️</h2>
+            <p>A website isn't magic - it's just files stored on a computer called a <span class="tech-term">server</span> that's always connected to the internet.</p>
+            <div class="info-box">
+                <h3>What's on a Server?</h3>
+                <ul>
+                    <li>HTML files (structure/content of the page)</li>
+                    <li>CSS files (styling/appearance)</li>
+                    <li>JavaScript files (interactivity)</li>
+                    <li>Images, videos, and other media</li>
+                    <li>Databases with information</li>
+                </ul>
+            </div>
+            <p style="margin-top: 30px;">When you visit google.com, Google's server sends all these files to your browser, which displays them as a webpage!</p>
+        </div>
+
+        <div class="slide">
+            <h2>URLs: Web Addresses 🔗</h2>
+            <p>A <span class="tech-term">URL</span> (Uniform Resource Locator) is the web address you type in your browser.</p>
+            <div class="info-box" style="text-align: center; font-family: monospace; background: rgba(0, 212, 255, 0.1); padding: 20px; margin: 20px 0;">
+                <p style="color: #00d4ff; font-size: 1.2em;">https://www.google.com/search?q=puppies</p>
+            </div>
+            <div class="concept-box">
+                <h3>Breaking Down the URL:</h3>
+                <ul>
+                    <li><strong>https://</strong> - Protocol (secure version of http)</li>
+                    <li><strong>www</strong> - Subdomain (often "World Wide Web")</li>
+                    <li><strong>google.com</strong> - Domain name</li>
+                    <li><strong>/search</strong> - Path (which page on the server)</li>
+                    <li><strong>?q=puppies</strong> - Query (search parameter)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Domains & Extensions 📝</h2>
+            <p>A <span class="tech-term">domain</span> is the unique name of a website. Every domain has an extension called a <span class="tech-term">TLD</span> (Top-Level Domain).</p>
+            <div class="info-box">
+                <h3>Common Domain Extensions:</h3>
+                <ul>
+                    <li><strong>.com</strong> - Commercial (most common)</li>
+                    <li><strong>.org</strong> - Organizations (non-profit)</li>
+                    <li><strong>.edu</strong> - Education (schools/universities)</li>
+                    <li><strong>.gov</strong> - Government</li>
+                    <li><strong>.net</strong> - Network infrastructure</li>
+                    <li><strong>.co.uk, .de, .fr</strong> - Country codes</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <h3>Domain Registration</h3>
+                <p>You can buy a domain from a registrar like GoDaddy or Namecheap. Cost is usually $5-15/year. This reserves the name so no one else can use it!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Web Browsers 🌐</h2>
+            <p>A <span class="tech-term">web browser</span> is the application that displays websites. It takes HTML/CSS/JavaScript and turns them into what you see.</p>
+            <div class="info-box">
+                <h3>Popular Web Browsers:</h3>
+                <ul>
+                    <li><strong>Google Chrome</strong> - Fast, feature-rich (most popular)</li>
+                    <li><strong>Mozilla Firefox</strong> - Privacy-focused, open-source</li>
+                    <li><strong>Safari</strong> - Apple's browser (for Mac/iPhone)</li>
+                    <li><strong>Microsoft Edge</strong> - Windows' default browser</li>
+                </ul>
+            </div>
+            <p style="margin-top: 30px;"><strong>Key feature:</strong> All browsers can display the same website, but slightly differently depending on how they interpret HTML/CSS.</p>
+        </div>
+
+        <div class="slide">
+            <h2>The Request-Response Cycle 🔄</h2>
+            <p>When you visit a website, something amazing happens in milliseconds:</p>
+            <ol style="font-size: 1.1em;">
+                <li><strong>You type a URL:</strong> "youtube.com"</li>
+                <li><strong>Browser sends request:</strong> "Hey, send me youtube.com"</li>
+                <li><strong>Request travels:</strong> Through routers and ISP to YouTube's server</li>
+                <li><strong>Server processes:</strong> Finds the files for youtube.com</li>
+                <li><strong>Server responds:</strong> Sends back HTML, CSS, JavaScript, images</li>
+                <li><strong>Response travels back:</strong> To your computer across the internet</li>
+                <li><strong>Browser displays:</strong> Renders the files into a webpage</li>
+                <li><strong>You see the page:</strong> In about 1-3 seconds!</li>
+            </ol>
+        </div>
+
+        <div class="slide">
+            <h2>HTML: The Building Block 📄</h2>
+            <p><span class="tech-term">HTML</span> (HyperText Markup Language) is the code that structures a website. Don't worry - you don't need to code, just understand the concept!</p>
+            <div class="concept-box">
+                <h3>What HTML Does:</h3>
+                <p>HTML is like an outline. It defines:</p>
+                <ul>
+                    <li>Headings and paragraphs</li>
+                    <li>Links to other pages</li>
+                    <li>Images and videos</li>
+                    <li>Forms (like search boxes)</li>
+                    <li>Lists and tables</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <p><strong>Example:</strong> When you see a blue underlined link on a website, that's HTML saying "This is a clickable link to another page!"</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Dynamic vs Static Websites 🎬</h2>
+            <div class="info-box">
+                <h3>Static Websites</h3>
+                <ul>
+                    <li>Same content for everyone</li>
+                    <li>Just HTML, CSS, and images</li>
+                    <li>Example: A business's "About Us" page</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>Dynamic Websites</h3>
+                <ul>
+                    <li>Content changes based on user input</li>
+                    <li>Uses databases and programming languages</li>
+                    <li>Examples: Google Search, Facebook, YouTube, Gmail</li>
+                    <li>Server creates custom HTML for each user</li>
+                </ul>
+            </div>
+            <p style="margin-top: 30px;"><strong>Almost all interesting websites today are dynamic!</strong> They remember who you are, show personalized content, and respond to your actions.</p>
+        </div>
+
+        <div class="slide">
+            <h2>HTTPS: Secure Websites 🔒</h2>
+            <p>Notice websites have "https://" not just "http://" - the "S" means <span class="tech-term">Secure</span>.</p>
+            <div class="info-box">
+                <h3>What's the Difference?</h3>
+                <ul>
+                    <li><strong>HTTP:</strong> Data travels unencrypted (anyone can see it)</li>
+                    <li><strong>HTTPS:</strong> Data is encrypted (scrambled, only the server can read it)</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <h3>Security Tip</h3>
+                <p><strong>Never enter passwords or credit cards on HTTP websites!</strong> Only use websites with HTTPS, especially when entering sensitive information. Most browsers show a lock icon 🔒 next to HTTPS URLs.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Web Hosting & Data Centers 🏢</h2>
+            <p>If you want to create a website, you need to store it somewhere. Companies like Bluehost, Hostgator, and AWS provide <span class="tech-term">web hosting</span>.</p>
+            <div class="info-box">
+                <h3>Web Hosting Types:</h3>
+                <ul>
+                    <li><strong>Shared Hosting:</strong> Your site shares a server with others (cheap, slow)</li>
+                    <li><strong>VPS (Virtual Private Server):</strong> More control and speed</li>
+                    <li><strong>Dedicated Server:</strong> Your own server (expensive but fast)</li>
+                    <li><strong>Cloud Hosting:</strong> Servers automatically scale (used by big companies)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Complete Website Journey 🚀</h2>
+            <p style="text-align: center; margin: 40px 0; font-size: 1.2em;"><strong>When you visit YouTube.com, here's what happens:</strong></p>
+            <ol>
+                <li>Your browser resolves "youtube.com" to Google's server IP address</li>
+                <li>Browser sends HTTPS request to Google's servers</li>
+                <li>Google's server checks your login info and preferences</li>
+                <li>Server generates personalized HTML based on your watch history</li>
+                <li>Server sends HTML, CSS, JavaScript, thumbnail images</li>
+                <li>Your browser downloads and displays the page</li>
+                <li>JavaScript makes the page interactive (hover effects, infinite scroll)</li>
+                <li>When you search or click, JavaScript sends more requests to the server</li>
+            </ol>
+            <p style="text-align: center; margin-top: 30px; color: #00d4ff;"><strong>All of this happens in 1-3 seconds!</strong></p>
+        </div>
+
+        <div class="slide">
+            <h2>Critical Thinking 🤔</h2>
+            <div class="discussion-box">
+                <h3>Questions to Consider:</h3>
+                <ul>
+                    <li><strong>How do websites remember you?</strong> (Cookies and user accounts)</li>
+                    <li><strong>Why are some websites slow?</strong> (Server load, poor connection, unoptimized code)</li>
+                    <li><strong>Who owns a website?</strong> (The person/company who registered the domain and owns the server)</li>
+                    <li><strong>Can websites see me?</strong> (They see your IP address and what you click, but not your location unless you allow it)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size: 1.1em;">
+                    <li>Websites are files stored on <strong>servers</strong> connected to the internet</li>
+                    <li><strong>URLs</strong> are web addresses with specific structure</li>
+                    <li><strong>Domains</strong> are unique website names with extensions (.com, .org, etc.)</li>
+                    <li><strong>Web browsers</strong> download and display website files</li>
+                    <li><strong>HTML</strong> structures website content</li>
+                    <li><strong>Dynamic websites</strong> generate content based on user input</li>
+                    <li><strong>HTTPS</strong> encrypts data for security</li>
+                    <li><strong>Web hosting</strong> is where websites are stored</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide title-slide center-content">
+            <h1>Websites Explained! 🎉</h1>
+            <p style="font-size: 1.3em; margin-top: 40px; color: #ccc;">Now you understand what happens when you visit a website!</p>
+            <p style="margin-top: 40px; color: #aaa;">Next Session: How Search Engines Work</p>
+        </div>
+
+    </div>
+
+    <div class="slide-nav">
+        <button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            if (n < 0) currentSlide = 0;
+            
+            slides.forEach(slide => slide.style.display = 'none');
+            slides[currentSlide].style.display = 'flex';
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Privacy - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Chapter 2: AI in Action</span></div>
+        <div class="slide title-slide center-content">
+            <h1>AI & Your Privacy 🔒</h1>
+            <div class="subtitle">Who's Collecting Your Data?</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 7: Data Privacy & AI</p>
+        </div>
+        <div class="slide">
+            <h2>What Data Are Apps Collecting? 📊</h2>
+            <p>Every app on your device is collecting information about you. This data trains AI and targets ads.</p>
+            <div class="info-box">
+                <h3>What Apps Know About You:</h3>
+                <ul>
+                    <li><strong>Location:</strong> Where you are right now (GPS)</li>
+                    <li><strong>Contacts:</strong> Who your friends are</li>
+                    <li><strong>Photos:</strong> Everything you photograph</li>
+                    <li><strong>Browsing history:</strong> Every website you visit</li>
+                    <li><strong>Keyboard input:</strong> Everything you type</li>
+                    <li><strong>Messages:</strong> Texts and emails</li>
+                    <li><strong>Voice:</strong> What you say (Siri, Alexa)</li>
+                    <li><strong>Behavior:</strong> How long you use apps, what you click</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>App Permissions Explained 🔑</h2>
+            <p>When you install an app, it asks for <span class="tech-term">permissions</span> - permission to access
+                your data.</p>
+            <div class="concept-box">
+                <h3>Common Permissions:</h3>
+                <ul>
+                    <li><strong>Camera:</strong> App can turn on your camera</li>
+                    <li><strong>Microphone:</strong> App can listen and record</li>
+                    <li><strong>Location:</strong> App knows where you are</li>
+                    <li><strong>Photos:</strong> App can see all your pictures</li>
+                    <li><strong>Contacts:</strong> App can see your friend list</li>
+                    <li><strong>Calendar:</strong> App sees your schedules</li>
+                </ul>
+                <p style="margin-top:15px"><strong>Question:</strong> Does a flashlight app really need access to your
+                    contacts?</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Why Companies Want Your Data 💰</h2>
+            <p>Data is extremely valuable. Companies use it to:</p>
+            <div class="info-box">
+                <h3>Data Use Cases:</h3>
+                <ul>
+                    <li><strong>Train AI:</strong> Your data helps teach AI systems</li>
+                    <li><strong>Ad targeting:</strong> Show you relevant advertisements</li>
+                    <li><strong>Sell to advertisers:</strong> Ad companies buy your data</li>
+                    <li><strong>Predict behavior:</strong> Guess what you'll buy</li>
+                    <li><strong>Improve products:</strong> Learn what users like</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Remember:</strong> If you're not paying for the app, YOU are the product
+                being sold!</p>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>Data + AI = Tracking 🎯</h2>
+        <p>Companies combine data about you to create detailed profiles. AI then uses these profiles.</p>
+        <div class="key-point">
+            <h3>Your Digital Profile Includes:</h3>
+            <ul>
+                <li>Interests (sports? music? coding?)</li>
+                <li>Buying habits (what you purchase)</li>
+                <li>Health info (if you use fitness apps)</li>
+                <li>Relationships (who you talk to most)</li>
+                <li>Location patterns (where you go regularly)</li>
+                <li>Emotions (based on what you search)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>Privacy Settings: Taking Control 🛡️</h2>
+        <p>Most phones and apps let you control what data they collect. You DO have options!</p>
+        <div class="info-box">
+            <h3>How to Protect Your Privacy:</h3>
+            <ul>
+                <li><strong>Check app permissions:</strong> Go through each app's settings</li>
+                <li><strong>Turn off location:</strong> Only allow when app is open</li>
+                <li><strong>Deny unnecessary permissions:</strong> Flashlight doesn't need contacts!</li>
+                <li><strong>Review privacy settings:</strong> On YouTube, TikTok, Instagram, etc.</li>
+                <li><strong>Limit ad targeting:</strong> Opt out of personalized ads</li>
+                <li><strong>Use Do Not Track:</strong> Tell websites to not track you</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>Data Breaches: What Could Go Wrong 😨</h2>
+        <p>Companies don't always keep your data safe. When data is stolen, it's called a <span class="tech-term">data
+                breach</span>.</p>
+        <div class="key-point">
+            <h3>Major Breaches (Real Examples):</h3>
+            <ul>
+                <li><strong>Facebook (2019):</strong> 533 million user phone numbers exposed</li>
+                <li><strong>Zoom (2020):</strong> Password information leaked</li>
+                <li><strong>Instagram:</strong> Millions of accounts hacked</li>
+                <li>When breaches happen, hackers can use your data for <strong>identity theft</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>Ethical Questions About AI Data ⚖️</h2>
+        <p>We need to think carefully about how AI uses our information.</p>
+        <div class="discussion-box">
+            <h3>Think About These:</h3>
+            <ul>
+                <li>Should a company be allowed to sell your data to advertisers?</li>
+                <li>Should AI systems know your exact location?</li>
+                <li>Should AI analyze your health data to predict diseases?</li>
+                <li>Who owns your data - you or the company?</li>
+                <li>Should parents let apps track their children?</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>Your Rights & The Law 📜</h2>
+        <p>Many countries have laws protecting your data privacy.</p>
+        <div class="info-box">
+            <h3>Important Laws:</h3>
+            <ul>
+                <li><strong>GDPR (Europe):</strong> Gives people control over their data</li>
+                <li><strong>CCPA (California):</strong> Right to know what data is collected</li>
+                <li><strong>COPPA (USA):</strong> Extra protection for children under 13</li>
+                <li>These laws let you: request your data, delete it, opt out of tracking</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide">
+        <h2>What We Learned 🎓</h2>
+        <div class="info-box">
+            <ul style="font-size:1.1em">
+                <li>Apps collect <strong>massive amounts of data</strong> about you</li>
+                <li>Companies use your data to <strong>train AI</strong> and <strong>target ads</strong></li>
+                <li>You can <strong>control app permissions</strong> on your phone</li>
+                <li>Review <strong>privacy settings</strong> regularly</li>
+                <li>Data <strong>breaches</strong> can expose your information</li>
+                <li>Laws like GDPR protect your privacy rights</li>
+                <li><strong>You have power</strong> - know what you're sharing!</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide title-slide center-content">
+        <h1>Privacy Explained! 🎉</h1>
+        <p style="font-size:1.3em;margin-top:40px;color:#ccc">Your data is valuable. Protect it wisely!</p>
+        <p style="margin-top:40px;color:#aaa">Next Session: Deepfakes & Misinformation</p>
+    </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

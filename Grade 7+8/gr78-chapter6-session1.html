@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks - Grades 7-8</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 7-8 | Chapter 2: Understanding AI</span>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>Neural Networks 🧠</h1>
+            <div class="subtitle">How AI Actually Learns</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 4: The Brain of AI</p>
+        </div>
+        <div class="slide">
+            <h2>The Biological Brain 🧠</h2>
+            <p>Your brain has about 86 billion <span class="tech-term">neurons</span> - cells connected together. When
+                you learn something, the connections between neurons get stronger.</p>
+            <div class="info-box">
+                <h3>Brain Learning Example:</h3>
+                <ul>
+                    <li>First time learning to ride a bike: slow, difficult</li>
+                    <li>Neural connections strengthen with practice</li>
+                    <li>10th time: automatic, your brain knows the pattern</li>
+                    <li>Same process: AI learns by strengthening connections</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Key idea:</strong> Learning is about patterns. Both brains and AI learn
+                patterns.</p>
+        </div>
+        <div class="slide">
+            <h2>Artificial Neural Networks 🤖</h2>
+            <p><span class="tech-term">Artificial Neural Networks</span> copy how brains work. They have "neurons"
+                connected by "synapses" (connections) with adjustable "weights" (connection strengths).</p>
+            <div class="concept-box">
+                <h3>Simple Network Structure:</h3>
+                <ul>
+                    <li><strong>Input Layer:</strong> Data goes in (pixel values, temperature readings, etc.)</li>
+                    <li><strong>Hidden Layers:</strong> Neurons process data and find patterns</li>
+                    <li><strong>Output Layer:</strong> Final answer comes out (cat? dog? spam?)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>How Information Flows 📊</h2>
+            <p>Information travels through the network like electricity through circuits.</p>
+            <div class="info-box">
+                <h3>Step-by-Step Process:</h3>
+                <ol>
+                    <li>Input data enters the input layer</li>
+                    <li>Each neuron does math using inputs and weights</li>
+                    <li>Neurons send results to next layer</li>
+                    <li>Process repeats through hidden layers</li>
+                    <li>Output layer produces final answer</li>
+                </ol>
+            </div>
+            <p style="margin-top:20px"><strong>Example:</strong> Recognizing a cat → pixels → edges → shapes → cat
+                features → answer "cat!"</p>
+        </div>
+        <div class="slide">
+            <h2>Weights & Learning 🎯</h2>
+            <p>The "strength" of connections between neurons are called <span class="tech-term">weights</span>. These
+                change as the AI learns.</p>
+            <div class="concept-box">
+                <h3>Training Process:</h3>
+                <ul>
+                    <li>Start with random weights</li>
+                    <li>AI makes a prediction (probably wrong)</li>
+                    <li>Compare to correct answer</li>
+                    <li>Adjust weights slightly</li>
+                    <li>Repeat millions of times</li>
+                    <li>Network gradually improves!</li>
+                </ul>
+            </div>
+            <p style="margin-top:15px"><strong>Think:</strong> Like tuning a guitar by turning pegs slightly, over and
+                over</p>
+        </div>
+        <div class="slide">
+            <h2>Activation Functions 💡</h2>
+            <p>Each neuron decides whether to "fire" (activate) based on its inputs. This is done with <span
+                    class="tech-term">activation functions</span>.</p>
+            <div class="concept-box">
+                <h3>Common Analogy:</h3>
+                <ul>
+                    <li>If total input is strong enough → neuron fires (output 1)</li>
+                    <li>If total input is weak → neuron doesn't fire (output 0)</li>
+                    <li>This creates non-linear behavior (like real brains!)</li>
+                </ul>
+                <p style="margin-top:15px"><strong>Why it matters:</strong> Without activation, neural networks would
+                    just be math (no learning power)</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Handwritten Digit Recognition 🔢</h2>
+            <p>Classic example: Can a neural network recognize handwritten numbers 0-9?</p>
+            <div class="info-box">
+                <h3>How It Works:</h3>
+                <ol>
+                    <li><strong>Input:</strong> 28×28 pixel image (784 pixels)</li>
+                    <li><strong>Hidden layers:</strong> Find edges, curves, shapes</li>
+                    <li><strong>Second hidden layer:</strong> Combines shapes into digit features</li>
+                    <li><strong>Output layer:</strong> 10 neurons (one for each digit)</li>
+                    <li><strong>Answer:</strong> Whichever output neuron fires strongest wins!</li>
+                </ol>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Backpropagation: Learning 📚</h2>
+            <p><span class="tech-term">Backpropagation</span> is how neural networks learn. It's like tracing backwards
+                to find which weights were "wrong" and need adjustment.</p>
+            <div class="concept-box">
+                <h3>Simple Explanation:</h3>
+                <ul>
+                    <li>Network makes prediction (wrong)</li>
+                    <li>Compare to correct answer</li>
+                    <li>Trace back: which weights caused the error?</li>
+                    <li>Adjust those weights slightly</li>
+                    <li>Try again with next example</li>
+                </ul>
+                <p style="margin-top:15px"><strong>Result:</strong> After thousands of examples, network learns!</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Deep Learning: Many Layers 🔢🔢🔢</h2>
+            <p>Modern AI uses <span class="tech-term">deep neural networks</span> with many hidden layers. More layers =
+                more complex patterns!</p>
+            <div class="info-box">
+                <h3>Why More Layers?</h3>
+                <ul>
+                    <li>Shallow network: Can recognize simple patterns</li>
+                    <li>Deep network: Can recognize complex, abstract patterns</li>
+                    <li>ChatGPT, image recognition, translation all use deep networks</li>
+                    <li>Tradeoff: More layers = requires more training data and time</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Overfitting: Learning Too Much ⚠️</h2>
+            <p>Sometimes networks memorize training data instead of learning general patterns. This is called <span
+                    class="tech-term">overfitting</span>.</p>
+            <div class="key-point">
+                <h3>Problem Example:</h3>
+                <ul>
+                    <li>Network trained only on cats with blue eyes</li>
+                    <li>When given green-eyed cat: doesn't recognize it!</li>
+                    <li>Network memorized specific examples instead of learning "cat-ness"</li>
+                </ul>
+                <h3 style="margin-top:20px">Solution:</h3>
+                <ul>
+                    <li>Use lots of diverse training data</li>
+                    <li>Use test data to validate learning</li>
+                    <li>Regular evaluation during training</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Real-World Applications 🌍</h2>
+            <div class="info-box">
+                <h3>Neural Networks Power:</h3>
+                <ul>
+                    <li><strong>Image Recognition:</strong> Facebook photo tagging, Google Photos</li>
+                    <li><strong>Language AI:</strong> ChatGPT, Bard, autocomplete</li>
+                    <li><strong>Speech Recognition:</strong> Siri, Alexa, transcription</li>
+                    <li><strong>Game AI:</strong> AlphaGo defeated world Go champion</li>
+                    <li><strong>Medical Diagnosis:</strong> Detecting diseases in X-rays</li>
+                    <li><strong>Autonomous Vehicles:</strong> Self-driving cars</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li><strong>Neural networks</strong> copy how brains work with neurons and connections</li>
+                    <li><strong>Input layer</strong> receives data, hidden layers find patterns, output layer produces
+                        answer</li>
+                    <li><strong>Weights</strong> control connection strength and change during learning</li>
+                    <li><strong>Training</strong> adjusts weights using backpropagation</li>
+                    <li><strong>Activation functions</strong> make networks non-linear and powerful</li>
+                    <li><strong>Deep learning</strong> uses many layers for complex pattern recognition</li>
+                    <li>Neural networks require lots of data and computing power!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>Neural Networks Explained! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">Now you understand how AI learns like a brain</p>
+            <p style="margin-top:40px;color:#aaa">Next Session: Types of Machine Learning</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

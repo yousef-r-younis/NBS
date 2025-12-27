@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engines - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide:first-of-type {
+            display: flex;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .flow-diagram {
+            background: rgba(0, 212, 255, 0.08);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .flow-item {
+            color: #00d4ff;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .center-content {
+            text-align: center;
+        }
+
+        strong {
+            color: #00d4ff;
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position: fixed; top: 0; left: 0; right: 0; background: rgba(26, 26, 46, 0.95); padding: 20px 40px; z-index: 2000; border-bottom: 2px solid #00d4ff; display: flex; justify-content: space-between; align-items: center;">
+            <a href="../index.html"
+                style="background: #00d4ff; color: #1a1a2e; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer;">←
+                Back to Home</a>
+            <span style="color: #00d4ff; font-size: 0.95em;">Grades 5-6 AI Class | Chapter 1: Internet & Web</span>
+        </div>
+
+        <div class="slide title-slide center-content">
+            <h1>How Search Engines Work 🔍</h1>
+            <div class="subtitle">Finding Answers in Billions of Pages</div>
+            <p style="margin-top: 40px; font-size: 1.3em;">Session 3: Search Engine Magic</p>
+        </div>
+
+        <div class="slide">
+            <h2>Google's Amazing Speed ⚡</h2>
+            <p>When you search "how tall is Mount Everest", Google finds and ranks millions of relevant results in less
+                than 0.5 seconds!</p>
+            <div class="key-point">
+                <h3>How is this possible?</h3>
+                <p>Google uses:</p>
+                <ul>
+                    <li>Billions of computers working in parallel</li>
+                    <li>Pre-indexed database of the entire internet</li>
+                    <li>AI algorithms to rank relevance</li>
+                    <li>Extremely optimized search technology</li>
+                </ul>
+            </div>
+            <p style="margin-top: 30px;">Let's break down how search engines work step by step.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Step 1: Crawling 🤖</h2>
+            <p>Search engines use special programs called <span class="tech-term">crawlers</span> or <span
+                    class="tech-term">bots</span> that automatically visit websites and read their content.</p>
+            <div class="info-box">
+                <h3>How Crawlers Work:</h3>
+                <ul>
+                    <li>Start with a list of known websites</li>
+                    <li>Visit each page and read the HTML</li>
+                    <li>Follow links to find new pages</li>
+                    <li>Crawl ~20 trillion web pages regularly</li>
+                    <li>Repeat the process constantly to stay updated</li>
+                </ul>
+            </div>
+            <div class="concept-box">
+                <p><strong>Fun fact:</strong> Google crawls the entire internet about once a month! Their crawlers are
+                    called "Googlebot".</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Step 2: Indexing 📚</h2>
+            <p>After crawling, search engines organize all the information into a giant <span
+                    class="tech-term">index</span> - like a library catalog.</p>
+            <div class="info-box">
+                <h3>What Gets Indexed?</h3>
+                <ul>
+                    <li>All words on each page</li>
+                    <li>Page titles and headings</li>
+                    <li>Links to and from the page</li>
+                    <li>Meta descriptions (short page summaries)</li>
+                    <li>Images and their descriptions</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <h3>Organization</h3>
+                <p>The index is organized so Google can instantly find pages containing any word or phrase. It's like
+                    having a magical card catalog where every book is cross-referenced!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Step 3: Ranking 🏆</h2>
+            <p>When you search, Google doesn't just find matching pages - it <span class="tech-term">ranks</span> them
+                by relevance and quality using hundreds of factors!</p>
+            <div class="info-box">
+                <h3>Key Ranking Factors:</h3>
+                <ul>
+                    <li><strong>Relevance:</strong> Does the page match your keywords?</li>
+                    <li><strong>Authority:</strong> Is the website trustworthy?</li>
+                    <li><strong>Backlinks:</strong> How many other sites link to it?</li>
+                    <li><strong>Page Speed:</strong> Does it load quickly?</li>
+                    <li><strong>Mobile Friendly:</strong> Works well on phones?</li>
+                    <li><strong>User Experience:</strong> Easy to read and navigate?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>PageRank Algorithm 📊</h2>
+            <p>Google's famous <span class="tech-term">PageRank</span> algorithm treats the internet like a voting
+                system. More links = higher rank.</p>
+            <div class="concept-box">
+                <h3>How It Works:</h3>
+                <p>If a popular website links to yours, it's like a "vote of confidence". The more trusted sites that
+                    link to you, the higher your rank.</p>
+                <p><strong>Example:</strong> If Wikipedia links to your site, that's a very strong vote because
+                    Wikipedia is very trusted!</p>
+            </div>
+            <div class="key-point">
+                <p>This is why websites pay for backlinks - they know it improves their search ranking!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>How Search Engines Make Money 💰</h2>
+            <p>Search engines are free to use, but they make billions of dollars. How?</p>
+            <div class="info-box">
+                <h3>Advertising!</h3>
+                <ul>
+                    <li>When you search for "laptops", Google shows ads for laptop companies</li>
+                    <li>Advertisers pay per click (sometimes $5-100+ per click!)</li>
+                    <li>Google shows ads to the right people at the right time</li>
+                    <li>This is called <strong>targeted advertising</strong></li>
+                </ul>
+            </div>
+            <div class="concept-box">
+                <p><strong>Example:</strong> Google makes $200 billion+ per year from ads! Your searches provide
+                    valuable data about what people want to buy.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Search Techniques 🎯</h2>
+            <p>You can search more effectively by using special techniques:</p>
+            <div class="info-box">
+                <h3>Advanced Search Tips:</h3>
+                <ul>
+                    <li><strong>"Exact phrase"</strong> - Use quotes to find exact matches: "climate change causes"</li>
+                    <li><strong>-excluded word</strong> - Use minus to exclude: "python -snake" (find programming
+                        language, not the animal)</li>
+                    <li><strong>site:domain.com</strong> - Search only one website: "AI" site:wikipedia.org</li>
+                    <li><strong>filetype:pdf</strong> - Find specific file types: "machine learning" filetype:pdf</li>
+                    <li><strong>related:</strong> - Find similar websites: related:wikipedia.org</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Search Bias & Filter Bubbles ⚠️</h2>
+            <p>Here's an important concern: <span class="tech-term">filter bubbles</span>. Search engines and social
+                media show you more of what you already like.</p>
+            <div class="key-point">
+                <h3>The Problem:</h3>
+                <ul>
+                    <li>Google learns your preferences over time</li>
+                    <li>Shows results personalized to you (different from others!)</li>
+                    <li>You might miss important viewpoints that don't match your interests</li>
+                    <li>Can reinforce bias and misunderstandings</li>
+                </ul>
+            </div>
+            <div class="concept-box">
+                <p><strong>Solution:</strong> Use incognito mode to see non-personalized results. Be critical about
+                    sources. Read multiple perspectives!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Evaluating Search Results 🔎</h2>
+            <p>Not all search results are reliable. Here's how to evaluate them:</p>
+            <div class="info-box">
+                <h3>Questions to Ask:</h3>
+                <ul>
+                    <li><strong>Who wrote this?</strong> Is it from a credible source?</li>
+                    <li><strong>When was it published?</strong> Is the information current?</li>
+                    <li><strong>What's the purpose?</strong> Selling something? Pushing an agenda?</li>
+                    <li><strong>Are sources cited?</strong> Can you verify the claims?</li>
+                    <li><strong>Does it match other sources?</strong> Confirm with multiple sites</li>
+                </ul>
+            </div>
+            <div class="key-point">
+                <p><strong>Rule of thumb:</strong> For academic work, prefer .edu and .org sites. Always verify
+                    information from multiple sources!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>The Complete Search Journey 🚀</h2>
+            <p style="text-align: center; margin: 40px 0; font-size: 1.2em;"><strong>When you search "best pizza near
+                    me":</strong></p>
+            <ol>
+                <li>You type the query into Google search box</li>
+                <li>Request sent to Google's servers</li>
+                <li>Google checks your location (if allowed) and search history</li>
+                <li>Searches the index for "pizza", "near me", location</li>
+                <li>Ranks pages by relevance, reviews, distance, popularity</li>
+                <li>Applies personalization (what you've clicked before)</li>
+                <li>Returns ~4 billion results in 0.5 seconds!</li>
+                <li>First result shown is most relevant for YOU</li>
+                <li>Google tracks which result you click</li>
+                <li>Uses that data to improve future rankings</li>
+            </ol>
+        </div>
+
+        <div class="slide">
+            <h2>SEO: Optimizing for Search 🎯</h2>
+            <p><span class="tech-term">SEO</span> (Search Engine Optimization) is the practice of making websites rank
+                higher in search results.</p>
+            <div class="info-box">
+                <h3>Common SEO Techniques:</h3>
+                <ul>
+                    <li>Using relevant keywords naturally</li>
+                    <li>Creating quality, original content</li>
+                    <li>Getting backlinks from trusted sites</li>
+                    <li>Optimizing page speed</li>
+                    <li>Making mobile-friendly designs</li>
+                    <li>Using descriptive titles and headings</li>
+                </ul>
+            </div>
+            <p style="margin-top: 20px;">This is why companies hire SEO specialists - ranking #1 on Google can generate
+                millions in revenue!</p>
+        </div>
+
+        <div class="slide">
+            <h2>Critical Thinking 🤔</h2>
+            <div class="discussion-box">
+                <h3>Questions to Consider:</h3>
+                <ul>
+                    <li><strong>Is Google too powerful?</strong> One company controls 90% of searches</li>
+                    <li><strong>Privacy concerns:</strong> Does Google knowing everything you search make you
+                        uncomfortable?</li>
+                    <li><strong>Filter bubbles:</strong> How can we see diverse viewpoints when algorithms choose what
+                        to show?</li>
+                    <li><strong>Misinformation:</strong> How do we prevent false information from ranking high?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size: 1.1em;">
+                    <li>Search engines use <strong>crawlers</strong> to read websites</li>
+                    <li>Content is organized into a massive <strong>index</strong></li>
+                    <li>Results are <strong>ranked</strong> by hundreds of factors</li>
+                    <li><strong>PageRank</strong> uses backlinks as "votes"</li>
+                    <li>Search engines make money through <strong>ads</strong></li>
+                    <li><strong>Filter bubbles</strong> can limit your viewpoint</li>
+                    <li>Always <strong>evaluate sources</strong> critically</li>
+                    <li><strong>SEO</strong> helps websites rank higher</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide title-slide center-content">
+            <h1>Search Mastery! 🎉</h1>
+            <p style="font-size: 1.3em; margin-top: 40px; color: #ccc;">Now you understand how Google finds answers in
+                milliseconds!</p>
+            <p style="margin-top: 40px; color: #aaa;">Next Session: AI Recommendations & Algorithms</p>
+        </div>
+
+    </div>
+
+    <div class="slide-nav">
+        <button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            if (n < 0) currentSlide = 0;
+
+            slides.forEach(slide => slide.style.display = 'none');
+            slides[currentSlide].style.display = 'flex';
+
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+
+</html>

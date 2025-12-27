@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment & Review - Grades 5-6</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Final Assessment</span></div>
+        <div class="slide title-slide center-content">
+            <h1>Final Assessment 🏆</h1>
+            <div class="subtitle">Grades 5-6 AI Curriculum Review</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 10: Test Your Knowledge</p>
+        </div>
+        <div class="slide">
+            <h2>Assessment Overview 📋</h2>
+            <p>This final assessment tests your understanding of Sessions 1-9. You'll complete two parts: a written test
+                and a practical Word project.</p>
+            <div class="info-box">
+                <h3>Assessment Structure:</h3>
+                <ul>
+                    <li><strong>Part 1 - Written Test:</strong> 30 points (multiple choice, short answer, diagrams)</li>
+                    <li><strong>Part 2 - Practical Project:</strong> 20 points (Microsoft Word document)</li>
+                    <li><strong>Total:</strong> 50 points (grade out of 50)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Part 1: Written Test 📝</h2>
+            <p>Answer the following questions based on Sessions 1-9. Use complete sentences for short answer questions.
+            </p>
+            <div class="concept-box">
+                <h3>Section A: Multiple Choice (10 points)</h3>
+                <ol>
+                    <li>What is the first step in how a website loads?
+                        <ul>
+                            <li>a) Server sends HTML file</li>
+                            <li>b) Browser sends request to server</li>
+                            <li>c) Images load</li>
+                            <li>d) CSS applies formatting</li>
+                        </ul>
+                    </li>
+                    <li>Which of these is NOT something Google's search algorithm ranks websites by?
+                        <ul>
+                            <li>a) Relevance to search query</li>
+                            <li>b) Website authority (backlinks)</li>
+                            <li>c) Server location</li>
+                            <li>d) Mobile-friendly design</li>
+                        </ul>
+                    </li>
+                    <li>What are training data biases?
+                        <ul>
+                            <li>a) Mistakes in the AI's math</li>
+                            <li>b) Problems in data the AI learned from</li>
+                            <li>c) Viruses in the AI</li>
+                            <li>d) Too much information</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Part 1 Continued: Section B 📝</h2>
+            <div class="concept-box">
+                <h3>Section B: Short Answer (10 points)</h3>
+                <ol start="4">
+                    <li>Explain how pixels and features help AI recognize images. (2-3 sentences)</li>
+                    <li>Why is it hard for AI to understand sarcasm? Give an example. (2-3 sentences)</li>
+                    <li>List three apps on your phone and explain what data each one collects. (2 sentences per app)
+                    </li>
+                </ol>
+            </div>
+            <div class="discussion-box">
+                <h3>Section C: Critical Thinking (10 points)</h3>
+                <ol start="7">
+                    <li>You see a viral video of a celebrity saying something shocking. How would you determine if it's
+                        a real deepfake or real footage? List 5 steps you'd take. (5 sentences)</li>
+                    <li>A company wants to buy your data from an app you use. What questions would you ask about how
+                        your data would be used? (3-4 sentences)</li>
+                </ol>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Part 2: Practical Project - Word Document 📄</h2>
+            <p>Create a professional 2-page document in Microsoft Word on any topic from Sessions 1-9.</p>
+            <div class="info-box">
+                <h3>Requirements (20 points):</h3>
+                <ul>
+                    <li><strong>Title Page:</strong> Title, your name, date (formatted differently from body)</li>
+                    <li><strong>Heading Structure:</strong> Use Heading 1 for main sections, Heading 2 for subsections
+                    </li>
+                    <li><strong>Table of Contents:</strong> Auto-generated TOC on page 2</li>
+                    <li><strong>Content:</strong> 2 pages of body text (10pt + image/table)</li>
+                    <li><strong>Headers/Footers:</strong> Page numbers in footer</li>
+                    <li><strong>At least one table or image</strong> with proper formatting</li>
+                    <li><strong>Two citations:</strong> At least 2 sources cited (MLA format)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Project Topic Ideas 💡</h2>
+            <div class="info-box">
+                <h3>Choose One:</h3>
+                <ul>
+                    <li>"How the Internet Works: A Technical Overview"</li>
+                    <li>"Bias in AI: Problems and Solutions"</li>
+                    <li>"Digital Privacy: Protecting Your Data"</li>
+                    <li>"Deepfakes and How to Spot Them"</li>
+                    <li>"Search Engines: From Crawling to Ranking"</li>
+                    <li>"Natural Language Processing: How AI Understands Language"</li>
+                    <li>"Computer Vision: Teaching Machines to See"</li>
+                    <li>"AI Recommendations and Filter Bubbles"</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Grading Rubric 📊</h2>
+            <div class="concept-box">
+                <h3>Written Test (30 points):</h3>
+                <ul>
+                    <li>Multiple Choice: 10 points (1 pt each)</li>
+                    <li>Short Answer: 10 points (accuracy, detail, clarity)</li>
+                    <li>Critical Thinking: 10 points (depth of analysis)</li>
+                </ul>
+                <h3 style="margin-top:20px">Practical Project (20 points):</h3>
+                <ul>
+                    <li>Formatting & Structure: 5 points (styles, TOC, headers/footers)</li>
+                    <li>Content Quality: 8 points (2 pages, accurate information)</li>
+                    <li>Citations: 4 points (minimum 2 sources, MLA format, properly cited)</li>
+                    <li>Table of Contents: 3 points (auto-generated from headings)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Success Tips for the Test 🎯</h2>
+            <div class="key-point">
+                <h3>Before the Test:</h3>
+                <ul>
+                    <li>Review notes from Sessions 1-9</li>
+                    <li>Re-read the slides about topics you find confusing</li>
+                    <li>Make flashcards for technical terms</li>
+                    <li>Create a study guide with key concepts</li>
+                </ul>
+                <h3 style="margin-top:20px">During the Test:</h3>
+                <ul>
+                    <li>Read questions carefully before answering</li>
+                    <li>Show your work for short answer questions</li>
+                    <li>Use specific examples and details</li>
+                    <li>Double-check spelling and grammar</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Key Topics to Review 🧠</h2>
+            <div class="info-box">
+                <h3>Most Important Concepts:</h3>
+                <ul>
+                    <li>How the internet works (routers, ISPs, packets)</li>
+                    <li>Website architecture and how they load</li>
+                    <li>How search engines rank websites</li>
+                    <li>Recommendation algorithms and filter bubbles</li>
+                    <li>AI image recognition and feature detection</li>
+                    <li>Natural language processing and context</li>
+                    <li>Data privacy and app permissions</li>
+                    <li>Deepfakes, detection, and source verification</li>
+                    <li>Microsoft Word advanced features</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>After Assessment: Reflection 🤔</h2>
+            <p>Regardless of your test score, reflect on what you learned:</p>
+            <div class="discussion-box">
+                <h3>Think About:</h3>
+                <ul>
+                    <li>What surprised you most about how AI works?</li>
+                    <li>What concept was most confusing?</li>
+                    <li>How has this curriculum changed how you think about technology?</li>
+                    <li>What AI topic do you want to learn more about?</li>
+                    <li>How will you use this knowledge in the future?</li>
+                    <li>What responsibility do YOU have as an AI user?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Congratulations! 🎉</h2>
+            <div class="info-box">
+                <ul style="font-size:1.2em">
+                    <li>You've completed the Grades 5-6 AI Curriculum!</li>
+                    <li>You understand how the internet, websites, search engines, and AI actually work</li>
+                    <li>You know about AI bias, privacy, misinformation, and deepfakes</li>
+                    <li>You have professional Microsoft Word skills</li>
+                    <li>You can think critically about technology</li>
+                    <li><strong>You're ready for high school computer science!</strong></li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>Course Complete! 🏆</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">You're now an informed AI literacy expert</p>
+            <p style="margin-top:40px;color:#aaa">Return to index to start any session over or explore more content!</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

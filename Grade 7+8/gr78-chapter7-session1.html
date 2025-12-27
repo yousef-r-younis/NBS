@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Web Development - Grades 7-8</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .slide:first-of-type {
+            display: flex
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            text-align: center;
+            align-items: center
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #0ff;
+            margin-bottom: 20px
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #aaa;
+            margin-bottom: 10px
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        ul,
+        ol {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 40px;
+            color: #ccc;
+            margin-bottom: 20px
+        }
+
+        li {
+            margin-bottom: 15px
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .concept-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .key-point {
+            background: rgba(255, 100, 100, 0.1);
+            border-left: 4px solid #ff6464;
+            padding: 20px;
+            margin: 20px 0
+        }
+
+        .code-block {
+            background: #0a0a1a;
+            border: 1px solid #0ff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            margin: 15px 0
+        }
+
+        .tech-term {
+            color: #00d4ff;
+            font-weight: 600
+        }
+
+        .discussion-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0
+        }
+
+        .center-content {
+            text-align: center
+        }
+
+        strong {
+            color: #00d4ff
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <div
+            style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+            <a href="../index.html"
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 7-8 | Chapter 3: Building the Web</span>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>HTML Web Development 🌐</h1>
+            <div class="subtitle">Build Your Own Website</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 7: HTML Fundamentals</p>
+        </div>
+        <div class="slide">
+            <h2>What Is HTML? 🏗️</h2>
+            <p><span class="tech-term">HTML</span> (HyperText Markup Language) is the building blocks of websites. Every
+                website you visit is made of HTML.</p>
+            <div class="info-box">
+                <h3>HTML Does:</h3>
+                <ul>
+                    <li>Creates structure (headings, paragraphs, lists)</li>
+                    <li>Displays images</li>
+                    <li>Creates links to other pages</li>
+                    <li>Makes buttons and forms</li>
+                    <li>Organizes content into sections</li>
+                </ul>
+            </div>
+            <p style="margin-top:20px"><strong>Note:</strong> HTML only controls structure. CSS (next session) controls
+                how it looks!</p>
+        </div>
+        <div class="slide">
+            <h2>HTML Tags: The Building Blocks 🧩</h2>
+            <p><span class="tech-term">Tags</span> are HTML's instructions. They use angle brackets &lt; &gt; and
+                usually have an opening tag and closing tag.</p>
+            <div class="concept-box">
+                <h3>Basic Structure:</h3>
+                <div class="code-block">
+                    &lt;html&gt;<br>&nbsp;&nbsp;&lt;head&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;My
+                    Website&lt;/title&gt;<br>&nbsp;&nbsp;&lt;/head&gt;<br>&nbsp;&nbsp;&lt;body&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello
+                    World!&lt;/h1&gt;<br>&nbsp;&nbsp;&lt;/body&gt;<br>&lt;/html&gt;</div>
+                <p style="margin-top:15px"><strong>Key:</strong> Notice opening &lt;tag&gt; and closing &lt;/tag&gt;</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Essential Tags 🏷️</h2>
+            <div class="info-box">
+                <h3>Headings:</h3>
+                <div class="code-block">&lt;h1&gt;Biggest
+                    Heading&lt;/h1&gt;<br>&lt;h2&gt;Subheading&lt;/h2&gt;<br>&lt;h3&gt;Smaller Heading&lt;/h3&gt;<br>(h1
+                    = most important, h6 = least important)</div>
+                <h3 style="margin-top:20px">Paragraphs & Text:</h3>
+                <div class="code-block">&lt;p&gt;This is a paragraph of text.&lt;/p&gt;<br>&lt;b&gt;Bold
+                    text&lt;/b&gt;<br>&lt;i&gt;Italic text&lt;/i&gt;</div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Lists in HTML 📋</h2>
+            <div class="concept-box">
+                <h3>Unordered List (Bullets):</h3>
+                <div class="code-block">&lt;ul&gt;<br>&nbsp;&nbsp;&lt;li&gt;Item
+                    1&lt;/li&gt;<br>&nbsp;&nbsp;&lt;li&gt;Item 2&lt;/li&gt;<br>&lt;/ul&gt;</div>
+                <h3 style="margin-top:20px">Ordered List (Numbers):</h3>
+                <div class="code-block">
+                    &lt;ol&gt;<br>&nbsp;&nbsp;&lt;li&gt;First&lt;/li&gt;<br>&nbsp;&nbsp;&lt;li&gt;Second&lt;/li&gt;<br>&lt;/ol&gt;
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Images in HTML 🖼️</h2>
+            <p>Display images from the web or your computer.</p>
+            <div class="concept-box">
+                <h3>Image Tag:</h3>
+                <div class="code-block">&lt;img src="photo.jpg" alt="My Photo"&gt;</div>
+                <p style="margin-top:15px"><strong>Note:</strong> img tag doesn't have a closing tag!</p>
+                <p style="margin-top:10px"><strong>src</strong> = where the image is located<br><strong>alt</strong> =
+                    text shown if image doesn't load</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Links in HTML 🔗</h2>
+            <p>Link to other websites or pages.</p>
+            <div class="concept-box">
+                <h3>Link Tag:</h3>
+                <div class="code-block">&lt;a href="https://google.com"&gt;Visit Google&lt;/a&gt;</div>
+                <p style="margin-top:15px"><strong>a</strong> = anchor (link)<br><strong>href</strong> = where the link
+                    goes<br>Text between tags is what user clicks</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Divs and Sections 📦</h2>
+            <p><span class="tech-term">Div</span> (division) is a container that groups related content. Essential for
+                organization!</p>
+            <div class="concept-box">
+                <h3>Using Divs:</h3>
+                <div class="code-block">&lt;div&gt;<br>&nbsp;&nbsp;&lt;h2&gt;About
+                    Me&lt;/h2&gt;<br>&nbsp;&nbsp;&lt;p&gt;I'm a student...&lt;/p&gt;<br>&lt;/div&gt;</div>
+                <p style="margin-top:15px">Divs let you organize content and style groups of elements</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Project: Personal Webpage 👤</h2>
+            <div class="info-box">
+                <h3>Create an HTML file with:</h3>
+                <ul>
+                    <li>&lt;h1&gt; Your name</li>
+                    <li>&lt;p&gt; A paragraph about you (3-4 sentences)</li>
+                    <li>&lt;h2&gt; "My Interests"</li>
+                    <li>&lt;ul&gt; A bulleted list of your interests</li>
+                    <li>&lt;img&gt; A photo of yourself or something you like</li>
+                    <li>&lt;a&gt; A link to your favorite website</li>
+                    <li>&lt;h2&gt; "Hobbies"</li>
+                    <li>&lt;ol&gt; A numbered list of hobbies</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>HTML Comments 💬</h2>
+            <p>Comments are notes in code that don't display on the website. Great for explaining code!</p>
+            <div class="concept-box">
+                <h3>Comment Syntax:</h3>
+                <div class="code-block">&lt;!-- This is a comment --&gt;<br>&lt;h1&gt;Hello&lt;/h1&gt;<br>&lt;!--
+                    Computers ignore comments --&gt;</div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Semantic HTML 🏗️</h2>
+            <p><span class="tech-term">Semantic HTML</span> uses tags that describe their meaning, not just appearance.
+            </p>
+            <div class="concept-box">
+                <h3>Better HTML Structure:</h3>
+                <div class="code-block">&lt;header&gt; Navigation &lt;/header&gt;<br>&lt;nav&gt; Links
+                    &lt;/nav&gt;<br>&lt;main&gt; Page content &lt;/main&gt;<br>&lt;footer&gt; Copyright info
+                    &lt;/footer&gt;</div>
+                <p style="margin-top:15px"><strong>Why:</strong> Better for search engines, accessibility, organization
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>HTML vs. Viewing Source 🔍</h2>
+            <p>You can see HTML of any website by pressing Ctrl+U (or right-click "View Page Source")!</p>
+            <div class="info-box">
+                <h3>Try It:</h3>
+                <ol>
+                    <li>Visit any website (YouTube, Twitter, Wikipedia)</li>
+                    <li>Right-click → "View Page Source"</li>
+                    <li>You'll see the HTML structure</li>
+                    <li>This is how you learn from others!</li>
+                </ol>
+            </div>
+            <p style="margin-top:20px"><strong>Cool fact:</strong> Complex websites have thousands of lines of HTML!</p>
+        </div>
+        <div class="slide">
+            <h2>Common Mistakes ❌</h2>
+            <div class="key-point">
+                <h3>Watch Out For:</h3>
+                <ul>
+                    <li>Forgetting closing tags (&lt;/p&gt;)</li>
+                    <li>Typing &gt;&lt; instead of &lt;&gt;</li>
+                    <li>Wrong tag names (using &lt;headl&gt; instead of &lt;h1&gt;)</li>
+                    <li>Nesting tags wrong (&lt;b&gt;&lt;i&gt;text&lt;/b&gt;&lt;/i&gt; is wrong)</li>
+                    <li>Spelling attribute names wrong (hrf instead of href)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li><strong>HTML</strong> is the structure of websites</li>
+                    <li><strong>Tags</strong> are HTML's building blocks (h1, p, img, a, etc.)</li>
+                    <li><strong>Headings</strong> organize content (&lt;h1&gt; through &lt;h6&gt;)</li>
+                    <li><strong>Lists</strong> can be ordered or unordered</li>
+                    <li><strong>Images</strong> and <strong>links</strong> bring content to life</li>
+                    <li><strong>Divs</strong> organize related content</li>
+                    <li>You can view source code of any website!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide title-slide center-content">
+            <h1>You Can Build Websites! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">HTML is the foundation - next add CSS to make it
+                beautiful</p>
+            <p style="margin-top:40px;color:#aaa">Next Session: CSS Styling & Web Design</p>
+        </div>
+    </div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+    <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
+</body>
+
+</html>

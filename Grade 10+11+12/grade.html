@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Exam Auto-Grader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="common logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        .upload-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .version-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .version-btn {
+            padding: 20px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #00d4ff;
+        }
+
+        .version-btn:hover {
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .version-btn.selected {
+            background: rgba(0, 212, 255, 0.2);
+            color: #0ff;
+            border-color: #00d4ff;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            font-size: 18px;
+            font-family: monospace;
+            transition: border-color 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .hint {
+            display: block;
+            margin-top: 8px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .btn {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 18px 50px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin: 30px auto 0;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: #666;
+            border-color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-circle {
+            display: inline-block;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            border: 3px solid #00d4ff;
+        }
+
+        .grade-text {
+            margin-top: 20px;
+            color: #00d4ff;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .answers-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .answers-table th,
+        .answers-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 16px;
+        }
+
+        .answers-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .correct {
+            background: rgba(76, 175, 80, 0.2);
+            color: #90ee90;
+            font-weight: 600;
+        }
+
+        .incorrect {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ff7777;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MCQ Exam Grader</h1>
+        
+        <div class="upload-section">
+            <div class="form-group">
+                <label>
+                    Student Name:
+                    <span class="hint">Enter the student's full name</span>
+                </label>
+                <input type="text" id="studentName" placeholder="e.g., John Doe">
+            </div>
+
+            <div class="form-group">
+                <label>Select Exam Version:</label>
+                <div class="version-buttons">
+                    <button class="version-btn" data-version="A">A</button>
+                    <button class="version-btn" data-version="B">B</button>
+                    <button class="version-btn" data-version="C">C</button>
+                    <button class="version-btn" data-version="D">D</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Enter Student Answers (20 answers):
+                    <span class="hint">Example: a c b c a a b d d a c c c a d d t t t t OR abcdaabddacccaddtttf</span>
+                </label>
+                <input type="text" id="studentAnswers" placeholder="Enter 20 answers (with or without spaces)">
+            </div>
+
+            <button class="btn" id="gradeBtn" disabled>Grade Exam</button>
+        </div>
+
+        <div class="results" id="results">
+            <div class="score-display">
+                <h2 id="studentNameDisplay" style="color: #1A154F; margin-bottom: 20px; font-size: 28px;"></h2>
+                <div class="score-circle" id="scoreCircle">0/10</div>
+                <div class="grade-text"><span id="gradeText">0/10</span></div>
+            </div>
+
+            <table class="answers-table">
+                <thead>
+                    <tr>
+                        <th>Q#</th>
+                        <th>Correct</th>
+                        <th>Student</th>
+                        <th>Points</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="answersBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Answer key for all versions
+        const answerKey = {
+            A: ['b', 'b', 'c', 'd', 'c', 'b', 'b', 'b', 'b', 'b', 'c', 'b', 'c', 'c', 'b', 'b', 't', 't', 't', 'f'],
+            B: ['c', 'd', 'a', 'a', 'b', 'c', 'a', 'c', 'a', 'c', 'a', 'a', 'a', 'b', 'c', 'a', 't', 't', 'f', 't'],
+            C: ['d', 'd', 'd', 'c', 'c', 'b', 'd', 'b', 'd', 'c', 'c', 'b', 'c', 'c', 'b', 'b', 't', 't', 'f', 't'],
+            D: ['a', 'c', 'b', 'c', 'c', 'd', 'b', 'd', 'd', 'c', 'b', 'c', 'c', 'a', 'd', 'd', 't', 't', 'f', 't']
+        };
+
+        let selectedVersion = '';
+        
+        const versionButtons = document.querySelectorAll('.version-btn');
+        const studentNameInput = document.getElementById('studentName');
+        const studentAnswersInput = document.getElementById('studentAnswers');
+        const gradeBtn = document.getElementById('gradeBtn');
+        const results = document.getElementById('results');
+
+        // Version button selection
+        versionButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                versionButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedVersion = btn.dataset.version;
+                checkEnableGrading();
+            });
+        });
+
+        studentNameInput.addEventListener('input', checkEnableGrading);
+        studentAnswersInput.addEventListener('input', checkEnableGrading);
+        gradeBtn.addEventListener('click', gradeExam);
+
+        function checkEnableGrading() {
+            const hasName = studentNameInput.value.trim().length > 0;
+            const hasAnswers = studentAnswersInput.value.trim().length > 0;
+            gradeBtn.disabled = !(selectedVersion && hasName && hasAnswers);
+        }
+
+        function gradeExam() {
+            const input = studentAnswersInput.value.trim().toLowerCase();
+            const studentName = studentNameInput.value.trim();
+            
+            // Parse answers - accept both spaced and non-spaced format
+            let answers = [];
+            if (input.includes(' ')) {
+                // Space-separated format
+                answers = input.split(/\s+/).map(ans => {
+                    if (ans === 'true') return 't';
+                    if (ans === 'false') return 'f';
+                    return ans[0];
+                });
+            } else {
+                // Continuous format like "abcdaabdd"
+                answers = input.split('').filter(c => c !== ' ');
+            }
+
+            if (answers.length !== 20) {
+                alert(`Please enter exactly 20 answers. You entered ${answers.length}.`);
+                return;
+            }
+
+            const correctAnswers = answerKey[selectedVersion];
+            let totalScore = 0;
+            const tbody = document.getElementById('answersBody');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < 20; i++) {
+                const studentAns = answers[i] || '';
+                const correctAns = correctAnswers[i];
+                const isCorrect = studentAns === correctAns;
+                const points = isCorrect ? 0.5 : 0;
+                
+                totalScore += points;
+
+                const row = document.createElement('tr');
+                row.className = isCorrect ? 'correct' : 'incorrect';
+                row.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td>${correctAns.toUpperCase()}</td>
+                    <td>${studentAns.toUpperCase() || '—'}</td>
+                    <td>${points.toFixed(1)}</td>
+                    <td>${isCorrect ? '✓' : '✗'}</td>
+                `;
+                tbody.appendChild(row);
+            }
+
+            document.getElementById('studentNameDisplay').textContent = studentName;
+            document.getElementById('scoreCircle').textContent = `${totalScore.toFixed(1)}/10`;
+            document.getElementById('gradeText').textContent = `${totalScore.toFixed(1)}/10`;
+            
+            results.style.display = 'block';
+            results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

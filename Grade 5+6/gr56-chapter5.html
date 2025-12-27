@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & AI - Class #5: Making Great Presentations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="common logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 100px 150px 100px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide:first-of-type {
+            margin-top: 80px;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%2300d4ff"/><circle cx="90" cy="10" r="2" fill="%2300d4ff"/><circle cx="10" cy="90" r="2" fill="%2300d4ff"/><circle cx="90" cy="90" r="2" fill="%2300d4ff"/><line x1="10" y1="10" x2="90" y2="10" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%2300d4ff" stroke-width="0.5"/></svg>') no-repeat;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #0ff;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.2em;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li:before {
+            content: "→ ";
+            color: #00d4ff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            color: #00d4ff;
+            font-weight: 600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .rule-box {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #0ff;
+            margin: 20px 0;
+            font-size: 1.4em;
+            text-align: center;
+            color: #0ff;
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: #0ff;
+            font-weight: 600;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(26, 26, 46, 0.95);
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button {
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-button:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .nav-button:active {
+            transform: translateY(0);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(100, 100, 100, 0.2);
+            border-color: #666;
+            color: #999;
+        }
+
+        .nav-button:disabled:hover {
+            background: rgba(100, 100, 100, 0.2);
+            color: #999;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .slide-counter {
+            color: #00d4ff;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .emoji-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h1>Making Great Presentations</h1>
+            <p class="subtitle">Learn PowerPoint & AI Tools the Fun Way!</p>
+            <p class="subtitle" style="margin-top: 50px; color: #00d4ff;">Grade 5-6 | 40 Minutes</p>
+        </div>
+
+        <!-- Slide 2: What You'll Learn -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>What You'll Learn Today</h2>
+            <ul style="font-size: 1.4em; line-height: 2.5;">
+                <li>How to make a good presentation</li>
+                <li>Using PowerPoint to create slides</li>
+                <li>Using AI tools to make it easier</li>
+                <li>How to present like a pro!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: What Makes a Good Presentation? -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Good Presentations Have This:</h2>
+            <div class="two-column">
+                <div class="feature-box">
+                    <div class="emoji-icon">📌</div>
+                    <div class="feature-title">Start Strong</div>
+                    <ul style="font-size: 1.15em;">
+                        <li>Cool title slide</li>
+                        <li>Something interesting</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <div class="emoji-icon">📝</div>
+                    <div class="feature-title">Main Ideas</div>
+                    <ul style="font-size: 1.15em;">
+                        <li>3-5 slides</li>
+                        <li>One idea per slide</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="feature-box">
+                    <div class="emoji-icon">🎯</div>
+                    <div class="feature-title">Show Examples</div>
+                    <ul style="font-size: 1.15em;">
+                        <li>Pictures & diagrams</li>
+                        <li>Real-world examples</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <div class="emoji-icon">✅</div>
+                    <div class="feature-title">Finish Strong</div>
+                    <ul style="font-size: 1.15em;">
+                        <li>Summary slide</li>
+                        <li>Questions at the end</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Golden Rules -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>The Golden Rules 🌟</h2>
+            
+            <div class="rule-box">Use the 6×6 Rule</div>
+            <p style="text-align: center; font-size: 1.3em; color: #aaa;">Max 6 bullet points, Max 6 words per point</p>
+
+            <ul style="font-size: 1.3em; margin-top: 40px;">
+                <li><span class="highlight">Pictures > Words:</span> Use lots of images!</li>
+                <li><span class="highlight">Keep it simple:</span> Don't cram too much on one slide</li>
+                <li><span class="highlight">Same colors:</span> Pick 2-3 colors and stick with them</li>
+                <li><span class="highlight">Easy to read:</span> Make text big and clear</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: PowerPoint Basics -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Using PowerPoint 💻</h2>
+
+            <h3>Steps to Make a Slide:</h3>
+            <ul style="font-size: 1.25em; margin-bottom: 30px;">
+                <li><span class="highlight">Step 1:</span> Open PowerPoint and pick "Blank Presentation"</li>
+                <li><span class="highlight">Step 2:</span> Add a title and make it big & bold</li>
+                <li><span class="highlight">Step 3:</span> Add bullet points (short & simple!)</li>
+                <li><span class="highlight">Step 4:</span> Add cool pictures or icons</li>
+                <li><span class="highlight">Step 5:</span> Pick a nice color theme</li>
+            </ul>
+
+            <p style="font-size: 1.2em; color: #0ff;">💡 Pro Tip: Use the same design for all slides!</p>
+        </div>
+
+        <!-- Slide 6: Meet AI Tools -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Meet the AI Helpers 🤖</h2>
+
+            <p style="font-size: 1.3em; margin-bottom: 30px;">AI tools can help make presentations FASTER. But remember—YOU are still in control!</p>
+
+            <div class="feature-box">
+                <div class="feature-title">Gamma ✨</div>
+                <p>Type your topic and AI creates slides for you. Then you edit them to make them perfect!</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-title">Slidesgo 🎨</div>
+                <p>Cool templates you can use and change. Saves time on making it pretty!</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-title">Quillbot 📝</div>
+                <p>Helps fix writing. Makes long text into short bullet points!</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: AI Rules -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>⚠️ Using AI the Right Way</h2>
+
+            <ul style="font-size: 1.3em; margin-top: 40px;">
+                <li>✓ <span class="highlight">CHECK YOUR FACTS</span> — AI can make mistakes!</li>
+                <li>✓ <span class="highlight">EDIT & CHANGE IT</span> — Don't just copy everything</li>
+                <li>✓ <span class="highlight">MAKE IT YOURS</span> — Add your own ideas</li>
+                <li>✓ <span class="highlight">SAY THANK YOU</span> — Write down your sources</li>
+            </ul>
+
+            <p style="margin-top: 50px; font-size: 1.3em; color: #0ff; text-align: center;">AI is a helper, not the boss! 🎯</p>
+        </div>
+
+        <!-- Slide 8: Gamma Tutorial -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Tool #1: Gamma</h2>
+            <p class="subtitle">AI-Powered Presentation Generator</p>
+
+            <div class="feature-box">
+                <div class="feature-title">What It Does</div>
+                <p>Gamma creates entire presentations from a topic or outline in minutes. You just provide a topic, and AI generates slides with text, layouts, and design.</p>
+            </div>
+
+            <h3>How to Use Gamma</h3>
+            <ul style="font-size: 1.3em;">
+                <li>Go to <span class="highlight">gamma.app</span></li>
+                <li>Click "Create" and select "Presentation" mode</li>
+                <li>Type your topic (e.g., "Introduction to Neural Networks for Kids")</li>
+                <li>Watch AI generate slides automatically</li>
+                <li><span class="highlight">Edit and customize</span> to make it your own</li>
+            </ul>
+
+            <p style="margin-top: 30px; font-size: 1.2em; color: #0ff;">✅ <span class="highlight">Best for:</span> Starting from scratch or needing quick structure</p>
+        </div>
+
+        <!-- Slide 9: Design Tips -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Make Your Slides Look Great 🎨</h2>
+
+            <ul style="font-size: 1.25em;">
+                <li>💚 Use <span class="highlight">big, clear pictures</span></li>
+                <li>💚 Keep colors <span class="highlight">matching</span> throughout</li>
+                <li>💚 Use <span class="highlight">easy-to-read fonts</span></li>
+                <li>💚 Don't put <span class="highlight">too much text</span> on one slide</li>
+                <li>💚 <span class="highlight">Space things out</span> — give them room to breathe!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: How to Present -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>How to Present Like a Star ⭐</h2>
+
+            <ul style="font-size: 1.25em;">
+                <li>🎤 <span class="highlight">Don't read the slides</span> — use them as reminders</li>
+                <li>🎤 <span class="highlight">Look at people</span> not the screen</li>
+                <li>🎤 <span class="highlight">Talk slowly</span> and clearly</li>
+                <li>🎤 <span class="highlight">Show you like it</span> — be excited!</li>
+                <li>🎤 <span class="highlight">Practice first</span> before showing the class</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: Your Assignment -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Your Challenge! 🚀</h2>
+
+            <div class="feature-box">
+                <div class="feature-title">Make a 5-7 Slide Presentation</div>
+                <p style="font-size: 1.2em;">On a topic your teacher gives you!</p>
+            </div>
+
+            <h3>You Must Do:</h3>
+            <ul style="font-size: 1.2em;">
+                <li>Make at least <span class="highlight">2 slides yourself</span> in PowerPoint</li>
+                <li>Use <span class="highlight">AI tools to help</span> with the rest</li>
+                <li>Edit everything to make it <span class="highlight">YOUR style</span></li>
+                <li>Add at least <span class="highlight">3 cool pictures</span></li>
+                <li>List where you got your info</li>
+                <li>Present for 3-5 minutes</li>
+            </ul>
+        </div>
+
+
+
+        <!-- Slide 12: Presentation Topics - Everyday AI -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topics: Everyday AI 🌟</h2>
+
+            <ul style="font-size: 1.15em;">
+                <li>How Does YouTube Know What Videos You'll Like?</li>
+                <li>AI in Your Favorite Video Games</li>
+                <li>How Snapchat and Instagram Filters Work</li>
+                <li>Voice Assistants: Talking to Siri and Alexa</li>
+                <li>How Does Autocorrect Know What Word You Mean?</li>
+                <li>AI Pets and Toys: Interactive Robots</li>
+                <li>Smart Home Devices: Lights, Thermostats, and More</li>
+                <li>How Google Search Finds Answers So Fast</li>
+                <li>AI in Cartoons and Animated Movies</li>
+                <li>Robots That Help at Home: Vacuum Cleaners and More</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: Presentation Topics - Cool AI Technologies -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topics: Cool AI Technologies 🚀</h2>
+
+            <ul style="font-size: 1.15em;">
+                <li>Facial Recognition: How Your Tablet Knows It's You</li>
+                <li>Teaching Computers to Recognize Animals and Objects</li>
+                <li>Self-Driving Cars: Cars Without Drivers!</li>
+                <li>Robots in Space: Exploring Mars</li>
+                <li>AI Translators: Breaking Language Barriers</li>
+                <li>Weather Prediction: How AI Helps Forecast Storms</li>
+                <li>AI Art: When Computers Draw and Paint</li>
+                <li>Smart Watches and Fitness Trackers</li>
+                <li>How Spell Check Really Works</li>
+                <li>AI in Music Apps: Making Playlists Just for You</li>
+            </ul>
+        </div>
+
+        <!-- Slide 14: Presentation Topics - Fun & Creative -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topics: Fun & Creative 🎨</h2>
+
+            <ul style="font-size: 1.15em;">
+                <li>Can Robots Play Sports? AI in Games</li>
+                <li>AI Storytellers: Computers That Write Stories</li>
+                <li>Virtual Reality and AI: Stepping Into New Worlds</li>
+                <li>AI Doctors: Helping Kids Stay Healthy</li>
+                <li>Robot Friends: Companion Robots for Kids</li>
+            </ul>
+         </div>
+
+        <!-- Slide 15: Presentation Topics - Simple Ethics -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Topics: Simple Ethics 🤝</h2>
+
+            <ul style="font-size: 1.15em;">
+                <li>Screen Time: Why Apps Want You to Stay Longer</li>
+                <li>Online Safety: How AI Protects You on the Internet</li>
+                <li>Sharing Photos Online: What Happens to Your Pictures?</li>
+                <li>Real vs. Fake: Spotting Fake Videos Online</li>
+                <li>Should Robots Look Like Humans?</li>
+            </ul>
+        </div>
+
+        <!-- Slide 16: Assessment Checklist -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Assessment Checklist</h2>
+            <p>Use this to make sure your presentation is complete:</p>
+
+            <div style="margin-top: 30px; font-size: 1.15em; line-height: 2.2;">
+                <div style="margin-bottom: 15px;">✓ Proper presentation structure (intro, body, conclusion)</div>
+                <div style="margin-bottom: 15px;">✓ Follows the 6×6 rule (6 bullets, 6 words each)</div>
+                <div style="margin-bottom: 15px;">✓ Consistent design throughout (colors, fonts, themes)</div>
+                <div style="margin-bottom: 15px;">✓ Quality visuals included (at least 3 images)</div>
+                <div style="margin-bottom: 15px;">✓ Evidence of both manual and AI-assisted work</div>
+                <div style="margin-bottom: 15px;">✓ Content is accurate and age-appropriate</div>
+                <div style="margin-bottom: 15px;">✓ Sources cited on final slide</div>
+                <div style="margin-bottom: 15px;">✓ Demonstrates strong presentation skills during delivery</div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Let's Summarize -->
+        <div class="slide">
+            <div class="circuit-pattern"></div>
+            <h2>Here's What You Know Now! 🎓</h2>
+
+            <div class="feature-box" style="margin-bottom: 30px;">
+                <p style="font-size: 1.3em;">✅ Good presentations have clear structure</p>
+            </div>
+
+            <div class="feature-box" style="margin-bottom: 30px;">
+                <p style="font-size: 1.3em;">✅ Use the 6×6 rule and lots of pictures</p>
+            </div>
+
+            <div class="feature-box" style="margin-bottom: 30px;">
+                <p style="font-size: 1.3em;">✅ PowerPoint is easy once you practice</p>
+            </div>
+
+            <div class="feature-box" style="margin-bottom: 30px;">
+                <p style="font-size: 1.3em;">✅ AI tools help, but YOU are in charge</p>
+            </div>
+
+            <p style="margin-top: 40px; font-size: 1.3em; color: #0ff; text-align: center;">NOW GO MAKE AWESOME PRESENTATIONS! 🌟</p>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">18</span></span>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) {
+                currentSlide = totalSlides;
+            }
+            if (n < 1) {
+                currentSlide = 1;
+            }
+            
+            slides.forEach(slide => {
+                slide.style.display = 'none';
+            });
+            
+            slides[currentSlide - 1].style.display = 'flex';
+            document.getElementById('currentSlide').textContent = currentSlide;
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
