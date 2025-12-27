@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Classes - NBS School</title>
+    <link rel="icon" type="image/png" href="common logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+        
+        .back-btn {
+            background-color: #2a5298;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        
+        .back-btn:hover {
+            background-color: #1e3c72;
+            transform: translateX(-3px);
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .logo-section img {
+            height: 200px;
+            width: auto;
+        }
+        
+        .header-content {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #2a5298;
+            font-size: 42px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #2a5298 0%, #7e22ce 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .tagline {
+            color: #999;
+            font-size: 14px;
+            font-style: italic;
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .class-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 30px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2a5298 0%, #7e22ce 100%);
+        }
+        
+        .class-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #7e22ce;
+        }
+        
+        .class-card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2a5298;
+            font-weight: 700;
+        }
+        
+        .class-card .teacher {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .class-card .description {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .class-card .topic {
+            display: inline-block;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            color: #2a5298;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .class-card:hover .topic {
+            background: linear-gradient(135deg, #2a5298 0%, #7e22ce 100%);
+            color: white;
+        }
+        
+        .class-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .logo-section {
+                justify-content: flex-start;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .class-card {
+                padding: 25px;
+            }
+            
+            .class-card h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <div class="logo-section">
+                <img src="common logo2.png" alt="NBS Logo">
+            </div>
+        </div>
+        
+        <div class="header-content">
+            <h1>📐 Mathematics Classes</h1>
+            <div class="subtitle">NBS School</div>
+            <div class="tagline">Building mathematical confidence and mastery</div>
+        </div>
+        
+        <div class="classes-grid">
+            <a href="Math/gr3math.html" class="class-card">
+                <div class="class-icon">🧮</div>
+                <h2>Grade 3 Mathematics</h2>
+                <h3>Formal Addition & Subtraction Challenge</h3>
+                <div class="teacher">👩‍🏫 Ms. Batool Omama</div>
+                <div class="description">Master the fundamentals of mathematics with engaging activities and clear explanations</div>
+                <div class="topic">📚 Addition & Subtraction - Formal Method</div>
+            </a>
+            
+            <a href="Math/add-sub.html" class="class-card">
+                <div class="class-icon">➕</div>
+                <h2>Grade 4 Mathematics</h2>
+                <h3>Addition & Subtraction in Thousands</h3>
+                <div class="teacher">👩‍🏫 Ms. Amal Abo Ajwi</div>
+                <div class="description">Build confidence and strong skills with larger numbers and advanced techniques</div>
+                <div class="topic">📚 Addition & Subtraction in Thousands</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
