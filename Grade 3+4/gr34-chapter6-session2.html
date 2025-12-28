@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Grades 3-4 - Session 5</title>
+    <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .presentation::before {
+            content: '';
+            display: block;
+            margin-top: 80px;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 80px;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+            border-bottom: 3px solid #4CA9FF;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide:first-of-type {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 4em;
+            color: #4CA9FF;
+            margin-bottom: 20px;
+            animation: floatIn 0.7s ease-out;
+        }
+
+        .title-slide h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 2.8em;
+            color: #4CA9FF;
+            margin-bottom: 30px;
+            animation: floatIn 0.7s ease-out;
+        }
+
+        .title-slide h2 {
+            color: #A48CFF;
+            font-size: 2.2em;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.6em;
+            color: #666;
+            margin-bottom: 15px;
+            animation: floatIn 0.8s ease-out 0.2s both;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.8em;
+        }
+
+        p {
+            font-size: 1.4em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        ul, ol {
+            font-size: 1.3em;
+            line-height: 2;
+            margin-left: 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        ul li:before {
+            content: "⭐ ";
+            margin-right: 10px;
+            color: #FFF48E;
+        }
+
+        .content-box {
+            background: rgba(76, 169, 255, 0.08);
+            border-left: 5px solid #4CA9FF;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .purple-box {
+            background: rgba(164, 140, 255, 0.08);
+            border-left: 5px solid #A48CFF;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .yellow-box {
+            background: rgba(255, 244, 142, 0.3);
+            border-left: 5px solid #FFF48E;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .green-box {
+            background: rgba(76, 255, 169, 0.08);
+            border-left: 5px solid #4CFFB0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .center-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .image-item {
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
+
+        .image-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .image-item p {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .icon-label {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #A48CFF 0%, #4CA9FF 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .challenge-box p {
+            color: white;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .emoji-large {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .demo-box {
+            background: white;
+            border: 3px solid #4CA9FF;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
+
+        .demo-box h3 {
+            color: #4CA9FF;
+            margin-bottom: 15px;
+        }
+
+        strong {
+            color: #4CA9FF;
+            font-weight: 700;
+        }
+
+        em {
+            color: #A48CFF;
+            font-style: italic;
+        }
+
+        .heart-box {
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            animation: floatIn 0.7s ease-out 0.3s both;
+        }
+
+        .heart-box p {
+            color: white;
+            font-size: 1.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Navigation Bar -->
+        <div style="position: fixed; top: 0; left: 0; right: 0; background: rgba(26, 26, 46, 0.95); padding: 15px 30px; z-index: 2000; border-bottom: 2px solid #00d4ff; display: flex; justify-content: space-between; align-items: center;">
+            <a href="../index.html" style="background: #00d4ff; color: #1a1a2e; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s;">← Back to Home</a>
+            <span style="color: #00d4ff; font-family: 'Poppins', sans-serif; font-size: 0.9em;">Tech & AI Classes</span>
+        </div>
+
+        <!-- TITLE SLIDE -->
+        <div class="slide title-slide center-content">
+            <h1>Session 5: AI Helpers for People! 🤖❤️</h1>
+            <div class="subtitle">How AI Makes the World Better for Everyone!</div>
+            <div class="emoji-large">♿ 👁️ 🦻 🗣️ ❤️</div>
+            <div class="subtitle" style="margin-top: 40px; color: white;"><strong>Teacher: Mr. Yousef Younis</strong></div>
+        </div>
+
+        <!-- Slide 1: Introduction -->
+        <div class="slide">
+            <div class="two-column">
+                <div>
+                    <h1>AI That Helps Everyone!</h1>
+                    <div class="subtitle">Technology for All People</div>
+                    <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                        AI isn't just for fun and games! It helps REAL people with REAL challenges every single day. Today, we'll learn how AI makes the world more accessible for everyone! 🌍
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 8em;">❤️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What Does "Accessible" Mean? -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">What Does "Accessible" Mean?</h2>
+            <div class="content-box" style="margin-top: 30px;">
+                <p style="font-size: 1.5em; font-weight: 600;">
+                    Accessible = Everyone can use it! 🌟
+                </p>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Imagine if there was a playground, but some kids couldn't reach the swings or climb the stairs. That wouldn't be fair, right?
+            </p>
+            <p style="font-size: 1.3em; color: #666; margin-top: 20px;">
+                AI helps make technology work for <strong>EVERYONE</strong> — no matter if they can see, hear, walk, or type easily!
+            </p>
+            <div class="emoji-large" style="text-align: center; font-size: 6em; margin-top: 30px;">🌈</div>
+        </div>
+
+        <!-- Slide 3: Different People, Different Needs -->
+        <div class="slide">
+            <h2>Different People, Different Needs</h2>
+            <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
+                Everyone is different! Some people need extra help with certain things:
+            </p>
+            <div class="icon-grid" style="margin-top: 40px;">
+                <div class="icon-item">
+                    <div class="icon">👁️</div>
+                    <div class="icon-label">Can't See Well</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to hear what's on screen</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">👂</div>
+                    <div class="icon-label">Can't Hear Well</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to see what people say</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">✋</div>
+                    <div class="icon-label">Can't Type/Write</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to speak to type</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">♿</div>
+                    <div class="icon-label">Use Wheelchairs</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need smart movement help</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🗣️</div>
+                    <div class="icon-label">Can't Speak Easily</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need computer to speak</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🧠</div>
+                    <div class="icon-label">Learn Differently</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need things explained differently</p>
+                </div>
+            </div>
+            <div class="heart-box" style="margin-top: 40px;">
+                <p style="font-size: 1.6em;">
+                    AI helps ALL these people! 💙
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4: AI Helper #1 - Text-to-Speech -->
+        <div class="slide">
+            <h2>AI Helper #1: Text-to-Speech 🗣️</h2>
+            <div class="subtitle">The Computer Reads to You!</div>
+            <div class="two-column" style="margin-top: 30px;">
+                <div>
+                    <p style="font-size: 1.2em; color: #666;">
+                        <strong>What is it?</strong> AI reads text OUT LOUD so you can hear it!
+                    </p>
+                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
+                        <strong>Who uses it?</strong> People who can't see the screen well, or anyone who wants to listen instead of read!
+                    </p>
+                    <div class="content-box" style="margin-top: 30px;">
+                        <h3 style="color: #4CA9FF;">How it works:</h3>
+                        <ol style="font-size: 1.1em;">
+                            <li>AI looks at the words on screen</li>
+                            <li>AI figures out how to say each word</li>
+                            <li>AI speaks the words out loud!</li>
+                        </ol>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 8em;">📢</div>
+                    <div class="demo-box">
+                        <h3>Examples:</h3>
+                        <p style="font-size: 1.1em;">📱 Phone reading messages</p>
+                        <p style="font-size: 1.1em;">📚 Audiobooks</p>
+                        <p style="font-size: 1.1em;">🌐 Websites reading to you</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Let's Try Text-to-Speech! -->
+        <div class="slide center-content">
+            <h2 style="color: #A48CFF;">Let's Try It! 🎤</h2>
+            <div class="challenge-box" style="max-width: 800px;">
+                <p style="font-size: 1.5em; margin-bottom: 20px;">
+                    We're going to use Text-to-Speech right now!
+                </p>
+                <div style="font-size: 1.2em; text-align: left; margin-top: 30px;">
+                    <p>✨ Watch as the computer reads this sentence:</p>
+                    <div class="demo-box" style="margin-top: 20px; background: rgba(255,255,255,0.2);">
+                        <p style="font-size: 1.5em; color: white; font-weight: 600;">
+                            "Hello! I am an AI helping you learn. AI can make the world better for everyone!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                (Teacher: Use your device's text-to-speech feature to read the text above)
+            </p>
+        </div>
+
+        <!-- Slide 6: AI Helper #2 - Speech-to-Text -->
+        <div class="slide">
+            <h2>AI Helper #2: Speech-to-Text ⌨️</h2>
+            <div class="subtitle">The Computer Types What You Say!</div>
+            <div class="two-column" style="margin-top: 30px;">
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 8em;">🎤</div>
+                    <div class="demo-box">
+                        <h3>Examples:</h3>
+                        <p style="font-size: 1.1em;">💬 Voice typing messages</p>
+                        <p style="font-size: 1.1em;">📝 Dictating homework</p>
+                        <p style="font-size: 1.1em;">🗣️ Siri, Alexa, Google Assistant</p>
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 1.2em; color: #666;">
+                        <strong>What is it?</strong> You SPEAK and AI TYPES what you said!
+                    </p>
+                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
+                        <strong>Who uses it?</strong> People who can't type easily, or anyone who wants to talk instead of type!
+                    </p>
+                    <div class="purple-box" style="margin-top: 30px;">
+                        <h3 style="color: #A48CFF;">How it works:</h3>
+                        <ol style="font-size: 1.1em;">
+                            <li>AI listens to your voice</li>
+                            <li>AI breaks down the sounds</li>
+                            <li>AI matches sounds to words</li>
+                            <li>AI types the words!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Let's Try Speech-to-Text! -->
+        <div class="slide center-content">
+            <h2 style="color: #4CA9FF;">Let's Try It! 🎙️</h2>
+            <div class="challenge-box" style="max-width: 800px;">
+                <p style="font-size: 1.5em; margin-bottom: 20px;">
+                    We're going to use Speech-to-Text right now!
+                </p>
+                <div style="font-size: 1.2em; text-align: left; margin-top: 30px;">
+                    <p>✨ Try saying this sentence:</p>
+                    <div class="demo-box" style="margin-top: 20px; background: rgba(255,255,255,0.2);">
+                        <p style="font-size: 1.5em; color: white; font-weight: 600;">
+                            "AI is amazing and helps people every day!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                (Teacher: Open a text document and use voice typing feature. Students can try on tablets!)
+            </p>
+        </div>
+
+        <!-- Slide 8: AI Helper #3 - Smart Wheelchairs & Movement -->
+        <div class="slide">
+            <h2>AI Helper #3: Smart Wheelchairs ♿</h2>
+            <div class="subtitle">AI Helps People Move Safely!</div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                Some people use wheelchairs to move around. AI can make wheelchairs SUPER SMART! 🚀
+            </p>
+            <div class="content-box" style="margin-top: 30px;">
+                <h3 style="color: #4CA9FF;">What AI-powered wheelchairs can do:</h3>
+                <ul style="font-size: 1.2em;">
+                    <li><strong>Avoid obstacles</strong> — AI sees walls, people, furniture and moves around them</li>
+                    <li><strong>Find paths</strong> — AI figures out the best way to go from here to there</li>
+                    <li><strong>Follow voice commands</strong> — "Go to the kitchen!" and it goes!</li>
+                    <li><strong>Stay balanced</strong> — AI keeps the wheelchair steady and safe</li>
+                </ul>
+            </div>
+            <div class="two-column" style="margin-top: 40px;">
+                <div class="demo-box">
+                    <h3>It's like a self-driving car!</h3>
+                    <div class="emoji-large">🚗 → ♿</div>
+                    <p style="font-size: 1.1em;">Same AI that helps cars helps wheelchairs!</p>
+                </div>
+                <div class="demo-box">
+                    <h3>AI Sensors</h3>
+                    <div class="emoji-large">📡</div>
+                    <p style="font-size: 1.1em;">Cameras and sensors "see" the world!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: AI Helper #4 - Seeing for Blind People -->
+        <div class="slide">
+            <h2>AI Helper #4: AI Eyes 👁️</h2>
+            <div class="subtitle">AI Describes the World!</div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                Imagine if you couldn't see. How would you know what's around you? AI can DESCRIBE everything!
+            </p>
+            <div class="two-column" style="margin-top: 40px;">
+                <div>
+                    <div class="purple-box">
+                        <h3 style="color: #A48CFF;">Special AI Apps:</h3>
+                        <ul style="font-size: 1.1em;">
+                            <li><strong>Point phone camera</strong> at anything</li>
+                            <li><strong>AI recognizes</strong> what it sees</li>
+                            <li><strong>AI speaks</strong> the description!</li>
+                        </ul>
+                    </div>
+                    <div class="green-box" style="margin-top: 20px;">
+                        <h3>Examples AI Can Describe:</h3>
+                        <p style="font-size: 1.1em;">🍎 "This is a red apple"</p>
+                        <p style="font-size: 1.1em;">👤 "A person is walking towards you"</p>
+                        <p style="font-size: 1.1em;">🚪 "There's a door on your left"</p>
+                        <p style="font-size: 1.1em;">📰 "This is a newspaper headline"</p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 7em;">📱</div>
+                    <div class="emoji-large" style="font-size: 5em;">👁️ → 🗣️</div>
+                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
+                        AI becomes someone's eyes!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: AI Helper #5 - Smart Hearing Aids -->
+        <div class="slide">
+            <h2>AI Helper #5: Smart Hearing Aids 🦻</h2>
+            <div class="subtitle">AI Helps You Hear Better!</div>
+            <div class="two-column" style="margin-top: 30px;">
+                <div style="text-align: center;">
+                    <div class="emoji-large" style="font-size: 8em;">👂</div>
+                </div>
+                <div>
+                    <p style="font-size: 1.2em; color: #666;">
+                        Some people can't hear well. Modern hearing aids have AI that makes them SUPER SMART!
+                    </p>
+                    <div class="content-box" style="margin-top: 30px;">
+                        <h3 style="color: #4CA9FF;">What AI hearing aids do:</h3>
+                        <ul style="font-size: 1.1em;">
+                            <li><strong>Focus on voices</strong> — Blocks out noise, keeps voices clear</li>
+                            <li><strong>Adjust volume</strong> — Quiet places? Louder. Loud places? Just right.</li>
+                            <li><strong>Recognize where sounds come from</strong> — AI knows if someone is talking behind you</li>
+                            <li><strong>Learn your preferences</strong> — AI remembers what you like!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="yellow-box" style="margin-top: 30px;">
+                <p style="font-size: 1.3em; font-weight: 600;">
+                    Imagine being at a noisy birthday party 🎉 AI helps you hear your friends talking, not just the loud music!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Real Life Stories -->
+        <div class="slide center-content">
+            <h2 style="color: #A48CFF;">Real People, Real Help! 💙</h2>
+            <div style="margin-top: 40px; max-width: 900px;">
+                <div class="demo-box" style="text-align: left; margin-bottom: 20px;">
+                    <h3 style="color: #4CA9FF;">👨‍🦯 Ahmed uses AI</h3>
+                    <p style="font-size: 1.2em;">
+                        Ahmed can't see, but his phone uses AI to describe everything around him. He can "see" his friends, read signs, and know when a car is coming!
+                    </p>
+                </div>
+                <div class="demo-box" style="text-align: left; margin-bottom: 20px;">
+                    <h3 style="color: #4CA9FF;">👧 Sara uses AI</h3>
+                    <p style="font-size: 1.2em;">
+                        Sara has trouble using her hands to type. She uses speech-to-text AI to do her homework by just talking! She can write stories, send messages, and do everything her friends do!
+                    </p>
+                </div>
+                <div class="demo-box" style="text-align: left;">
+                    <h3 style="color: #4CA9FF;">♿ Omar uses AI</h3>
+                    <p style="font-size: 1.2em;">
+                        Omar uses a smart wheelchair with AI. It helps him move through crowded hallways at school without bumping into anyone. He can even tell it where to go with his voice!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: The Big Message -->
+        <div class="slide center-content">
+            <h2 style="font-size: 3.5em; color: #4CA9FF;">AI Isn't Just for Fun!</h2>
+            <div class="heart-box" style="margin-top: 50px; max-width: 800px;">
+                <p style="font-size: 1.8em; line-height: 1.6;">
+                    AI helps REAL people with REAL challenges. 💙<br>
+                    <br>
+                    Technology should work for EVERYONE!<br>
+                    <br>
+                    AI makes the world more fair and accessible! 🌍
+                </p>
+            </div>
+            <div class="emoji-large" style="font-size: 7em; margin-top: 40px;">❤️🤖❤️</div>
+        </div>
+
+        <!-- Slide 13: Activity - Brainstorm! -->
+        <div class="slide">
+            <h2>Activity: Design an AI Helper! 💡</h2>
+            <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
+                Now it's YOUR turn to think like an inventor! What other ways could AI help people?
+            </p>
+            <div class="challenge-box" style="margin-top: 30px;">
+                <p style="font-size: 1.5em;">
+                    Think of someone who needs help with something, and design an AI tool to help them!
+                </p>
+            </div>
+            <div class="content-box" style="margin-top: 30px;">
+                <h3 style="color: #4CA9FF;">Questions to think about:</h3>
+                <ul style="font-size: 1.2em;">
+                    <li>What challenge does someone face?</li>
+                    <li>How could AI help them?</li>
+                    <li>What would your AI tool do?</li>
+                    <li>What would you name it?</li>
+                </ul>
+            </div>
+            <div class="demo-box" style="margin-top: 30px;">
+                <p style="font-size: 1.1em;"><strong>Example:</strong> "AI Buddy" — An AI robot that helps elderly people remember to take their medicine and calls for help if they fall!</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Discussion Time -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">Discussion Time! 💬</h2>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Let's talk about what we learned! Think about these questions:
+            </p>
+            <div class="purple-box" style="margin-top: 40px;">
+                <h3 style="color: #A48CFF; margin-bottom: 25px;">Questions to Discuss:</h3>
+                <div style="font-size: 1.2em; line-height: 2.2;">
+                    <p>1️⃣ Which AI helper did you find most amazing? Why?</p>
+                    <p>2️⃣ Do you know anyone who might benefit from these AI tools?</p>
+                    <p>3️⃣ What other problems could AI help solve?</p>
+                    <p>4️⃣ Why is it important that technology works for everyone?</p>
+                    <p>5️⃣ How does AI make the world more fair?</p>
+                </div>
+            </div>
+            <div class="emoji-large" style="text-align: center; font-size: 6em; margin-top: 40px;">🤔💭</div>
+        </div>
+
+        <!-- Slide 15: Key Takeaways -->
+        <div class="slide">
+            <h2>What We Learned Today! 🌟</h2>
+            <div class="icon-grid" style="margin-top: 40px;">
+                <div class="icon-item">
+                    <div class="icon">🗣️</div>
+                    <div class="icon-label">Text-to-Speech</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI reads to you!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">⌨️</div>
+                    <div class="icon-label">Speech-to-Text</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI types what you say!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">♿</div>
+                    <div class="icon-label">Smart Wheelchairs</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI helps movement!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">👁️</div>
+                    <div class="icon-label">AI Eyes</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI describes the world!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🦻</div>
+                    <div class="icon-label">Smart Hearing</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI improves hearing!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">❤️</div>
+                    <div class="icon-label">Technology for All</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI helps everyone!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Closing -->
+        <div class="slide title-slide center-content">
+            <h1>Amazing Work! 🎉</h1>
+            <div class="subtitle">You learned how AI helps people!</div>
+            <div class="heart-box" style="max-width: 700px; margin-top: 40px;">
+                <p style="font-size: 1.6em;">
+                    Remember: AI isn't just cool technology.<br>
+                    It's a tool that makes the world better for EVERYONE! 💙
+                </p>
+            </div>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🤖❤️🌍</div>
+            <p style="color: white; font-size: 1.4em; margin-top: 40px;">
+                Next Session: Translation AI — How computers understand different languages! 🌐
+            </p>
+        </div>
+
+        <div class="slide-nav">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            if (n < 0) currentSlide = 0;
+            
+            slides.forEach(slide => slide.style.display = 'none');
+            slides[currentSlide].style.display = 'flex';
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
