@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9 - Session 3: Future of AI & Emerging Tech</title>
+  <link rel="icon" type="image/png" href="../common logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Poppins',sans-serif;background:#1a1a2e;color:#fff;overflow-x:hidden}.presentation{width:100%;min-height:100vh}.presentation::before{content:'';display:block;margin-top:80px}.slide{width:100%;min-height:100vh;padding:80px 100px;position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-bottom:2px solid rgba(0,212,255,0.1);display:none;flex-direction:column;justify-content:center}.slide:first-of-type{display:flex}.title-slide{background:linear-gradient(135deg,#0f3460 0%,#16213e 100%);text-align:center;align-items:center}h1{font-size:3.5em;font-weight:700;color:#00d4ff;text-shadow:0 0 30px rgba(0,212,255,0.5);margin-bottom:20px}h2{font-size:2.8em;font-weight:700;color:#00d4ff;margin-bottom:40px}h3{font-size:1.8em;color:#0ff;margin-bottom:20px}.subtitle{font-size:1.4em;color:#aaa;margin-bottom:10px}p{font-size:1.2em;line-height:1.8;color:#ccc;margin-bottom:20px}ul,ol{font-size:1.2em;line-height:2;margin-left:40px;color:#ccc;margin-bottom:20px}li{margin-bottom:15px}.info-box{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);padding:25px;border-radius:10px;margin:20px 0}.concept-box{background:rgba(0,255,255,0.05);border-left:4px solid #0ff;padding:20px;margin:20px 0}.key-point{background:rgba(255,100,100,0.1);border-left:4px solid #ff6464;padding:20px;margin:20px 0}.tech-term{color:#00d4ff;font-weight:600}.discussion-box{background:rgba(100,200,255,0.1);border:1px solid rgba(100,200,255,0.3);padding:25px;border-radius:10px;margin:20px 0}.center-content{text-align:center}strong{color:#00d4ff}.slide-nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:20px;z-index:1000}.nav-btn{background:linear-gradient(135deg,#00d4ff 0%,#0088ff 100%);color:#1a1a2e;border:none;padding:12px 30px;border-radius:25px;font-size:1.1em;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,212,255,0.3)}.nav-btn:hover{transform:translateY(-3px);box-shadow:0 6px 25px rgba(0,212,255,0.5)}.nav-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}</style>
+</head>
+<body>
+  <div class="presentation">
+    <div style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+      <a href="../index.html" style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">← Back</a>
+      <span style="color:#00d4ff;font-size:0.95em">Grades 10-12 | Chapter 9: Future of AI</span>
+    </div>
+
+    <div class="slide title-slide center-content"><h1>Future of AI & Emerging Technologies</h1><div class="subtitle">Session 3: AGI, Quantum, BCIs & Societal Change</div><p style="margin-top:40px;font-size:1.3em"></p></div>
+
+    <div class="slide"><h2>What Is AGI?</h2><p>Artificial General Intelligence: systems with broad, human-level cognitive abilities—still hypothetical and debated.</p></div>
+
+    <div class="slide"><h2>Timelines & Uncertainty</h2><p>Experts disagree on when (or if) AGI will arrive; planning for impacts is still important.</p></div>
+
+    <div class="slide"><h2>Safety and Alignment</h2><div class="info-box"><p>Ensuring powerful systems act as intended: value alignment, interpretability, and robust testing.</p></div></div>
+
+    <div class="slide"><h2>Quantum Computing & AI</h2><p>Quantum hardware could accelerate some AI workloads, but practical benefits are still emerging.</p></div>
+
+    <div class="slide"><h2>Brain-Computer Interfaces (BCIs)</h2><p>BCIs may enable new interfaces and raise privacy, consent, and identity concerns.</p></div>
+
+    <div class="slide"><h2>Economic & Social Impacts</h2><ul><li>Acceleration of automation</li><li>Shifts in skills and education</li><li>Potential for concentration of power</li></ul></div>
+
+    <div class="slide"><h2>Governance Challenges</h2><div class="info-box"><p>Global coordination, tech monopolies, and unequal access are central governance problems.</p></div></div>
+
+    <div class="slide"><h2>Ethical Questions</h2><ul><li>What rights, if any, for advanced AI?</li><li>How to preserve human dignity and agency?</li></ul></div>
+
+    <div class="slide"><h2>Class Debate (8 mins)</h2><div class="info-box"><p>Proposition: "AGI will arrive within 30 years." Prepare arguments for and against.</p></div></div>
+
+    <div class="slide"><h2>Exam Points</h2><ul><li>Definitions: AGI, BCIs, quantum AI</li><li>Key governance and safety concerns</li><li>Societal and ethical trade-offs</li></ul></div>
+
+  </div>
+  <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+  <script>let currentSlide=0;const slides=document.querySelectorAll('.slide');const totalSlides=slides.length;function showSlide(n){if(n>=totalSlides)currentSlide=totalSlides-1;if(n<0)currentSlide=0;slides.forEach(slide=>slide.style.display='none');slides[currentSlide].style.display='flex';document.getElementById('prevBtn').disabled=currentSlide===0;document.getElementById('nextBtn').disabled=currentSlide===totalSlides-1}function nextSlide(){currentSlide++;showSlide(currentSlide);window.scrollTo({top:0,behavior:'smooth'})}function previousSlide(){currentSlide--;showSlide(currentSlide);window.scrollTo({top:0,behavior:'smooth'})}showSlide(currentSlide)</script>
+
+</body>
+</html>
