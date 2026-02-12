@@ -1,24 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chapter 7 - Session 2: Data & Privacy in AI</title>
 	<link rel="icon" type="image/png" href="../common logo.png">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-	<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Poppins',sans-serif;background:#1a1a2e;color:#fff;overflow-x:hidden}.presentation{width:100%;min-height:100vh}.presentation::before{content:'';display:block;margin-top:80px}.slide{width:100%;min-height:100vh;padding:80px 100px;position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-bottom:2px solid rgba(0,212,255,0.1);display:none;flex-direction:column;justify-content:center}.slide:first-of-type{display:flex}.title-slide{background:linear-gradient(135deg,#0f3460 0%,#16213e 100%);text-align:center;align-items:center}h1{font-size:3.5em;font-weight:700;color:#00d4ff;text-shadow:0 0 30px rgba(0,212,255,0.5);margin-bottom:20px}h2{font-size:2.8em;font-weight:700;color:#00d4ff;margin-bottom:40px}h3{font-size:1.8em;color:#0ff;margin-bottom:20px}.subtitle{font-size:1.4em;color:#aaa;margin-bottom:10px}p{font-size:1.2em;line-height:1.8;color:#ccc;margin-bottom:20px}ul,ol{font-size:1.2em;line-height:2;margin-left:40px;color:#ccc;margin-bottom:20px}li{margin-bottom:15px}.info-box{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);padding:25px;border-radius:10px;margin:20px 0}.concept-box{background:rgba(0,255,255,0.05);border-left:4px solid #0ff;padding:20px;margin:20px 0}.key-point{background:rgba(255,100,100,0.1);border-left:4px solid #ff6464;padding:20px;margin:20px 0}.tech-term{color:#00d4ff;font-weight:600}.discussion-box{background:rgba(100,200,255,0.1);border:1px solid rgba(100,200,255,0.3);padding:25px;border-radius:10px;margin:20px 0}.center-content{text-align:center}strong{color:#00d4ff}.slide-nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:20px;z-index:1000}.nav-btn{background:linear-gradient(135deg,#00d4ff 0%,#0088ff 100%);color:#1a1a2e;border:none;padding:12px 30px;border-radius:25px;font-size:1.1em;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,212,255,0.3)}.nav-btn:hover{transform:translateY(-3px);box-shadow:0 6px 25px rgba(0,212,255,0.5)}.nav-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}</style>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			background: #1a1a2e;
+			color: #fff;
+			overflow-x: hidden
+		}
+
+		.presentation {
+			width: 100%;
+			min-height: 100vh
+		}
+
+		.presentation::before {
+			content: '';
+			display: block;
+			margin-top: 80px
+		}
+
+		.slide {
+			width: 100%;
+			min-height: 100vh;
+			padding: 80px 100px;
+			position: relative;
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+			border-bottom: 2px solid rgba(0, 212, 255, 0.1);
+			display: none;
+			flex-direction: column;
+			justify-content: center
+		}
+
+		.slide:first-of-type {
+			display: flex
+		}
+
+		.title-slide {
+			background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+			text-align: center;
+			align-items: center
+		}
+
+		h1 {
+			font-size: 3.5em;
+			font-weight: 700;
+			color: #00d4ff;
+			text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+			margin-bottom: 20px
+		}
+
+		h2 {
+			font-size: 2.8em;
+			font-weight: 700;
+			color: #00d4ff;
+			margin-bottom: 40px
+		}
+
+		h3 {
+			font-size: 1.8em;
+			color: #0ff;
+			margin-bottom: 20px
+		}
+
+		.subtitle {
+			font-size: 1.4em;
+			color: #aaa;
+			margin-bottom: 10px
+		}
+
+		p {
+			font-size: 1.2em;
+			line-height: 1.8;
+			color: #ccc;
+			margin-bottom: 20px
+		}
+
+		ul,
+		ol {
+			font-size: 1.2em;
+			line-height: 2;
+			margin-left: 40px;
+			color: #ccc;
+			margin-bottom: 20px
+		}
+
+		li {
+			margin-bottom: 15px
+		}
+
+		.info-box {
+			background: rgba(0, 212, 255, 0.05);
+			border: 1px solid rgba(0, 212, 255, 0.2);
+			padding: 25px;
+			border-radius: 10px;
+			margin: 20px 0
+		}
+
+		.concept-box {
+			background: rgba(0, 255, 255, 0.05);
+			border-left: 4px solid #0ff;
+			padding: 20px;
+			margin: 20px 0
+		}
+
+		.key-point {
+			background: rgba(255, 100, 100, 0.1);
+			border-left: 4px solid #ff6464;
+			padding: 20px;
+			margin: 20px 0
+		}
+
+		.tech-term {
+			color: #00d4ff;
+			font-weight: 600
+		}
+
+		.discussion-box {
+			background: rgba(100, 200, 255, 0.1);
+			border: 1px solid rgba(100, 200, 255, 0.3);
+			padding: 25px;
+			border-radius: 10px;
+			margin: 20px 0
+		}
+
+		.center-content {
+			text-align: center
+		}
+
+		strong {
+			color: #00d4ff
+		}
+
+		.slide-nav {
+			position: fixed;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			gap: 20px;
+			z-index: 1000
+		}
+
+		.nav-btn {
+			background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+			color: #1a1a2e;
+			border: none;
+			padding: 12px 30px;
+			border-radius: 25px;
+			font-size: 1.1em;
+			font-weight: 600;
+			font-family: 'Poppins', sans-serif;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3)
+		}
+
+		.nav-btn:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5)
+		}
+
+		.nav-btn:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+			transform: none
+		}
+	</style>
 </head>
+
 <body>
 	<div class="presentation">
-		<div style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
-			<a href="../index.html" style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">← Back</a>
+		<div
+			style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+			<a href="../index.html"
+				style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
+				Back</a>
 			<span style="color:#00d4ff;font-size:0.95em">Grades 10-12 | Chapter 7: Data & Privacy</span>
 		</div>
 
-		<div class="slide title-slide center-content"><h1>Your Data: The Fuel for AI</h1><div class="subtitle">Session 2: Data & Privacy in AI</div><p style="margin-top:40px;font-size:1.3em"></p></div><div class="slide"><h2>Why AI Needs Data</h2><p>AI learns patterns from examples — without data it cannot generalize or make predictions.</p><div class="info-box"><h3>Why this matters:</h3><ul><li>Models need examples to learn; more data usually improves performance</li></ul></div></div><div class="slide"><h2>Types of Data AI Uses</h2><ul><li>Text (articles, chats)</li><li>Images and video</li><li>Behavioral data (clicks, time spent)</li><li>Personal info (profiles, purchases)</li></ul></div><div class="slide"><h2>How Companies Collect Your Data</h2><ul><li>Social media (likes, shares, time on page)</li><li>Shopping & browsing (cookies, purchase history)</li><li>Smart devices (voice assistants, wearables)</li><li>Third-party trackers and data brokers</li></ul></div><div class="slide"><h2>Hidden Data Collection</h2><div class="info-box"><p>Data brokers compile profiles from many sources; often users don't know how their data is collected or sold.</p></div></div><div class="slide"><h2>What Is Training Data?</h2><p>Training data are examples an AI learns from — labeled photos, transcripts, logs — the more and better the data, the better the model.</p></div><div class="slide"><h2>Examples: Image Recognition</h2><div class="info-box"><p>Image models may need millions of labeled photos (e.g., ImageNet) to learn robust features.</p></div></div><div class="slide"><h2>Where Training Data Comes From</h2><ul><li>Public datasets</li><li>Scraped web content</li><li>User contributions and uploaded data</li></ul></div><div class="slide"><h2>Data Privacy Laws: GDPR</h2><div class="info-box"><p>Key rights: consent, right to be forgotten, data portability, and requirements for lawful processing.</p></div></div><div class="slide"><h2>Data Privacy Laws: CCPA</h2><p>California law giving consumers rights over their personal information and requiring disclosure of data use.</p></div><div class="slide"><h2>Why These Laws Exist</h2><ul><li>To prevent misuse</li><li>To give people control over their data</li><li>To reduce harm from breaches and profiling</li></ul></div><div class="slide"><h2>Real Examples of Data Misuse</h2><ul><li>Target predicting pregnancy and sending ads</li><li>TikTok data access concerns</li><li>Large-scale data breaches (Equifax)</li></ul></div><div class="slide"><h2>Protecting Your Data</h2><div class="info-box"><p>Practical steps: strong passwords, 2FA, limit app permissions, use VPNs, and read privacy settings.</p></div></div><div class="slide"><h2>The Trade-off</h2><p>Convenience vs. privacy: many apps trade personalisation for data collection — know what you give up.</p></div><div class="slide"><h2>THINK-PAIR-SHARE Activity (7 mins)</h2><div class="info-box"><p>Question: "What data have you shared today?" Discuss privacy risks and what you would change.</p></div></div><div class="slide"><h2>Key Exam Points</h2><ul><li>Types of data and collection methods</li><li>Training data sources and risks</li><li>Main rights under GDPR & CCPA</li><li>Practical data protection steps</li></ul></div>
+		<div class="slide title-slide center-content">
+			<h1>Your Data: The Fuel for AI</h1>
+			<div class="subtitle">Lesson 2 - Chapter 1</div>
+		</div>
+		<div class="slide">
+			<h2>Without Data, AI Cannot Learn</h2>
+			<p><strong>Think of AI like a student:</strong></p>
+			<ul>
+				<li>A student needs textbooks and examples to learn</li>
+				<li>The more examples they see, the better they understand</li>
+				<li>AI is the same — it learns from data (examples)</li>
+			</ul>
+			<div class="info-box">
+				<p><strong>The Rule:</strong> More data = Better AI (usually). Examples: GPT-3 trained on ~45 TB of
+					text; image recognition needs millions of photos.</p>
+			</div>
+		</div>
+		<div class="slide">
+			<h2>Types of Data AI Uses</h2>
+			<ul>
+				<li><strong>Text Data</strong> - social posts, emails, search queries, books</li>
+				<li><strong>Images & Videos</strong> - photos, security footage, medical scans</li>
+				<li><strong>Behavior Data</strong> - clicks, time on page, shopping habits</li>
+				<li><strong>Personal Information</strong> - name, age, health, political views</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h2>Social Media Data Collection</h2>
+			<p>Everything they track: likes, comments, watch time, messages, location, device, and more. The business
+				model: "If you're not paying, you are the product."</p>
+		</div>
+		<div class="slide">
+			<h2>Shopping and Browsing</h2>
+			<ul>
+				<li><strong>Cookies</strong> - track across sites</li>
+				<li><strong>Purchase History</strong> - predicts future buys</li>
+				<li><strong>Search History</strong> - builds a profile of interests</li>
+				<li><strong>Third-Party Trackers</strong> - follow you across the web</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h2>Smart Devices</h2>
+			<ul>
+				<li><strong>Voice Assistants</strong> - record wake-word audio and uploads</li>
+				<li><strong>Fitness Trackers</strong> - heart rate, sleep, location</li>
+				<li><strong>Smart TVs</strong> - viewing habits, possible cameras/mics</li>
+				<li><strong>Smart Home</strong> - doorbells, thermostats, security cameras</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h2>Hidden Data Collection</h2>
+			<div class="info-box">
+				<p><strong>Data Brokers:</strong> Companies like Acxiom and Oracle compile and sell detailed profiles
+					assembled from public records, purchase history, trackers, and more.</p>
+			</div>
+		</div>
+		<div class="slide">
+			<h2>What Is Training Data?</h2>
+			<p>Training data = the examples used to teach AI. If training data is biased, the AI will be biased:
+				"Garbage in, garbage out."</p>
+		</div>
+		<div class="slide">
+			<h2>Where Training Data Comes From</h2>
+			<ul>
+				<li><strong>Public Datasets</strong> - ImageNet, Common Crawl, Wikipedia</li>
+				<li><strong>Scraped Web Content</strong> - Reddit, blogs, news</li>
+				<li><strong>User Contributions</strong> - CAPTCHAs and labeled tasks</li>
+				<li><strong>Purchased Data</strong> - from brokers</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h2>GDPR - European Data Protection</h2>
+			<p><strong>Key Rights:</strong> Right to access, right to be forgotten, data portability, right to know.
+				Penalties: up to 4% of global revenue or €20 million.</p>
+		</div>
+		<div class="slide">
+			<h2>The Right to Be Forgotten</h2>
+			<p>Under GDPR you can request deletion of your data; companies have 30 days to comply unless legal
+				exceptions apply.</p>
+		</div>
+		<div class="slide">
+			<h2>CCPA - California's Data Law</h2>
+			<p>Key rights: right to know, right to delete, right to opt-out of sale, and protection from discrimination
+				for exercising rights.</p>
+		</div>
+		<div class="slide">
+			<h2>Why These Laws Exist</h2>
+			<p>To prevent data breaches, misuse, and give people control over personal information. Examples: Equifax,
+				Yahoo, Marriott breaches.</p>
+		</div>
+		<div class="slide">
+			<h2>Target Pregnancy Prediction</h2>
+			<p>2012: Target predicted a teen's pregnancy via purchase patterns and sent targeted coupons before family
+				knew — a privacy invasion but legal.</p>
+		</div>
+		<div class="slide">
+			<h2>TikTok Data Concerns</h2>
+			<p>Controversy over ByteDance and potential access by Chinese authorities; collects a wide range of device
+				and behavioral data. Government bans on official devices in several countries.</p>
+		</div>
+		<div class="slide">
+			<h2>Equifax Breach</h2>
+			<p>2017 breach exposed sensitive data for 147 million people. Consequences: identity theft risk and a $700
+				million settlement.</p>
+		</div>
+		<div class="slide">
+			<h2>Protecting Your Data</h2>
+			<div class="info-box">
+				<ul>
+					<li>Use strong, unique passwords and a password manager</li>
+					<li>Enable two-factor authentication</li>
+					<li>Limit app permissions and review privacy settings</li>
+					<li>Use VPN on public Wi‑Fi and privacy browser extensions</li>
+					<li>Exercise GDPR/CCPA rights and opt out where possible</li>
+				</ul>
+			</div>
+		</div>
+		<div class="slide">
+			<h2>Privacy vs. Convenience</h2>
+			<p>Many services require data to function (maps, personalization). Consider trade-offs and prefer
+				privacy-first alternatives where possible.</p>
+		</div>
+		<div class="slide">
+			<h2>Think-Pair-Share Activity</h2>
+			<div class="discussion-box">
+				<p>Think: list data you shared today. Pair: discuss surprises and risks. Share: a few pairs report
+					insights.</p>
+			</div>
+		</div>
+		<div class="slide">
+			<h2>Key Exam Points</h2>
+			<ul>
+				<li>Terms: GDPR, CCPA, training data, data brokers</li>
+				<li>Facts: Equifax 147M, Target pregnancy example</li>
+				<li>Practice: How to protect your data</li>
+			</ul>
+		</div>
 
 	</div>
-	<div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
-	<script>let currentSlide=0;const slides=document.querySelectorAll('.slide');const totalSlides=slides.length;function showSlide(n){if(n>=totalSlides)currentSlide=totalSlides-1;if(n<0)currentSlide=0;slides.forEach(slide=>slide.style.display='none');slides[currentSlide].style.display='flex';document.getElementById('prevBtn').disabled=currentSlide===0;document.getElementById('nextBtn').disabled=currentSlide===totalSlides-1}function nextSlide(){currentSlide++;showSlide(currentSlide);window.scrollTo({top:0,behavior:'smooth'})}function previousSlide(){currentSlide--;showSlide(currentSlide);window.scrollTo({top:0,behavior:'smooth'})}showSlide(currentSlide)</script>
+	<div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+			class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
+	<script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
 </body>
+
 </html>
