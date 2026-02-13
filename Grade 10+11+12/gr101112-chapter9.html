@@ -40,6 +40,11 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
+        header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+        }
+
         .nav-back {
             display: inline-block;
             background: #00d4ff;
@@ -50,6 +55,11 @@
             font-weight: 600;
             margin-bottom: 30px;
             transition: all 0.3s;
+        }
+
+        .nav-back:hover {
+            background: #00a8d4;
+            transform: translateY(-2px);
         }
 
         .chapter-intro {
@@ -78,10 +88,84 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .session-icon {font-size: 3.5em; margin-bottom: 15px}
-        .session-link {display:inline-block;background:linear-gradient(135deg,#4CA9FF 0%,#A48CFF 100%);color:#fff;padding:10px 25px;border-radius:20px;text-decoration:none;font-weight:600}
-        footer {text-align:center;padding:20px;color:#666;margin-top:40px;border-top:2px solid #e0e0e0}
-        @media (max-width: 768px) {.sessions-grid {grid-template-columns:1fr}}
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #A48CFF;
+        }
+
+        .session-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .session-card h3 {
+            color: #4CA9FF;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .session-card p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .session-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .session-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(76, 169, 255, 0.4);
+        }
+
+        .learning-objectives {
+            background: rgba(76, 169, 255, 0.08);
+            border-left: 5px solid #4CA9FF;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            color: #4CA9FF;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            font-size: 1.1em;
+            line-height: 2;
+        }
+
+        .learning-objectives li:before {
+            content: "⭐ ";
+            color: #FFF48E;
+            margin-right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 40px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .sessions-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8em; }
+        }
     </style>
 </head>
 <body>
