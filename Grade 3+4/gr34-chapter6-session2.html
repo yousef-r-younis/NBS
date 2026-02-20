@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI for Grades 3-4 - Session 5</title>
+    <title>AI for Grades 3-4 - Session 6</title>
     <link rel="icon" type="image/png" href="../common logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -201,6 +201,13 @@
             margin: 30px 0;
         }
 
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
         .image-row {
             display: flex;
             justify-content: space-around;
@@ -212,19 +219,6 @@
         .image-item {
             text-align: center;
             animation: popIn 0.6s ease-out;
-        }
-
-        .image-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
-
-        .image-item p {
-            font-size: 1.2em;
-            color: #333;
-            margin-top: 10px;
         }
 
         .icon-grid {
@@ -290,6 +284,26 @@
             margin-bottom: 15px;
         }
 
+        .translation-card {
+            background: white;
+            border: 3px solid #A48CFF;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            animation: popIn 0.6s ease-out;
+        }
+
+        .language-flag {
+            font-size: 4em;
+            margin: 15px;
+        }
+
+        .arrow {
+            font-size: 3em;
+            color: #4CA9FF;
+            margin: 0 20px;
+        }
+
         strong {
             color: #4CA9FF;
             font-weight: 700;
@@ -300,19 +314,39 @@
             font-style: italic;
         }
 
-        .heart-box {
-            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 30px 0;
-            animation: floatIn 0.7s ease-out 0.3s both;
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
         }
 
-        .heart-box p {
+        .nav-btn {
+            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
             color: white;
-            font-size: 1.8em;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 169, 255, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 169, 255, 0.5);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
     </style>
 </head>
@@ -326,9 +360,9 @@
 
         <!-- TITLE SLIDE -->
         <div class="slide title-slide center-content">
-            <h1>Session 5: AI Helpers for People! 🤖❤️</h1>
-            <div class="subtitle">How AI Makes the World Better for Everyone!</div>
-            <div class="emoji-large">♿ 👁️ 🦻 🗣️ ❤️</div>
+            <h1>Session 2: Translation AI! 🌐</h1>
+            <div class="subtitle">How AI Speaks Every Language!</div>
+            <div class="emoji-large">🗣️ 🌍 🇬🇧 🇫🇷 🇪🇸 🇦🇪</div>
             <div class="subtitle" style="margin-top: 40px; color: white;"><strong>Teacher: Mr. Yousef Younis</strong></div>
         </div>
 
@@ -336,418 +370,481 @@
         <div class="slide">
             <div class="two-column">
                 <div>
-                    <h1>AI That Helps Everyone!</h1>
-                    <div class="subtitle">Technology for All People</div>
+                    <h1>AI That Speaks Your Language!</h1>
+                    <div class="subtitle">Breaking Language Barriers</div>
                     <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
-                        AI isn't just for fun and games! It helps REAL people with REAL challenges every single day. Today, we'll learn how AI makes the world more accessible for everyone! 🌍
+                        There are over 7,000 languages in the world! 🌍 How can we talk to someone who speaks a different language? AI can help! Today we learn about Translation AI!
                     </p>
                 </div>
                 <div style="text-align: center;">
-                    <div class="emoji-large" style="font-size: 8em;">❤️</div>
+                    <div class="emoji-large" style="font-size: 8em;">🌐</div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 2: What Does "Accessible" Mean? -->
+        <!-- Slide 2: The Language Problem -->
         <div class="slide">
-            <h2 style="color: #A48CFF;">What Does "Accessible" Mean?</h2>
-            <div class="content-box" style="margin-top: 30px;">
-                <p style="font-size: 1.5em; font-weight: 600;">
-                    Accessible = Everyone can use it! 🌟
+            <h2 style="color: #A48CFF;">The Language Problem 🤔</h2>
+            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
+                Imagine you meet a new friend from another country...
+            </p>
+            <div class="three-column" style="margin-top: 40px;">
+                <div class="translation-card">
+                    <div class="language-flag">🇬🇧</div>
+                    <h3 style="color: #4CA9FF;">English</h3>
+                    <p style="font-size: 1.3em; font-weight: 600;">"Hello!"</p>
+                </div>
+                <div class="translation-card">
+                    <div class="language-flag">🇫🇷</div>
+                    <h3 style="color: #4CA9FF;">French</h3>
+                    <p style="font-size: 1.3em; font-weight: 600;">"Bonjour!"</p>
+                </div>
+                <div class="translation-card">
+                    <div class="language-flag">🇪🇸</div>
+                    <h3 style="color: #4CA9FF;">Spanish</h3>
+                    <p style="font-size: 1.3em; font-weight: 600;">"¡Hola!"</p>
+                </div>
+            </div>
+            <div class="content-box" style="margin-top: 40px;">
+                <p style="font-size: 1.4em; text-align: center;">
+                    How do we understand each other? 🤷<br>
+                    <strong>AI to the rescue!</strong> 🦸
                 </p>
             </div>
-            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
-                Imagine if there was a playground, but some kids couldn't reach the swings or climb the stairs. That wouldn't be fair, right?
-            </p>
-            <p style="font-size: 1.3em; color: #666; margin-top: 20px;">
-                AI helps make technology work for <strong>EVERYONE</strong> — no matter if they can see, hear, walk, or type easily!
-            </p>
-            <div class="emoji-large" style="text-align: center; font-size: 6em; margin-top: 30px;">🌈</div>
         </div>
 
-        <!-- Slide 3: Different People, Different Needs -->
+        <!-- Slide 3: Meet Google Translate! -->
         <div class="slide">
-            <h2>Different People, Different Needs</h2>
-            <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
-                Everyone is different! Some people need extra help with certain things:
+            <h2>Meet Google Translate! 📱</h2>
+            <div class="subtitle">Your AI Language Helper</div>
+            <div class="two-column" style="margin-top: 30px;">
+                <div>
+                    <div class="content-box">
+                        <h3 style="color: #4CA9FF;">What is Google Translate?</h3>
+                        <p style="font-size: 1.2em;">
+                            It's an AI tool that changes words from one language to another language! Like magic! ✨
+                        </p>
+                    </div>
+                    <div class="purple-box">
+                        <h3 style="color: #A48CFF;">What can it do?</h3>
+                        <ul style="font-size: 1.1em;">
+                            <li><strong>Type</strong> words and get translation</li>
+                            <li><strong>Speak</strong> and hear translation</li>
+                            <li><strong>Take photo</strong> of text and see translation</li>
+                            <li><strong>Have conversations</strong> in different languages</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="demo-box">
+                        <div class="emoji-large" style="font-size: 6em;">📱</div>
+                        <h3>Translates Over 100 Languages!</h3>
+                        <div style="margin-top: 20px;">
+                            <span class="language-flag">🇬🇧</span>
+                            <span class="language-flag">🇫🇷</span>
+                            <span class="language-flag">🇪🇸</span>
+                            <span class="language-flag">🇩🇪</span>
+                            <span class="language-flag">🇨🇳</span>
+                            <span class="language-flag">🇯🇵</span>
+                            <span class="language-flag">🇦🇪</span>
+                            <span class="language-flag">🇰🇷</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How Does AI Learn Languages? -->
+        <div class="slide">
+            <h2 style="color: #4CA9FF;">How Does AI Learn Languages? 🧠</h2>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                You might think AI learns like you learn in school... but it's different! AI learns by looking at MILLIONS of examples!
+            </p>
+            <div class="content-box" style="margin-top: 40px;">
+                <h3 style="color: #4CA9FF;">How YOU Learn a Language:</h3>
+                <ol style="font-size: 1.2em;">
+                    <li>Teacher explains grammar rules 📚</li>
+                    <li>You memorize vocabulary 📖</li>
+                    <li>You practice speaking 🗣️</li>
+                    <li>You make mistakes and learn 💪</li>
+                </ol>
+            </div>
+            <div class="purple-box" style="margin-top: 30px;">
+                <h3 style="color: #A48CFF;">How AI Learns a Language:</h3>
+                <ol style="font-size: 1.2em;">
+                    <li>AI reads MILLIONS of already-translated documents 📄📄📄</li>
+                    <li>AI finds patterns: "This English word usually means this Arabic word" 🔍</li>
+                    <li>AI sees patterns in grammar and sentence structure 📊</li>
+                    <li>AI gets better with more examples! 📈</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Slide 5: Where AI Finds Examples -->
+        <div class="slide">
+            <h2>Where AI Finds Examples 📚</h2>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                AI needs to see the SAME text in DIFFERENT languages. Where does it find these?
             </p>
             <div class="icon-grid" style="margin-top: 40px;">
                 <div class="icon-item">
-                    <div class="icon">👁️</div>
-                    <div class="icon-label">Can't See Well</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to hear what's on screen</p>
+                    <div class="icon">🏛️</div>
+                    <div class="icon-label">UN Documents</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">United Nations translates everything into many languages!</p>
                 </div>
                 <div class="icon-item">
-                    <div class="icon">👂</div>
-                    <div class="icon-label">Can't Hear Well</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to see what people say</p>
+                    <div class="icon">📰</div>
+                    <div class="icon-label">News Articles</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Same news in different languages!</p>
                 </div>
                 <div class="icon-item">
-                    <div class="icon">✋</div>
-                    <div class="icon-label">Can't Type/Write</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need to speak to type</p>
+                    <div class="icon">📖</div>
+                    <div class="icon-label">Books</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Books translated into many languages!</p>
                 </div>
                 <div class="icon-item">
-                    <div class="icon">♿</div>
-                    <div class="icon-label">Use Wheelchairs</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need smart movement help</p>
+                    <div class="icon">🌐</div>
+                    <div class="icon-label">Websites</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Websites in multiple languages!</p>
                 </div>
                 <div class="icon-item">
-                    <div class="icon">🗣️</div>
-                    <div class="icon-label">Can't Speak Easily</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need computer to speak</p>
+                    <div class="icon">🎬</div>
+                    <div class="icon-label">Movie Subtitles</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Same movie, different subtitle languages!</p>
                 </div>
                 <div class="icon-item">
-                    <div class="icon">🧠</div>
-                    <div class="icon-label">Learn Differently</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Need things explained differently</p>
+                    <div class="icon">⚖️</div>
+                    <div class="icon-label">Legal Documents</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Official documents in many languages!</p>
                 </div>
-            </div>
-            <div class="heart-box" style="margin-top: 40px;">
-                <p style="font-size: 1.6em;">
-                    AI helps ALL these people! 💙
-                </p>
             </div>
         </div>
 
-        <!-- Slide 4: AI Helper #1 - Text-to-Speech -->
+        <!-- Slide 6: AI Finds Patterns -->
         <div class="slide">
-            <h2>AI Helper #1: Text-to-Speech 🗣️</h2>
-            <div class="subtitle">The Computer Reads to You!</div>
-            <div class="two-column" style="margin-top: 30px;">
-                <div>
-                    <p style="font-size: 1.2em; color: #666;">
-                        <strong>What is it?</strong> AI reads text OUT LOUD so you can hear it!
-                    </p>
-                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                        <strong>Who uses it?</strong> People who can't see the screen well, or anyone who wants to listen instead of read!
-                    </p>
-                    <div class="content-box" style="margin-top: 30px;">
-                        <h3 style="color: #4CA9FF;">How it works:</h3>
-                        <ol style="font-size: 1.1em;">
-                            <li>AI looks at the words on screen</li>
-                            <li>AI figures out how to say each word</li>
-                            <li>AI speaks the words out loud!</li>
-                        </ol>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div class="emoji-large" style="font-size: 8em;">📢</div>
-                    <div class="demo-box">
-                        <h3>Examples:</h3>
-                        <p style="font-size: 1.1em;">📱 Phone reading messages</p>
-                        <p style="font-size: 1.1em;">📚 Audiobooks</p>
-                        <p style="font-size: 1.1em;">🌐 Websites reading to you</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Let's Try Text-to-Speech! -->
-        <div class="slide center-content">
-            <h2 style="color: #A48CFF;">Let's Try It! 🎤</h2>
-            <div class="challenge-box" style="max-width: 800px;">
-                <p style="font-size: 1.5em; margin-bottom: 20px;">
-                    We're going to use Text-to-Speech right now!
-                </p>
-                <div style="font-size: 1.2em; text-align: left; margin-top: 30px;">
-                    <p>✨ Watch as the computer reads this sentence:</p>
-                    <div class="demo-box" style="margin-top: 20px; background: rgba(255,255,255,0.2);">
-                        <p style="font-size: 1.5em; color: white; font-weight: 600;">
-                            "Hello! I am an AI helping you learn. AI can make the world better for everyone!"
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <h2 style="color: #A48CFF;">AI Finds Patterns! 🔍</h2>
             <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
-                (Teacher: Use your device's text-to-speech feature to read the text above)
+                After reading millions of documents, AI notices patterns. Let's see an example:
             </p>
-        </div>
-
-        <!-- Slide 6: AI Helper #2 - Speech-to-Text -->
-        <div class="slide">
-            <h2>AI Helper #2: Speech-to-Text ⌨️</h2>
-            <div class="subtitle">The Computer Types What You Say!</div>
-            <div class="two-column" style="margin-top: 30px;">
-                <div style="text-align: center;">
-                    <div class="emoji-large" style="font-size: 8em;">🎤</div>
-                    <div class="demo-box">
-                        <h3>Examples:</h3>
-                        <p style="font-size: 1.1em;">💬 Voice typing messages</p>
-                        <p style="font-size: 1.1em;">📝 Dictating homework</p>
-                        <p style="font-size: 1.1em;">🗣️ Siri, Alexa, Google Assistant</p>
+            <div class="demo-box" style="margin-top: 40px;">
+                <h3>Example: English → Spanish</h3>
+                <div style="font-size: 1.3em; margin-top: 30px; line-height: 2.5;">
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                        <span style="background: rgba(76, 169, 255, 0.2); padding: 15px 30px; border-radius: 10px;">The cat</span>
+                        <span class="arrow">→</span>
+                        <span style="background: rgba(164, 140, 255, 0.2); padding: 15px 30px; border-radius: 10px;">El gato</span>
                     </div>
-                </div>
-                <div>
-                    <p style="font-size: 1.2em; color: #666;">
-                        <strong>What is it?</strong> You SPEAK and AI TYPES what you said!
-                    </p>
-                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                        <strong>Who uses it?</strong> People who can't type easily, or anyone who wants to talk instead of type!
-                    </p>
-                    <div class="purple-box" style="margin-top: 30px;">
-                        <h3 style="color: #A48CFF;">How it works:</h3>
-                        <ol style="font-size: 1.1em;">
-                            <li>AI listens to your voice</li>
-                            <li>AI breaks down the sounds</li>
-                            <li>AI matches sounds to words</li>
-                            <li>AI types the words!</li>
-                        </ol>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                        <span style="background: rgba(76, 169, 255, 0.2); padding: 15px 30px; border-radius: 10px;">The dog</span>
+                        <span class="arrow">→</span>
+                        <span style="background: rgba(164, 140, 255, 0.2); padding: 15px 30px; border-radius: 10px;">El perro</span>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7: Let's Try Speech-to-Text! -->
-        <div class="slide center-content">
-            <h2 style="color: #4CA9FF;">Let's Try It! 🎙️</h2>
-            <div class="challenge-box" style="max-width: 800px;">
-                <p style="font-size: 1.5em; margin-bottom: 20px;">
-                    We're going to use Speech-to-Text right now!
-                </p>
-                <div style="font-size: 1.2em; text-align: left; margin-top: 30px;">
-                    <p>✨ Try saying this sentence:</p>
-                    <div class="demo-box" style="margin-top: 20px; background: rgba(255,255,255,0.2);">
-                        <p style="font-size: 1.5em; color: white; font-weight: 600;">
-                            "AI is amazing and helps people every day!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
-                (Teacher: Open a text document and use voice typing feature. Students can try on tablets!)
-            </p>
-        </div>
-
-        <!-- Slide 8: AI Helper #3 - Smart Wheelchairs & Movement -->
-        <div class="slide">
-            <h2>AI Helper #3: Smart Wheelchairs ♿</h2>
-            <div class="subtitle">AI Helps People Move Safely!</div>
-            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
-                Some people use wheelchairs to move around. AI can make wheelchairs SUPER SMART! 🚀
-            </p>
-            <div class="content-box" style="margin-top: 30px;">
-                <h3 style="color: #4CA9FF;">What AI-powered wheelchairs can do:</h3>
-                <ul style="font-size: 1.2em;">
-                    <li><strong>Avoid obstacles</strong> — AI sees walls, people, furniture and moves around them</li>
-                    <li><strong>Find paths</strong> — AI figures out the best way to go from here to there</li>
-                    <li><strong>Follow voice commands</strong> — "Go to the kitchen!" and it goes!</li>
-                    <li><strong>Stay balanced</strong> — AI keeps the wheelchair steady and safe</li>
-                </ul>
-            </div>
-            <div class="two-column" style="margin-top: 40px;">
-                <div class="demo-box">
-                    <h3>It's like a self-driving car!</h3>
-                    <div class="emoji-large">🚗 → ♿</div>
-                    <p style="font-size: 1.1em;">Same AI that helps cars helps wheelchairs!</p>
-                </div>
-                <div class="demo-box">
-                    <h3>AI Sensors</h3>
-                    <div class="emoji-large">📡</div>
-                    <p style="font-size: 1.1em;">Cameras and sensors "see" the world!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 9: AI Helper #4 - Seeing for Blind People -->
-        <div class="slide">
-            <h2>AI Helper #4: AI Eyes 👁️</h2>
-            <div class="subtitle">AI Describes the World!</div>
-            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
-                Imagine if you couldn't see. How would you know what's around you? AI can DESCRIBE everything!
-            </p>
-            <div class="two-column" style="margin-top: 40px;">
-                <div>
-                    <div class="purple-box">
-                        <h3 style="color: #A48CFF;">Special AI Apps:</h3>
-                        <ul style="font-size: 1.1em;">
-                            <li><strong>Point phone camera</strong> at anything</li>
-                            <li><strong>AI recognizes</strong> what it sees</li>
-                            <li><strong>AI speaks</strong> the description!</li>
-                        </ul>
-                    </div>
-                    <div class="green-box" style="margin-top: 20px;">
-                        <h3>Examples AI Can Describe:</h3>
-                        <p style="font-size: 1.1em;">🍎 "This is a red apple"</p>
-                        <p style="font-size: 1.1em;">👤 "A person is walking towards you"</p>
-                        <p style="font-size: 1.1em;">🚪 "There's a door on your left"</p>
-                        <p style="font-size: 1.1em;">📰 "This is a newspaper headline"</p>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div class="emoji-large" style="font-size: 7em;">📱</div>
-                    <div class="emoji-large" style="font-size: 5em;">👁️ → 🗣️</div>
-                    <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                        AI becomes someone's eyes!
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 10: AI Helper #5 - Smart Hearing Aids -->
-        <div class="slide">
-            <h2>AI Helper #5: Smart Hearing Aids 🦻</h2>
-            <div class="subtitle">AI Helps You Hear Better!</div>
-            <div class="two-column" style="margin-top: 30px;">
-                <div style="text-align: center;">
-                    <div class="emoji-large" style="font-size: 8em;">👂</div>
-                </div>
-                <div>
-                    <p style="font-size: 1.2em; color: #666;">
-                        Some people can't hear well. Modern hearing aids have AI that makes them SUPER SMART!
-                    </p>
-                    <div class="content-box" style="margin-top: 30px;">
-                        <h3 style="color: #4CA9FF;">What AI hearing aids do:</h3>
-                        <ul style="font-size: 1.1em;">
-                            <li><strong>Focus on voices</strong> — Blocks out noise, keeps voices clear</li>
-                            <li><strong>Adjust volume</strong> — Quiet places? Louder. Loud places? Just right.</li>
-                            <li><strong>Recognize where sounds come from</strong> — AI knows if someone is talking behind you</li>
-                            <li><strong>Learn your preferences</strong> — AI remembers what you like!</li>
-                        </ul>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                        <span style="background: rgba(76, 169, 255, 0.2); padding: 15px 30px; border-radius: 10px;">The house</span>
+                        <span class="arrow">→</span>
+                        <span style="background: rgba(164, 140, 255, 0.2); padding: 15px 30px; border-radius: 10px;">La casa</span>
                     </div>
                 </div>
             </div>
             <div class="yellow-box" style="margin-top: 30px;">
                 <p style="font-size: 1.3em; font-weight: 600;">
-                    Imagine being at a noisy birthday party 🎉 AI helps you hear your friends talking, not just the loud music!
+                    AI learns: "The" in English usually means "El" or "La" in Spanish! 💡
                 </p>
             </div>
         </div>
 
-        <!-- Slide 11: Real Life Stories -->
+        <!-- Slide 7: Let's Try Translation! -->
         <div class="slide center-content">
-            <h2 style="color: #A48CFF;">Real People, Real Help! 💙</h2>
-            <div style="margin-top: 40px; max-width: 900px;">
-                <div class="demo-box" style="text-align: left; margin-bottom: 20px;">
-                    <h3 style="color: #4CA9FF;">👨‍🦯 Ahmed uses AI</h3>
-                    <p style="font-size: 1.2em;">
-                        Ahmed can't see, but his phone uses AI to describe everything around him. He can "see" his friends, read signs, and know when a car is coming!
-                    </p>
-                </div>
-                <div class="demo-box" style="text-align: left; margin-bottom: 20px;">
-                    <h3 style="color: #4CA9FF;">👧 Sara uses AI</h3>
-                    <p style="font-size: 1.2em;">
-                        Sara has trouble using her hands to type. She uses speech-to-text AI to do her homework by just talking! She can write stories, send messages, and do everything her friends do!
-                    </p>
-                </div>
-                <div class="demo-box" style="text-align: left;">
-                    <h3 style="color: #4CA9FF;">♿ Omar uses AI</h3>
-                    <p style="font-size: 1.2em;">
-                        Omar uses a smart wheelchair with AI. It helps him move through crowded hallways at school without bumping into anyone. He can even tell it where to go with his voice!
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 12: The Big Message -->
-        <div class="slide center-content">
-            <h2 style="font-size: 3.5em; color: #4CA9FF;">AI Isn't Just for Fun!</h2>
-            <div class="heart-box" style="margin-top: 50px; max-width: 800px;">
-                <p style="font-size: 1.8em; line-height: 1.6;">
-                    AI helps REAL people with REAL challenges. 💙<br>
-                    <br>
-                    Technology should work for EVERYONE!<br>
-                    <br>
-                    AI makes the world more fair and accessible! 🌍
+            <h2 style="color: #4CA9FF;">Let's Try Translation! 🎯</h2>
+            <div class="challenge-box" style="max-width: 800px;">
+                <p style="font-size: 1.5em; margin-bottom: 30px;">
+                    We're going to translate simple phrases!
                 </p>
+                <div style="font-size: 1.2em; text-align: left;">
+                    <p style="color: white;">Let's translate these English phrases:</p>
+                    <div class="demo-box" style="margin-top: 20px; background: rgba(255,255,255,0.9);">
+                        <p style="font-size: 1.4em; color: #333; margin: 15px 0;">1️⃣ "Hello"</p>
+                        <p style="font-size: 1.4em; color: #333; margin: 15px 0;">2️⃣ "Thank you"</p>
+                        <p style="font-size: 1.4em; color: #333; margin: 15px 0;">3️⃣ "How are you?"</p>
+                    </div>
+                </div>
             </div>
-            <div class="emoji-large" style="font-size: 7em; margin-top: 40px;">❤️🤖❤️</div>
-        </div>
-
-        <!-- Slide 13: Activity - Brainstorm! -->
-        <div class="slide">
-            <h2>Activity: Design an AI Helper! 💡</h2>
-            <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
-                Now it's YOUR turn to think like an inventor! What other ways could AI help people?
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                (Teacher: Use Google Translate to show these translations into Arabic, French, or Spanish!)
             </p>
+        </div>
+
+        <!-- Slide 8: Translation Results -->
+        <div class="slide">
+            <h2>Translation Magic! ✨</h2>
+            <div class="three-column" style="margin-top: 40px;">
+                <div class="translation-card">
+                    <h3 style="color: #4CA9FF;">English</h3>
+                    <div class="emoji-large">🇬🇧</div>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"Hello"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"Thank you"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"How are you?"</p>
+                </div>
+                <div class="translation-card">
+                    <h3 style="color: #4CA9FF;">Arabic</h3>
+                    <div class="emoji-large">🇦🇪</div>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"مرحبا"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"شكراً"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"كيف حالك؟"</p>
+                </div>
+                <div class="translation-card">
+                    <h3 style="color: #4CA9FF;">Spanish</h3>
+                    <div class="emoji-large">🇪🇸</div>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"Hola"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"Gracias"</p>
+                    <p style="font-size: 1.3em; margin: 10px 0;">"¿Cómo estás?"</p>
+                </div>
+            </div>
+            <div class="content-box" style="margin-top: 40px;">
+                <p style="font-size: 1.3em; text-align: center;">
+                    Same meaning, different words! AI understands the pattern! 🎯
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Camera Translation Magic -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">Camera Translation! 📸</h2>
+            <div class="subtitle">Point, See, Understand!</div>
+            <div class="two-column" style="margin-top: 30px;">
+                <div>
+                    <p style="font-size: 1.2em; color: #666;">
+                        Did you know? You can use your phone camera to translate text you see!
+                    </p>
+                    <div class="content-box" style="margin-top: 30px;">
+                        <h3 style="color: #4CA9FF;">How it works:</h3>
+                        <ol style="font-size: 1.2em;">
+                            <li><strong>Point</strong> your camera at text (sign, menu, book)</li>
+                            <li><strong>AI recognizes</strong> the letters (like we learned in Session 2!)</li>
+                            <li><strong>AI translates</strong> the text</li>
+                            <li><strong>You see</strong> the translation on your screen!</li>
+                        </ol>
+                    </div>
+                    <div class="yellow-box" style="margin-top: 20px;">
+                        <p style="font-size: 1.2em;">
+                            <strong>Two AI Powers Working Together:</strong><br>
+                            AI Vision (to see text) + AI Translation (to translate)! 🤖🤖
+                        </p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="demo-box">
+                        <div class="emoji-large" style="font-size: 5em;">📱</div>
+                        <div class="emoji-large" style="font-size: 4em;">👁️ + 🌐</div>
+                        <h3 style="margin-top: 20px;">Real-Time Translation!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Is AI Perfect? -->
+        <div class="slide">
+            <h2>Is AI Translation Perfect? 🤔</h2>
+            <div class="content-box" style="margin-top: 30px;">
+                <p style="font-size: 1.4em; text-align: center; font-weight: 600;">
+                    NO! AI makes mistakes! 😅
+                </p>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                Languages are tricky! The same words can mean different things. Let's see some funny examples:
+            </p>
+            <div class="purple-box" style="margin-top: 30px;">
+                <h3 style="color: #A48CFF;">Funny Translation Fails!</h3>
+                <div style="font-size: 1.2em; margin-top: 20px;">
+                    <p style="margin: 20px 0;">
+                        <strong>English:</strong> "It's raining cats and dogs!"<br>
+                        <strong>AI Translates Literally:</strong> "Cats and dogs are falling from sky!" 🐱🐶☔<br>
+                        <span style="color: #666; font-size: 0.9em;">(It just means "raining heavily!")</span>
+                    </p>
+                    <p style="margin: 20px 0;">
+                        <strong>English:</strong> "Break a leg!" (Good luck!)<br>
+                        <strong>AI Might Think:</strong> "Hurt your leg!" 🦵💔<br>
+                        <span style="color: #666; font-size: 0.9em;">(It's an expression for good luck!)</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Why Does AI Make Mistakes? -->
+        <div class="slide">
+            <h2 style="color: #4CA9FF;">Why Does AI Make Mistakes? 🧐</h2>
+            <div class="icon-grid" style="margin-top: 40px;">
+                <div class="icon-item">
+                    <div class="icon">🎭</div>
+                    <div class="icon-label">Idioms</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Special phrases that don't translate word-by-word</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📚</div>
+                    <div class="icon-label">Context</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Same word can mean different things!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎨</div>
+                    <div class="icon-label">Culture</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Different cultures say things differently</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🆕</div>
+                    <div class="icon-label">New Words</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI hasn't learned all new slang yet</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🔤</div>
+                    <div class="icon-label">Grammar Rules</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Every language has different rules</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">❤️</div>
+                    <div class="icon-label">Emotions</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Hard to translate feelings and tone</p>
+                </div>
+            </div>
+            <div class="yellow-box" style="margin-top: 40px;">
+                <p style="font-size: 1.3em; text-align: center;">
+                    But AI is getting better EVERY DAY! The more it learns, the smarter it gets! 📈
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Activity - Translation Challenge! -->
+        <div class="slide">
+            <h2 style="color: #A48CFF;">Activity: Translation Challenge! 🎮</h2>
             <div class="challenge-box" style="margin-top: 30px;">
                 <p style="font-size: 1.5em;">
-                    Think of someone who needs help with something, and design an AI tool to help them!
+                    Let's translate YOUR name and a simple phrase!
                 </p>
             </div>
             <div class="content-box" style="margin-top: 30px;">
-                <h3 style="color: #4CA9FF;">Questions to think about:</h3>
-                <ul style="font-size: 1.2em;">
-                    <li>What challenge does someone face?</li>
-                    <li>How could AI help them?</li>
-                    <li>What would your AI tool do?</li>
-                    <li>What would you name it?</li>
-                </ul>
+                <h3 style="color: #4CA9FF;">Steps:</h3>
+                <ol style="font-size: 1.2em;">
+                    <li>Open Google Translate on your tablet/phone</li>
+                    <li>Type your name in English</li>
+                    <li>Choose a language you want to learn (Arabic, Spanish, French, etc.)</li>
+                    <li>See how your name looks in that language!</li>
+                    <li>Try translating: "I love learning about AI!"</li>
+                </ol>
             </div>
-            <div class="demo-box" style="margin-top: 30px;">
-                <p style="font-size: 1.1em;"><strong>Example:</strong> "AI Buddy" — An AI robot that helps elderly people remember to take their medicine and calls for help if they fall!</p>
+            <div class="purple-box" style="margin-top: 30px;">
+                <h3 style="color: #A48CFF;">Discussion Questions:</h3>
+                <ul style="font-size: 1.2em;">
+                    <li>Does your name change in other languages?</li>
+                    <li>Which language looks coolest to you?</li>
+                    <li>Can you hear the pronunciation? (Click the speaker icon!)</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Slide 14: Discussion Time -->
+        <!-- Slide 13: Real-World Uses -->
+        <div class="slide">
+            <h2>How People Use Translation AI! 🌍</h2>
+            <div class="icon-grid" style="margin-top: 40px;">
+                <div class="icon-item">
+                    <div class="icon">✈️</div>
+                    <div class="icon-label">Travelers</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Read menus, signs, and ask for directions!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🏫</div>
+                    <div class="icon-label">Students</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Learn new languages faster!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💼</div>
+                    <div class="icon-label">Business People</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Talk to clients from other countries!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">👨‍⚕️</div>
+                    <div class="icon-label">Doctors</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Help patients who speak different languages!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">👨‍👩‍👧‍👦</div>
+                    <div class="icon-label">Families</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Talk to relatives in other countries!</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎮</div>
+                    <div class="icon-label">Gamers</div>
+                    <p style="font-size: 1em; color: #666; margin-top: 10px;">Play with friends around the world!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Breaking Barriers -->
+        <div class="slide center-content">
+            <h2 style="font-size: 3.2em; color: #4CA9FF;">Translation AI Breaks Barriers! 🌈</h2>
+            <div class="challenge-box" style="max-width: 800px; margin-top: 40px;">
+                <p style="font-size: 1.6em; line-height: 1.8;">
+                    Before AI Translation:<br>
+                    People couldn't talk if they spoke different languages 😔<br>
+                    <br>
+                    With AI Translation:<br>
+                    EVERYONE can communicate! 🎉<br>
+                    <br>
+                    AI brings the world closer together! 🌍
+                </p>
+            </div>
+            <div class="emoji-large" style="font-size: 7em; margin-top: 40px;">🤝🌏</div>
+        </div>
+
+        <!-- Slide 15: Discussion Time -->
         <div class="slide">
             <h2 style="color: #A48CFF;">Discussion Time! 💬</h2>
-            <p style="margin-top: 30px; font-size: 1.3em; color: #666;">
-                Let's talk about what we learned! Think about these questions:
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                Let's talk about what we learned today!
             </p>
             <div class="purple-box" style="margin-top: 40px;">
                 <h3 style="color: #A48CFF; margin-bottom: 25px;">Questions to Discuss:</h3>
                 <div style="font-size: 1.2em; line-height: 2.2;">
-                    <p>1️⃣ Which AI helper did you find most amazing? Why?</p>
-                    <p>2️⃣ Do you know anyone who might benefit from these AI tools?</p>
-                    <p>3️⃣ What other problems could AI help solve?</p>
-                    <p>4️⃣ Why is it important that technology works for everyone?</p>
-                    <p>5️⃣ How does AI make the world more fair?</p>
+                    <p>1️⃣ Have you ever used Google Translate? When?</p>
+                    <p>2️⃣ What language would you like to learn? Why?</p>
+                    <p>3️⃣ How does AI make the world smaller?</p>
+                    <p>4️⃣ If you traveled to another country, how would translation AI help you?</p>
+                    <p>5️⃣ Do you think AI will get better at translating? How?</p>
                 </div>
             </div>
-            <div class="emoji-large" style="text-align: center; font-size: 6em; margin-top: 40px;">🤔💭</div>
         </div>
 
-        <!-- Slide 15: Key Takeaways -->
+        <!-- Slide 16: Key Takeaways -->
         <div class="slide">
             <h2>What We Learned Today! 🌟</h2>
-            <div class="icon-grid" style="margin-top: 40px;">
-                <div class="icon-item">
-                    <div class="icon">🗣️</div>
-                    <div class="icon-label">Text-to-Speech</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI reads to you!</p>
-                </div>
-                <div class="icon-item">
-                    <div class="icon">⌨️</div>
-                    <div class="icon-label">Speech-to-Text</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI types what you say!</p>
-                </div>
-                <div class="icon-item">
-                    <div class="icon">♿</div>
-                    <div class="icon-label">Smart Wheelchairs</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI helps movement!</p>
-                </div>
-                <div class="icon-item">
-                    <div class="icon">👁️</div>
-                    <div class="icon-label">AI Eyes</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI describes the world!</p>
-                </div>
-                <div class="icon-item">
-                    <div class="icon">🦻</div>
-                    <div class="icon-label">Smart Hearing</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI improves hearing!</p>
-                </div>
-                <div class="icon-item">
-                    <div class="icon">❤️</div>
-                    <div class="icon-label">Technology for All</div>
-                    <p style="font-size: 1em; color: #666; margin-top: 10px;">AI helps everyone!</p>
-                </div>
+            <div class="content-box" style="margin-top: 40px;">
+                <ul style="font-size: 1.3em;">
+                    <li><strong>AI learns languages</strong> by reading millions of already-translated documents</li>
+                    <li><strong>AI finds patterns</strong> between words in different languages</li>
+                    <li><strong>Google Translate</strong> can translate text, speech, and even pictures!</li>
+                    <li><strong>AI isn't perfect</strong> — it makes mistakes with idioms and context</li>
+                    <li><strong>Translation AI helps people</strong> communicate across language barriers</li>
+                    <li><strong>More examples = smarter AI</strong> — it gets better every day!</li>
+                </ul>
+            </div>
+            <div class="demo-box" style="margin-top: 40px;">
+                <div class="emoji-large" style="font-size: 5em;">🌐❤️</div>
+                <h3 style="margin-top: 20px;">AI helps us understand each other!</h3>
             </div>
         </div>
 
-        <!-- Slide 16: Closing -->
+        <!-- Slide 17: Closing -->
         <div class="slide title-slide center-content">
-            <h1>Amazing Work! 🎉</h1>
-            <div class="subtitle">You learned how AI helps people!</div>
-            <div class="heart-box" style="max-width: 700px; margin-top: 40px;">
+            <h1>Fantastic Work! 🎉</h1>
+            <div class="subtitle">You're becoming AI experts!</div>
+            <div class="challenge-box" style="max-width: 700px; margin-top: 40px; background: linear-gradient(135deg, #FFF48E 0%, #4CA9FF 100%);">
                 <p style="font-size: 1.6em;">
-                    Remember: AI isn't just cool technology.<br>
-                    It's a tool that makes the world better for EVERYONE! 💙
+                    Remember: AI Translation helps people from different countries become friends! 🤝<br>
+                    <br>
+                    Language barriers are disappearing thanks to AI! 🌍
                 </p>
             </div>
-            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🤖❤️🌍</div>
+            <div class="emoji-large" style="font-size: 6em; margin-top: 40px;">🌐🗣️✨</div>
             <p style="color: white; font-size: 1.4em; margin-top: 40px;">
-                Next Session: Translation AI — How computers understand different languages! 🌐
+                Next Session: How Computers Learn — The training process behind AI! 🧠
             </p>
         </div>
 
