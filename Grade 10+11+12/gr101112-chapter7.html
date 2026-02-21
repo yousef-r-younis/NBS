@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade 10-11-12 - Chapter 7: Foundations of Large Language Models</title>
     <link rel="icon" type="image/png" href="../common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -20,244 +17,287 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        header .subtitle {
-            font-size: 1.4em;
-            opacity: 0.95;
+            padding: 30px 20px;
         }
 
         .nav-back {
             display: inline-block;
-            background: #00d4ff;
-            color: #1a1a2e;
-            padding: 12px 25px;
-            border-radius: 5px;
+            background: #4CA9FF;
+            color: white;
+            padding: 11px 24px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
+            font-size: .95em;
             margin-bottom: 30px;
-            transition: all 0.3s;
+            transition: all .3s;
+            box-shadow: 0 3px 12px rgba(76,169,255,.3);
         }
+        .nav-back:hover { background: #2a94ff; transform: translateY(-2px); }
 
-        .nav-back:hover {
-            background: #00a8d4;
-            transform: translateY(-2px);
+        header {
+            background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
+            color: white;
+            padding: 45px 40px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(76,169,255,.3);
         }
+        .chapter-tag {
+            display: inline-block;
+            background: rgba(255,255,255,.2);
+            border: 1px solid rgba(255,255,255,.4);
+            padding: 5px 18px;
+            border-radius: 20px;
+            font-size: .85em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: .5px;
+        }
+        header h1 { font-size: 2.4em; margin-bottom: 10px; text-shadow: 1px 2px 6px rgba(0,0,0,.2); }
+        header .subtitle { font-size: 1.2em; opacity: .92; }
 
         .chapter-intro {
             background: white;
             border-left: 5px solid #4CA9FF;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 28px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+            font-size: 1.05em;
+            line-height: 1.85;
+            color: #444;
+        }
+        .chapter-intro strong { color: #4CA9FF; }
+
+        .learning-objectives {
+            background: rgba(76,169,255,.06);
+            border-left: 5px solid #4CA9FF;
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+        }
+        .learning-objectives h2 { color: #4CA9FF; margin-bottom: 16px; font-size: 1.3em; }
+        .learning-objectives ul { list-style: none; font-size: 1.02em; line-height: 2.1; }
+        .learning-objectives li::before { content: "⭐ "; margin-right: 6px; }
+
+        .section-title {
+            color: #4CA9FF;
+            font-size: 1.6em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
         }
 
         .sessions-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 22px;
+            margin-bottom: 35px;
         }
 
         .session-card {
             background: white;
-            border: 3px solid #4CA9FF;
-            border-radius: 12px;
-            padding: 30px;
+            border: 2.5px solid #4CA9FF;
+            border-radius: 14px;
+            padding: 28px 22px;
             text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all .3s;
+            box-shadow: 0 4px 14px rgba(0,0,0,.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
         .session-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 28px rgba(76,169,255,.2);
             border-color: #A48CFF;
         }
+        .session-card.exam-card { border-color: #A48CFF; }
+        .session-card.exam-card:hover { border-color: #4CA9FF; }
 
-        .session-icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-        }
-
-        .session-card h3 {
-            color: #4CA9FF;
-            font-size: 1.3em;
+        .session-icon { font-size: 3em; margin-bottom: 12px; }
+        .week-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CA9FF, #A48CFF);
+            color: white;
+            font-size: .75em;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: 12px;
             margin-bottom: 10px;
+            letter-spacing: .3px;
         }
+        .week-badge.exam { background: linear-gradient(135deg, #A48CFF, #7c3aed); }
 
-        .session-card p {
-            color: #666;
-            font-size: 1em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+        .session-card h3 { color: #333; font-size: 1.1em; margin-bottom: 10px; }
+        .session-card p { color: #666; font-size: .95em; line-height: 1.65; margin-bottom: 20px; flex-grow: 1; }
 
         .session-link {
             display: inline-block;
             background: linear-gradient(135deg, #4CA9FF 0%, #A48CFF 100%);
             color: white;
-            padding: 10px 25px;
-            border-radius: 20px;
+            padding: 10px 24px;
+            border-radius: 22px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            font-size: .95em;
+            transition: all .3s;
+            box-shadow: 0 3px 12px rgba(76,169,255,.25);
         }
+        .session-link:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(76,169,255,.4); }
+        .session-link.exam-link { background: linear-gradient(135deg, #A48CFF, #7c3aed); }
+        .session-link.exam-link:hover { box-shadow: 0 6px 20px rgba(164,140,255,.4); }
 
-        .session-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(76, 169, 255, 0.4);
+        /* Handouts row */
+        .handouts-section {
+            background: white;
+            border: 2px solid rgba(164,140,255,.35);
+            border-radius: 14px;
+            padding: 26px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.07);
         }
-
-        .learning-objectives {
-            background: rgba(76, 169, 255, 0.08);
-            border-left: 5px solid #4CA9FF;
-            padding: 25px;
+        .handouts-section h3 { color: #A48CFF; font-size: 1.2em; margin-bottom: 18px; }
+        .handout-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .handout-link {
+            display: block;
+            background: rgba(164,140,255,.07);
+            border: 1.5px solid rgba(164,140,255,.3);
             border-radius: 10px;
-            margin-bottom: 40px;
+            padding: 14px 18px;
+            text-decoration: none;
+            color: #555;
+            font-size: .92em;
+            font-weight: 600;
+            text-align: center;
+            transition: all .25s;
         }
+        .handout-link:hover { background: rgba(164,140,255,.15); border-color: #A48CFF; color: #A48CFF; transform: translateY(-2px); }
+        .handout-link span { display: block; font-size: 1.5em; margin-bottom: 5px; }
+        .handout-link small { font-weight: 400; color: #999; display: block; margin-top: 3px; }
 
-        .learning-objectives h2 {
-            color: #4CA9FF;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+        .big-idea {
+            background: rgba(164,140,255,.07);
+            border-left: 5px solid #A48CFF;
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            font-size: 1.05em;
+            line-height: 1.85;
+            color: #444;
         }
-
-        .learning-objectives ul {
-            list-style: none;
-            font-size: 1.1em;
-            line-height: 2;
-        }
-
-        .learning-objectives li:before {
-            content: "⭐ ";
-            color: #FFF48E;
-            margin-right: 10px;
-        }
+        .big-idea h3 { color: #A48CFF; margin-bottom: 12px; font-size: 1.15em; }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: #666;
-            margin-top: 40px;
-            border-top: 2px solid #e0e0e0;
+            color: #888;
+            font-size: .92em;
+            margin-top: 10px;
+            border-top: 2px solid #e8e8e8;
         }
 
-        @media (max-width: 768px) {
-            .sessions-grid {
-                grid-template-columns: 1fr;
-            }
-
-            header h1 {
-                font-size: 1.8em;
-            }
+        @media(max-width:768px) {
+            .sessions-grid, .handout-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.7em; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="nav-back">← Back to Home</a>
+<div class="container">
 
-        <header>
-            <h1>Chapter 7: Foundations of Large Language Models</h1>
-            <p class="subtitle">Understanding How Modern AI Systems Actually Work</p>
-        </header>
+    <a href="../index.html" class="nav-back">← Back to Home</a>
 
-        <div class="chapter-intro">
-            <h2 style="color: #4CA9FF; margin-bottom: 15px;">Welcome to Chapter 7!</h2>
-            <p style="font-size: 1.1em; line-height: 1.8;">
-                Before building AI solutions, you need to understand how modern AI systems like ChatGPT actually work. 
-                This chapter has three lessons: <strong>How LLMs Work (Part 1)</strong> — tokens, training data, and what LLMs can do; 
-                <strong>How LLMs Work (Part 2)</strong> — context windows, hallucinations, and when not to use AI; 
-                and <strong>AI in the Real World</strong> — an analysis framework and case studies (ChatGPT, Grammarly, Spotify) so you can see what makes AI succeed or fail.
-            </p>
-        </div>
+    <header>
+        <div class="chapter-tag">Grade 10–11–12 • AI Learning Program</div>
+        <h1>Chapter 7: Foundations of Large Language Models</h1>
+        <p class="subtitle">Understanding How Modern AI Systems Actually Work</p>
+    </header>
 
-        <div class="learning-objectives">
-            <h2>What You'll Learn:</h2>
-            <ul>
-                <li><strong>Lesson 1:</strong> Tokens, training data, neural networks (high level), and what LLMs can do</li>
-                <li><strong>Lesson 2:</strong> Context windows, hallucinations, limitations vs capabilities, and when NOT to use AI</li>
-                <li><strong>Lesson 3:</strong> AI product analysis framework, case studies (OpenAI/ChatGPT, Grammarly, Spotify), problem–solution fit, and what makes AI succeed or fail</li>
-            </ul>
-        </div>
-
-        <h2 style="color: #4CA9FF; font-size: 1.8em; margin-bottom: 30px; text-align: center;">
-            The Three Lessons in This Chapter:
-        </h2>
-
-        <div class="sessions-grid">
-
-            <div class="session-card">
-                <div class="session-icon">🔤</div>
-                <h3>Lesson 1 — How LLMs Work (Part 1)</h3>
-                <p>
-                    See how text becomes tokens, where training data comes from, and how neural networks learn at a high level. 
-                    By the end you’ll have a clear picture of what LLMs can — and can’t — actually do.
-                </p>
-                <a href="gr101112-chapter7-session1.html" class="session-link">
-                    Start Lesson 1 →
-                </a>
-            </div>
-
-            <div class="session-card">
-                <div class="session-icon">🧠</div>
-                <h3>Lesson 2 — How LLMs Work (Part 2)</h3>
-                <p>
-                    Dig into context windows (why AI “forgets”), why models hallucinate, and where their limits are. 
-                    You’ll learn when to lean on AI and when it’s better not to.
-                </p>
-                <a href="gr101112-chapter7-session2.html" class="session-link">
-                    Start Lesson 2 →
-                </a>
-            </div>
-
-            <div class="session-card">
-                <div class="session-icon">🌐</div>
-                <h3>Lesson 3 — AI in the Real World</h3>
-                <p>
-                    Use a simple framework to analyze real AI products: ChatGPT, Grammarly, and Spotify. 
-                    See how problem–solution fit and design choices make AI succeed or fail in practice.
-                </p>
-                <a href="gr101112-chapter7-session3.html" class="session-link">
-                    Start Lesson 3 →
-                </a>
-            </div>
-
-        </div>
-
-        <div style="background: rgba(164, 140, 255, 0.08); border-left: 5px solid #A48CFF; padding: 25px; border-radius: 10px; margin-bottom: 40px;">
-            <h3 style="color: #A48CFF; margin-bottom: 15px;">💡 Big Idea:</h3>
-            <p style="font-size: 1.1em; line-height: 1.8;">
-                Large Language Models don’t “think” — they predict the next token based on patterns learned from data. 
-                Understanding this, plus how real products use AI (and when they shouldn’t), changes how you use and build AI forever.
-            </p>
-        </div>
-
-        <footer>
-            <p>Chapter 7 of Grade 10-11-12 AI Learning Program • Teacher: Mr. Yousef Younis</p>
-            <p>💙 Building deep understanding before building AI systems!</p>
-        </footer>
+    <div class="chapter-intro">
+        <strong>Welcome to Chapter 7!</strong> Before building AI solutions, you need to understand how modern AI systems like ChatGPT actually work — and why they sometimes get things badly wrong.
+        This chapter runs over <strong>3 weeks</strong>: <strong>Week 1</strong> covers how LLMs work and why they fail;
+        <strong>Week 2</strong> is fully hands-on — you'll test real AI tools and explore AI careers;
+        and <strong>Week 3</strong> is your exam.
     </div>
-</body>
 
+    <div class="learning-objectives">
+        <h2>What You'll Learn</h2>
+        <ul>
+            <li><strong>Week 1:</strong> Tokens, training data, context windows, hallucinations, and the key limitations of LLMs</li>
+            <li><strong>Week 2:</strong> Test a real AI tool and document what you find; explore AI careers and how AI will affect your field</li>
+            <li><strong>Week 3:</strong> 20-question MCQ exam covering all concepts from Weeks 1 & 2</li>
+        </ul>
+    </div>
+
+    <p class="section-title">The 3-Week Plan</p>
+
+    <div class="sessions-grid">
+
+        <div class="session-card">
+            <div class="session-icon">🔤</div>
+            <span class="week-badge">Week 1</span>
+            <h3>How LLMs Work & Why They Fail</h3>
+            <p>
+                Learn how text becomes tokens, how LLMs are trained, what context windows are, and why AI confidently makes things up. The theory behind everything.
+            </p>
+            <a href="gr101112-chapter7-session1.html" class="session-link">Start Week 1 →</a>
+        </div>
+
+        <div class="session-card">
+            <div class="session-icon">🧪</div>
+            <span class="week-badge">Week 2</span>
+            <h3>Let's Get Hands-On</h3>
+            <p>
+                Test a real AI tool, try to make it hallucinate, and document what you find. Then explore AI careers and reflect on how AI will change your own field.
+            </p>
+            <a href="gr101112-chapter7-session2.html" class="session-link">Start Week 2 →</a>
+        </div>
+
+        <div class="session-card exam-card">
+            <div class="session-icon">📝</div>
+            <span class="week-badge exam">Week 3</span>
+            <h3>Exam</h3>
+            <p>
+                20 multiple-choice questions across 6 sections. Tests your understanding of LLM concepts, hallucinations, context windows, limitations, and real-world application.
+            </p>
+            <a href="gr101112-chapter7-session3.html" class="session-link exam-link">Take the Exam →</a>
+        </div>
+
+    </div>
+
+    <!-- Handouts -->
+    <div class="handouts-section">
+        <h3>📄 Student Handouts</h3>
+        <div class="handout-grid">
+            <a href="gr101112-chapter7-handouts.html" class="handout-link">
+                <span>🔤</span>
+                Week 1 Handout
+                <small>How LLMs Work & Why They Fail</small>
+            </a>
+            <a href="gr101112-chapter7-handouts.html" class="handout-link">
+                <span>🧪</span>
+                Week 2 Handout
+                <small>Hands-On Activity Worksheets + Career Reflection</small>
+            </a>
+        </div>
+    </div>
+
+    <div class="big-idea">
+        <h3>💡 Big Idea</h3>
+        Large Language Models don't "think" — they predict the next token based on patterns learned from data.
+        Understanding this, plus knowing when and how AI fails, changes how you use and build AI forever.
+    </div>
+
+    <footer>
+        <p>Chapter 7 of Grade 10–11–12 AI Learning Program • Teacher: Mr. Yousef Younis</p>
+        <p>💙 Building deep understanding before building AI systems!</p>
+    </footer>
+
+</div>
+</body>
 </html>
