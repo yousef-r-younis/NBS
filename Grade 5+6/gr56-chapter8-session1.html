@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & Privacy - Grades 5-6</title>
+    <title>AI Language Understanding - Grades 5-6</title>
     <link rel="icon" type="image/png" href="../common logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -187,154 +187,142 @@
             style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
             <a href="../index.html"
                 style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
-                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Chapter 2: AI in Action</span></div>
+                Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 5-6 | Chapter 8: Being Smart & Safe Online</span></div>
         <div class="slide title-slide center-content">
-            <h1>AI & Your Privacy 🔒</h1>
-            <div class="subtitle">Who's Collecting Your Data?</div>
-            <p style="margin-top:40px;font-size:1.3em">Session 7: Data Privacy & AI</p>
+            <h1>How AI Understands Language 🗣️</h1>
+            <div class="subtitle">Natural Language Processing</div>
+            <p style="margin-top:40px;font-size:1.3em">Session 9: AI & Communication</p>
         </div>
         <div class="slide">
-            <h2>What Data Are Apps Collecting? 📊</h2>
-            <p>Every app on your device is collecting information about you. This data trains AI and targets ads.</p>
+            <h2>Natural Language Processing (NLP) 🤖</h2>
+            <p><span class="tech-term">Natural Language Processing</span> is how AI learns to understand and use human
+                language - the words we speak and write.</p>
             <div class="info-box">
-                <h3>What Apps Know About You:</h3>
+                <h3>NLP Examples:</h3>
                 <ul>
-                    <li><strong>Location:</strong> Where you are right now (GPS)</li>
-                    <li><strong>Contacts:</strong> Who your friends are</li>
-                    <li><strong>Photos:</strong> Everything you photograph</li>
-                    <li><strong>Browsing history:</strong> Every website you visit</li>
-                    <li><strong>Keyboard input:</strong> Everything you type</li>
-                    <li><strong>Messages:</strong> Texts and emails</li>
-                    <li><strong>Voice:</strong> What you say (Siri, Alexa)</li>
-                    <li><strong>Behavior:</strong> How long you use apps, what you click</li>
+                    <li>ChatGPT and Chatbots answering your questions</li>
+                    <li>Google Translate converting between languages</li>
+                    <li>Siri/Alexa understanding voice commands</li>
+                    <li>Email spam filters detecting junk mail</li>
+                    <li>Social media removing hate speech</li>
                 </ul>
             </div>
         </div>
         <div class="slide">
-            <h2>App Permissions Explained 🔑</h2>
-            <p>When you install an app, it asks for <span class="tech-term">permissions</span> - permission to access
-                your data.</p>
+            <h2>Tokenization: Breaking Down Words 🔪</h2>
+            <p>AI can't understand "hello world" as words like you do. First, it must break language into pieces called
+                <span class="tech-term">tokens</span>.</p>
             <div class="concept-box">
-                <h3>Common Permissions:</h3>
+                <h3>How Tokenization Works:</h3>
+                <p><strong>Sentence:</strong> "Can't believe it's Friday!"</p>
                 <ul>
-                    <li><strong>Camera:</strong> App can turn on your camera</li>
-                    <li><strong>Microphone:</strong> App can listen and record</li>
-                    <li><strong>Location:</strong> App knows where you are</li>
-                    <li><strong>Photos:</strong> App can see all your pictures</li>
-                    <li><strong>Contacts:</strong> App can see your friend list</li>
-                    <li><strong>Calendar:</strong> App sees your schedules</li>
+                    <li><strong>Token 1:</strong> "Can't" (contract + apostrophe)</li>
+                    <li><strong>Token 2:</strong> "believe"</li>
+                    <li><strong>Token 3:</strong> "it's" (contraction)</li>
+                    <li><strong>Token 4:</strong> "Friday"</li>
+                    <li><strong>Token 5:</strong> "!" (punctuation)</li>
                 </ul>
-                <p style="margin-top:15px"><strong>Question:</strong> Does a flashlight app really need access to your
-                    contacts?</p>
             </div>
         </div>
         <div class="slide">
-            <h2>Why Companies Want Your Data 💰</h2>
-            <p>Data is extremely valuable. Companies use it to:</p>
+            <h2>Word Embeddings: AI's Number System 🔢</h2>
+            <p>After tokenizing, AI converts each word into a series of numbers. This is called a <span
+                    class="tech-term">word embedding</span>.</p>
             <div class="info-box">
-                <h3>Data Use Cases:</h3>
+                <h3>The Concept:</h3>
                 <ul>
-                    <li><strong>Train AI:</strong> Your data helps teach AI systems</li>
-                    <li><strong>Ad targeting:</strong> Show you relevant advertisements</li>
-                    <li><strong>Sell to advertisers:</strong> Ad companies buy your data</li>
-                    <li><strong>Predict behavior:</strong> Guess what you'll buy</li>
-                    <li><strong>Improve products:</strong> Learn what users like</li>
+                    <li>"cat" might become [0.2, -0.5, 0.8, 0.1...]</li>
+                    <li>"kitten" might be [0.25, -0.48, 0.75, 0.12...]</li>
+                    <li>Similar words have similar number patterns</li>
+                    <li>This lets AI understand that "cat" and "kitten" are related</li>
                 </ul>
             </div>
-            <p style="margin-top:20px"><strong>Remember:</strong> If you're not paying for the app, YOU are the product
-                being sold!</p>
         </div>
-    </div>
-    <div class="slide">
-        <h2>Data + AI = Tracking 🎯</h2>
-        <p>Companies combine data about you to create detailed profiles. AI then uses these profiles.</p>
-        <div class="key-point">
-            <h3>Your Digital Profile Includes:</h3>
-            <ul>
-                <li>Interests (sports? music? coding?)</li>
-                <li>Buying habits (what you purchase)</li>
-                <li>Health info (if you use fitness apps)</li>
-                <li>Relationships (who you talk to most)</li>
-                <li>Location patterns (where you go regularly)</li>
-                <li>Emotions (based on what you search)</li>
-            </ul>
+        <div class="slide">
+            <h2>Context: The Secret Sauce 🍯</h2>
+            <p>The biggest challenge: the same word means different things in different contexts!</p>
+            <div class="info-box">
+                <h3>Example: The word "bank"</h3>
+                <ul>
+                    <li>"I went to the <strong>bank</strong>" = financial institution</li>
+                    <li>"We sat on the <strong>bank</strong> of the river" = riverside</li>
+                    <li>"The plane <strong>banked</strong> left" = tilted</li>
+                </ul>
+                <p style="margin-top:15px">Modern AI models look at surrounding words to understand which meaning is
+                    correct!</p>
+            </div>
         </div>
-    </div>
-    <div class="slide">
-        <h2>Privacy Settings: Taking Control 🛡️</h2>
-        <p>Most phones and apps let you control what data they collect. You DO have options!</p>
-        <div class="info-box">
-            <h3>How to Protect Your Privacy:</h3>
-            <ul>
-                <li><strong>Check app permissions:</strong> Go through each app's settings</li>
-                <li><strong>Turn off location:</strong> Only allow when app is open</li>
-                <li><strong>Deny unnecessary permissions:</strong> Flashlight doesn't need contacts!</li>
-                <li><strong>Review privacy settings:</strong> On YouTube, TikTok, Instagram, etc.</li>
-                <li><strong>Limit ad targeting:</strong> Opt out of personalized ads</li>
-                <li><strong>Use Do Not Track:</strong> Tell websites to not track you</li>
-            </ul>
+        <div class="slide">
+            <h2>Sarcasm, Jokes & Slang 😅</h2>
+            <p>This is where AI fails most often! Humor requires understanding <strong>what ISN'T said</strong>.</p>
+            <div class="key-point">
+                <h3>Why AI Struggles:</h3>
+                <ul>
+                    <li><strong>Sarcasm:</strong> "Oh great, another Monday!" (means the opposite)</li>
+                    <li><strong>Slang:</strong> "That's fire!" (means "good", not literally burning)</li>
+                    <li><strong>Jokes:</strong> Require background knowledge and cultural understanding</li>
+                    <li><strong>Double meanings:</strong> Puns rely on multiple meanings of one word</li>
+                    <li><strong>Idioms:</strong> "It's raining cats and dogs" (doesn't mean pets falling from sky)</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="slide">
-        <h2>Data Breaches: What Could Go Wrong 😨</h2>
-        <p>Companies don't always keep your data safe. When data is stolen, it's called a <span class="tech-term">data
-                breach</span>.</p>
-        <div class="key-point">
-            <h3>Major Breaches (Real Examples):</h3>
-            <ul>
-                <li><strong>Facebook (2019):</strong> 533 million user phone numbers exposed</li>
-                <li><strong>Zoom (2020):</strong> Password information leaked</li>
-                <li><strong>Instagram:</strong> Millions of accounts hacked</li>
-                <li>When breaches happen, hackers can use your data for <strong>identity theft</strong></li>
-            </ul>
+        <div class="slide">
+            <h2>Translation Challenges 🌍</h2>
+            <p>Not all languages work the same way! Direct translation often fails.</p>
+            <div class="concept-box">
+                <h3>Translation Problems:</h3>
+                <ul>
+                    <li><strong>Word order:</strong> English: "I like cats". Japanese: "I cats like"</li>
+                    <li><strong>Grammar:</strong> Spanish has gendered nouns (el/la). English doesn't</li>
+                    <li><strong>Cultural context:</strong> Jokes, idioms, references don't translate</li>
+                    <li><strong>Missing concepts:</strong> Some languages have words English doesn't have</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="slide">
-        <h2>Ethical Questions About AI Data ⚖️</h2>
-        <p>We need to think carefully about how AI uses our information.</p>
-        <div class="discussion-box">
-            <h3>Think About These:</h3>
-            <ul>
-                <li>Should a company be allowed to sell your data to advertisers?</li>
-                <li>Should AI systems know your exact location?</li>
-                <li>Should AI analyze your health data to predict diseases?</li>
-                <li>Who owns your data - you or the company?</li>
-                <li>Should parents let apps track their children?</li>
-            </ul>
+        <div class="slide">
+            <h2>Bias in Language AI 🎭</h2>
+            <p>Language AI learns bias from the text it's trained on - which reflects human prejudices.</p>
+            <div class="key-point">
+                <h3>Real Examples:</h3>
+                <ul>
+                    <li>AI associates "male" with engineering jobs, "female" with nurse jobs</li>
+                    <li>Autocomplete suggests gender stereotypes</li>
+                    <li>AI learned racist and sexist language from internet text</li>
+                    <li>Translation tools have different accuracy for different languages</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="slide">
-        <h2>Your Rights & The Law 📜</h2>
-        <p>Many countries have laws protecting your data privacy.</p>
-        <div class="info-box">
-            <h3>Important Laws:</h3>
-            <ul>
-                <li><strong>GDPR (Europe):</strong> Gives people control over their data</li>
-                <li><strong>CCPA (California):</strong> Right to know what data is collected</li>
-                <li><strong>COPPA (USA):</strong> Extra protection for children under 13</li>
-                <li>These laws let you: request your data, delete it, opt out of tracking</li>
-            </ul>
+        <div class="slide">
+            <h2>How AI Improves Language Understanding 🚀</h2>
+            <div class="info-box">
+                <h3>Modern Techniques:</h3>
+                <ul>
+                    <li><strong>Transformer Models:</strong> Better at understanding context</li>
+                    <li><strong>Attention Mechanisms:</strong> Focus on important words</li>
+                    <li><strong>Pre-training:</strong> Learning from billions of words first</li>
+                    <li><strong>Fine-tuning:</strong> Learning specific tasks after basic training</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="slide">
-        <h2>What We Learned 🎓</h2>
-        <div class="info-box">
-            <ul style="font-size:1.1em">
-                <li>Apps collect <strong>massive amounts of data</strong> about you</li>
-                <li>Companies use your data to <strong>train AI</strong> and <strong>target ads</strong></li>
-                <li>You can <strong>control app permissions</strong> on your phone</li>
-                <li>Review <strong>privacy settings</strong> regularly</li>
-                <li>Data <strong>breaches</strong> can expose your information</li>
-                <li>Laws like GDPR protect your privacy rights</li>
-                <li><strong>You have power</strong> - know what you're sharing!</li>
-            </ul>
+        <div class="slide">
+            <h2>What We Learned 🎓</h2>
+            <div class="info-box">
+                <ul style="font-size:1.1em">
+                    <li>AI breaks language into <strong>tokens</strong> (word pieces)</li>
+                    <li>Words become <strong>numbers</strong> (embeddings) AI can understand</li>
+                    <li>AI needs <strong>context</strong> to understand word meanings</li>
+                    <li><strong>Sarcasm, jokes, slang</strong> are AI's biggest challenges</li>
+                    <li>AI has <strong>language bias</strong> from training data</li>
+                    <li>Translation is hard because languages work differently</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="slide title-slide center-content">
-        <h1>Privacy Explained! 🎉</h1>
-        <p style="font-size:1.3em;margin-top:40px;color:#ccc">Your data is valuable. Protect it wisely!</p>
-        <p style="margin-top:40px;color:#aaa">Next Session: Deepfakes & Misinformation</p>
-    </div>
+        <div class="slide title-slide center-content">
+            <h1>AI Language Explained! 🎉</h1>
+            <p style="font-size:1.3em;margin-top:40px;color:#ccc">AI understands language through numbers and patterns,
+                but still struggles with human complexity</p>
+            <p style="margin-top:40px;color:#aaa">Next Session: AI & Privacy</p>
+        </div>
     </div>
     <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
             class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
