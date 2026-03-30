@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Quiz Grader</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --border: #E0DDD6;
+    --text: #1A1814;
+    --muted: #8A8780;
+    --accent: #2D5BE3;
+    --accent-light: #EEF2FD;
+    --green: #1A6B3C;
+    --green-bg: #E8F5EE;
+    --red: #C0392B;
+    --red-bg: #FDECEA;
+    --amber: #8B5E00;
+    --amber-bg: #FFF4E0;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    background: var(--text);
+    color: #fff;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .header-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .header-sub {
+    font-size: 0.8rem;
+    font-family: var(--mono);
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  .header-badge {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+    white-space: nowrap;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .input-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .answer-input {
+    flex: 1;
+    font-family: var(--mono);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .answer-input:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+
+  .answer-input::placeholder {
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .grade-btn {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.85rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .grade-btn:hover { opacity: 0.9; }
+  .grade-btn:active { transform: scale(0.97); }
+
+  .hint-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+  }
+
+  .counter {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .counter.ready { color: var(--green); }
+  .counter.over { color: var(--red); }
+
+  .error-msg {
+    background: var(--red-bg);
+    color: var(--red);
+    font-size: 0.85rem;
+    font-family: var(--mono);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    display: none;
+  }
+
+  /* Score section */
+  .score-section {
+    display: none;
+    animation: fadeUp 0.3s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .score-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .score-card.accent {
+    background: var(--text);
+    border-color: var(--text);
+  }
+
+  .sc-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .score-card.accent .sc-label { color: rgba(255,255,255,0.4); }
+
+  .sc-value {
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .score-card.accent .sc-value { color: #fff; }
+
+  .sc-value.green { color: var(--green); }
+  .sc-value.amber { color: var(--amber); }
+  .sc-value.red { color: var(--red); }
+
+  /* Results grid */
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .results-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .legend {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-family: var(--mono);
+    color: var(--muted);
+  }
+
+  .legend span::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .legend .l-correct::before { background: var(--green); }
+  .legend .l-wrong::before { background: var(--red); }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 500px) {
+    .results-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .q-cell {
+    border-radius: 8px;
+    padding: 0.6rem 0.4rem;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: transform 0.1s;
+  }
+
+  .q-cell:hover { transform: scale(1.05); }
+
+  .q-cell.correct {
+    background: var(--green-bg);
+    border-color: #C3E6D2;
+  }
+
+  .q-cell.wrong {
+    background: var(--red-bg);
+    border-color: #F5C6C1;
+  }
+
+  .q-num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .q-cell.correct .q-num { color: #4A9E72; }
+  .q-cell.wrong .q-num { color: #D96A5F; }
+
+  .q-ans {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .q-cell.correct .q-ans { color: var(--green); }
+  .q-cell.wrong .q-ans { color: var(--red); }
+
+  .q-correct-ans {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--amber);
+    margin-top: 2px;
+  }
+
+  /* Wrong answers summary */
+  .wrong-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .wrong-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .wrong-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .wi-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15rem 0.4rem;
+    color: var(--muted);
+    min-width: 32px;
+    text-align: center;
+  }
+
+  .wi-got {
+    font-family: var(--mono);
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  .wi-arrow { color: var(--muted); font-size: 0.75rem; }
+
+  .wi-correct {
+    font-family: var(--mono);
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .all-correct {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: var(--green);
+    font-family: var(--mono);
+  }
+
+  footer {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    padding: 2rem;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">Quiz Grader</div>
+    <div class="header-sub">LLM Fundamentals — Weeks 1 &amp; 2</div>
+  </div>
+  <div class="header-badge">24 questions</div>
+</header>
+
+<main>
+  <div class="input-section">
+    <div class="section-label">Student answers</div>
+    <div class="input-row">
+      <input
+        type="text"
+        class="answer-input"
+        id="inp"
+        placeholder="dacbbacdbdacdbabdcbaaccd"
+        maxlength="48"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button class="grade-btn" onclick="grade()">Grade</button>
+    </div>
+    <div class="counter" id="counter">0 / 24 letters entered</div>
+    <div class="hint-text">type or paste 24 letters (a b c d only) — spaces ignored</div>
+    <div class="error-msg" id="error"></div>
+  </div>
+
+  <div class="score-section" id="output">
+    <div class="score-cards">
+      <div class="score-card accent">
+        <div class="sc-label">Raw score</div>
+        <div class="sc-value" id="s-frac" style="color:#fff"></div>
+      </div>
+      <div class="score-card">
+        <div class="sc-label">Out of 10</div>
+        <div class="sc-value" id="s-10"></div>
+      </div>
+      <div class="score-card">
+        <div class="sc-label">Percentage</div>
+        <div class="sc-value" id="s-pct"></div>
+      </div>
+      <div class="score-card">
+        <div class="sc-label">Grade</div>
+        <div class="sc-value" id="s-grade"></div>
+      </div>
+    </div>
+
+    <div class="results-header">
+      <div class="results-title">Question breakdown</div>
+      <div class="legend">
+        <span class="l-correct">correct</span>
+        <span class="l-wrong">wrong</span>
+      </div>
+    </div>
+    <div class="results-grid" id="grid"></div>
+
+    <div class="wrong-summary">
+      <div class="section-label" style="margin-bottom:0.75rem">Incorrect answers</div>
+      <ul class="wrong-list" id="wrong-list"></ul>
+    </div>
+  </div>
+</main>
+
+<footer>LLM Fundamentals Quiz Grader &nbsp;·&nbsp; Answer key: D A B B A C B C D D A C D B A B D B C A A B C D</footer>
+
+<script>
+  const KEY = 'dabbackdbdacdbabdbcaabcd'.split('');
+
+  // Corrected key: d a b b a c b d c d a c d b a b d b c a a b c d
+  const ANSWER_KEY = 'dabbacbdcdacdbabdbcaaabcd'.split('');
+
+  // Final key matching our quiz
+  const AK = ['d','a','b','b','a','c','b','c','d','d','a','c','d','b','a','b','d','b','c','a','a','b','c','d'];
+
+  const inp = document.getElementById('inp');
+  const counter = document.getElementById('counter');
+
+  inp.addEventListener('input', () => {
+    const clean = inp.value.replace(/[^abcdABCD]/gi, '').toLowerCase();
+    const n = clean.length;
+    counter.textContent = n + ' / 24 letters entered';
+    counter.className = 'counter' + (n === 24 ? ' ready' : n > 24 ? ' over' : '');
+  });
+
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') grade();
+  });
+
+  function grade() {
+    const raw = inp.value.replace(/\s/g,'').toLowerCase().replace(/[^abcd]/g,'');
+    const err = document.getElementById('error');
+    const out = document.getElementById('output');
+
+    if (raw.length !== 24) {
+      err.textContent = 'Need exactly 24 answers (a/b/c/d). Got ' + raw.length + '.';
+      err.style.display = 'block';
+      out.style.display = 'none';
+      return;
+    }
+    err.style.display = 'none';
+
+    let correct = 0;
+    const wrongs = [];
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+
+    for (let i = 0; i < 24; i++) {
+      const ok = raw[i] === AK[i];
+      if (ok) correct++; else wrongs.push({ q: i+1, got: raw[i], ans: AK[i] });
+
+      const cell = document.createElement('div');
+      cell.className = 'q-cell ' + (ok ? 'correct' : 'wrong');
+      cell.innerHTML =
+        `<div class="q-num">Q${i+1}</div>` +
+        `<div class="q-ans">${raw[i].toUpperCase()}</div>` +
+        (!ok ? `<div class="q-correct-ans">✓${AK[i].toUpperCase()}</div>` : '');
+      grid.appendChild(cell);
+    }
+
+    const pct = Math.round(correct / 24 * 100);
+    const outOf10 = (correct / 24 * 10).toFixed(1);
+
+    let gradeLabel, gradeClass;
+    if (pct >= 90) { gradeLabel = 'A'; gradeClass = 'green'; }
+    else if (pct >= 80) { gradeLabel = 'B'; gradeClass = 'green'; }
+    else if (pct >= 70) { gradeLabel = 'C'; gradeClass = 'amber'; }
+    else if (pct >= 60) { gradeLabel = 'D'; gradeClass = 'amber'; }
+    else { gradeLabel = 'F'; gradeClass = 'red'; }
+
+    document.getElementById('s-frac').textContent = correct + ' / 24';
+    document.getElementById('s-10').textContent = outOf10;
+    document.getElementById('s-pct').textContent = pct + '%';
+    const g = document.getElementById('s-grade');
+    g.textContent = gradeLabel;
+    g.className = 'sc-value ' + gradeClass;
+
+    const wl = document.getElementById('wrong-list');
+    wl.innerHTML = '';
+    if (wrongs.length === 0) {
+      wl.innerHTML = '<div class="all-correct">Perfect score — all correct!</div>';
+    } else {
+      wrongs.forEach(w => {
+        const li = document.createElement('li');
+        li.className = 'wrong-item';
+        li.innerHTML =
+          `<span class="wi-num">Q${w.q}</span>` +
+          `<span class="wi-got">${w.got.toUpperCase()}</span>` +
+          `<span class="wi-arrow">→</span>` +
+          `<span class="wi-correct">${w.ans.toUpperCase()}</span>`;
+        wl.appendChild(li);
+      });
+    }
+
+    out.style.display = 'block';
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
