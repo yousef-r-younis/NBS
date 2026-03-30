@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Student Packet — Exhibition Day</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --accent: #c0254e; --blue: #4f6ef7; --green: #2eb87a; --gold: #c9920d; --text: #1a1d2e; --muted: #6b7080; --border: #d5d9f0; --bg: #f7f8fe; --card: #ffffff; }
+@media print { body { background: white; } .no-print { display:none; } .page-break { page-break-before: always; } }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 48px 32px; max-width: 860px; margin: 0 auto; line-height: 1.6; }
+.doc-header { border-bottom: 3px solid var(--accent); padding-bottom: 20px; margin-bottom: 32px; }
+.doc-badge { display:inline-block; background:var(--accent); color:#fff; font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:12px; }
+.doc-header h1 { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; line-height:1.1; margin-bottom:6px; }
+.doc-header p { color:var(--muted); font-size:0.95rem; }
+.meta-row { display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; }
+.meta-item { font-size:0.82rem; color:var(--muted); }
+.meta-item b { color:var(--text); }
+.section { margin-bottom: 36px; }
+.section-title { font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:10px; }
+h3 { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--accent); margin-bottom:6px; }
+p { font-size:0.92rem; color:#2a2d3e; margin-bottom:8px; }
+ul, ol { padding-left:20px; margin-bottom:10px; }
+li { font-size:0.91rem; margin-bottom:5px; }
+.guide-box { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:18px 20px; margin-bottom:16px; }
+.guide-box.green { border-left-color:var(--green); }
+.guide-box.gold { border-left-color:var(--gold); }
+.guide-box.blue { border-left-color:var(--blue); }
+
+/* FINAL CHECKLIST */
+.mega-checklist { display:flex; flex-direction:column; gap:10px; }
+.mc-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:flex-start; }
+.mc-item input[type=checkbox] { margin-top:2px; accent-color:var(--accent); transform:scale(1.3); flex-shrink:0; }
+.mc-item .mc-body { flex:1; }
+.mc-item .mc-body b { display:block; font-size:0.9rem; margin-bottom:3px; }
+.mc-item .mc-body span { font-size:0.8rem; color:var(--muted); }
+.mc-section { font-family:'Syne',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin:20px 0 10px; }
+
+/* JUDGE SCORE SHEET */
+.score-sheet { background:var(--card); border:2px solid var(--border); border-radius:12px; padding:24px; margin-bottom:20px; }
+.score-sheet .ss-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; border-bottom:1px solid var(--border); padding-bottom:14px; }
+.score-sheet .ss-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; }
+.score-sheet .ss-meta { font-size:0.8rem; color:var(--muted); text-align:right; }
+.score-sheet .ss-meta input { border:none; border-bottom:1px solid var(--border); background:transparent; font-family:'DM Sans',sans-serif; font-size:0.8rem; width:140px; outline:none; padding:2px 0; }
+.criteria-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+.criteria-row:last-of-type { border-bottom:none; }
+.criteria-row .cr-name { font-size:0.88rem; font-weight:600; flex:1; }
+.criteria-row .cr-sub { font-size:0.75rem; color:var(--muted); }
+.score-options { display:flex; gap:6px; }
+.score-opt { width:34px; height:34px; border:1px solid var(--border); border-radius:6px; background:var(--bg); font-family:'Syne',sans-serif; font-weight:700; font-size:0.88rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.score-opt:hover { border-color:var(--accent); }
+.score-opt.s3:hover, .score-opt.s3.sel { background:#dcfff0; border-color:var(--green); color:var(--green); }
+.score-opt.s2:hover, .score-opt.s2.sel { background:#fff8dc; border-color:var(--gold); color:var(--gold); }
+.score-opt.s1:hover, .score-opt.s1.sel { background:#ffe0e8; border-color:var(--accent); color:var(--accent); }
+.score-sheet .total-row { display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:14px; border-top:2px solid var(--border); }
+.score-sheet .total-row .total-label { font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; }
+.score-sheet .total-row .total-val { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; color:var(--accent); }
+.score-sheet .notes-area { margin-top:14px; }
+.score-sheet .notes-area label { font-size:0.78rem; color:var(--muted); display:block; margin-bottom:4px; }
+.score-sheet .notes-area textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.85rem; resize:none; height:55px; font-family:'DM Sans',sans-serif; outline:none; }
+
+/* REFLECTION */
+.reflection-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+.ref-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.ref-card label { font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; color:var(--blue); display:block; margin-bottom:6px; letter-spacing:1px; text-transform:uppercase; }
+.ref-card textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.84rem; resize:vertical; min-height:70px; outline:none; font-family:'DM Sans',sans-serif; }
+
+.page-break { margin-top:40px; border-top:2px dashed var(--border); padding-top:32px; }
+.doc-footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.78rem; color:var(--muted); }
+.print-btn { display:inline-block; background:var(--accent); color:#fff; border:none; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; padding:9px 20px; border-radius:8px; cursor:pointer; margin-bottom:24px; }
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">🖨 Print / Save as PDF</button>
+
+<div class="doc-header">
+  <div class="doc-badge">Week 4 · Student Packet</div>
+  <h1>Exhibition Day<br>Final Checklist & Score Sheet</h1>
+  <p>Part 1: Your pre-pitch checklist. Part 2: Score sheet for pitches you watch. Part 3: Reflection.</p>
+  <div class="meta-row">
+    <div class="meta-item"><b>Team Name:</b> _______________________</div>
+    <div class="meta-item"><b>Date:</b> _______________________</div>
+  </div>
+</div>
+
+<!-- PART 1: FINAL CHECKLIST -->
+<div class="section">
+  <div class="section-title">Part 1 — Pre-Pitch Final Checklist</div>
+  <p style="margin-bottom:16px;">Complete this before you go on. Every box should be checked.</p>
+
+  <div class="mc-section">Content</div>
+  <div class="mega-checklist">
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Problem is specific and opens with a hook</b><span>First slide or first sentence makes the audience feel the problem — not just understand it.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>ML type is named and justified</b><span>Not just "AI" — the specific type of ML and why it's the right approach.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Training data sources are named</b><span>Specific datasets or collection methods — not just "we'll find data online."</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Bias type is named with a specific mitigation</b><span>Historical, sampling, label, feedback loop, or measurement bias — and a real strategy to address it.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Ethics: at least one harm scenario and one safeguard</b><span>Who could be harmed if the system fails? What's the safeguard?</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Two specific failure cases described</b><span>Concrete scenarios — not just "sometimes it might be wrong."</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Future work is ambitious and specific</b><span>Not just "add more features" — what, why, and what it would require.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>LLM-specific concerns addressed (if applicable)</b><span>Hallucinations, cultural bias, prompt injection, or environmental cost — whichever apply.</span></div></div>
+  </div>
+
+  <div class="mc-section" style="margin-top:20px;">Slides</div>
+  <div class="mega-checklist">
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Every slide has a visual</b><span>Diagram, mockup, chart, or user flow — not just text.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>No slide is a wall of bullet points</b><span>If a slide has 6+ bullets, it needs to be redesigned.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Font is readable from 3 metres away</b><span>Body text minimum 20pt. Headers 28pt+. Check from the back of the room.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Deck is loaded and tested on the display device</b><span>Don't find out there's a font issue mid-pitch.</span></div></div>
+  </div>
+
+  <div class="mc-section" style="margin-top:20px;">Delivery</div>
+  <div class="mega-checklist">
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Timed at 5–7 minutes on a practice run</b><span>Not "probably around 6 minutes." Actually timed.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Every team member knows their section</b><span>Judges will direct Q&A to quiet members.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Opening line memorised</b><span>The first 15 seconds set the entire tone. Know it cold.</span></div></div>
+    <div class="mc-item"><input type="checkbox"><div class="mc-body"><b>Q&A plan ready</b><span>Likely questions: "How would you handle X bias?" "What if your system is wrong for group Y?" Who answers these?</span></div></div>
+  </div>
+</div>
+
+<!-- PART 2: JUDGE SCORE SHEET -->
+<div class="page-break">
+  <div class="section-title" style="font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px;">Part 2 — Audience Score Sheet <span style="flex:1; height:1px; background:var(--border); display:block;"></span></div>
+  <p style="margin-bottom:8px;">Score each team as they pitch. 3 = Strong, 2 = Developing, 1 = Weak.</p>
+  <p style="font-size:0.82rem; color:var(--muted); margin-bottom:20px;">You'll use this to inform your audience vote at the end. Be honest — your vote counts 50%.</p>
+
+  <!-- SCORE SHEET 1 -->
+  <div class="score-sheet">
+    <div class="ss-header">
+      <div>
+        <div class="ss-title">Team Score Sheet #1</div>
+      </div>
+      <div class="ss-meta">
+        Team name: <input type="text" placeholder="________________">
+      </div>
+    </div>
+    <div class="criteria-row"><div class="cr-name">Problem Clarity<div class="cr-sub">Real, specific, compelling</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">AI Solution + ML Type<div class="cr-sub">Named, justified, explained</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Data & Bias<div class="cr-sub">Sources + type + mitigation</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Ethics & Impact<div class="cr-sub">Harm named + safeguards</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Limitations & Failures<div class="cr-sub">2+ specific failure cases</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Future Work<div class="cr-sub">Ambitious and specific</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Pitch Quality<div class="cr-sub">Clear, confident, visuals</div></div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="total-row"><span class="total-label">Your Total (max 21)</span><span class="total-val" id="t1">—</span></div>
+    <div class="notes-area"><label>Quick notes — what stood out (positive or negative)?</label><textarea placeholder="..."></textarea></div>
+  </div>
+
+  <!-- SCORE SHEET 2 -->
+  <div class="score-sheet">
+    <div class="ss-header">
+      <div><div class="ss-title">Team Score Sheet #2</div></div>
+      <div class="ss-meta">Team name: <input type="text" placeholder="________________"></div>
+    </div>
+    <div class="criteria-row"><div class="cr-name">Problem Clarity</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">AI Solution + ML Type</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Data & Bias</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Ethics & Impact</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Limitations & Failures</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Future Work</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Pitch Quality</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="total-row"><span class="total-label">Your Total (max 21)</span><span class="total-val">—</span></div>
+    <div class="notes-area"><label>Quick notes</label><textarea placeholder="..."></textarea></div>
+  </div>
+
+  <!-- SCORE SHEET 3 -->
+  <div class="score-sheet">
+    <div class="ss-header">
+      <div><div class="ss-title">Team Score Sheet #3</div></div>
+      <div class="ss-meta">Team name: <input type="text" placeholder="________________"></div>
+    </div>
+    <div class="criteria-row"><div class="cr-name">Problem Clarity</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">AI Solution + ML Type</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Data & Bias</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Ethics & Impact</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Limitations & Failures</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Future Work</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="criteria-row"><div class="cr-name">Pitch Quality</div><div class="score-options"><div class="score-opt s3" onclick="sel(this)">3</div><div class="score-opt s2" onclick="sel(this)">2</div><div class="score-opt s1" onclick="sel(this)">1</div></div></div>
+    <div class="total-row"><span class="total-label">Your Total (max 21)</span><span class="total-val">—</span></div>
+    <div class="notes-area"><label>Quick notes</label><textarea placeholder="..."></textarea></div>
+  </div>
+</div>
+
+<!-- PART 3: REFLECTION -->
+<div class="section" style="margin-top:32px;">
+  <div class="section-title">Part 3 — Post-Exhibition Reflection</div>
+  <p style="margin-bottom:14px;">Complete this after the results are announced.</p>
+  <div class="reflection-grid">
+    <div class="ref-card"><label>What's the one thing you're most proud of from your team's work?</label><textarea placeholder="..."></textarea></div>
+    <div class="ref-card"><label>What would you do differently if you had another week?</label><textarea placeholder="..."></textarea></div>
+    <div class="ref-card"><label>Which other team's idea did you find most impressive, and why?</label><textarea placeholder="..."></textarea></div>
+    <div class="ref-card"><label>One real-world AI system you now think about differently after this project?</label><textarea placeholder="..."></textarea></div>
+  </div>
+  <div style="background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; margin-top:12px;">
+    <label style="font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; color:var(--blue); display:block; margin-bottom:8px; letter-spacing:1px; text-transform:uppercase;">If you were to build your idea yourself one day — what's the first step you'd actually take?</label>
+    <textarea style="width:100%; border:1px solid var(--border); border-radius:6px; padding:10px; font-size:0.88rem; resize:none; height:70px; font-family:'DM Sans',sans-serif; outline:none;" placeholder="..."></textarea>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <span>AI Innovation Challenge · Week 4 of 4</span>
+  <span>Thank you for building something real. 🏆</span>
+</div>
+
+<script>
+function sel(btn) {
+  const row = btn.closest('.score-options');
+  row.querySelectorAll('.score-opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  updateTotals();
+}
+function updateTotals() {
+  document.querySelectorAll('.score-sheet').forEach(sheet => {
+    let total = 0;
+    sheet.querySelectorAll('.criteria-row').forEach(row => {
+      const sel = row.querySelector('.sel');
+      if (sel) total += parseInt(sel.textContent);
+    });
+    const tv = sheet.querySelector('.total-val');
+    if (tv) tv.textContent = total > 0 ? total + '/21' : '—';
+  });
+}
+</script>
+</body>
+</html>

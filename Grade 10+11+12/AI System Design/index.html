@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Innovation Challenge — Design the Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #4f6ef7;
+      --green: #2eb87a;
+      --gold: #d4a017;
+      --pink: #e0436a;
+      --text: #1a1d2e;
+      --muted: #6b7080;
+      --border: #d5d9f0;
+      --bg: #f7f8fe;
+      --card: #ffffff;
+    }
+
+    @media print { body { background: white; } .no-print { display: none; } }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #eef0fc 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, #6a7fff 100%);
+      color: white;
+      padding: clamp(60px, 10vw, 120px) 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-bottom: 12px;
+      opacity: 0.95;
+    }
+
+    .hero .tagline {
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      padding: 60px 32px;
+      background: white;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .timeline-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      box-shadow: 0 8px 24px rgba(79, 110, 247, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .timeline-card.week1 { border-top: 5px solid var(--blue); }
+    .timeline-card.week2 { border-top: 5px solid var(--green); }
+    .timeline-card.week3 { border-top: 5px solid var(--gold); }
+    .timeline-card.week4 { border-top: 5px solid var(--pink); }
+
+    .week-badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .week1 .week-badge { background: rgba(79, 110, 247, 0.1); color: var(--blue); }
+    .week2 .week-badge { background: rgba(46, 184, 122, 0.1); color: var(--green); }
+    .week3 .week-badge { background: rgba(212, 160, 23, 0.1); color: var(--gold); }
+    .week4 .week-badge { background: rgba(224, 67, 106, 0.1); color: var(--pink); }
+
+    .timeline-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .timeline-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* NAVIGATION BUTTONS */
+    .btn-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .btn.primary {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .btn.primary:hover {
+      background: #3d52c4;
+      border-color: #3d52c4;
+    }
+
+    /* PROJECTS SECTION */
+    .projects-section {
+      padding: 60px 32px;
+      background: linear-gradient(135deg, #f7f8fe 0%, white 100%);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .project-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      border-color: var(--blue);
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .project-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .project-tag {
+      display: inline-block;
+      background: rgba(79, 110, 247, 0.1);
+      color: var(--blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+
+    /* RESOURCES BANNER */
+    .resources-banner {
+      padding: 40px 32px;
+      background: linear-gradient(135deg, var(--green) 0%, #1d9d6b 100%);
+      color: white;
+      text-align: center;
+      border-radius: 12px;
+      margin: 60px 32px;
+    }
+
+    .resources-banner h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .resources-banner p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .btn.secondary {
+      background: white;
+      color: var(--green);
+      border-color: white;
+      display: inline-block;
+    }
+
+    .btn.secondary:hover {
+      background: #f0f2ff;
+      transform: scale(1.05);
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      padding: 60px 32px;
+      background: white;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .faq-item.green { border-left-color: var(--green); }
+    .faq-item.gold { border-left-color: var(--gold); }
+    .faq-item.pink { border-left-color: var(--pink); }
+
+    .faq-item h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .faq-item p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--text);
+      color: white;
+      padding: 40px 32px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .footer p {
+      font-size: 0.88rem;
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+
+    .footer a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-meta {
+      font-size: 0.78rem;
+      opacity: 0.6;
+      margin-top: 20px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      .timeline-section { padding: 40px 16px; }
+      .projects-section { padding: 40px 16px; }
+      .faq-section { padding: 40px 16px; }
+      .resources-banner { margin: 40px 16px; }
+      .hero { padding: 50px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>🚀 AI Innovation Challenge</h1>
+    <p>Design the Future. Solve Real Problems with AI.</p>
+    <p class="tagline">Over 90 students. 4 weeks. 1 winning idea that might actually come to life.</p>
+  </div>
+</div>
+
+<!-- CHALLENGE OVERVIEW -->
+<div class="container" style="padding: 60px 32px; text-align: center;">
+  <h2 style="font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 16px;">How It Works</h2>
+  <p style="font-size: 1.05rem; color: var(--muted); max-width: 600px; margin: 0 auto 40px;">Your class forms teams, brainstorms an AI-powered solution to a real problem, designs how it would work, and pitches it to win. The winning teams' ideas might actually get built.</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="container">
+    <h2 class="section-title">📅 The 4-Week Timeline</h2>
+    <p class="section-subtitle">Each week builds on the last. By Week 4, you'll have a polished pitch ready for the world.</p>
+
+    <div class="timeline">
+      <!-- WEEK 1 -->
+      <div class="timeline-card week1">
+        <span class="week-badge">Week 1</span>
+        <h3>💡 Ideation & Teams</h3>
+        <p>Learn what AI actually is. Form teams. Brainstorm problems you want to solve. Submit your team's idea brief.</p>
+        <div class="btn-group">
+          <a href="week1-student.html" class="btn">Student Packet</a>
+          <a href="week1-slides.html" class="btn primary">Slides</a>
+        </div>
+      </div>
+
+      <!-- WEEK 2 -->
+      <div class="timeline-card week2">
+        <span class="week-badge">Week 2</span>
+        <h3>🛠️ Design Your System</h3>
+        <p>Answer the hard questions: What data do you need? What could go wrong? Start building your pitch deck.</p>
+        <div class="btn-group">
+          <a href="week2-student.html" class="btn">Student Packet</a>
+          <a href="week2-slides.html" class="btn primary">Slides</a>
+        </div>
+      </div>
+
+      <!-- WEEK 3 -->
+      <div class="timeline-card week3">
+        <span class="week-badge">Week 3</span>
+        <h3>🎤 Rehearsal & Feedback</h3>
+        <p>Practice your pitch. Get feedback from classmates. Refine and polish before the big day.</p>
+        <div class="btn-group">
+          <a href="week3-student.html" class="btn">Student Packet</a>
+          <a href="week3-slides.html" class="btn primary">Slides</a>
+        </div>
+      </div>
+
+      <!-- WEEK 4 -->
+      <div class="timeline-card week4">
+        <span class="week-badge">Week 4</span>
+        <h3>🎉 The Exhibition</h3>
+        <p>Present to an audience. Get judged on originality, feasibility, and clarity. 🥇 🥈 🥉 Win prizes.</p>
+        <div class="btn-group">
+          <a href="week4-student.html" class="btn">Student Packet</a>
+          <a href="week4-slides.html" class="btn primary">Slides</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAMPLE PROJECTS -->
+<div class="projects-section">
+  <div class="container">
+    <h2 class="section-title">🌟 See Example Projects</h2>
+    <p class="section-subtitle">Stuck? Here are 5 detailed examples of what a complete project looks like—from problem to solution to pitch.</p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">📚</div>
+        <h4>AI Study Buddy</h4>
+        <p>Generates personalized quizzes from student notes using NLP. Helps students study more effectively.</p>
+        <span class="project-tag">Classification</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🔍</div>
+        <h4>Arabic Fact-Check</h4>
+        <p>Flags potentially false or misleading news articles in Arabic social media. Fights misinformation.</p>
+        <span class="project-tag">LOCAL • NLP</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🤝</div>
+        <h4>NGO Matcher</h4>
+        <p>Matches volunteers with Lebanese NGOs based on skills, location, and interests using recommendations.</p>
+        <span class="project-tag">LOCAL • Recommendation</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🎯</div>
+        <h4>School Navigator Bot</h4>
+        <p>Chatbot that instantly answers questions about school rules, schedules, and procedures in Arabic.</p>
+        <span class="project-tag">NLP • Retrieval</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🚗</div>
+        <h4>Beirut Route Optimizer</h4>
+        <p>Suggests the fastest commute route considering traffic, time of day, and congestion patterns.</p>
+        <span class="project-tag">LOCAL • Optimization</span>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="example-projects.html" class="btn primary" style="padding: 14px 32px; font-size: 0.9rem;">View Full Project Breakdowns</a>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES BANNER -->
+<div class="resources-banner">
+  <h3>Need to Learn More?</h3>
+  <p>Check out our curated resource library for tutorials, ethics case studies, bias examples, and links to datasets.</p>
+  <a href="resources.html" class="btn secondary">Explore Resources</a>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="container">
+    <h2 class="section-title">❓ Frequently Asked Questions</h2>
+
+    <div class="faq-grid">
+      <div class="faq-item blue">
+        <h4>Can we change teams?</h4>
+        <p>Teams are final after Week 1. Choose your teammates carefully! You'll work together for 4 weeks, so pick people you trust and can communicate with.</p>
+      </div>
+
+      <div class="faq-item green">
+        <h4>What if our idea is too big?</h4>
+        <p>That's okay! In Week 2, you'll scope down to a realistic prototype or mockup. You don't need a fully working AI—a great design and clear thinking matter more.</p>
+      </div>
+
+      <div class="faq-item gold">
+        <h4>Do we need coding skills?</h4>
+        <p>No! This challenge is about design and thinking, not coding. You can show your idea with wireframes, flowcharts, videos, or even a paper prototype.</p>
+      </div>
+
+      <div class="faq-item pink">
+        <h4>What happens if we win?</h4>
+        <p>The winning team's idea gets built! The teacher will work with you over the following weeks to create a real, working prototype or demo that you can show off.</p>
+      </div>
+
+      <div class="faq-item blue">
+        <h4>How will we be judged?</h4>
+        <p>On 5 criteria: <strong>Originality</strong> (Is it new?), <strong>Usefulness</strong> (Does it solve a real problem?), <strong>Clarity</strong> (Can we understand your pitch?), <strong>AI Knowledge</strong> (Do you understand the AI?), and <strong>Feasibility</strong> (Is it doable?).</p>
+      </div>
+
+      <div class="faq-item green">
+        <h4>How should we save our work?</h4>
+        <p>Each week's student packet auto-saves your progress. You can also export as PDF or JSON for backup. Use the Save/Export buttons in each packet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Ready to innovate?</strong></p>
+  <p style="margin-bottom: 20px;">Start with <a href="week1-student.html">Week 1: Ideation</a> or check out <a href="example-projects.html">example projects</a> for inspiration.</p>
+  <div class="footer-meta">
+    <p>💡 AI Innovation Challenge | Design the future. Solve real problems.</p>
+    <p style="margin-top: 8px;">Have questions? Contact your teacher or visit the <a href="resources.html">resources library</a>.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Student Packet — AI System Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --accent: #2eb87a; --blue: #4f6ef7; --gold: #c9920d; --pink: #e0436a; --text: #1a1d2e; --muted: #6b7080; --border: #d5d9f0; --bg: #f7f8fe; --card: #ffffff; }
+@media print { body { background: white; } .no-print { display:none; } }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 48px 32px; max-width: 860px; margin: 0 auto; line-height: 1.6; }
+.doc-header { border-bottom: 3px solid var(--accent); padding-bottom: 20px; margin-bottom: 32px; }
+.doc-badge { display:inline-block; background:var(--accent); color:#fff; font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:12px; }
+.doc-header h1 { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; line-height:1.1; margin-bottom:6px; }
+.doc-header p { color:var(--muted); font-size:0.95rem; }
+.meta-row { display:flex; gap:24px; margin-top:14px; }
+.meta-item { font-size:0.82rem; color:var(--muted); }
+.meta-item b { color:var(--text); }
+.section { margin-bottom: 36px; }
+.section-title { font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:10px; }
+h3 { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--accent); margin-bottom:6px; }
+p { font-size:0.92rem; color:#2a2d3e; margin-bottom:8px; }
+ul, ol { padding-left:20px; margin-bottom:10px; }
+li { font-size:0.91rem; margin-bottom:5px; }
+.guide-box { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:18px 20px; margin-bottom:16px; }
+.guide-box.blue { border-left-color:var(--blue); }
+.guide-box.gold { border-left-color:var(--gold); }
+.guide-box.pink { border-left-color:var(--pink); }
+
+/* FLOW DIAGRAM */
+.flow { display:flex; align-items:stretch; gap:0; margin:16px 0; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.flow-box { flex:1; padding:14px 16px; background:var(--card); text-align:center; border-right:1px solid var(--border); }
+.flow-box:last-child { border-right:none; }
+.flow-box .fb-label { font-family:'Syne',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.flow-box p { font-size:0.82rem; color:var(--muted); }
+
+/* WORKSHEET */
+.ws-field { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+.ws-field label { display:block; font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; color:var(--accent); margin-bottom:8px; letter-spacing:1px; text-transform:uppercase; }
+.ws-field .lines { display:flex; flex-direction:column; gap:8px; }
+.ws-field .line { border:none; border-bottom:1px solid var(--border); height:28px; width:100%; background:transparent; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); outline:none; }
+.ws-field .line:focus { border-bottom-color:var(--accent); }
+.ws-field textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); resize:vertical; min-height:80px; outline:none; }
+.ws-field textarea:focus { border-color:var(--accent); }
+
+/* BIAS TABLE */
+.bias-table { width:100%; border-collapse:collapse; margin:12px 0; }
+.bias-table th { background:var(--accent); color:#fff; font-family:'Syne',sans-serif; font-size:0.78rem; padding:8px 12px; text-align:left; }
+.bias-table td { padding:9px 12px; font-size:0.85rem; border-bottom:1px solid var(--border); vertical-align:top; }
+.bias-table tr:nth-child(even) td { background:#f0fff8; }
+.bias-table .input-cell { min-width:200px; }
+.bias-table input { width:100%; border:none; border-bottom:1px solid var(--border); background:transparent; font-family:'DM Sans',sans-serif; font-size:0.85rem; padding:2px 0; outline:none; }
+
+/* ETHICS GRID */
+.ethics-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+.ethics-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.ethics-card .eq { font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
+.ethics-card textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.84rem; resize:vertical; min-height:60px; outline:none; font-family:'DM Sans',sans-serif; }
+
+/* PITCH STRUCTURE */
+.pitch-slides { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0; }
+.pitch-slide { background:var(--card); border:2px solid var(--border); border-radius:8px; padding:12px; min-height:90px; }
+.pitch-slide .ps-num { font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; color:var(--blue); margin-bottom:4px; }
+.pitch-slide .ps-title { font-size:0.82rem; font-weight:600; margin-bottom:6px; }
+.pitch-slide .ps-hint { font-size:0.75rem; color:var(--muted); }
+
+/* CHECKLIST */
+.checklist { display:flex; flex-direction:column; gap:8px; }
+.check-item { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--card); border:1px solid var(--border); border-radius:8px; }
+.check-item input[type=checkbox] { margin-top:2px; accent-color:var(--accent); transform:scale(1.2); flex-shrink:0; }
+.check-item label { font-size:0.88rem; }
+.check-item label b { display:block; margin-bottom:2px; }
+.check-item label span { color:var(--muted); font-size:0.82rem; }
+
+.doc-footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.78rem; color:var(--muted); }
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.btn-action {
+  display: inline-block; background: var(--accent); color: #fff; border: none; font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+}
+.btn-action:hover { background: #1d9d6b; transform: translateY(-2px); }
+.btn-action.secondary { background: var(--text); color: white; }
+.btn-action.secondary:hover { background: #000; }
+
+/* INFO BOX */
+.info-box {
+  background: rgba(46, 184, 122, 0.05); border-left: 4px solid var(--accent); padding: 12px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.82rem; color: #2a2d3e;
+}
+
+/* RUBRIC */
+.rubric-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0;
+}
+.rubric-item {
+  background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 8px; padding: 14px;
+}
+.rubric-item .r-title { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+.rubric-item .r-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; margin-bottom: 8px; }
+.rubric-item .r-score { font-size: 0.78rem; background: rgba(46, 184, 122, 0.1); color: var(--accent); padding: 6px 10px; border-radius: 4px; display: inline-block; font-weight: 700; }
+
+/* CASE STUDY BOX */
+.case-study {
+  background: white; border: 1px solid var(--border); border-left: 5px solid var(--pink); border-radius: 8px; padding: 16px; margin-bottom: 16px;
+}
+.case-study h4 {
+  font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: var(--text);
+}
+.case-study p {
+  font-size: 0.85rem; color: #2a2d3e; margin-bottom: 6px; line-height: 1.5;
+}
+.case-study strong { color: var(--pink); }
+
+.print-btn { display:inline-block; background:var(--accent); color:#fff; border:none; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; padding:9px 20px; border-radius:8px; cursor:pointer; margin-bottom:24px; }
+</style>
+</head>
+<body>
+<div class="action-buttons no-print">
+  <button class="btn-action" onclick="autoSaveData()">💾 Save Progress</button>
+  <button class="btn-action" onclick="exportToPDF()">📥 Export as PDF</button>
+  <button class="btn-action secondary" onclick="window.print()">🖨️ Print</button>
+  <button class="btn-action secondary" onclick="clearAllData()">🗑️ Clear All</button>
+</div>
+
+<div class="info-box no-print">
+  💾 <strong>Auto-Save:</strong> Your work is automatically saved as you type. You can close the browser and come back later.
+</div>
+
+<div class="doc-header">
+  <div class="doc-badge">Week 2 · Student Packet</div>
+  <h1>AI System Design<br>Guide & Worksheet</h1>
+  <p>Complete the system design today. Start your pitch deck before Week 3.</p>
+  <div class="meta-row">
+    <div class="meta-item"><b>Team Name:</b> _______________________</div>
+    <div class="meta-item"><b>Date:</b> _______________________</div>
+  </div>
+</div>
+
+<!-- PART 1: GUIDE -->
+<div class="section">
+  <div class="section-title">Part 1 — Reference Guide</div>
+
+  <h2>The Input → Model → Output → Feedback Loop</h2>
+  <p>Every AI system follows this structure. Map your system to it before anything else.</p>
+  <div class="flow">
+    <div class="flow-box"><div class="fb-label">📥 Input</div><p>What data enters the system? (text, image, sensor, user click…)</p></div>
+    <div class="flow-box"><div class="fb-label">⚙️ Model</div><p>What ML type? What has it been trained on?</p></div>
+    <div class="flow-box"><div class="fb-label">📤 Output</div><p>Prediction? Classification? Generated content? Score?</p></div>
+    <div class="flow-box"><div class="fb-label">🔁 Feedback</div><p>How does it improve over time?</p></div>
+  </div>
+
+  <h2 style="margin-top:24px;">Types of Bias to Watch For</h2>
+  <table class="bias-table">
+    <tr><th>Bias Type</th><th>What it means</th><th>Example</th></tr>
+    <tr><td><b>Historical Bias</b></td><td>Training data reflects past injustices</td><td>Hiring model trained on historical resumes — underrepresents women in senior roles</td></tr>
+    <tr><td><b>Sampling Bias</b></td><td>Certain groups underrepresented in training data</td><td>Facial recognition trained mostly on lighter-skinned faces fails on darker skin tones</td></tr>
+    <tr><td><b>Label Bias</b></td><td>Human labelers bring their own assumptions</td><td>Sentiment labels on text reflect the labeler's culture, not universal sentiment</td></tr>
+    <tr><td><b>Feedback Loop Bias</b></td><td>Model outputs shape future training data</td><td>A content recommender shows more extreme content → users engage more → model amplifies it</td></tr>
+    <tr><td><b>Measurement Bias</b></td><td>The metric used doesn't capture the real goal</td><td>Optimising for clicks instead of user satisfaction produces addictive but unhelpful content</td></tr>
+  </table>
+
+  <div class="guide-box gold" style="margin-top:16px;">
+    <h3 style="color:var(--gold);">On Mitigation — Be Specific</h3>
+    <p>Saying "we'll use unbiased data" is not a strategy. Good answers include: <em>auditing data for demographic balance</em>, <em>using fairness metrics during evaluation</em>, <em>building in human review for high-stakes decisions</em>, or <em>being transparent about limitations in the UI</em>.</p>
+  </div>
+
+  <h2 style="margin-top:24px;">LLM-Specific Concerns</h2>
+  <p>If your system uses a language model (chatbot, content generator, Q&A tool), you must also address:</p>
+  <ul style="margin-top:8px;">
+    <li><b>Hallucinations</b> — LLMs can confidently state false things. How do you handle this?</li>
+    <li><b>Language/cultural bias</b> — Most LLMs are Western/English-centric. Relevant for Arabic or Lebanese use cases?</li>
+    <li><b>Prompt injection</b> — Can malicious users hijack your system through crafted inputs?</li>
+    <li><b>Environmental cost</b> — Large models are energy-intensive. Is the benefit justified?</li>
+  </ul>
+
+  <h2 style="margin-top:24px;">Your Pitch Deck Structure</h2>
+  <div class="pitch-slides">
+    <div class="pitch-slide"><div class="ps-num">Slide 1</div><div class="ps-title">Hook: The Problem</div><div class="ps-hint">Story, stat, or scenario. Make them feel it.</div></div>
+    <div class="pitch-slide"><div class="ps-num">Slide 2</div><div class="ps-title">The Solution</div><div class="ps-hint">What your system does from the user's view</div></div>
+    <div class="pitch-slide"><div class="ps-num">Slide 3</div><div class="ps-title">How It Works</div><div class="ps-hint">ML type, training process, diagram or mockup</div></div>
+    <div class="pitch-slide"><div class="ps-num">Slide 4</div><div class="ps-title">Data & Bias</div><div class="ps-hint">Sources, risks, and mitigation</div></div>
+    <div class="pitch-slide"><div class="ps-num">Slide 5</div><div class="ps-title">Ethics, Limits & Failures</div><div class="ps-hint">Honest critique of your own system</div></div>
+    <div class="pitch-slide"><div class="ps-num">Slide 6</div><div class="ps-title">Future Work</div><div class="ps-hint">What's next? What would you build with more resources?</div></div>
+  </div>
+
+  <h2 style="margin-top:28px;">🏆 How You'll Be Judged</h2>
+  <p style="margin-bottom:16px;">Your team's final pitch will be scored on these 5 criteria. Use this as YOUR self-assessment guide while designing.</p>
+  <div class="rubric-grid">
+    <div class="rubric-item">
+      <div class="r-title">🎨 Originality</div>
+      <div class="r-desc">Is the idea novel and creative? Does it solve a real, specific problem in a unique way?</div>
+      <div class="r-score">/ 5 points</div>
+    </div>
+    <div class="rubric-item">
+      <div class="r-title">🎯 Real-World Usefulness</div>
+      <div class="r-desc">Does your system solve a genuine problem for real people? Would they actually use it?</div>
+      <div class="r-score">/ 5 points</div>
+    </div>
+    <div class="rubric-item">
+      <div class="r-title">🎤 Clarity of Pitch</div>
+      <div class="r-desc">Can the audience understand your idea in 5-7 minutes? Is your explanation clear and engaging?</div>
+      <div class="r-score">/ 5 points</div>
+    </div>
+    <div class="rubric-item">
+      <div class="r-title">🧠 AI Knowledge</div>
+      <div class="r-desc">Do you name the ML type? Can you explain HOW your system works (not just WHAT it does)?</div>
+      <div class="r-score">/ 5 points</div>
+    </div>
+    <div class="rubric-item">
+      <div class="r-title">⚡ Feasibility</div>
+      <div class="r-desc">Is the scope realistic? Are your data requirements reasonable? Could this actually be built?</div>
+      <div class="r-score">/ 5 points</div>
+    </div>
+  </div>
+  <p style="margin-top:16px; font-size:0.88rem; color:var(--muted);"><strong>Total: 25 points.</strong> BONUS: +2 points if you address bias/ethics proactively (students often skip this, but judges LOVE teams that own their challenges).</p>
+
+  <h2 style="margin-top:28px;">📖 Real-World Bias Case Studies</h2>
+  <p style="margin-bottom: 16px;">Learn from these real cases of AI bias. These aren't hypothetical — they happened, caused harm, and are lessons for your project.</p>
+
+  <div class="case-study">
+    <h4>🚨 Case 1: COMPAS Recidivism Algorithm (Criminal Justice)</h4>
+    <p><strong>What happened:</strong> A system called COMPAS predicted the likelihood that released prisoners would re-offend. Black defendants were flagged as "high risk" at nearly twice the rate of white defendants.</p>
+    <p><strong>Root cause:</strong> The algorithm was trained on historical crime data, which reflects decades of racial bias in policing and sentencing. More arrests of Black people → model learned "Black = higher risk."</p>
+    <p><strong>Harm:</strong> Black people were kept in prison longer based on a statistical fiction.</p>
+    <p><strong>Lesson for you:</strong> Historical data encodes historical racism. Always ask: "What biases are baked into my training data from society's past?"</p>
+  </div>
+
+  <div class="case-study">
+    <h4>💼 Case 2: Amazon Hiring Algorithm (Gender Bias)</h4>
+    <p><strong>What happened:</strong> Amazon built an AI recruiter to screen job applications for technical positions. The system systematically rejected qualified women.</p>
+    <p><strong>Root cause:</strong> Amazon trained it on 10 years of hiring data. In tech roles, most hires were men (due to historical bias in the field). The AI learned "tech = male." When women applied, they scored lower.</p>
+    <p><strong>Harm:</strong> Women's careers blocked. Amazon's diversity efforts failed. Amazon shut down the tool.</p>
+    <p><strong>Lesson for you:</strong> Representation matters. If your data overrepresents one group, your AI will discriminate against others. Check your data profile BEFORE training.</p>
+  </div>
+
+  <div class="case-study">
+    <h4>🏥 Case 3: Medical Risk Algorithm (Healthcare Discrimination)</h4>
+    <p><strong>What happened:</strong> A widely-used algorithm in U.S. hospitals predicted which patients needed extra medical care resources. It systematically under-flagged Black patients.</p>
+    <p><strong>Root cause:</strong> The algorithm used healthcare spending as a proxy for illness. Because the healthcare system has historically spent less on Black patients, the AI thought they were less sick when they weren't.</p>
+    <p><strong>Harm:</strong> Black patients were denied needed treatments. They suffered preventable complications.</p>
+    <p><strong>Lesson for you:</strong> Proxies matter. Never use a variable that correlates with a protected group (race, gender) as a proxy for something else. "Spending ≠ illness; skin tone ≠ risk."</p>
+  </div>
+
+  <div class="case-study">
+    <h4>📸 Case 4: Facial Recognition (Surveillance Bias)</h4>
+    <p><strong>What happened:</strong> Facial recognition systems used by police had error rates of 1% for light-skinned faces but 35% for dark-skinned faces.</p>
+    <p><strong>Root cause:</strong> Training data oversampled lighter skin tones. Most popular datasets were from Western sources with predominantly light-skinned faces.</p>
+    <p><strong>Harm:</strong> Black people were wrongly arrested based on AI misidentification. An innocent man in Detroit spent time in jail.</p>
+    <p><strong>Lesson for you:</strong> Representation in training data directly impacts fairness. If your computer vision system uses faces, test it on diverse demographics.</p>
+  </div>
+
+  <div class="guide-box blue" style="margin-top:20px;">
+    <h3 style="color:var(--blue);">🎯 What These Cases Teach</h3>
+    <ul>
+      <li><strong>Historical data is biased:</strong> Past injustices → present data → future discrimination</li>
+      <li><strong>Proxies hide discrimination:</strong> Using spending as "health," or past hiring as "merit" encodes bias</li>
+      <li><strong>Representation matters:</strong> AI systems trained on majority groups fail on minorities</li>
+      <li><strong>High stakes = high responsibility:</strong> Criminal justice, hiring, healthcare need extra scrutiny</li>
+      <li><strong>Transparency saves lives:</strong> These issues were caught because researchers investigated. Make YOUR biases visible.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- PART 2: WORKSHEET -->
+<div class="section">
+  <div class="section-title">Part 2 — System Design Worksheet</div>
+
+  <h2>Q1 — What Does It Do?</h2>
+  <div class="ws-field">
+    <label>Describe your system in 2 sentences from the user's perspective</label>
+    <textarea placeholder="Example: A user uploads a photo of a skin lesion. The system classifies it as low, medium, or high risk and recommends whether to see a doctor."></textarea>
+  </div>
+
+  <h2 style="margin-top:20px;">Q2 — How Does It Learn?</h2>
+  <div class="ws-field">
+    <label>ML Type</label>
+    <div class="lines"><input class="line" type="text" placeholder="e.g. Supervised classification, generative LLM, recommendation system..."></div>
+  </div>
+  <div class="ws-field">
+    <label>Training process — how does the model learn to do its task?</label>
+    <textarea placeholder="What examples does it learn from? What is it trying to optimise for?"></textarea>
+  </div>
+  <div class="ws-field">
+    <label>If using an LLM — which one, and how is it used? (fine-tuned, prompted, RAG...)</label>
+    <textarea placeholder="Or write N/A if your system doesn't use an LLM"></textarea>
+  </div>
+
+  <h2 style="margin-top:20px;">Q3 — What Data Does It Need?</h2>
+  <div class="ws-field">
+    <label>Data Sources — Where would the training data come from?</label>
+    <textarea placeholder="Be specific. Public datasets? User-collected? Scraped? Licensed?"></textarea>
+  </div>
+  <div class="ws-field">
+    <label>Data Format & Volume — What type of data and roughly how much?</label>
+    <div class="lines">
+      <input class="line" type="text" placeholder="Format: (images, text, tabular, audio...)">
+      <input class="line" type="text" placeholder="Estimated volume needed:">
+    </div>
+  </div>
+  <div class="ws-field">
+    <label>Bias Risk — Which type(s) of bias could affect your data?</label>
+    <textarea placeholder="Refer to the bias table in Part 1. Name specific types and explain why they apply to your system."></textarea>
+  </div>
+  <div class="ws-field">
+    <label>Mitigation — How specifically would you address these biases?</label>
+    <textarea placeholder="Be specific. Not just 'good data' — what process, metric, or safeguard?"></textarea>
+  </div>
+
+  <h2 style="margin-top:20px;">Q4 — Where Can It Go Wrong?</h2>
+  <div class="ws-field">
+    <label>Failure Cases — Give 2 specific scenarios where your system produces wrong or harmful outputs</label>
+    <textarea placeholder="Scenario 1: ...&#10;Scenario 2: ..."></textarea>
+  </div>
+  <div class="ws-field">
+    <label>Adversarial / Edge Cases — Can users trick or confuse your system?</label>
+    <textarea placeholder="What unusual inputs might break it? What could a malicious user try?"></textarea>
+  </div>
+
+  <h2 style="margin-top:20px;">Q5 — Ethics & Limitations</h2>
+  <div class="ethics-grid">
+    <div class="ethics-card">
+      <div class="eq">Who could be harmed if it's wrong?</div>
+      <textarea placeholder="Who? How seriously?"></textarea>
+    </div>
+    <div class="ethics-card">
+      <div class="eq">Is there consent & data privacy?</div>
+      <textarea placeholder="Do users know? Can they opt out?"></textarea>
+    </div>
+    <div class="ethics-card">
+      <div class="eq">Could it be misused?</div>
+      <textarea placeholder="By whom? How?"></textarea>
+    </div>
+    <div class="ethics-card">
+      <div class="eq">Is there human oversight?</div>
+      <textarea placeholder="For which decisions? How?"></textarea>
+    </div>
+  </div>
+
+  <h2 style="margin-top:20px;">Future Work</h2>
+  <div class="ws-field">
+    <label>If you had 6 more months and a full team — what would you build next?</label>
+    <textarea placeholder="Expansions, improvements, new features, research directions..."></textarea>
+  </div>
+
+  <h2 style="margin-top:24px;">Pitch Deck Checklist</h2>
+  <p style="margin-bottom:10px;">Before Week 3, confirm your draft deck has all of these:</p>
+  <div class="checklist">
+    <div class="check-item"><input type="checkbox"><label><b>Slide 1: The Problem</b><span>Opens with a hook — story, stat, or scenario. Not a definition of AI.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 2–3: Solution + How it Works</b><span>ML type named explicitly. Includes a diagram, mockup, or user flow visual.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 4: Data & Bias</b><span>Specific data sources + named bias type + specific mitigation strategy.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 5: Ethics, Limits & Failures</b><span>Honest. At least 2 failure scenarios. Real ethical risks named.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 6: Future Work</b><span>Ambitious but grounded. Shows depth of thinking beyond the MVP.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Visuals > Text</b><span>Each slide has a visual. No slide is a wall of bullet points.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Fits 5–7 minutes</b><span>Practice run complete — you know your timing.</span></label></div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <span>AI Innovation Challenge · Week 2 of 4</span>
+  <span>Bring your draft pitch deck to Week 3</span>
+</div>
+
+<script>
+  // localStorage Utilities
+  const STORAGE_KEY = 'week2-data';
+
+  // Auto-save on input
+  window.addEventListener('load', function() {
+    loadFromLocalStorage();
+    setupAutoSave();
+  });
+
+  function setupAutoSave() {
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(el => {
+      el.addEventListener('change', autoSaveData);
+      el.addEventListener('blur', autoSaveData);
+    });
+  }
+
+  function autoSaveData() {
+    const inputs = document.querySelectorAll('input, textarea');
+    const data = {};
+    inputs.forEach((el, idx) => {
+      data[`field_${idx}`] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    console.log('Data saved!');
+  }
+
+  function loadFromLocalStorage() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach((el, idx) => {
+          if (data[`field_${idx}`]) {
+            el.value = data[`field_${idx}`];
+          }
+        });
+        console.log('Data loaded from storage!');
+      } catch (e) {
+        console.log('Could not load data');
+      }
+    }
+  }
+
+  function exportToPDF() {
+    alert('Click "Print" below and select "Save as PDF" to download your work.');
+    window.print();
+  }
+
+  function clearAllData() {
+    if (confirm('Are you sure? This will erase all your unsaved work.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+      console.log('All data cleared');
+    }
+  }
+</script>

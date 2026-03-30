@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 — Design Your AI System</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #06080f; --surface: #0e1018; --card: #161825;
+  --accent: #3de8a0; --blue: #4f8ef7; --pink: #f75e8e; --gold: #f7c948;
+  --text: #eef0fa; --muted: #6068a0; --border: rgba(61,232,160,0.18);
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+.slides-wrap { flex: 1; position: relative; overflow: hidden; }
+.slide {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; padding: 52px 80px; text-align: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.45s ease, transform 0.45s ease; transform: translateY(24px);
+}
+.slide.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+.slide::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 55% 45% at 80% 15%, rgba(61,232,160,0.07) 0%, transparent 65%),
+              radial-gradient(ellipse 35% 35% at 15% 85%, rgba(79,142,247,0.05) 0%, transparent 65%);
+}
+.eyebrow { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+h1 { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:800; line-height:1.05; margin-bottom:18px; }
+h2 { font-family:'Syne',sans-serif; font-size:clamp(1.6rem,3.5vw,2.6rem); font-weight:700; line-height:1.1; margin-bottom:16px; }
+h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:6px; color:var(--accent); }
+p { font-size:1.02rem; line-height:1.75; color:rgba(238,240,250,0.8); max-width:680px; }
+.lead { font-size:1.2rem; max-width:660px; }
+.hl { color:var(--accent); } .hlb { color:var(--blue); } .hlp { color:var(--pink); } .hly { color:var(--gold); }
+
+.grid { display:grid; gap:14px; width:100%; max-width:920px; margin-top:20px; }
+.g2 { grid-template-columns:repeat(2,1fr); } .g3 { grid-template-columns:repeat(3,1fr); }
+.card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px; text-align:left; }
+.card .ico { font-size:1.6rem; margin-bottom:10px; }
+.card p { font-size:0.88rem; }
+
+.steps { display:flex; flex-direction:column; gap:12px; max-width:700px; width:100%; margin-top:18px; }
+.step { display:flex; gap:18px; align-items:flex-start; text-align:left; }
+.step .num { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; color:var(--accent); min-width:36px; line-height:1; }
+.step .body p { font-size:0.9rem; margin-top:3px; }
+.step .body h3 { color:var(--text); margin-bottom:3px; }
+
+.discussion { background:rgba(247,201,72,0.07); border:1px solid rgba(247,201,72,0.25); border-radius:14px; padding:22px 28px; max-width:680px; width:100%; margin-top:18px; text-align:left; }
+.discussion .d-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.discussion ul { padding-left:18px; }
+.discussion li { font-size:0.92rem; line-height:1.7; color:rgba(238,240,250,0.82); }
+
+.tnote { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); background:rgba(247,94,142,0.1); border:1px solid rgba(247,94,142,0.25); border-radius:8px; padding:7px 18px; font-size:0.75rem; color:var(--pink); white-space:nowrap; z-index:5; }
+.tnote b { font-weight:600; }
+
+/* FRAMEWORK DIAGRAM */
+.framework { display:flex; align-items:center; gap:0; max-width:860px; width:100%; margin-top:22px; }
+.fw-box { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 16px; text-align:center; flex:1; }
+.fw-box h3 { font-size:0.85rem; color:var(--accent); margin-bottom:6px; }
+.fw-box p { font-size:0.78rem; color:var(--muted); }
+.fw-arrow { color:var(--muted); font-size:1.4rem; padding:0 6px; flex-shrink:0; }
+
+/* BIG QUESTION */
+.big-q { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px 32px; max-width:680px; width:100%; margin-top:22px; text-align:left; }
+.big-q .q-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--blue); margin-bottom:14px; }
+.big-q .q-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
+.big-q .q-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.big-q .q-num { font-family:'Syne',sans-serif; font-weight:800; color:var(--blue); min-width:24px; }
+.big-q .q-text { font-size:0.9rem; line-height:1.6; color:rgba(238,240,250,0.85); }
+
+/* AGENDA */
+.agenda { display:flex; flex-direction:column; gap:10px; max-width:680px; width:100%; margin-top:18px; }
+.a-item { display:flex; align-items:center; gap:16px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:13px 20px; text-align:left; }
+.a-item .time { font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; color:var(--accent); min-width:70px; }
+.a-item .label { font-size:0.92rem; }
+.a-item .label small { display:block; font-size:0.78rem; color:var(--muted); margin-top:1px; }
+
+/* DATA BIAS FLOW */
+.bias-flow { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:840px; width:100%; margin-top:22px; }
+.bias-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; text-align:left; }
+.bias-card .step-num { font-family:'Syne',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.bias-card h3 { font-size:0.95rem; color:var(--text); margin-bottom:6px; }
+.bias-card p { font-size:0.82rem; }
+.bias-card .warning { background:rgba(247,94,142,0.1); border-radius:6px; padding:8px 10px; margin-top:10px; font-size:0.78rem; color:var(--pink); }
+
+nav { display:flex; align-items:center; justify-content:space-between; padding:12px 36px; background:var(--surface); border-top:1px solid rgba(255,255,255,0.04); }
+.nav-left { display:flex; align-items:center; gap:16px; }
+.week-badge { background:var(--accent); color:#06080f; font-family:'Syne',sans-serif; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:100px; }
+.slide-count { font-size:0.8rem; color:var(--muted); }
+.nav-title { font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; color:var(--muted); }
+.nav-btns { display:flex; gap:8px; }
+.btn { background:var(--card); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:7px 18px; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; transition:all 0.2s; }
+.btn:hover { background:var(--accent); border-color:var(--accent); color:#06080f; }
+.btn:disabled { opacity:0.3; cursor:default; }
+.progress { height:2px; background:rgba(255,255,255,0.05); }
+.progress-bar { height:100%; background:var(--accent); transition:width 0.4s ease; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-bar" id="pbar"></div></div>
+<div class="slides-wrap" id="slides">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active">
+    <div class="eyebrow">AI Innovation Challenge · Week 2 of 4</div>
+    <h1>Design Your<br><span class="hl">AI System.</span></h1>
+    <p class="lead" style="margin-top:8px;">You have an idea. Now you need to think like an AI engineer — not just what it does, but <em>how</em> it works, what it needs, and what can go wrong.</p>
+    <div class="grid g3" style="margin-top:28px; max-width:720px;">
+      <div class="card"><div class="ico">🧠</div><h3>ML Architecture</h3><p>What type of learning? What model? Why?</p></div>
+      <div class="card"><div class="ico">📊</div><h3>Data & Bias</h3><p>Training data sources, quality risks, bias mitigation</p></div>
+      <div class="card"><div class="ico">⚖️</div><h3>Ethics & Limits</h3><p>Who could be harmed? Where does it break?</p></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 AGENDA -->
+  <div class="slide">
+    <div class="eyebrow">Today's Session · 60 min</div>
+    <h2>What We're Doing Today</h2>
+    <div class="agenda">
+      <div class="a-item"><span class="time">0–10 min</span><span class="label">Idea Brief feedback + approvals<small>Quick round — what got approved, what needs rethinking</small></span></div>
+      <div class="a-item"><span class="time">10–25 min</span><span class="label">The System Design Framework<small>Walk through the 5 design questions every team must answer</small></span></div>
+      <div class="a-item"><span class="time">25–45 min</span><span class="label">Team work session<small>Teams fill in their System Design worksheet</small></span></div>
+      <div class="a-item"><span class="time">45–55 min</span><span class="label">Hot seat: 2 teams share their design<small>Class challenges their data & ethics thinking</small></span></div>
+      <div class="a-item"><span class="time">55–60 min</span><span class="label">Pitch deck structure intro<small>What goes in your slides and how to structure them</small></span></div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Return Idea Briefs with written feedback before this session. Teams who need to pivot get 5 min of your time at the start.</div>
+  </div>
+
+  <!-- SLIDE 3: 5 DESIGN QUESTIONS -->
+  <div class="slide">
+    <div class="eyebrow">The Framework</div>
+    <h2>5 Questions Every Team<br>Must <span class="hl">Answer</span></h2>
+    <div class="big-q">
+      <div class="q-label">System Design Questions</div>
+      <div class="q-item"><span class="q-num">1</span><span class="q-text"><b>What does it do?</b> — Describe your system's behaviour from a user's perspective in 2 sentences.</span></div>
+      <div class="q-item"><span class="q-num">2</span><span class="q-text"><b>How does it learn?</b> — What ML type, what model, what training process?</span></div>
+      <div class="q-item"><span class="q-num">3</span><span class="q-text"><b>What data does it need?</b> — Source, volume, format, and any label requirements.</span></div>
+      <div class="q-item"><span class="q-num">4</span><span class="q-text"><b>Where can it go wrong?</b> — Bias risks, failure cases, adversarial inputs, edge cases.</span></div>
+      <div class="q-item"><span class="q-num">5</span><span class="q-text"><b>What are its limits?</b> — Ethical risks, who it could harm, what it should never be used for.</span></div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> These 5 questions map directly onto the pitch rubric. Design well now = pitch well later.</div>
+  </div>
+
+  <!-- SLIDE 4: SYSTEM FLOW -->
+  <div class="slide">
+    <div class="eyebrow">How AI Systems Work</div>
+    <h2>The Flow Every System Follows</h2>
+    <div class="framework">
+      <div class="fw-box"><h3>📥 Input</h3><p>What data comes in? Text, image, sensor, user action?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>⚙️ Model</h3><p>What ML type? What's it been trained on?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>📤 Output</h3><p>Prediction, classification, generated content, recommendation?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>🔁 Feedback</h3><p>How does the system improve over time?</p></div>
+    </div>
+    <div class="discussion" style="margin-top:24px;">
+      <div class="d-label">💬 Example — walk through together</div>
+      <ul>
+        <li><b>Spam filter:</b> Input = email text → Model = text classifier (supervised ML) → Output = spam/not spam → Feedback = user corrections</li>
+        <li>Now apply this to your own idea. What's your Input → Model → Output → Feedback loop?</li>
+      </ul>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Walk through 1 student idea using this framework before teams work independently.</div>
+  </div>
+
+  <!-- SLIDE 5: DATA & BIAS DEEP DIVE -->
+  <div class="slide">
+    <div class="eyebrow">Critical Thinking</div>
+    <h2>Data, Bias, and<br><span class="hlp">What Can Go Wrong</span></h2>
+    <div class="bias-flow">
+      <div class="bias-card">
+        <div class="step-num">Step 1</div>
+        <h3>Where's your data from?</h3>
+        <p>Who collected it? When? Does it represent your actual users, or just some of them?</p>
+        <div class="warning">⚠️ A dataset that doesn't represent your users will produce a biased model — even if the training accuracy looks great.</div>
+      </div>
+      <div class="bias-card">
+        <div class="step-num">Step 2</div>
+        <h3>What biases could it carry?</h3>
+        <p>Historical bias (reflects old injustices), sampling bias (certain groups missing), label bias (humans who labeled it had their own views).</p>
+        <div class="warning">⚠️ Ask: whose data is overrepresented? Whose is missing? What were the labelers' assumptions?</div>
+      </div>
+      <div class="bias-card">
+        <div class="step-num">Step 3</div>
+        <h3>How do you mitigate it?</h3>
+        <p>Diverse data collection, fairness metrics, human oversight, regular audits, transparency about limitations.</p>
+        <div class="warning">⚠️ Saying "we'll just use good data" is not a mitigation strategy. Be specific.</div>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Push teams to go beyond "we'll make sure the data is unbiased." Ask for specifics.</div>
+  </div>
+
+  <!-- SLIDE 6: ETHICS CHECKLIST -->
+  <div class="slide">
+    <div class="eyebrow">AI Ethics</div>
+    <h2>Is Your System <span class="hl">Ethical?</span></h2>
+    <p style="margin-bottom:20px;">Every AI system affects people. Your pitch must show you've thought this through.</p>
+    <div class="grid g2" style="max-width:800px;">
+      <div class="card">
+        <h3 style="color:var(--gold);">Who could be harmed?</h3>
+        <p>If your system makes a wrong prediction — who suffers? Is that harm minor (wrong movie rec) or serious (wrong medical diagnosis)?</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold);">Is consent considered?</h3>
+        <p>Does the user know their data is being used? Is there a way to opt out? What happens to their data?</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold);">Could it be misused?</h3>
+        <p>Could a bad actor exploit your system? Could it be used for surveillance, discrimination, or manipulation?</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold);">Is there a human in the loop?</h3>
+        <p>For high-stakes decisions (medical, legal, financial), should a human always have final say? How is that built in?</p>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Great discussion prompt: "What's the worst-case scenario if your system is wrong 10% of the time?"</div>
+  </div>
+
+  <!-- SLIDE 7: IF LLM -->
+  <div class="slide">
+    <div class="eyebrow">Special Case</div>
+    <h2>If Your System Uses<br>an <span class="hl">LLM or GenAI</span></h2>
+    <p style="margin-bottom:20px;">Many ideas will involve a chatbot, content generator, or language model. Teams using LLMs must address these specifically:</p>
+    <div class="grid g2" style="max-width:800px;">
+      <div class="card">
+        <div class="ico">🤔</div>
+        <h3>Hallucinations</h3>
+        <p>LLMs can confidently state false information. How does your system handle or flag this? What's the risk if a user trusts it?</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔒</div>
+        <h3>Prompt Injection</h3>
+        <p>Malicious users can try to trick your model with crafted inputs. Have you thought about how users might abuse your system?</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌍</div>
+        <h3>Cultural & Language Bias</h3>
+        <p>Most LLMs are trained predominantly on English, Western data. How does this affect your use case, especially if aimed at Lebanon or Arabic speakers?</p>
+      </div>
+      <div class="card">
+        <div class="ico">♻️</div>
+        <h3>Environmental Cost</h3>
+        <p>Training and running large language models consumes significant energy. Is the benefit worth the cost? How might you minimise it?</p>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> This applies to any team building a chatbot, writing tool, Q&A system, etc.</div>
+  </div>
+
+  <!-- SLIDE 8: HOT SEAT -->
+  <div class="slide">
+    <div class="eyebrow">Activity · 10 min</div>
+    <h2>The Hot Seat 🔥</h2>
+    <p class="lead">Two teams volunteer (or are chosen). They explain their system design. The class asks hard questions.</p>
+    <div class="discussion" style="margin-top:24px;">
+      <div class="d-label">🎯 Challenge Questions for the Class</div>
+      <ul>
+        <li>Where exactly does your training data come from?</li>
+        <li>What happens when the model is wrong — who's affected?</li>
+        <li>Could your system discriminate against a specific group? How?</li>
+        <li>If I wanted to abuse your system, how would I do it?</li>
+        <li>Why does this specifically need ML — not a simpler rule-based solution?</li>
+      </ul>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Encourage respectful but tough questioning. This is exactly what judges will ask at the exhibition.</div>
+  </div>
+
+  <!-- SLIDE 9: PITCH DECK STRUCTURE -->
+  <div class="slide">
+    <div class="eyebrow">Building Your Pitch</div>
+    <h2>Pitch Deck <span class="hl">Structure</span></h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="body"><h3>Slide 1 — Hook: The Problem</h3><p>Start with a story, statistic, or scenario. Make the audience feel the problem before you introduce your solution.</p></div></div>
+      <div class="step"><div class="num">2</div><div class="body"><h3>Slides 2–3 — The Solution + How it Works</h3><p>What your system does + the ML type and process. Include a diagram, mockup, or user flow.</p></div></div>
+      <div class="step"><div class="num">3</div><div class="body"><h3>Slide 4 — Data & Bias</h3><p>Training data sources, known biases, and your mitigation approach. Show you've thought critically.</p></div></div>
+      <div class="step"><div class="num">4</div><div class="body"><h3>Slide 5 — Ethics, Limits & Failures</h3><p>Who could be harmed, failure cases, and what your system should never be used for.</p></div></div>
+      <div class="step"><div class="num">5</div><div class="body"><h3>Slide 6 — Future Work</h3><p>What you'd improve, expand, or research next. Shows ambition and depth of thinking.</p></div></div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Remind teams: visuals > text on slides. Judges read fast. Clarity beats density.</div>
+  </div>
+
+  <!-- SLIDE 10: THIS WEEK -->
+  <div class="slide">
+    <div class="eyebrow">Before Next Class</div>
+    <h2>Your Week 2 <span class="hly">Deliverables</span></h2>
+    <div class="grid g2" style="max-width:720px;">
+      <div class="card" style="border-color:rgba(61,232,160,0.35);">
+        <div class="ico">📋</div>
+        <h3>System Design Worksheet</h3>
+        <p>Completed during today's class. All 5 design questions answered in detail.</p>
+      </div>
+      <div class="card" style="border-color:rgba(61,232,160,0.35);">
+        <div class="ico">📊</div>
+        <h3>Pitch Deck Draft</h3>
+        <p>6 slides. Rough is fine. Must cover all 6 required pitch elements. Bring to Week 3 for practice.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px;">Week 3 is entirely dedicated to <span class="hl">pitch rehearsal and feedback</span>. Come prepared to present your full deck.</p>
+    <div class="tnote"><b>Teacher:</b> Let teams know you'll do a quick deck review before Week 3 if they share their slides with you early.</div>
+  </div>
+
+</div>
+
+<nav>
+  <div class="nav-left">
+    <span class="week-badge">WEEK 2</span>
+    <span class="slide-count" id="sc">1 / 10</span>
+  </div>
+  <span class="nav-title">Design Your AI System</span>
+  <div class="nav-btns">
+    <button class="btn" id="prev" onclick="go(-1)" disabled>← Prev</button>
+    <button class="btn" id="next" onclick="go(1)">Next →</button>
+  </div>
+</nav>
+
+<script>
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+function go(dir) {
+  slides[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(total-1, cur+dir));
+  slides[cur].classList.add('active');
+  document.getElementById('sc').textContent = (cur+1)+' / '+total;
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===total-1;
+  document.getElementById('pbar').style.width = ((cur+1)/total*100)+'%';
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+});
+document.getElementById('pbar').style.width = (1/total*100)+'%';
+</script>
+</body>
+</html>

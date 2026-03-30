@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 — Pitch Coaching & Rehearsal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #06080f; --surface: #0e1018; --card: #161825;
+  --accent: #f7c948; --blue: #4f8ef7; --green: #3de8a0; --pink: #f75e8e;
+  --text: #eef0fa; --muted: #6068a0; --border: rgba(247,201,72,0.18);
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+.slides-wrap { flex: 1; position: relative; overflow: hidden; }
+.slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 52px 80px; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.45s ease, transform 0.45s ease; transform: translateY(24px); }
+.slide.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+.slide::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 45% at 80% 15%, rgba(247,201,72,0.07) 0%, transparent 65%), radial-gradient(ellipse 35% 35% at 15% 85%, rgba(79,142,247,0.05) 0%, transparent 65%); }
+.eyebrow { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+h1 { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:800; line-height:1.05; margin-bottom:18px; }
+h2 { font-family:'Syne',sans-serif; font-size:clamp(1.6rem,3.5vw,2.6rem); font-weight:700; line-height:1.1; margin-bottom:16px; }
+h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:6px; color:var(--accent); }
+p { font-size:1.02rem; line-height:1.75; color:rgba(238,240,250,0.8); max-width:680px; }
+.lead { font-size:1.2rem; max-width:660px; }
+.hl { color:var(--accent); } .hlb { color:var(--blue); } .hlg { color:var(--green); } .hlp { color:var(--pink); }
+
+.grid { display:grid; gap:14px; width:100%; max-width:920px; margin-top:20px; }
+.g2 { grid-template-columns:repeat(2,1fr); } .g3 { grid-template-columns:repeat(3,1fr); }
+.card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px; text-align:left; }
+.card .ico { font-size:1.6rem; margin-bottom:10px; }
+.card p { font-size:0.88rem; }
+
+.agenda { display:flex; flex-direction:column; gap:10px; max-width:680px; width:100%; margin-top:18px; }
+.a-item { display:flex; align-items:center; gap:16px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:13px 20px; text-align:left; }
+.a-item .time { font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; color:var(--accent); min-width:70px; }
+.a-item .label { font-size:0.92rem; }
+.a-item .label small { display:block; font-size:0.78rem; color:var(--muted); margin-top:1px; }
+
+.discussion { background:rgba(79,142,247,0.07); border:1px solid rgba(79,142,247,0.25); border-radius:14px; padding:22px 28px; max-width:680px; width:100%; margin-top:18px; text-align:left; }
+.discussion .d-label { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--blue); margin-bottom:12px; }
+.discussion ul { padding-left:18px; }
+.discussion li { font-size:0.92rem; line-height:1.7; color:rgba(238,240,250,0.82); }
+
+.tnote { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); background:rgba(247,94,142,0.1); border:1px solid rgba(247,94,142,0.25); border-radius:8px; padding:7px 18px; font-size:0.75rem; color:var(--pink); white-space:nowrap; z-index:5; }
+.tnote b { font-weight:600; }
+
+/* RUBRIC */
+.rubric { display:flex; flex-direction:column; gap:0; max-width:840px; width:100%; margin-top:18px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.rubric-header { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; background:rgba(247,201,72,0.15); padding:10px 16px; }
+.rubric-header span { font-family:'Syne',sans-serif; font-size:0.75rem; font-weight:700; color:var(--accent); text-align:center; }
+.rubric-header span:first-child { text-align:left; }
+.rubric-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; padding:12px 16px; border-top:1px solid rgba(255,255,255,0.05); }
+.rubric-row:nth-child(odd) { background:rgba(255,255,255,0.02); }
+.rubric-row .criteria { font-size:0.88rem; font-weight:500; }
+.rubric-row .score { font-size:0.8rem; color:var(--muted); text-align:center; line-height:1.4; }
+
+/* DELIVERY TIPS */
+.tip-row { display:flex; gap:0; max-width:860px; width:100%; margin-top:20px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.tip-col { flex:1; padding:20px; border-right:1px solid rgba(255,255,255,0.06); }
+.tip-col:last-child { border-right:none; }
+.tip-col h3 { font-size:0.85rem; margin-bottom:10px; }
+.tip-col ul { padding-left:16px; }
+.tip-col li { font-size:0.82rem; line-height:1.6; color:rgba(238,240,250,0.75); margin-bottom:4px; }
+
+/* BIG FEEDBACK */
+.feedback-types { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:820px; width:100%; margin-top:20px; }
+.fb-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; text-align:left; }
+.fb-card .fb-icon { font-size:1.4rem; margin-bottom:8px; }
+.fb-card h3 { font-size:0.88rem; margin-bottom:6px; }
+.fb-card p { font-size:0.8rem; }
+
+nav { display:flex; align-items:center; justify-content:space-between; padding:12px 36px; background:var(--surface); border-top:1px solid rgba(255,255,255,0.04); }
+.nav-left { display:flex; align-items:center; gap:16px; }
+.week-badge { background:var(--accent); color:#06080f; font-family:'Syne',sans-serif; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:100px; }
+.slide-count { font-size:0.8rem; color:var(--muted); }
+.nav-title { font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; color:var(--muted); }
+.nav-btns { display:flex; gap:8px; }
+.btn { background:var(--card); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:7px 18px; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; transition:all 0.2s; }
+.btn:hover { background:var(--accent); border-color:var(--accent); color:#06080f; }
+.btn:disabled { opacity:0.3; cursor:default; }
+.progress { height:2px; background:rgba(255,255,255,0.05); }
+.progress-bar { height:100%; background:var(--accent); transition:width 0.4s ease; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-bar" id="pbar"></div></div>
+<div class="slides-wrap">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active">
+    <div class="eyebrow">AI Innovation Challenge · Week 3 of 4</div>
+    <h1>This is Your<br><span class="hl">Dress Rehearsal.</span></h1>
+    <p class="lead" style="margin-top:10px;">Next week is the real thing. Today, every team pitches. Every team gets feedback. And every team leaves better than they arrived.</p>
+    <div class="grid g3" style="margin-top:28px; max-width:720px;">
+      <div class="card"><div class="ico">🎤</div><h3>Full Pitch</h3><p>Every team presents their complete deck today. Time it.</p></div>
+      <div class="card"><div class="ico">🔍</div><h3>Peer Feedback</h3><p>Structured critique from classmates using the rubric.</p></div>
+      <div class="card"><div class="ico">✏️</div><h3>Refine</h3><p>Leave with specific improvements. Don't leave with "it was fine."</p></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 AGENDA -->
+  <div class="slide">
+    <div class="eyebrow">Today's Session · 60 min</div>
+    <h2>What We're Doing Today</h2>
+    <div class="agenda">
+      <div class="a-item"><span class="time">0–5 min</span><span class="label">Rubric walkthrough<small>Everyone understands how judging works before pitching</small></span></div>
+      <div class="a-item"><span class="time">5–10 min</span><span class="label">Delivery tips — 5 quick principles<small>Body language, pacing, handling questions</small></span></div>
+      <div class="a-item"><span class="time">10–45 min</span><span class="label">Practice pitches — all teams<small>5 min per team + 3 min structured peer feedback</small></span></div>
+      <div class="a-item"><span class="time">45–55 min</span><span class="label">Teacher feedback highlights<small>Patterns you noticed across teams — what needs fixing</small></span></div>
+      <div class="a-item"><span class="time">55–60 min</span><span class="label">Exhibition logistics + final checklist<small>What to expect next week, who votes, how it works</small></span></div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> With ~5 teams per section and 8 min each, this fits tight. Keep transitions snappy. Use a visible timer.</div>
+  </div>
+
+  <!-- SLIDE 3: RUBRIC -->
+  <div class="slide">
+    <div class="eyebrow">Judging Criteria</div>
+    <h2>The <span class="hl">Rubric</span></h2>
+    <div class="rubric">
+      <div class="rubric-header"><span>Criteria</span><span>3 — Strong</span><span>2 — Developing</span><span>1 — Weak</span></div>
+      <div class="rubric-row"><span class="criteria">Problem Clarity</span><span class="score">Real, specific, compelling</span><span class="score">Somewhat clear</span><span class="score">Vague or obvious</span></div>
+      <div class="rubric-row"><span class="criteria">AI Solution + ML Type</span><span class="score">Named, justified, explained clearly</span><span class="score">Named but vague</span><span class="score">Missing or wrong</span></div>
+      <div class="rubric-row"><span class="criteria">Data & Bias</span><span class="score">Sources + type + mitigation</span><span class="score">Partial — missing mitigation</span><span class="score">Not addressed</span></div>
+      <div class="rubric-row"><span class="criteria">Ethics & Impact</span><span class="score">Specific harm + safeguards named</span><span class="score">Acknowledged, not addressed</span><span class="score">Not addressed</span></div>
+      <div class="rubric-row"><span class="criteria">Limitations & Failures</span><span class="score">2+ specific failure cases</span><span class="score">Vague acknowledgment</span><span class="score">"It will always work"</span></div>
+      <div class="rubric-row"><span class="criteria">Future Work</span><span class="score">Ambitious, specific, grounded</span><span class="score">Generic ("add features")</span><span class="score">Not included</span></div>
+      <div class="rubric-row"><span class="criteria">Pitch Quality</span><span class="score">Clear, confident, good visuals</span><span class="score">Mostly clear, some rough spots</span><span class="score">Hard to follow</span></div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Print this for peer feedback. 50% judge score, 50% audience vote at the exhibition.</div>
+  </div>
+
+  <!-- SLIDE 4: DELIVERY TIPS -->
+  <div class="slide">
+    <div class="eyebrow">Pitch Delivery</div>
+    <h2>5 Things That Separate<br><span class="hl">Good Pitches</span> from Great Ones</h2>
+    <div class="tip-row">
+      <div class="tip-col">
+        <h3>🎯 Lead with the problem</h3>
+        <ul><li>Don't open with "Hi, we're Team X and today we're going to talk about..."</li><li>Open with a story, stat, or scenario that makes the audience feel the problem.</li></ul>
+      </div>
+      <div class="tip-col">
+        <h3>👁️ Slides support you</h3>
+        <ul><li>You are the pitch — slides are visual aids, not scripts</li><li>No slide should be a wall of text. If you wrote it to read aloud, cut it.</li></ul>
+      </div>
+      <div class="tip-col">
+        <h3>⏱️ Respect the clock</h3>
+        <ul><li>5–7 minutes. Practice out loud. Time yourself.</li><li>Going over signals you haven't prepared.</li></ul>
+      </div>
+    </div>
+    <div class="tip-row" style="margin-top:10px;">
+      <div class="tip-col">
+        <h3>🧠 Know your content</h3>
+        <ul><li>Every team member should be able to answer questions — not just the speaker</li><li>Judges will ask the quiet ones.</li></ul>
+      </div>
+      <div class="tip-col">
+        <h3>💬 Handle questions well</h3>
+        <ul><li>"That's a great point, and here's how we've thought about it..." is a strong opener</li><li>"We haven't thought about that" is honest — but have a plan B.</li></ul>
+      </div>
+      <div class="tip-col">
+        <h3>✅ Own your limitations</h3>
+        <ul><li>Pretending your system is perfect loses judge trust immediately</li><li>Honest acknowledgment of bias and failure builds credibility.</li></ul>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Do a quick demo — give a 60-second bad pitch vs a 60-second good pitch on the same idea. Makes the principles stick.</div>
+  </div>
+
+  <!-- SLIDE 5: PEER FEEDBACK -->
+  <div class="slide">
+    <div class="eyebrow">Peer Feedback</div>
+    <h2>How to Give <span class="hlg">Useful</span> Feedback</h2>
+    <p style="margin-bottom:20px;">After each team pitches, the class gives structured feedback. Here's how:</p>
+    <div class="feedback-types">
+      <div class="fb-card">
+        <div class="fb-icon">⭐</div>
+        <h3 style="color:var(--green);">What worked</h3>
+        <p>One specific thing that was clear, compelling, or well-argued. Not "it was good." Be specific — "the opening scenario was really effective because..."</p>
+      </div>
+      <div class="fb-card">
+        <div class="fb-icon">🔍</div>
+        <h3 style="color:var(--accent);">One challenge</h3>
+        <p>One thing you weren't convinced by, or a gap you spotted. Frame it as a question: "How would your system handle the case where...?"</p>
+      </div>
+      <div class="fb-card">
+        <div class="fb-icon">💡</div>
+        <h3 style="color:var(--blue);">One suggestion</h3>
+        <p>Something concrete they could add, change, or clarify before the exhibition. Specific > vague. "Add a slide about X" beats "be clearer."</p>
+      </div>
+    </div>
+    <div class="discussion" style="margin-top:20px;">
+      <div class="d-label">🚫 What NOT to say in feedback</div>
+      <ul>
+        <li>"It was really good / great / amazing" — what specifically worked?</li>
+        <li>"I didn't understand anything" — what part specifically?</li>
+        <li>"Your idea is bad" — challenge the design, not the concept</li>
+      </ul>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Model the feedback yourself after the first team. Show them what "specific and useful" looks like.</div>
+  </div>
+
+  <!-- SLIDE 6: COMMON MISTAKES -->
+  <div class="slide">
+    <div class="eyebrow">Watch Out For</div>
+    <h2>Most Common <span class="hlp">Mistakes</span><br>in Student AI Pitches</h2>
+    <div class="grid g2" style="max-width:800px;">
+      <div class="card" style="border-color:rgba(247,94,142,0.25);">
+        <h3 style="color:var(--pink);">❌ "Our AI will be 99% accurate"</h3>
+        <p>Overconfident claims with no basis. Judges don't trust teams who haven't thought about failure. Accuracy claims need context, benchmarks, and acknowledgment of edge cases.</p>
+      </div>
+      <div class="card" style="border-color:rgba(247,94,142,0.25);">
+        <h3 style="color:var(--pink);">❌ "We'll just use good data"</h3>
+        <p>Not a bias mitigation strategy. Judges want to know which bias types apply, what specific steps address them, and what monitoring looks like post-deployment.</p>
+      </div>
+      <div class="card" style="border-color:rgba(247,94,142,0.25);">
+        <h3 style="color:var(--pink);">❌ "Ethics: our system is safe"</h3>
+        <p>Empty claim. Every AI system has ethical implications. "Safe" needs to be shown — with safeguards, oversight mechanisms, and acknowledged risks.</p>
+      </div>
+      <div class="card" style="border-color:rgba(247,94,142,0.25);">
+        <h3 style="color:var(--pink);">❌ Reading off slides word-for-word</h3>
+        <p>If you're reading your slides, the audience could have just read them alone. Know your content. Use slides as cues, not scripts.</p>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> After practice pitches, call out 1-2 of these patterns you observed. Don't name teams — make it general.</div>
+  </div>
+
+  <!-- SLIDE 7: EXHIBITION LOGISTICS -->
+  <div class="slide">
+    <div class="eyebrow">Next Week</div>
+    <h2>What to Expect at the<br><span class="hl">Exhibition</span></h2>
+    <div class="grid g2" style="max-width:780px;">
+      <div class="card">
+        <div class="ico">🎤</div>
+        <h3>The Pitch</h3>
+        <p>5–7 minutes. All four sections participate. Judges + public audience. Be ready for questions after your pitch.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🗳️</div>
+        <h3>The Vote</h3>
+        <p>50% judge rubric scores, 50% audience popular vote. Judges are teachers (and any guests invited). Audience is everyone else.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🏆</div>
+        <h3>The Prize</h3>
+        <p>Top 3 teams announced. The winning idea gets built into a real, working AI system by your teacher. 2nd and 3rd get recognition.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📋</div>
+        <h3>What to Bring</h3>
+        <p>Final slide deck (shared with teacher the night before). Any printed materials or mockups you want displayed. All team members present.</p>
+      </div>
+    </div>
+    <div class="tnote"><b>Teacher:</b> Share the exhibition schedule with teams now. Let them know the exact timing so no one is caught off-guard.</div>
+  </div>
+
+  <!-- SLIDE 8: FINAL CHECKLIST -->
+  <div class="slide">
+    <div class="eyebrow">Before Exhibition Day</div>
+    <h2>Final <span class="hl">Checklist</span></h2>
+    <div class="grid g3" style="max-width:840px;">
+      <div class="card" style="border-color:rgba(61,232,160,0.25);">
+        <h3 style="color:var(--green);">Content ✓</h3>
+        <p style="font-size:0.85rem;">All 6 pitch requirements covered. Specific on data sources. Specific on bias type + mitigation. Real failure cases. Honest limitations.</p>
+      </div>
+      <div class="card" style="border-color:rgba(61,232,160,0.25);">
+        <h3 style="color:var(--green);">Slides ✓</h3>
+        <p style="font-size:0.85rem;">Visuals on every slide. No slide is just text. Diagrams, mockups, or user flows included. Font readable from 3 metres away.</p>
+      </div>
+      <div class="card" style="border-color:rgba(61,232,160,0.25);">
+        <h3 style="color:var(--green);">Delivery ✓</h3>
+        <p style="font-size:0.85rem;">Timed at 5–7 min. Everyone knows their section. Practiced out loud at least 3 times. Ready for Q&A on any slide.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px;" class="lead">You've done the hard work. <span class="hl">Now make it shine.</span></p>
+    <div class="tnote"><b>Teacher:</b> Collect final decks the night before. Quick scan to catch any last-minute issues before exhibition day.</div>
+  </div>
+
+</div>
+
+<nav>
+  <div class="nav-left">
+    <span class="week-badge" style="background:var(--accent); color:#06080f;">WEEK 3</span>
+    <span class="slide-count" id="sc">1 / 8</span>
+  </div>
+  <span class="nav-title">Pitch Coaching & Rehearsal</span>
+  <div class="nav-btns">
+    <button class="btn" id="prev" onclick="go(-1)" disabled>← Prev</button>
+    <button class="btn" id="next" onclick="go(1)">Next →</button>
+  </div>
+</nav>
+
+<script>
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+function go(dir) {
+  slides[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(total-1, cur+dir));
+  slides[cur].classList.add('active');
+  document.getElementById('sc').textContent = (cur+1)+' / '+total;
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===total-1;
+  document.getElementById('pbar').style.width = ((cur+1)/total*100)+'%';
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+});
+document.getElementById('pbar').style.width = (1/total*100)+'%';
+</script>
+</body>
+</html>

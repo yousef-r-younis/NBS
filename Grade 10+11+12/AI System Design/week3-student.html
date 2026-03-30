@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 Student Packet — Pitch Coaching</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --accent: #c9920d; --blue: #4f6ef7; --green: #2eb87a; --pink: #e0436a; --text: #1a1d2e; --muted: #6b7080; --border: #d5d9f0; --bg: #f7f8fe; --card: #ffffff; }
+@media print { body { background: white; } .no-print { display:none; } .page-break { page-break-before: always; } }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 48px 32px; max-width: 860px; margin: 0 auto; line-height: 1.6; }
+.doc-header { border-bottom: 3px solid var(--accent); padding-bottom: 20px; margin-bottom: 32px; }
+.doc-badge { display:inline-block; background:var(--accent); color:#fff; font-family:'Syne',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:12px; }
+.doc-header h1 { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; line-height:1.1; margin-bottom:6px; }
+.doc-header p { color:var(--muted); font-size:0.95rem; }
+.meta-row { display:flex; gap:24px; margin-top:14px; }
+.meta-item { font-size:0.82rem; color:var(--muted); }
+.meta-item b { color:var(--text); }
+.section { margin-bottom: 36px; }
+.section-title { font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:10px; }
+h3 { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--accent); margin-bottom:6px; }
+p { font-size:0.92rem; color:#2a2d3e; margin-bottom:8px; }
+ul, ol { padding-left:20px; margin-bottom:10px; }
+li { font-size:0.91rem; margin-bottom:5px; }
+.guide-box { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:18px 20px; margin-bottom:16px; }
+.guide-box.green { border-left-color:var(--green); }
+.guide-box.blue { border-left-color:var(--blue); }
+.guide-box.pink { border-left-color:var(--pink); }
+
+/* RUBRIC */
+.rubric { width:100%; border-collapse:collapse; margin:14px 0; font-size:0.85rem; }
+.rubric th { background:var(--accent); color:#fff; font-family:'Syne',sans-serif; font-size:0.75rem; padding:9px 12px; text-align:left; }
+.rubric th:not(:first-child) { text-align:center; }
+.rubric td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+.rubric td:not(:first-child) { text-align:center; font-size:0.8rem; color:var(--muted); }
+.rubric tr:nth-child(even) td { background:#fff8e8; }
+.rubric .criteria { font-weight:600; color:var(--text); }
+
+/* DELIVERY CARD GRID */
+.delivery-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+.del-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.del-card .do { color:var(--green); font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; margin-bottom:4px; }
+.del-card .dont { color:var(--pink); font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; margin-bottom:4px; }
+.del-card p { font-size:0.85rem; }
+
+/* SELF REVIEW */
+.self-review { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+.sr-item { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 16px; display:flex; gap:16px; align-items:flex-start; }
+.sr-item .sr-q { flex:1; font-size:0.88rem; }
+.sr-item .sr-q b { display:block; margin-bottom:4px; }
+.sr-item .sr-q span { font-size:0.8rem; color:var(--muted); }
+.sr-item textarea { width:200px; flex-shrink:0; border:1px solid var(--border); border-radius:6px; padding:6px 8px; font-size:0.82rem; resize:none; height:55px; font-family:'DM Sans',sans-serif; outline:none; }
+.sr-item textarea:focus { border-color:var(--accent); }
+
+/* PEER FEEDBACK FORM */
+.pf-section { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:16px; }
+.pf-section .pf-title { font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+.pf-section .pf-title.green { color:var(--green); }
+.pf-section .pf-title.gold { color:var(--accent); }
+.pf-section .pf-title.blue { color:var(--blue); }
+.pf-section label { display:block; font-size:0.82rem; color:var(--muted); margin-bottom:6px; }
+.pf-section textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.88rem; resize:vertical; min-height:60px; outline:none; font-family:'DM Sans',sans-serif; }
+.pf-section textarea:focus { border-color:var(--accent); }
+.score-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.score-btn { border:1px solid var(--border); background:var(--bg); border-radius:6px; padding:5px 12px; font-size:0.82rem; font-family:'Syne',sans-serif; cursor:pointer; font-weight:700; }
+.score-btn.selected { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+/* FINAL ACTION */
+.action-list { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+.action-item { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
+.action-item .num { font-family:'Syne',sans-serif; font-weight:800; color:var(--accent); min-width:22px; }
+.action-item input { flex:1; border:none; border-bottom:1px solid var(--border); background:transparent; font-size:0.88rem; padding:2px 0; outline:none; font-family:'DM Sans',sans-serif; }
+
+.ws-field { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+.ws-field label { display:block; font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; color:var(--accent); margin-bottom:8px; letter-spacing:1px; text-transform:uppercase; }
+.ws-field textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); resize:vertical; min-height:70px; outline:none; }
+.ws-field textarea:focus { border-color:var(--accent); }
+.ws-field .line { border:none; border-bottom:1px solid var(--border); height:28px; width:100%; background:transparent; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); outline:none; }
+
+.page-break { margin-top:40px; border-top:2px dashed var(--border); padding-top:32px; }
+.doc-footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.78rem; color:var(--muted); }
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.btn-action {
+  display: inline-block; background: var(--accent); color: #fff; border: none; font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+}
+.btn-action:hover { background: #a77105; transform: translateY(-2px); }
+.btn-action.secondary { background: var(--text); color: white; }
+.btn-action.secondary:hover { background: #000; }
+
+/* INFO BOX */
+.info-box {
+  background: rgba(201, 146, 13, 0.05); border-left: 4px solid var(--accent); padding: 12px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.82rem; color: #2a2d3e;
+}
+
+/* COACHING TIPS */
+.coaching-tip {
+  background: #fffbf0; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; font-size: 0.82rem;
+}
+.coaching-tip strong { color: var(--accent); }
+
+.print-btn { display:inline-block; background:var(--accent); color:#fff; border:none; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; padding:9px 20px; border-radius:8px; cursor:pointer; margin-bottom:24px; }
+</style>
+</head>
+<body>
+<div class="action-buttons no-print">
+  <button class="btn-action" onclick="autoSaveData()">💾 Save Progress</button>
+  <button class="btn-action" onclick="exportToPDF()">📥 Export as PDF</button>
+  <button class="btn-action secondary" onclick="window.print()">🖨️ Print</button>
+  <button class="btn-action secondary" onclick="clearAllData()">🗑️ Clear All</button>
+</div>
+
+<div class="info-box no-print">
+  💾 <strong>Auto-Save:</strong> Your work is automatically saved as you type. You can close the browser and come back later.
+</div>
+
+<div class="doc-header">
+  <div class="doc-badge">Week 3 · Student Packet</div>
+  <h1>Pitch Coaching<br>Guide & Peer Feedback Sheet</h1>
+  <p>Use Part 1 to sharpen your pitch. Use Part 2 during practice presentations to give structured feedback.</p>
+  <div class="meta-row">
+    <div class="meta-item"><b>Team Name:</b> _______________________</div>
+    <div class="meta-item"><b>Date:</b> _______________________</div>
+  </div>
+</div>
+
+<!-- PART 1: GUIDE -->
+<div class="section">
+  <div class="section-title">Part 1 — Pitch Coaching Guide</div>
+
+  <h2>The Judging Rubric</h2>
+  <p>This is exactly how your pitch will be scored. Read it before you practise.</p>
+  <table class="rubric">
+    <tr><th style="width:35%;">Criteria</th><th>3 — Strong</th><th>2 — Developing</th><th>1 — Weak</th></tr>
+    <tr><td class="criteria">Problem Clarity</td><td>Real, specific, compelling</td><td>Somewhat clear</td><td>Vague or generic</td></tr>
+    <tr><td class="criteria">AI Solution + ML Type</td><td>Named, justified, clearly explained</td><td>Named but vague</td><td>Missing or incorrect</td></tr>
+    <tr><td class="criteria">Data & Bias</td><td>Sources + bias type + specific mitigation</td><td>Partial — mitigation missing</td><td>Not addressed</td></tr>
+    <tr><td class="criteria">Ethics & Impact</td><td>Specific harm named + safeguards explained</td><td>Acknowledged but not addressed</td><td>Not addressed</td></tr>
+    <tr><td class="criteria">Limitations & Failures</td><td>2+ specific failure scenarios</td><td>Vague acknowledgment</td><td>"It will always work"</td></tr>
+    <tr><td class="criteria">Future Work</td><td>Ambitious, specific, grounded</td><td>Generic ("add features")</td><td>Not included</td></tr>
+    <tr><td class="criteria">Pitch Quality</td><td>Clear, confident, strong visuals</td><td>Mostly clear, some rough spots</td><td>Hard to follow</td></tr>
+  </table>
+  <p style="font-size:0.82rem; color:var(--muted);">Final score = 50% judge rubric + 50% audience popular vote at the exhibition.</p>
+
+  <h2 style="margin-top:24px;">Delivery: Do's and Don'ts</h2>
+  <div class="delivery-grid">
+    <div class="del-card"><div class="do">✅ DO</div><p>Open with a story, stat, or scenario that makes the problem feel real.</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Open with "Hi we're Team X and today we'll be talking about..."</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Use your slides as visual cues. Speak to the audience, not the screen.</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Read bullet points off slides word for word.</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Be honest about limitations and bias. It builds credibility.</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Say "our AI will be 99% accurate" or "there are no ethical concerns."</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Practice out loud, timed. Know your section cold.</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Run over time. 7+ minutes signals you haven't prepared.</p></div>
+  </div>
+
+  <h2 style="margin-top:24px;">🎤 Section-Specific Coaching Tips</h2>
+  <div class="coaching-tip">
+    <strong>Slide 1 — The Problem (Hook them first 20 seconds)</strong><br>
+    Start with a story or stat that makes the problem feel <em>real and urgent</em>. Not: "Healthcare is important." Instead: "My grandmother forgets to take her medications every week, and nobody catches it until she gets sick." Make the audience feel it. This is your one chance to grab attention.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Slide 2 — The Solution (Show, don't tell)</strong><br>
+    Describe from the user's perspective: "She receives a reminder at 8am. She taps a button to confirm. The system tracks her compliance." Use a mockup, screenshot, or video. Saying "AI-powered medication tracking" means nothing; showing it means everything.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Slide 3 — How It Works (Name the ML type like it's obvious)</strong><br>
+    Don't say "we use machine learning." Say "we use a classification model trained on historical compliance data." Name it. Explain the training process in 2–3 sentences. Include a simple diagram showing: data in → model → prediction out. If you use an LLM, say which one and how (fine-tuned, prompted, RAG).
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Slide 4 — Data & Bias (Specific = credible)</strong><br>
+    Name the bias type you're concerned about. "We might have sampling bias because our training data comes from a hospital in one city. We're addressing it by collecting data from clinics in 3 different regions." Vagueness loses points; specificity wins judges.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Slide 5 — Ethics, Limits & Failures (Own the problems)</strong><br>
+    Give 2 concrete failure scenarios: "If the system sends a reminder at 2am instead of 8am due to a timezone bug, the elderly user sleeps through it." "If the model was trained primarily on younger patients, it might misjudge adherence for older demographics." Honesty disarms skeptics and builds credibility.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Slide 6 — Future Work (Dream big, stay grounded)</strong><br>
+    Don't just say "add more features." Say: "In Phase 2, we'd integrate with pharmacies to auto-refill prescriptions when doses run low. In Phase 3, we'd build a predictive model to forecast compliance drop-offs before they happen." Ambitious but doable = impressive.
+  </div>
+
+  <div class="guide-box blue" style="margin-top:16px;">
+    <h3 style="color:var(--blue);">Handling Q&A</h3>
+    <p>After your pitch, judges and classmates may ask questions. Strong answers start with: <em>"That's a great point — here's how we've thought about it..."</em> If you don't know: <em>"We haven't fully solved that yet — but our current thinking is..."</em> is far better than a defensive or vague response. <strong>Never lie or exaggerate.</strong> Judges respect honesty.</p>
+  </div>
+</div>
+
+<!-- PART 2: SELF-REVIEW -->
+<div class="section">
+  <div class="section-title">Part 2 — Self-Review Before You Present</div>
+  <p style="margin-bottom:14px;">Fill this in as a team before your practice pitch.</p>
+  <div class="self-review">
+    <div class="sr-item">
+      <div class="sr-q"><b>Opening hook</b><span>What's our opening line or scenario? Would a stranger feel the problem immediately?</span></div>
+      <textarea placeholder="Our opening is..."></textarea>
+    </div>
+    <div class="sr-item">
+      <div class="sr-q"><b>ML type & why</b><span>Do we clearly name and justify our ML type? Could someone explain it back to us?</span></div>
+      <textarea placeholder="We use ___ because..."></textarea>
+    </div>
+    <div class="sr-item">
+      <div class="sr-q"><b>Bias — named & mitigated</b><span>Which specific bias type? What specific mitigation? Is it vague or concrete?</span></div>
+      <textarea placeholder="Bias type: ___ / Mitigation: ___"></textarea>
+    </div>
+    <div class="sr-item">
+      <div class="sr-q"><b>2 failure scenarios</b><span>Can we describe two specific cases where our system produces a wrong or harmful output?</span></div>
+      <textarea placeholder="Failure 1: ___ / Failure 2: ___"></textarea>
+    </div>
+    <div class="sr-item">
+      <div class="sr-q"><b>Timing</b><span>Have we timed this out loud? Are we within 5–7 minutes?</span></div>
+      <textarea placeholder="Last timed run: ___ min ___ sec"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- PART 3: PEER FEEDBACK (REPEATABLE) -->
+<div class="page-break">
+  <div class="section-title" style="font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px;">Part 3 — Peer Feedback Sheet <span style="flex:1; height:1px; background:var(--border); display:block;"></span></div>
+  <p style="margin-bottom:6px; font-size:0.82rem; color:var(--muted);">Complete one per team you observe. Use specific, constructive language.</p>
+
+  <div class="ws-field" style="margin-bottom:16px;">
+    <label>Team You're Giving Feedback To</label>
+    <input class="line" type="text" placeholder="Team name">
+  </div>
+
+  <h2>Rubric Scores</h2>
+  <p style="margin-bottom:12px; font-size:0.82rem; color:var(--muted);">Circle or click a score for each criterion. 3 = Strong, 2 = Developing, 1 = Weak.</p>
+
+  <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">Problem Clarity</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">AI Solution + ML Type</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">Data & Bias</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">Ethics & Impact</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">Limitations & Failures</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88em; font-weight:600;">Future Work</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
+      <span style="font-size:0.88rem; font-weight:600;">Pitch Quality</span>
+      <div class="score-row" style="margin:0;">
+        <button class="score-btn" onclick="toggleScore(this)">3</button>
+        <button class="score-btn" onclick="toggleScore(this)">2</button>
+        <button class="score-btn" onclick="toggleScore(this)">1</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pf-section">
+    <div class="pf-title green">⭐ What worked — be specific</div>
+    <label>One thing that was clear, compelling, or well-argued (not just "it was good")</label>
+    <textarea placeholder="The ___ was effective because..."></textarea>
+  </div>
+
+  <div class="pf-section">
+    <div class="pf-title gold">🔍 One challenge — frame as a question</div>
+    <label>Something you weren't convinced by, or a gap you noticed</label>
+    <textarea placeholder="How would your system handle the case where...? / I wasn't sure about... because..."></textarea>
+  </div>
+
+  <div class="pf-section">
+    <div class="pf-title blue">💡 One concrete suggestion</div>
+    <label>Something specific they could add, change, or clarify</label>
+    <textarea placeholder="I'd suggest adding a slide about ___ / Being more specific about ___ would help because..."></textarea>
+  </div>
+</div>
+
+<!-- PART 4: ACTION ITEMS -->
+<div class="section" style="margin-top:32px;">
+  <div class="section-title">Part 4 — Post-Feedback Action Items</div>
+  <p style="margin-bottom:12px;">After receiving feedback from classmates and your teacher, list your top 3 improvements to make before the exhibition.</p>
+  <div class="action-list">
+    <div class="action-item"><span class="num">1</span><input type="text" placeholder="I will improve: ___"></div>
+    <div class="action-item"><span class="num">2</span><input type="text" placeholder="I will improve: ___"></div>
+    <div class="action-item"><span class="num">3</span><input type="text" placeholder="I will improve: ___"></div>
+  </div>
+  <div class="ws-field" style="margin-top:12px;">
+    <label>Slide that needs the most work</label>
+    <input class="line" type="text" placeholder="Which slide, and what specifically needs to change?">
+  </div>
+</div>
+
+<div class="doc-footer">
+  <span>AI Innovation Challenge · Week 3 of 4</span>
+  <span>Final deck due to teacher the night before the exhibition</span>
+</div>
+
+<script>
+const STORAGE_KEY = 'week3-data';
+
+// Toggle score buttons
+function toggleScore(btn) {
+  const row = btn.closest('.score-row');
+  row.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// Auto-save localStorage
+window.addEventListener('load', function() {
+  loadFromLocalStorage();
+  setupAutoSave();
+});
+
+function setupAutoSave() {
+  const inputs = document.querySelectorAll('input, textarea');
+  inputs.forEach(el => {
+    el.addEventListener('change', autoSaveData);
+    el.addEventListener('blur', autoSaveData);
+  });
+
+  // Also save score selections
+  const buttons = document.querySelectorAll('.score-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', autoSaveData);
+  });
+}
+
+function autoSaveData() {
+  const inputs = document.querySelectorAll('input, textarea');
+  const data = {};
+  inputs.forEach((el, idx) => {
+    data[`field_${idx}`] = el.value;
+  });
+
+  // Save selected scores
+  const scores = {};
+  document.querySelectorAll('.score-row').forEach((row, idx) => {
+    const selected = row.querySelector('.score-btn.selected');
+    if (selected) scores[`score_${idx}`] = selected.textContent;
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ inputs: data, scores: scores }));
+  console.log('Data saved!');
+}
+
+function loadFromLocalStorage() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const { inputs, scores } = JSON.parse(saved);
+
+      // Restore text inputs
+      const all_inputs = document.querySelectorAll('input, textarea');
+      all_inputs.forEach((el, idx) => {
+        if (inputs && inputs[`field_${idx}`]) {
+          el.value = inputs[`field_${idx}`];
+        }
+      });
+
+      // Restore score selections
+      if (scores) {
+        document.querySelectorAll('.score-row').forEach((row, idx) => {
+          if (scores[`score_${idx}`]) {
+            const btn = Array.from(row.querySelectorAll('.score-btn')).find(
+              b => b.textContent === scores[`score_${idx}`]
+            );
+            if (btn) btn.classList.add('selected');
+          }
+        });
+      }
+
+      console.log('Data loaded from storage!');
+    } catch (e) {
+      console.log('Could not load data');
+    }
+  }
+}
+
+function exportToPDF() {
+  alert('Click "Print" below and select "Save as PDF" to download your feedback sheet.');
+  window.print();
+}
+
+function clearAllData() {
+  if (confirm('Are you sure? This will erase all your unsaved work.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+    document.querySelectorAll('.score-btn').forEach(btn => btn.classList.remove('selected'));
+    console.log('All data cleared');
+  }
+}
+</script>
+</body>
+</html>
