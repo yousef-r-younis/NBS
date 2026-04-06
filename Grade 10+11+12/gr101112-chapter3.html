@@ -1,11 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="common logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%2010%2B11%2B12/gr101112-chapter3.html">
-
     <title>Chapter 3 Building Your First AI Chatbot</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -111,7 +109,7 @@
         }
 
         ul li:before {
-            content: "â†’ ";
+            content: "→ ";
             color: #00d4ff;
             font-weight: bold;
             margin-right: 10px;
@@ -423,7 +421,7 @@
         <!-- Slide 1: Title Slide -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h1>Building Your First AI Chatbot 🤖–</h1>
+            <h1>Building Your First AI Chatbot 🤖</h1>
             <div class="subtitle">Using MIT App Inventor</div>
             <p style="font-size: 1.4em; margin-top: 40px; color: #aaa;">Grades 10-12 | AI & Mobile Development</p>
         </div>
@@ -431,7 +429,7 @@
         <!-- Slide 2: Setup - Project Link & API Key -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Setup: Your Credentials ðŸ”‘</h2>
+            <h2>Setup: Your Credentials 🔑</h2>
             
             <div style="margin-top: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
                 <div class="big-idea-card" style="margin-bottom: 30px;">
@@ -444,7 +442,7 @@
                 </div>
 
                 <div class="big-idea-card" style="margin-bottom: 30px;">
-                    <h4>Get Your Gemini Free API Key ðŸ”‘</h4>
+                    <h4>Get Your Gemini Free API Key 🔑</h4>
                     <p style="margin: 15px 0; font-size: 1.1em;">Follow these steps to get your own free Gemini API key:</p>
                     <ol style="font-size: 1.1em; line-height: 2; margin-left: 30px; margin-top: 15px;">
                         <li>Go to <a href="https://aistudio.google.com/apikey" target="_blank" style="color: #00d4ff; text-decoration: underline;">aistudio.google.com/apikey</a></li>
@@ -456,7 +454,7 @@
                         <li>Save your API key in a safe place (never share it!)</li>
                     </ol>
                     <div style="background: rgba(255, 193, 7, 0.1); padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 20px;">
-                        <p style="margin: 0; color: #ffcc00; font-size: 1.1em;"><strong>âš ï¸ Important:</strong> Keep your API key private! Never share it in public repositories or with others.</p>
+                        <p style="margin: 0; color: #ffcc00; font-size: 1.1em;"><strong>⚠️ Important:</strong> Keep your API key private! Never share it in public repositories or with others.</p>
                     </div>
                 </div>
 
@@ -473,11 +471,11 @@
                             ManagE@1941@
                         </div>
                         <button onclick="copyWifiPassword(this)" style="background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 2px solid #00d4ff; padding: 15px 20px; border-radius: 8px; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s; font-weight: 600; white-space: nowrap; min-width: 100px; font-size: 1em;">
-                            ðŸ“‹ Copy
+                            📋 Copy
                         </button>
                     </div>
                     <button onclick="connectToWifi()" style="background: rgba(0, 100, 200, 0.3); color: #00d4ff; border: 2px solid #00d4ff; padding: 15px 30px; border-radius: 8px; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1.1em; margin-top: 15px; width: 100%;">
-                        🌍 Connect to Network
+                        🌐 Connect to Network
                     </button>
                     <div id="wifiStatus" style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.2); display: none;">
                         <p id="wifiStatusText" style="margin: 0; color: #00d4ff;"></p>
@@ -485,7 +483,7 @@
                 </div>
 
                 <div class="tip" style="margin-top: 30px;">
-                    <p style="font-size: 1.2em;">ðŸ’¡ <strong>Tip:</strong> These credentials are already loaded. You'll use them when building your app blocks. Keep them safe!</p>
+                    <p style="font-size: 1.2em;">💡 <strong>Tip:</strong> These credentials are already loaded. You'll use them when building your app blocks. Keep them safe!</p>
                 </div>
             </div>
         </div>
@@ -493,7 +491,7 @@
         <!-- Slide 3: What is a Chatbot? -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>What is a Chatbot? ðŸ’¬</h2>
+            <h2>What is a Chatbot? 💬</h2>
             <p style="font-size: 1.3em; margin-bottom: 30px;">A <strong>chatbot</strong> is a computer program that simulates human conversation through text or voice interactions.</p>
             
             <div class="big-idea-card">
@@ -510,7 +508,7 @@
         <!-- Slide 4: MIT App Inventor Overview -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>What is MIT App Inventor? ðŸ“±</h2>
+            <h2>What is MIT App Inventor? 📱</h2>
             
             <div class="three-column">
                 <div class="card">
@@ -551,7 +549,7 @@
         <!-- Slide 6: Components Needed -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Components We'll Use ðŸ”§</h2>
+            <h2>Components We'll Use 🔧</h2>
             
             <div class="two-column">
                 <div class="card">
@@ -577,7 +575,7 @@
             </div>
             
             <div class="tip">
-                <p style="font-size: 1.2em;">ðŸ’¡ <strong>Tip:</strong> All these components can be found in the Designer view's Palette on the left side</p>
+                <p style="font-size: 1.2em;">💡 <strong>Tip:</strong> All these components can be found in the Designer view's Palette on the left side</p>
             </div>
         </div>
 
@@ -608,7 +606,7 @@
         <!-- Slide 8: Code Block 2 -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Block 2: After Getting Speech ðŸ“</h2>
+            <h2>Block 2: After Getting Speech 📝</h2>
             
             <div class="fun-box">
                 <h4 style="margin-top: 0;">The Code:</h4>
@@ -635,7 +633,7 @@
         <!-- Slide 9: Code Block 3 -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Block 3: Send Button Click âœ‰ï¸</h2>
+            <h2>Block 3: Send Button Click ✉️</h2>
             
             <div class="fun-box">
                 <h4 style="margin-top: 0;">The Code:</h4>
@@ -664,7 +662,7 @@
         <!-- Slide 10: Code Block 4 -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Block 4: After AI Responds 🤖–</h2>
+            <h2>Block 4: After AI Responds 🤖</h2>
             
             <div class="fun-box">
                 <h4 style="margin-top: 0;">The Code:</h4>
@@ -693,7 +691,7 @@
         <!-- Slide 11: Code Block 5 -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>Block 5: Read Button Click ðŸ”Š</h2>
+            <h2>Block 5: Read Button Click 🔊</h2>
             
             <div class="fun-box">
                 <h4 style="margin-top: 0;">The Code:</h4>
@@ -718,7 +716,7 @@
         <!-- Slide 12: The Complete Flow -->
         <div class="slide">
             <div class="circuit-pattern"></div>
-            <h2>The Complete Flow ðŸ”„</h2>
+            <h2>The Complete Flow 🔄</h2>
             
             <div class="flow-diagram" style="margin-top: 40px; flex-direction: column; gap: 20px; align-items: stretch;">
                 <div class="flow-step" style="text-align: left;">
@@ -777,11 +775,11 @@
             <div class="center-text">
                 <h1 style="font-size: 3.5em;">Excellent Work! 🎉</h1>
                 <div class="subtitle" style="font-size: 1.5em; margin-top: 40px;">Building the Future with AI</div>
-                <div class="tagline">Stay curious. Think critically. Build responsibly. âœ¨</div>
+                <div class="tagline">Stay curious. Think critically. Build responsibly. ✨</div>
                 
                 <div style="margin-top: 60px; font-size: 1.3em; color: #00d4ff;">
                     <p>Questions? Insights? Debates?</p>
-                    <p style="margin-top: 10px;">Let's discuss! ðŸ’¬</p>
+                    <p style="margin-top: 10px;">Let's discuss! 💬</p>
                 </div>
 
                 <p style="margin-top: 60px; font-size: 1.2em; color: #aaa;">
@@ -793,21 +791,21 @@
 
     <div class="logo-top-right"></div>
 
-    <div class="scroll-indicator">â†“ Scroll or use arrow buttons</div>
+    <div class="scroll-indicator">↓ Scroll or use arrow buttons</div>
     
     <div class="controls">
-        <button onclick="prevSlide()">â† Previous</button>
-        <button onclick="nextSlide()">Next â†’</button>
+        <button onclick="prevSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
     </div>
     
-    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">â†‘ Top</button>
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Top</button>
 
     <script>
         function copyWifiPassword(button) {
             const password = document.getElementById('wifiPassDisplay').innerText;
             navigator.clipboard.writeText(password).then(() => {
                 const originalText = button.innerHTML;
-                button.innerHTML = 'âœ“ Copied!';
+                button.innerHTML = '✓ Copied!';
                 setTimeout(() => {
                     button.innerHTML = originalText;
                 }, 2000);
@@ -823,7 +821,7 @@
             const wifiPassword = 'ManagE@1941@';
             
             statusDiv.style.display = 'block';
-            statusText.innerHTML = 'â³ Attempting to connect to ' + wifiName + '...';
+            statusText.innerHTML = '⏳ Attempting to connect to ' + wifiName + '...';
             statusText.style.color = '#00d4ff';
             
             // Check if WiFi Management API is available (for MIT App Inventor or similar)
@@ -832,17 +830,17 @@
                     ssid: wifiName,
                     password: wifiPassword,
                     successCallback: function() {
-                        statusText.innerHTML = 'âœ“ Successfully connected to ' + wifiName + '!';
+                        statusText.innerHTML = '✓ Successfully connected to ' + wifiName + '!';
                         statusText.style.color = '#00ff00';
                     },
                     errorCallback: function(error) {
-                        statusText.innerHTML = 'âœ— Connection failed. Please connect manually using the credentials above. Error: ' + error;
+                        statusText.innerHTML = '✗ Connection failed. Please connect manually using the credentials above. Error: ' + error;
                         statusText.style.color = '#ff6b6b';
                     }
                 });
             } else {
                 // Fallback message for browsers that don't support WiFi API
-                statusText.innerHTML = 'âš ï¸ Automatic connection not available on this device. Please connect manually to <strong>' + wifiName + '</strong> using password: <strong>' + wifiPassword + '</strong>';
+                statusText.innerHTML = '⚠️ Automatic connection not available on this device. Please connect manually to <strong>' + wifiName + '</strong> using password: <strong>' + wifiPassword + '</strong>';
                 statusText.style.color = '#ffcc00';
             }
         }
@@ -903,4 +901,3 @@
     </script>
 </body>
 </html>
-

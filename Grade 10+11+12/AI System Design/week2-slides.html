@@ -1,11 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%2010%2B11%2B12/AI%20System%20Design/week2-slides.html">
-
-<title>Week 2 â€” Design Your AI System</title>
+<title>Week 2 — Design Your AI System</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,26 +102,26 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
 
   <!-- SLIDE 1 -->
   <div class="slide active">
-    <div class="eyebrow">AI Innovation Challenge Â· Week 2 of 4</div>
+    <div class="eyebrow">AI Innovation Challenge · Week 2 of 4</div>
     <h1>Design Your<br><span class="hl">AI System.</span></h1>
-    <p class="lead" style="margin-top:8px;">You have an idea. Now you need to think like an AI engineer â€” not just what it does, but <em>how</em> it works, what it needs, and what can go wrong.</p>
+    <p class="lead" style="margin-top:8px;">You have an idea. Now you need to think like an AI engineer — not just what it does, but <em>how</em> it works, what it needs, and what can go wrong.</p>
     <div class="grid g3" style="margin-top:28px; max-width:720px;">
-      <div class="card"><div class="ico">ðŸ§ </div><h3>ML Architecture</h3><p>What type of learning? What model? Why?</p></div>
-      <div class="card"><div class="ico">ðŸ“Š</div><h3>Data & Bias</h3><p>Training data sources, quality risks, bias mitigation</p></div>
-      <div class="card"><div class="ico">âš–ï¸</div><h3>Ethics & Limits</h3><p>Who could be harmed? Where does it break?</p></div>
+      <div class="card"><div class="ico">🧠</div><h3>ML Architecture</h3><p>What type of learning? What model? Why?</p></div>
+      <div class="card"><div class="ico">📊</div><h3>Data & Bias</h3><p>Training data sources, quality risks, bias mitigation</p></div>
+      <div class="card"><div class="ico">⚖️</div><h3>Ethics & Limits</h3><p>Who could be harmed? Where does it break?</p></div>
     </div>
   </div>
 
   <!-- SLIDE 2 AGENDA -->
   <div class="slide">
-    <div class="eyebrow">Today's Session Â· 60 min</div>
+    <div class="eyebrow">Today's Session · 60 min</div>
     <h2>What We're Doing Today</h2>
     <div class="agenda">
-      <div class="a-item"><span class="time">0â€“10 min</span><span class="label">Idea Brief feedback + approvals<small>Quick round â€” what got approved, what needs rethinking</small></span></div>
-      <div class="a-item"><span class="time">10â€“25 min</span><span class="label">The System Design Framework<small>Walk through the 5 design questions every team must answer</small></span></div>
-      <div class="a-item"><span class="time">25â€“45 min</span><span class="label">Team work session<small>Teams fill in their System Design worksheet</small></span></div>
-      <div class="a-item"><span class="time">45â€“55 min</span><span class="label">Hot seat: 2 teams share their design<small>Class challenges their data & ethics thinking</small></span></div>
-      <div class="a-item"><span class="time">55â€“60 min</span><span class="label">Pitch deck structure intro<small>What goes in your slides and how to structure them</small></span></div>
+      <div class="a-item"><span class="time">0–10 min</span><span class="label">Idea Brief feedback + approvals<small>Quick round — what got approved, what needs rethinking</small></span></div>
+      <div class="a-item"><span class="time">10–25 min</span><span class="label">The System Design Framework<small>Walk through the 5 design questions every team must answer</small></span></div>
+      <div class="a-item"><span class="time">25–45 min</span><span class="label">Team work session<small>Teams fill in their System Design worksheet</small></span></div>
+      <div class="a-item"><span class="time">45–55 min</span><span class="label">Hot seat: 2 teams share their design<small>Class challenges their data & ethics thinking</small></span></div>
+      <div class="a-item"><span class="time">55–60 min</span><span class="label">Pitch deck structure intro<small>What goes in your slides and how to structure them</small></span></div>
     </div>
     <div class="tnote"><b>Teacher:</b> Return Idea Briefs with written feedback before this session. Teams who need to pivot get 5 min of your time at the start.</div>
   </div>
@@ -134,11 +132,11 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <h2>5 Questions Every Team<br>Must <span class="hl">Answer</span></h2>
     <div class="big-q">
       <div class="q-label">System Design Questions</div>
-      <div class="q-item"><span class="q-num">1</span><span class="q-text"><b>What does it do?</b> â€” Describe your system's behaviour from a user's perspective in 2 sentences.</span></div>
-      <div class="q-item"><span class="q-num">2</span><span class="q-text"><b>How does it learn?</b> â€” What ML type, what model, what training process?</span></div>
-      <div class="q-item"><span class="q-num">3</span><span class="q-text"><b>What data does it need?</b> â€” Source, volume, format, and any label requirements.</span></div>
-      <div class="q-item"><span class="q-num">4</span><span class="q-text"><b>Where can it go wrong?</b> â€” Bias risks, failure cases, adversarial inputs, edge cases.</span></div>
-      <div class="q-item"><span class="q-num">5</span><span class="q-text"><b>What are its limits?</b> â€” Ethical risks, who it could harm, what it should never be used for.</span></div>
+      <div class="q-item"><span class="q-num">1</span><span class="q-text"><b>What does it do?</b> — Describe your system's behaviour from a user's perspective in 2 sentences.</span></div>
+      <div class="q-item"><span class="q-num">2</span><span class="q-text"><b>How does it learn?</b> — What ML type, what model, what training process?</span></div>
+      <div class="q-item"><span class="q-num">3</span><span class="q-text"><b>What data does it need?</b> — Source, volume, format, and any label requirements.</span></div>
+      <div class="q-item"><span class="q-num">4</span><span class="q-text"><b>Where can it go wrong?</b> — Bias risks, failure cases, adversarial inputs, edge cases.</span></div>
+      <div class="q-item"><span class="q-num">5</span><span class="q-text"><b>What are its limits?</b> — Ethical risks, who it could harm, what it should never be used for.</span></div>
     </div>
     <div class="tnote"><b>Teacher:</b> These 5 questions map directly onto the pitch rubric. Design well now = pitch well later.</div>
   </div>
@@ -148,19 +146,19 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <div class="eyebrow">How AI Systems Work</div>
     <h2>The Flow Every System Follows</h2>
     <div class="framework">
-      <div class="fw-box"><h3>ðŸ“¥ Input</h3><p>What data comes in? Text, image, sensor, user action?</p></div>
-      <span class="fw-arrow">â†’</span>
-      <div class="fw-box"><h3>âš™ï¸ Model</h3><p>What ML type? What's it been trained on?</p></div>
-      <span class="fw-arrow">â†’</span>
-      <div class="fw-box"><h3>ðŸ“¤ Output</h3><p>Prediction, classification, generated content, recommendation?</p></div>
-      <span class="fw-arrow">â†’</span>
-      <div class="fw-box"><h3>ðŸ” Feedback</h3><p>How does the system improve over time?</p></div>
+      <div class="fw-box"><h3>📥 Input</h3><p>What data comes in? Text, image, sensor, user action?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>⚙️ Model</h3><p>What ML type? What's it been trained on?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>📤 Output</h3><p>Prediction, classification, generated content, recommendation?</p></div>
+      <span class="fw-arrow">→</span>
+      <div class="fw-box"><h3>🔁 Feedback</h3><p>How does the system improve over time?</p></div>
     </div>
     <div class="discussion" style="margin-top:24px;">
-      <div class="d-label">ðŸ’¬ Example â€” walk through together</div>
+      <div class="d-label">💬 Example — walk through together</div>
       <ul>
-        <li><b>Spam filter:</b> Input = email text â†’ Model = text classifier (supervised ML) â†’ Output = spam/not spam â†’ Feedback = user corrections</li>
-        <li>Now apply this to your own idea. What's your Input â†’ Model â†’ Output â†’ Feedback loop?</li>
+        <li><b>Spam filter:</b> Input = email text → Model = text classifier (supervised ML) → Output = spam/not spam → Feedback = user corrections</li>
+        <li>Now apply this to your own idea. What's your Input → Model → Output → Feedback loop?</li>
       </ul>
     </div>
     <div class="tnote"><b>Teacher:</b> Walk through 1 student idea using this framework before teams work independently.</div>
@@ -175,19 +173,19 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
         <div class="step-num">Step 1</div>
         <h3>Where's your data from?</h3>
         <p>Who collected it? When? Does it represent your actual users, or just some of them?</p>
-        <div class="warning">âš ï¸ A dataset that doesn't represent your users will produce a biased model â€” even if the training accuracy looks great.</div>
+        <div class="warning">⚠️ A dataset that doesn't represent your users will produce a biased model — even if the training accuracy looks great.</div>
       </div>
       <div class="bias-card">
         <div class="step-num">Step 2</div>
         <h3>What biases could it carry?</h3>
         <p>Historical bias (reflects old injustices), sampling bias (certain groups missing), label bias (humans who labeled it had their own views).</p>
-        <div class="warning">âš ï¸ Ask: whose data is overrepresented? Whose is missing? What were the labelers' assumptions?</div>
+        <div class="warning">⚠️ Ask: whose data is overrepresented? Whose is missing? What were the labelers' assumptions?</div>
       </div>
       <div class="bias-card">
         <div class="step-num">Step 3</div>
         <h3>How do you mitigate it?</h3>
         <p>Diverse data collection, fairness metrics, human oversight, regular audits, transparency about limitations.</p>
-        <div class="warning">âš ï¸ Saying "we'll just use good data" is not a mitigation strategy. Be specific.</div>
+        <div class="warning">⚠️ Saying "we'll just use good data" is not a mitigation strategy. Be specific.</div>
       </div>
     </div>
     <div class="tnote"><b>Teacher:</b> Push teams to go beyond "we'll make sure the data is unbiased." Ask for specifics.</div>
@@ -201,7 +199,7 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <div class="grid g2" style="max-width:800px;">
       <div class="card">
         <h3 style="color:var(--gold);">Who could be harmed?</h3>
-        <p>If your system makes a wrong prediction â€” who suffers? Is that harm minor (wrong movie rec) or serious (wrong medical diagnosis)?</p>
+        <p>If your system makes a wrong prediction — who suffers? Is that harm minor (wrong movie rec) or serious (wrong medical diagnosis)?</p>
       </div>
       <div class="card">
         <h3 style="color:var(--gold);">Is consent considered?</h3>
@@ -226,22 +224,22 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <p style="margin-bottom:20px;">Many ideas will involve a chatbot, content generator, or language model. Teams using LLMs must address these specifically:</p>
     <div class="grid g2" style="max-width:800px;">
       <div class="card">
-        <div class="ico">🤖”</div>
+        <div class="ico">🤔</div>
         <h3>Hallucinations</h3>
         <p>LLMs can confidently state false information. How does your system handle or flag this? What's the risk if a user trusts it?</p>
       </div>
       <div class="card">
-        <div class="ico">ðŸ”’</div>
+        <div class="ico">🔒</div>
         <h3>Prompt Injection</h3>
         <p>Malicious users can try to trick your model with crafted inputs. Have you thought about how users might abuse your system?</p>
       </div>
       <div class="card">
-        <div class="ico">🌍</div>
+        <div class="ico">🌍</div>
         <h3>Cultural & Language Bias</h3>
         <p>Most LLMs are trained predominantly on English, Western data. How does this affect your use case, especially if aimed at Lebanon or Arabic speakers?</p>
       </div>
       <div class="card">
-        <div class="ico">â™»ï¸</div>
+        <div class="ico">♻️</div>
         <h3>Environmental Cost</h3>
         <p>Training and running large language models consumes significant energy. Is the benefit worth the cost? How might you minimise it?</p>
       </div>
@@ -251,17 +249,17 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
 
   <!-- SLIDE 8: HOT SEAT -->
   <div class="slide">
-    <div class="eyebrow">Activity Â· 10 min</div>
-    <h2>The Hot Seat ðŸ”¥</h2>
+    <div class="eyebrow">Activity · 10 min</div>
+    <h2>The Hot Seat 🔥</h2>
     <p class="lead">Two teams volunteer (or are chosen). They explain their system design. The class asks hard questions.</p>
     <div class="discussion" style="margin-top:24px;">
       <div class="d-label">🎯 Challenge Questions for the Class</div>
       <ul>
         <li>Where exactly does your training data come from?</li>
-        <li>What happens when the model is wrong â€” who's affected?</li>
+        <li>What happens when the model is wrong — who's affected?</li>
         <li>Could your system discriminate against a specific group? How?</li>
         <li>If I wanted to abuse your system, how would I do it?</li>
-        <li>Why does this specifically need ML â€” not a simpler rule-based solution?</li>
+        <li>Why does this specifically need ML — not a simpler rule-based solution?</li>
       </ul>
     </div>
     <div class="tnote"><b>Teacher:</b> Encourage respectful but tough questioning. This is exactly what judges will ask at the exhibition.</div>
@@ -272,11 +270,11 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <div class="eyebrow">Building Your Pitch</div>
     <h2>Pitch Deck <span class="hl">Structure</span></h2>
     <div class="steps">
-      <div class="step"><div class="num">1</div><div class="body"><h3>Slide 1 â€” Hook: The Problem</h3><p>Start with a story, statistic, or scenario. Make the audience feel the problem before you introduce your solution.</p></div></div>
-      <div class="step"><div class="num">2</div><div class="body"><h3>Slides 2â€“3 â€” The Solution + How it Works</h3><p>What your system does + the ML type and process. Include a diagram, mockup, or user flow.</p></div></div>
-      <div class="step"><div class="num">3</div><div class="body"><h3>Slide 4 â€” Data & Bias</h3><p>Training data sources, known biases, and your mitigation approach. Show you've thought critically.</p></div></div>
-      <div class="step"><div class="num">4</div><div class="body"><h3>Slide 5 â€” Ethics, Limits & Failures</h3><p>Who could be harmed, failure cases, and what your system should never be used for.</p></div></div>
-      <div class="step"><div class="num">5</div><div class="body"><h3>Slide 6 â€” Future Work</h3><p>What you'd improve, expand, or research next. Shows ambition and depth of thinking.</p></div></div>
+      <div class="step"><div class="num">1</div><div class="body"><h3>Slide 1 — Hook: The Problem</h3><p>Start with a story, statistic, or scenario. Make the audience feel the problem before you introduce your solution.</p></div></div>
+      <div class="step"><div class="num">2</div><div class="body"><h3>Slides 2–3 — The Solution + How it Works</h3><p>What your system does + the ML type and process. Include a diagram, mockup, or user flow.</p></div></div>
+      <div class="step"><div class="num">3</div><div class="body"><h3>Slide 4 — Data & Bias</h3><p>Training data sources, known biases, and your mitigation approach. Show you've thought critically.</p></div></div>
+      <div class="step"><div class="num">4</div><div class="body"><h3>Slide 5 — Ethics, Limits & Failures</h3><p>Who could be harmed, failure cases, and what your system should never be used for.</p></div></div>
+      <div class="step"><div class="num">5</div><div class="body"><h3>Slide 6 — Future Work</h3><p>What you'd improve, expand, or research next. Shows ambition and depth of thinking.</p></div></div>
     </div>
     <div class="tnote"><b>Teacher:</b> Remind teams: visuals > text on slides. Judges read fast. Clarity beats density.</div>
   </div>
@@ -287,12 +285,12 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
     <h2>Your Week 2 <span class="hly">Deliverables</span></h2>
     <div class="grid g2" style="max-width:720px;">
       <div class="card" style="border-color:rgba(61,232,160,0.35);">
-        <div class="ico">ðŸ“‹</div>
+        <div class="ico">📋</div>
         <h3>System Design Worksheet</h3>
         <p>Completed during today's class. All 5 design questions answered in detail.</p>
       </div>
       <div class="card" style="border-color:rgba(61,232,160,0.35);">
-        <div class="ico">ðŸ“Š</div>
+        <div class="ico">📊</div>
         <h3>Pitch Deck Draft</h3>
         <p>6 slides. Rough is fine. Must cover all 6 required pitch elements. Bring to Week 3 for practice.</p>
       </div>
@@ -310,8 +308,8 @@ nav { display:flex; align-items:center; justify-content:space-between; padding:1
   </div>
   <span class="nav-title">Design Your AI System</span>
   <div class="nav-btns">
-    <button class="btn" id="prev" onclick="go(-1)" disabled>â† Prev</button>
-    <button class="btn" id="next" onclick="go(1)">Next â†’</button>
+    <button class="btn" id="prev" onclick="go(-1)" disabled>← Prev</button>
+    <button class="btn" id="next" onclick="go(1)">Next →</button>
   </div>
 </nav>
 
@@ -336,5 +334,3 @@ document.getElementById('pbar').style.width = (1/total*100)+'%';
 </script>
 </body>
 </html>
-
-

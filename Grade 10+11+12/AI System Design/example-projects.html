@@ -1,11 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%2010%2B11%2B12/AI%20System%20Design/example-projects.html">
-
-  <title>Example Projects â€” AI Innovation Challenge</title>
+  <title>Example Projects — AI Innovation Challenge</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,7 +178,7 @@
     }
 
     .section-title::before {
-      content: 'â–ª';
+      content: '▪';
       font-size: 1.2rem;
     }
 
@@ -262,7 +260,7 @@
     }
 
     .check-item::before {
-      content: 'âœ“';
+      content: '✓';
       flex-shrink: 0;
       color: var(--green);
       font-weight: 700;
@@ -306,14 +304,14 @@
 </div>
 
 <div class="nav-top no-print">
-  <a href="index.html" class="btn" style="background: var(--text);">â† Back to Home</a>
-  <button onclick="window.print()" class="btn">🖨ï¸ Print</button>
+  <a href="index.html" class="btn" style="background: var(--text);">← Back to Home</a>
+  <button onclick="window.print()" class="btn">🖨️ Print</button>
 </div>
 
 <!-- EXAMPLE PROJECT 1: AI STUDY BUDDY -->
 <div class="project type-classification">
   <div class="project-header">
-    <div class="project-icon">ðŸ“š</div>
+    <div class="project-icon">📚</div>
     <div class="project-meta">
       <h2 class="project-title">AI Study Buddy</h2>
       <p class="project-subtitle">Generates personalized quizzes from student notes</p>
@@ -361,10 +359,10 @@
   <div class="section">
     <h3 class="section-title">Ethics & Impact</h3>
     <div class="checklist">
-      <div class="check-item">Is student data kept private? YESâ€”notes stay on the student's device</div>
-      <div class="check-item">Is it fair? YESâ€”equally helps all students practice</div>
-      <div class="check-item">Could it hurt anyone? MAYBEâ€”if it generates bad questions, weak students get confused</div>
-      <div class="check-item">Transparency? YESâ€”students know the AI generated the quiz</div>
+      <div class="check-item">Is student data kept private? YES—notes stay on the student's device</div>
+      <div class="check-item">Is it fair? YES—equally helps all students practice</div>
+      <div class="check-item">Could it hurt anyone? MAYBE—if it generates bad questions, weak students get confused</div>
+      <div class="check-item">Transparency? YES—students know the AI generated the quiz</div>
     </div>
   </div>
 
@@ -387,7 +385,7 @@
 <!-- EXAMPLE PROJECT 2: ARABIC MISINFORMATION DETECTOR -->
 <div class="project type-classification">
   <div class="project-header">
-    <div class="project-icon">ðŸ”</div>
+    <div class="project-icon">🔍</div>
     <div class="project-meta">
       <h2 class="project-title">Arabic Misinformation Detector</h2>
       <p class="project-subtitle">Flags suspicious news & social media posts in Arabic</p>
@@ -426,7 +424,7 @@
     <p><strong>What could go wrong?</strong></p>
     <ul>
       <li>If most training data is from one news outlet, it might inherit that outlet's biases</li>
-      <li>Sarcasm & humor in Arabic might be flagged as false (e.g., "Ø£ØºÙ„Ù‰ Ù…Ù† Ø°Ù‡Ø¨" = "costs more than gold" is slang for expensive, not literal)</li>
+      <li>Sarcasm & humor in Arabic might be flagged as false (e.g., "أغلى من ذهب" = "costs more than gold" is slang for expensive, not literal)</li>
       <li>New events: The AI only knows about things in its training data; breaking news appears as "suspicious" because it's not fact-checked yet</li>
       <li>Political bias: If training data skews one direction, it might unfairly flag certain viewpoints</li>
     </ul>
@@ -435,10 +433,10 @@
   <div class="section">
     <h3 class="section-title">Ethics & Impact</h3>
     <div class="checklist">
-      <div class="check-item">Could suppress free speech? RISKYâ€”if the tool is wrong, it silences legitimate posts</div>
-      <div class="check-item">Who decides what's "true"? Importantâ€”fact-checking sources must be transparent</div>
-      <div class="check-item">Privacy? YESâ€”doesn't store personal data</div>
-      <div class="check-item">Real-world impact? HIGHâ€”misinformation affects elections, health, safety</div>
+      <div class="check-item">Could suppress free speech? RISKY—if the tool is wrong, it silences legitimate posts</div>
+      <div class="check-item">Who decides what's "true"? Important—fact-checking sources must be transparent</div>
+      <div class="check-item">Privacy? YES—doesn't store personal data</div>
+      <div class="check-item">Real-world impact? HIGH—misinformation affects elections, health, safety</div>
     </div>
   </div>
 
@@ -461,7 +459,7 @@
 <!-- EXAMPLE PROJECT 3: NGO VOLUNTEER MATCHER -->
 <div class="project type-recommendation">
   <div class="project-header">
-    <div class="project-icon">🤖</div>
+    <div class="project-icon">🤝</div>
     <div class="project-meta">
       <h2 class="project-title">Lebanese NGO Volunteer Matcher</h2>
       <p class="project-subtitle">Matches people with NGOs based on skills & interests</p>
@@ -482,7 +480,7 @@
     <ul>
       <li>Build profiles: Volunteer skills (teaching, medical, tech, etc.) + interests (education, healthcare, environment)</li>
       <li>Profile NGOs: Needs (teacher, nurse, programmer) + locations + causes</li>
-      <li>Match: "You're a graphic designer interested in women's rights â†’ This women's org needs social media graphics"</li>
+      <li>Match: "You're a graphic designer interested in women's rights → This women's org needs social media graphics"</li>
       <li>Score matches and rank them (best match first)</li>
     </ul>
     <div class="flow">
@@ -509,10 +507,10 @@
   <div class="section">
     <h3 class="section-title">Ethics & Impact</h3>
     <div class="checklist">
-      <div class="check-item">Fairness? RISKYâ€”if algorithm is biased, some volunteers are always recommended, others never are</div>
-      <div class="check-item">Privacy? YESâ€”personal data is protected</div>
-      <div class="check-item">Positive impact? HIGHâ€”if done right, increases community engagement</div>
-      <div class="check-item">Incentives? CHECKâ€”don't incentivize NGOs to hire only recommended candidates</div>
+      <div class="check-item">Fairness? RISKY—if algorithm is biased, some volunteers are always recommended, others never are</div>
+      <div class="check-item">Privacy? YES—personal data is protected</div>
+      <div class="check-item">Positive impact? HIGH—if done right, increases community engagement</div>
+      <div class="check-item">Incentives? CHECK—don't incentivize NGOs to hire only recommended candidates</div>
     </div>
   </div>
 
@@ -520,7 +518,7 @@
     <h3 class="section-title">Limitations & Risks</h3>
     <ul>
       <li><strong>Cold start:</strong> New volunteers/NGOs have no history; recommendations are generic</li>
-      <li><strong>Long-term performance:</strong> AI can't measure actual successâ€”a "well-matched" volunteer might quit after a week</li>
+      <li><strong>Long-term performance:</strong> AI can't measure actual success—a "well-matched" volunteer might quit after a week</li>
       <li><strong>Rare skills:</strong> If an NGO needs a translator for a rare language, the AI might not find anyone</li>
       <li><strong>Hard to explain:</strong> Why did it recommend this volunteer? The reasoning is implicit in thousands of data points.</li>
     </ul>
@@ -575,7 +573,7 @@
     <ul>
       <li>If the handbook is outdated, the AI gives wrong information (e.g., old dress code)</li>
       <li>If FAQs only answer questions from certain students (e.g., not inclusive of students with disabilities), the chatbot is incomplete</li>
-      <li>Arabic dialectal differences: MSA (Modern Standard Arabic) vs. Lebanese dialectâ€”might struggle with dialect variations</li>
+      <li>Arabic dialectal differences: MSA (Modern Standard Arabic) vs. Lebanese dialect—might struggle with dialect variations</li>
       <li>Trolling: If students ask offensive questions, the chatbot might amplify bad behavior</li>
     </ul>
   </div>
@@ -583,20 +581,20 @@
   <div class="section">
     <h3 class="section-title">Ethics & Impact</h3>
     <div class="checklist">
-      <div class="check-item">Accessibility? YESâ€”works 24/7, helps students who are shy about asking</div>
-      <div class="check-item">Accuracy? CRITICALâ€”wrong info about school policies causes problems</div>
-      <div class="check-item">Scalability? YESâ€”same effort for 100 students or 1000</div>
-      <div class="check-item">Reduces staff burden? YESâ€”frees administrators for complex issues</div>
+      <div class="check-item">Accessibility? YES—works 24/7, helps students who are shy about asking</div>
+      <div class="check-item">Accuracy? CRITICAL—wrong info about school policies causes problems</div>
+      <div class="check-item">Scalability? YES—same effort for 100 students or 1000</div>
+      <div class="check-item">Reduces staff burden? YES—frees administrators for complex issues</div>
     </div>
   </div>
 
   <div class="section">
     <h3 class="section-title">Limitations & Risks</h3>
     <ul>
-      <li><strong>Emotional support:</strong> "I'm feeling anxious about exams"â€”the chatbot can't help; only a counselor can</li>
+      <li><strong>Emotional support:</strong> "I'm feeling anxious about exams"—the chatbot can't help; only a counselor can</li>
       <li><strong>Policy changes:</strong> If dress code changes, someone must update the database. Outdated = wrong answers</li>
       <li><strong>Arabic dialects:</strong> If trained on MSA, it might not understand Lebanese Arabic slang</li>
-      <li><strong>Nuanced questions:</strong> "My teacher is unfair"â€”the chatbot can't mediate; needs a human</li>
+      <li><strong>Nuanced questions:</strong> "My teacher is unfair"—the chatbot can't mediate; needs a human</li>
     </ul>
   </div>
 
@@ -629,7 +627,7 @@
     <p>Uses <strong>optimization algorithms</strong> + <strong>prediction</strong> to:</p>
     <ul>
       <li>Collect real-time traffic data (from Waze, Google Maps, or your own sensors)</li>
-      <li>Learn traffic patterns by hour, day, weather (8am traffic â‰  8pm traffic)</li>
+      <li>Learn traffic patterns by hour, day, weather (8am traffic ≠ 8pm traffic)</li>
       <li>Predict future congestion 15-30 mins ahead</li>
       <li>Find the route that minimizes travel time considering: distance, congestion, time of day</li>
     </ul>
@@ -647,7 +645,7 @@
     <p><strong>What data would it use?</strong> GPS traces, traffic incidents, time of day, weather, road conditions, user feedback.</p>
     <p><strong>What could go wrong?</strong></p>
     <ul>
-      <li>All routes routed through certain areas = overload â†’ those areas get more traffic</li>
+      <li>All routes routed through certain areas = overload → those areas get more traffic</li>
       <li>If the system doesn't have data for unsafe neighborhoods, it might route people there</li>
       <li>Weather data: AI trained on normal weather might fail during storms or rare events</li>
       <li>Accidents: A single car accident happens; the AI might overreact and route everyone else away, causing a different jam</li>
@@ -657,17 +655,17 @@
   <div class="section">
     <h3 class="section-title">Ethics & Impact</h3>
     <div class="checklist">
-      <div class="check-item">Public good? YESâ€”faster commutes = lower emissions, less frustration</div>
-      <div class="check-item">Fairness? RISKYâ€”if app users cluster, non-users are stuck in jams</div>
-      <div class="check-item">Privacy? CRITICALâ€”tracking location is sensitive; must be anonymized</div>
-      <div class="check-item">Safety? IMPORTANTâ€”routes through unsafe areas are problematic</div>
+      <div class="check-item">Public good? YES—faster commutes = lower emissions, less frustration</div>
+      <div class="check-item">Fairness? RISKY—if app users cluster, non-users are stuck in jams</div>
+      <div class="check-item">Privacy? CRITICAL—tracking location is sensitive; must be anonymized</div>
+      <div class="check-item">Safety? IMPORTANT—routes through unsafe areas are problematic</div>
     </div>
   </div>
 
   <div class="section">
     <h3 class="section-title">Limitations & Risks</h3>
     <ul>
-      <li><strong>Unpredictable events:</strong> Politician's convoy, sudden closureâ€”AI didn't see it coming</li>
+      <li><strong>Unpredictable events:</strong> Politician's convoy, sudden closure—AI didn't see it coming</li>
       <li><strong>Self-fulfilling prophecy:</strong> If everyone gets routed down one "fast" road, it becomes slow</li>
       <li><strong>Cold data:</strong> New roads or route changes: AI doesn't know about them yet</li>
       <li><strong>Real-time accuracy:</strong> Predictions are only as good as the data; incomplete data = poor predictions</li>
@@ -682,10 +680,8 @@
 
 <!-- FOOTER -->
 <div class="back-link">
-  <a href="index.html">â† Back to AI Innovation Challenge Home</a>
+  <a href="index.html">← Back to AI Innovation Challenge Home</a>
 </div>
 
 </body>
 </html>
-
-

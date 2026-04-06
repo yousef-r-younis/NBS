@@ -1,11 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%2010%2B11%2B12/gr101112-chapter7-handouts.html">
-
-<title>Chapter 7 â€” Student Handouts</title>
+<title>Chapter 7 — Student Handouts</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -114,20 +112,20 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
 <div class="container">
 
   <div style="text-align:center;margin-bottom:20px">
-    <h1 style="color:#4CA9FF;font-size:1.65em;margin-bottom:4px">Chapter 7 â€” Student Handouts</h1>
+    <h1 style="color:#4CA9FF;font-size:1.65em;margin-bottom:4px">Chapter 7 — Student Handouts</h1>
     <p style="color:#888;font-size:.93em">Foundations of Large Language Models | Mr. Yousef Younis</p>
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('w1',this)">ðŸ“˜ Week 1 â€” How LLMs Work & Why They Fail</button>
-    <button class="tab-btn w2" onclick="showTab('w2',this)">🧪 Week 2 â€” Let's Get Hands-On</button>
+    <button class="tab-btn active" onclick="showTab('w1',this)">📘 Week 1 — How LLMs Work & Why They Fail</button>
+    <button class="tab-btn w2" onclick="showTab('w2',this)">🧪 Week 2 — Let's Get Hands-On</button>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â• WEEK 1 HANDOUT â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ══════════ WEEK 1 HANDOUT ══════════ -->
   <div class="tab-content active" id="w1">
     <div class="handout-header w1-header">
-      <h2>ðŸ“˜ Week 1 â€” How LLMs Work & Why They Fail</h2>
-      <p>Tokens Â· Training Â· Context Windows Â· Hallucinations Â· Limitations</p>
+      <h2>📘 Week 1 — How LLMs Work & Why They Fail</h2>
+      <p>Tokens · Training · Context Windows · Hallucinations · Limitations</p>
     </div>
     <div class="handout-body">
 
@@ -135,11 +133,11 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
         <div class="sec-title">1. Key Vocabulary</div>
         <table class="vocab-table">
           <tr><th>Term</th><th>Definition</th></tr>
-          <tr><td>LLM</td><td>Large Language Model â€” AI trained on massive text data to predict the next token</td></tr>
-          <tr><td>Token</td><td>The unit of text an LLM reads â€” approximately Â¾ of a word, or ~4 characters</td></tr>
-          <tr><td>Training data</td><td>The text an LLM learns from (books, websites, code, Wikipediaâ€¦)</td></tr>
+          <tr><td>LLM</td><td>Large Language Model — AI trained on massive text data to predict the next token</td></tr>
+          <tr><td>Token</td><td>The unit of text an LLM reads — approximately ¾ of a word, or ~4 characters</td></tr>
+          <tr><td>Training data</td><td>The text an LLM learns from (books, websites, code, Wikipedia…)</td></tr>
           <tr><td>Fine-tuning</td><td>Additional training on a smaller dataset to specialise a model for a specific task</td></tr>
-          <tr><td>Context window</td><td>The maximum number of tokens an LLM can process at once â€” its short-term memory</td></tr>
+          <tr><td>Context window</td><td>The maximum number of tokens an LLM can process at once — its short-term memory</td></tr>
           <tr><td>Hallucination</td><td>When an LLM confidently states false or made-up information</td></tr>
           <tr><td>Training cutoff</td><td>The date after which the model has no knowledge of new events</td></tr>
           <tr><td>Bias</td><td>When a model reflects unfair or skewed patterns from its training data</td></tr>
@@ -147,25 +145,25 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
       </div>
 
       <div class="section">
-        <div class="sec-title">2. How LLMs Are Trained â€” Fill in the Blanks</div>
+        <div class="sec-title">2. How LLMs Are Trained — Fill in the Blanks</div>
         <div class="fill-box">
-          Step 1: Collect <span class="blank"></span> â€” billions of text examples from books, websites, and code.<br>
-          Step 2: Learn <span class="blank"></span> â€” predict the next <span class="blank"></span> billions of times and get feedback.<br>
-          Step 3: <span class="blank"></span> â€” further train the model for a specific task or behaviour.
+          Step 1: Collect <span class="blank"></span> — billions of text examples from books, websites, and code.<br>
+          Step 2: Learn <span class="blank"></span> — predict the next <span class="blank"></span> billions of times and get feedback.<br>
+          Step 3: <span class="blank"></span> — further train the model for a specific task or behaviour.
         </div>
         <div class="info-box" style="margin-top:8px">
-          <strong>ðŸ’¡ Key idea:</strong> LLMs learn statistical patterns â€” not facts about the world. This one idea explains almost every limitation we cover today.
+          <strong>💡 Key idea:</strong> LLMs learn statistical patterns — not facts about the world. This one idea explains almost every limitation we cover today.
         </div>
       </div>
 
       <div class="section">
-        <div class="sec-title">3. Tokens â€” Practice</div>
+        <div class="sec-title">3. Tokens — Practice</div>
         <table class="vocab-table">
           <tr><th>Phrase</th><th>Your Estimate</th><th>Actual (approx)</th></tr>
           <tr><td>"Hello world"</td><td></td><td>2 tokens</td></tr>
-          <tr><td>"Unbelievable"</td><td></td><td>3 tokens (un Â· believ Â· able)</td></tr>
+          <tr><td>"Unbelievable"</td><td></td><td>3 tokens (un · believ · able)</td></tr>
           <tr><td>"I love pizza"</td><td></td><td>4 tokens</td></tr>
-          <tr><td>"Artificial intelligence"</td><td></td><td>5â€“6 tokens</td></tr>
+          <tr><td>"Artificial intelligence"</td><td></td><td>5–6 tokens</td></tr>
           <tr><td style="color:#A48CFF;font-weight:400">Write your own sentence:</td><td></td><td></td></tr>
         </table>
       </div>
@@ -191,30 +189,30 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
           <tr><th>#</th><th>Cause</th><th>Example</th></tr>
           <tr><td>1</td><td>Pattern matching without understanding</td><td>Invents a capital city for a made-up country</td></tr>
           <tr><td>2</td><td>Gaps in training data</td><td>Guesses about a recent event it was never trained on</td></tr>
-          <tr><td>3</td><td>Ambiguous prompts</td><td>"Tell me about the Paris incident" â€” it assumes which one</td></tr>
+          <tr><td>3</td><td>Ambiguous prompts</td><td>"Tell me about the Paris incident" — it assumes which one</td></tr>
         </table>
         <div class="warning-box" style="margin-top:10px">
-          <strong>âš ï¸ Critical:</strong> The AI is NOT lying. It has no concept of truth. It always predicts the most plausible-sounding continuation â€” sometimes that continuation is wrong.
+          <strong>⚠️ Critical:</strong> The AI is NOT lying. It has no concept of truth. It always predicts the most plausible-sounding continuation — sometimes that continuation is wrong.
         </div>
       </div>
 
       <div class="section">
-        <div class="sec-title">6. Spot the Hallucination â€” Notes</div>
+        <div class="sec-title">6. Spot the Hallucination — Notes</div>
         <table class="vocab-table">
           <tr><th>Statement</th><th>Verdict</th><th>Why</th></tr>
-          <tr><td>"The Eiffel Tower was built 1887â€“1889"</td><td style="color:#2e7d32">âœ“ Real</td><td>Well-documented historical fact</td></tr>
-          <tr><td>"The Great Wall is visible from space with the naked eye"</td><td style="color:#c0392b">âœ— Myth</td><td>Widely repeated online â€” model learned the myth</td></tr>
-          <tr><td>"Einstein won the Nobel Prize for the theory of relativity"</td><td style="color:#e67e22">âš ï¸ Partial</td><td>He won it for the photoelectric effect â€” most dangerous type</td></tr>
+          <tr><td>"The Eiffel Tower was built 1887–1889"</td><td style="color:#2e7d32">✓ Real</td><td>Well-documented historical fact</td></tr>
+          <tr><td>"The Great Wall is visible from space with the naked eye"</td><td style="color:#c0392b">✗ Myth</td><td>Widely repeated online — model learned the myth</td></tr>
+          <tr><td>"Einstein won the Nobel Prize for the theory of relativity"</td><td style="color:#e67e22">⚠️ Partial</td><td>He won it for the photoelectric effect — most dangerous type</td></tr>
         </table>
       </div>
 
       <div class="section">
         <div class="sec-title">7. Other Key Limitations</div>
         <div class="two-col">
-          <div class="concept-box"><strong>ðŸ“… No real-time info</strong>Knowledge cutoff date â€” no live news, weather, or prices without external tools</div>
-          <div class="concept-box red"><strong>🤖– No true understanding</strong>Pattern recognition â‰  comprehension. No lived experience or common sense</div>
-          <div class="concept-box purple"><strong>âš–ï¸ Biased outputs</strong>Reflects biases in training data â€” gender, culture, language. English hugely overrepresented</div>
-          <div class="concept-box" style="border-left-color:#f39c12;background:#fff8f0"><strong style="color:#e67e22">ðŸ§  Context window limit</strong>Forgets long conversations â€” critical to design around</div>
+          <div class="concept-box"><strong>📅 No real-time info</strong>Knowledge cutoff date — no live news, weather, or prices without external tools</div>
+          <div class="concept-box red"><strong>🤖 No true understanding</strong>Pattern recognition ≠ comprehension. No lived experience or common sense</div>
+          <div class="concept-box purple"><strong>⚖️ Biased outputs</strong>Reflects biases in training data — gender, culture, language. English hugely overrepresented</div>
+          <div class="concept-box" style="border-left-color:#f39c12;background:#fff8f0"><strong style="color:#e67e22">🧠 Context window limit</strong>Forgets long conversations — critical to design around</div>
         </div>
       </div>
 
@@ -222,16 +220,16 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
         <div class="sec-title">8. Common Misconceptions</div>
         <div class="misconception-grid">
           <div class="wrong-col">
-            <h5>âŒ Wrong ideas</h5>
+            <h5>❌ Wrong ideas</h5>
             <p>"LLMs lie when they hallucinate"</p>
             <p>"LLMs understand language like humans"</p>
             <p>"More training data = no hallucinations"</p>
             <p>"The AI remembers our past chats"</p>
           </div>
           <div class="right-col">
-            <h5>âœ“ Correct understanding</h5>
-            <p>They predict plausible text â€” they don't know truth from fiction</p>
-            <p>Pattern recognition â‰  comprehension</p>
+            <h5>✓ Correct understanding</h5>
+            <p>They predict plausible text — they don't know truth from fiction</p>
+            <p>Pattern recognition ≠ comprehension</p>
             <p>Gaps + ambiguous prompts still cause hallucinations</p>
             <p>Context window = short-term only, resets each session</p>
           </div>
@@ -239,10 +237,10 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
       </div>
 
       <div class="section">
-        <div class="sec-title">9. Exit Ticket âœï¸</div>
+        <div class="sec-title">9. Exit Ticket ✍️</div>
         <div class="task-box">
           <h4>Answer all 3 before you leave:</h4>
-          <p style="font-size:.92em;font-weight:600;color:#555;margin:10px 0 4px">1. In one sentence â€” what is a context window and what happens when it's exceeded?</p>
+          <p style="font-size:.92em;font-weight:600;color:#555;margin:10px 0 4px">1. In one sentence — what is a context window and what happens when it's exceeded?</p>
           <div class="write-line"></div>
           <div class="write-line"></div>
           <p style="font-size:.92em;font-weight:600;color:#555;margin:12px 0 4px">2. Name one cause of hallucinations and give a real-world example of why it's dangerous.</p>
@@ -257,18 +255,18 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â• WEEK 2 HANDOUT â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ══════════ WEEK 2 HANDOUT ══════════ -->
   <div class="tab-content w2" id="w2">
     <div class="handout-header w2-header">
-      <h2>🧪 Week 2 â€” Let's Get Hands-On</h2>
-      <p>Break the AI Â· AI Career Explorer Â· Exam Prep</p>
+      <h2>🧪 Week 2 — Let's Get Hands-On</h2>
+      <p>Break the AI · AI Career Explorer · Exam Prep</p>
     </div>
     <div class="handout-body">
 
       <!-- Activity 1 -->
       <div class="section">
-        <div class="sec-title purple">Activity 1: Break the AI ðŸ”¨</div>
-        <p style="font-size:.93em;color:#666;margin-bottom:12px">Use a real AI tool (ChatGPT, Claude, or Gemini). Try each challenge below. Write what actually happened â€” be specific.</p>
+        <div class="sec-title purple">Activity 1: Break the AI 🔨</div>
+        <p style="font-size:.93em;color:#666;margin-bottom:12px">Use a real AI tool (ChatGPT, Claude, or Gemini). Try each challenge below. Write what actually happened — be specific.</p>
 
         <div class="challenge-box">
           <div class="challenge-row">
@@ -330,7 +328,7 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
         </div>
 
         <div class="warning-box" style="margin-top:14px">
-          <strong>ðŸ”‘ Reflection:</strong> Did the AI sound equally confident when it was wrong as when it was right? Why does that matter in real-world use?
+          <strong>🔑 Reflection:</strong> Did the AI sound equally confident when it was wrong as when it was right? Why does that matter in real-world use?
         </div>
         <div class="write-line"></div>
         <div class="write-line"></div>
@@ -339,36 +337,36 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
       <!-- Activity 2 -->
       <div class="section">
         <div class="sec-title purple">Activity 2: AI Career Explorer 🚀</div>
-        <p style="font-size:.93em;color:#666;margin-bottom:12px">Reference table â€” use this during class discussion.</p>
+        <p style="font-size:.93em;color:#666;margin-bottom:12px">Reference table — use this during class discussion.</p>
         <table class="career-table">
           <tr><th>Job Title</th><th>What they do</th><th>Skills needed</th><th>Avg Salary (USD)</th></tr>
-          <tr><td>AI / ML Engineer</td><td>Builds and trains AI models</td><td>Python, statistics, linear algebra</td><td class="salary">$120Kâ€“$200K+</td></tr>
-          <tr><td>Prompt Engineer</td><td>Designs instructions that make AI behave correctly</td><td>Clear writing, LLM knowledge â€” no CS degree required</td><td class="salary">$80Kâ€“$130K</td></tr>
-          <tr><td>AI Ethics Analyst</td><td>Ensures AI systems are fair, safe, and legal</td><td>Law, philosophy, social science</td><td class="salary">$70Kâ€“$120K</td></tr>
-          <tr><td>Data Scientist</td><td>Prepares data and makes decisions from AI outputs</td><td>Statistics, SQL, Python</td><td class="salary">$75Kâ€“$130K</td></tr>
-          <tr><td>AI Product Designer</td><td>Designs how humans interact with AI tools</td><td>UX design + understanding AI limits</td><td class="salary">$85Kâ€“$140K</td></tr>
+          <tr><td>AI / ML Engineer</td><td>Builds and trains AI models</td><td>Python, statistics, linear algebra</td><td class="salary">$120K–$200K+</td></tr>
+          <tr><td>Prompt Engineer</td><td>Designs instructions that make AI behave correctly</td><td>Clear writing, LLM knowledge — no CS degree required</td><td class="salary">$80K–$130K</td></tr>
+          <tr><td>AI Ethics Analyst</td><td>Ensures AI systems are fair, safe, and legal</td><td>Law, philosophy, social science</td><td class="salary">$70K–$120K</td></tr>
+          <tr><td>Data Scientist</td><td>Prepares data and makes decisions from AI outputs</td><td>Statistics, SQL, Python</td><td class="salary">$75K–$130K</td></tr>
+          <tr><td>AI Product Designer</td><td>Designs how humans interact with AI tools</td><td>UX design + understanding AI limits</td><td class="salary">$85K–$140K</td></tr>
           <tr><td>AI in Your Field</td><td>Domain expert who critically evaluates AI tools</td><td>Your expertise + AI literacy</td><td class="salary">Premium in any field</td></tr>
         </table>
 
         <div class="two-col" style="margin-top:14px">
-          <div class="concept-box purple"><strong>🤖– Skills AI can automate</strong>Routine, repetitive tasks Â· Basic data entry Â· Template-based writing Â· Simple pattern recognition</div>
-          <div class="concept-box" style="border-left-color:#4caf50;background:#f0fff4"><strong style="color:#2e7d32">ðŸ§  Skills AI can't replace</strong>Critical thinking Â· Ethical judgment Â· Creativity Â· Emotional intelligence Â· Domain expertise</div>
+          <div class="concept-box purple"><strong>🤖 Skills AI can automate</strong>Routine, repetitive tasks · Basic data entry · Template-based writing · Simple pattern recognition</div>
+          <div class="concept-box" style="border-left-color:#4caf50;background:#f0fff4"><strong style="color:#2e7d32">🧠 Skills AI can't replace</strong>Critical thinking · Ethical judgment · Creativity · Emotional intelligence · Domain expertise</div>
         </div>
       </div>
 
       <!-- Career Reflection -->
       <div class="section">
-        <div class="sec-title purple">Career Reflection âœï¸</div>
+        <div class="sec-title purple">Career Reflection ✍️</div>
         <div class="reflection-box">
-          <h4>Answer honestly â€” there's no right answer. This is about your future.</h4>
-          <div class="ref-question">1. What field or career are you currently interested in? (Any field â€” doesn't have to be tech)</div>
+          <h4>Answer honestly — there's no right answer. This is about your future.</h4>
+          <div class="ref-question">1. What field or career are you currently interested in? (Any field — doesn't have to be tech)</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
           <div class="ref-question">2. How do you think AI will change that field in the next 10 years? Name one specific change you can imagine.</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
           <div class="write-line"></div>
-          <div class="ref-question">3. What is one skill â€” technical or human â€” you want to develop that would make you more valuable in an AI-influenced world?</div>
+          <div class="ref-question">3. What is one skill — technical or human — you want to develop that would make you more valuable in an AI-influenced world?</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
           <div class="ref-question">Bonus: Find one real job listing in your field that mentions AI. What does it ask for?</div>
@@ -379,30 +377,30 @@ body{font-family:'Poppins',sans-serif;background:#f5f7fa;color:#333;padding:30px
 
       <!-- Exam prep checklist -->
       <div class="section">
-        <div class="sec-title purple">Exam Prep Checklist âœ…</div>
-        <p style="font-size:.92em;color:#666;margin-bottom:12px">Tick each one when you feel confident â€” Week 3 is the exam.</p>
+        <div class="sec-title purple">Exam Prep Checklist ✅</div>
+        <p style="font-size:.92em;color:#666;margin-bottom:12px">Tick each one when you feel confident — Week 3 is the exam.</p>
         <table class="career-table">
-          <tr><th>Topic</th><th>Confident?</th><th>If not, reviewâ€¦</th></tr>
-          <tr><td>What a token is and why limits matter</td><td>â˜</td><td>Week 1 handout Â§3</td></tr>
-          <tr><td>The 3-step training process</td><td>â˜</td><td>Week 1 handout Â§2</td></tr>
-          <tr><td>What fine-tuning does</td><td>â˜</td><td>Week 1 slides</td></tr>
-          <tr><td>What a context window is + what happens when exceeded</td><td>â˜</td><td>Week 1 handout Â§4</td></tr>
-          <tr><td>What hallucinations are (definition)</td><td>â˜</td><td>Week 1 handout Â§5</td></tr>
-          <tr><td>The 3 causes of hallucinations</td><td>â˜</td><td>Week 1 handout Â§5</td></tr>
-          <tr><td>Real-world examples of hallucinations</td><td>â˜</td><td>Week 1 slides</td></tr>
-          <tr><td>No real-time info / knowledge cutoff</td><td>â˜</td><td>Week 1 handout Â§7</td></tr>
-          <tr><td>Bias in training data + why it happens</td><td>â˜</td><td>Week 1 handout Â§7</td></tr>
-          <tr><td>Pattern recognition â‰  understanding</td><td>â˜</td><td>Week 1 handout Â§8</td></tr>
+          <tr><th>Topic</th><th>Confident?</th><th>If not, review…</th></tr>
+          <tr><td>What a token is and why limits matter</td><td>☐</td><td>Week 1 handout §3</td></tr>
+          <tr><td>The 3-step training process</td><td>☐</td><td>Week 1 handout §2</td></tr>
+          <tr><td>What fine-tuning does</td><td>☐</td><td>Week 1 slides</td></tr>
+          <tr><td>What a context window is + what happens when exceeded</td><td>☐</td><td>Week 1 handout §4</td></tr>
+          <tr><td>What hallucinations are (definition)</td><td>☐</td><td>Week 1 handout §5</td></tr>
+          <tr><td>The 3 causes of hallucinations</td><td>☐</td><td>Week 1 handout §5</td></tr>
+          <tr><td>Real-world examples of hallucinations</td><td>☐</td><td>Week 1 slides</td></tr>
+          <tr><td>No real-time info / knowledge cutoff</td><td>☐</td><td>Week 1 handout §7</td></tr>
+          <tr><td>Bias in training data + why it happens</td><td>☐</td><td>Week 1 handout §7</td></tr>
+          <tr><td>Pattern recognition ≠ understanding</td><td>☐</td><td>Week 1 handout §8</td></tr>
         </table>
         <div class="info-box" style="margin-top:12px">
-          <strong>ðŸ’¡ Exam tip:</strong> The exam tests whether you <em>understand</em> the concepts â€” not just the vocabulary. You'll be asked to apply them to new scenarios.
+          <strong>💡 Exam tip:</strong> The exam tests whether you <em>understand</em> the concepts — not just the vocabulary. You'll be asked to apply them to new scenarios.
         </div>
       </div>
 
     </div>
   </div>
 
-  <button class="print-btn" onclick="window.print()">🖨ï¸ Print This Handout</button>
+  <button class="print-btn" onclick="window.print()">🖨️ Print This Handout</button>
 
 </div>
 <script>
@@ -416,4 +414,3 @@ function showTab(id,btn){
 </script>
 </body>
 </html>
-

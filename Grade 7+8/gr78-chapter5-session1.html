@@ -1,11 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%207%2B8/gr78-chapter5-session1.html">
-
     <title>Python Programming - Grades 7-8</title>
     <link rel="icon" type="image/png" href="../common logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -199,15 +197,15 @@
         <div
             style="position:fixed;top:0;left:0;right:0;background:rgba(26,26,46,0.95);padding:20px 40px;z-index:2000;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
             <a href="../index.html"
-                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">â†
+                style="background:#00d4ff;color:#1a1a2e;padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer">←
                 Back</a><span style="color:#00d4ff;font-size:0.95em">Grades 7-8 | Chapter 1: Python Basics</span></div>
         <div class="slide title-slide center-content">
-            <h1>Introduction to Python ðŸ</h1>
+            <h1>Introduction to Python 🐍</h1>
             <div class="subtitle">Start Coding Today</div>
             <p style="margin-top:40px;font-size:1.3em">Session 1: Python Fundamentals</p>
         </div>
         <div class="slide">
-            <h2>What Is Python? 🤖”</h2>
+            <h2>What Is Python? 🤔</h2>
             <p><span class="tech-term">Python</span> is a programming language - a way to tell computers exactly what to
                 do, step by step.</p>
             <div class="info-box">
@@ -222,7 +220,7 @@
             <p style="margin-top:20px"><strong>Fun fact:</strong> Python is named after Monty Python, not the snake!</p>
         </div>
         <div class="slide">
-            <h2>Your First Program: Print ðŸ“¤</h2>
+            <h2>Your First Program: Print 📤</h2>
             <p>The simplest Python program uses <span class="tech-term">print()</span> - this tells Python to display
                 text on the screen.</p>
             <div class="concept-box">
@@ -234,7 +232,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>Variables: Storing Information ðŸ’¾</h2>
+            <h2>Variables: Storing Information 💾</h2>
             <p>A <span class="tech-term">variable</span> is a container that holds information. You can store numbers,
                 text, and more.</p>
             <div class="concept-box">
@@ -257,7 +255,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>Math Operations ðŸ”¢</h2>
+            <h2>Math Operations 🔢</h2>
             <p>Python can do math! Use +, -, *, / for add, subtract, multiply, divide.</p>
             <div class="concept-box">
                 <h3>Code Examples:</h3>
@@ -266,7 +264,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>Project 1: Age Calculator ðŸŽ‚</h2>
+            <h2>Project 1: Age Calculator 🎂</h2>
             <p>Let's create a program that calculates how old you'll be in 10 years!</p>
             <div class="concept-box">
                 <h3>Code:</h3>
@@ -277,7 +275,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>Project 2: Simple Math Quiz ðŸ§®</h2>
+            <h2>Project 2: Simple Math Quiz 🧮</h2>
             <div class="concept-box">
                 <h3>Code:</h3>
                 <div class="code-block">answer = input("What is 7 + 3? ")<br>answer = int(answer)<br>if answer ==
@@ -286,7 +284,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>Try It Yourself! ðŸ’ª</h2>
+            <h2>Try It Yourself! 💪</h2>
             <div class="info-box">
                 <h3>Online Python Editors (No Installation!):</h3>
                 <ul>
@@ -307,7 +305,7 @@
             </div>
         </div>
         <div class="slide">
-            <h2>What We Learned ðŸŽ“</h2>
+            <h2>What We Learned 🎓</h2>
             <div class="info-box">
                 <ul style="font-size:1.1em">
                     <li><strong>Python</strong> is a beginner-friendly programming language</li>
@@ -326,10 +324,9 @@
             <p style="margin-top:40px;color:#aaa">Next Session: Make Programs Smarter with If/Else Logic</p>
         </div>
     </div>
-    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">â† Previous</button><button
-            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next â†’</button></div>
+    <div class="slide-nav"><button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button><button
+            class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button></div>
     <script>let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const totalSlides = slides.length; function showSlide(n) { if (n >= totalSlides) currentSlide = totalSlides - 1; if (n < 0) currentSlide = 0; slides.forEach(slide => slide.style.display = 'none'); slides[currentSlide].style.display = 'flex'; document.getElementById('prevBtn').disabled = currentSlide === 0; document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1 } function nextSlide() { currentSlide++; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } function previousSlide() { currentSlide--; showSlide(currentSlide); window.scrollTo({ top: 0, behavior: 'smooth' }) } showSlide(currentSlide)</script>
 </body>
 
 </html>
-

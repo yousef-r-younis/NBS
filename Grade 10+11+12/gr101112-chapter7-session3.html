@@ -1,11 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade%2010%2B11%2B12/gr101112-chapter7-session3.html">
-
-<title>Week 3 MCQ Exam â€” LLMs</title>
+<title>Week 3 MCQ Exam — LLMs</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -44,10 +42,10 @@ h1{color:#00d4ff;font-size:2em;margin-bottom:5px;text-align:center}
 <body>
 <div class="container">
   <h1>LLMs: How They Work & Why They Fail</h1>
-  <div class="meta">Week 3 MCQ Exam | 20 Questions | Grades 10â€“11</div>
+  <div class="meta">Week 3 MCQ Exam | 20 Questions | Grades 10–11</div>
   <div class="instructions">
     Read each question carefully. Select the best answer. You'll get immediate feedback after each question.<br>
-    <strong>Tip:</strong> Think about the concepts â€” not just the vocabulary.
+    <strong>Tip:</strong> Think about the concepts — not just the vocabulary.
   </div>
   <div class="live-bar" id="live-bar">Answered: 0 / 20 &nbsp;|&nbsp; Correct: 0</div>
   <hr class="divider">
@@ -62,31 +60,31 @@ h1{color:#00d4ff;font-size:2em;margin-bottom:5px;text-align:center}
 <script>
 const questions = [
   // Section 1: Foundations
-  {sec:"Section 1 â€” What is an LLM?",
+  {sec:"Section 1 — What is an LLM?",
    q:"What does LLM stand for?",
    opts:["Logical Learning Machine","Large Language Model","Linear Language Module","Layered Learning Mechanism"],
-   ans:1,exp:"LLM stands for Large Language Model â€” AI trained on vast text data to predict the next token."},
+   ans:1,exp:"LLM stands for Large Language Model — AI trained on vast text data to predict the next token."},
   {
    q:"Which of the following best describes what an LLM does at its core?",
    opts:["It searches the internet for answers","It retrieves facts from a knowledge database","It predicts the most likely next token based on patterns in training data","It reasons through problems step-by-step like a human"],
-   ans:2,exp:"LLMs generate text by predicting the next token based on statistical patterns learned during training â€” not by reasoning, searching, or fact-retrieval."},
+   ans:2,exp:"LLMs generate text by predicting the next token based on statistical patterns learned during training — not by reasoning, searching, or fact-retrieval."},
   {
    q:"Which of these is NOT an example of a large language model?",
    opts:["Claude (Anthropic)","Gemini (Google)","Siri's voice recognition","Llama (Meta)"],
    ans:2,exp:"Siri's voice recognition is a speech-to-text system, not a large language model. Claude, Gemini, and Llama are all LLMs."},
 
   // Section 2: Tokens & Training
-  {sec:"Section 2 â€” Tokens & Training",
+  {sec:"Section 2 — Tokens & Training",
    q:"What is a token in the context of LLMs?",
-   opts:["A single word","A single character","A unit of text roughly equal to Â¾ of a word","A complete sentence"],
-   ans:2,exp:"A token is approximately Â¾ of a word or ~4 characters. For example, 'unbelievable' breaks into 3 tokens: un-believ-able."},
+   opts:["A single word","A single character","A unit of text roughly equal to ¾ of a word","A complete sentence"],
+   ans:2,exp:"A token is approximately ¾ of a word or ~4 characters. For example, 'unbelievable' breaks into 3 tokens: un-believ-able."},
   {
    q:"The word 'unbelievable' is most likely broken into how many tokens?",
    opts:["1","2","3","4"],
-   ans:2,exp:"'Unbelievable' = 3 tokens: un Â· believ Â· able. Longer and less common words break into more tokens."},
+   ans:2,exp:"'Unbelievable' = 3 tokens: un · believ · able. Longer and less common words break into more tokens."},
   {
    q:"What is the correct order of the LLM training process?",
-   opts:["Fine-tune â†’ Collect data â†’ Learn patterns","Collect data â†’ Fine-tune â†’ Learn patterns","Collect data â†’ Learn patterns â†’ Fine-tune","Learn patterns â†’ Collect data â†’ Fine-tune"],
+   opts:["Fine-tune → Collect data → Learn patterns","Collect data → Fine-tune → Learn patterns","Collect data → Learn patterns → Fine-tune","Learn patterns → Collect data → Fine-tune"],
    ans:2,exp:"The process is: (1) collect massive text data, (2) train on it to learn patterns (predict next token), then (3) fine-tune for specific tasks or behaviour."},
   {
    q:"What does 'fine-tuning' an LLM mean?",
@@ -95,62 +93,62 @@ const questions = [
   {
    q:"Why might an LLM trained on internet data have problematic outputs?",
    opts:["Internet data is always too short for training","The internet contains no factual information","Internet data can contain bias, misinformation, and harmful content","LLMs cannot process internet text directly"],
-   ans:2,exp:"Internet data is a reflection of human-generated content â€” which includes bias, false information, offensive language, and outdated facts. LLMs learn all of it."},
+   ans:2,exp:"Internet data is a reflection of human-generated content — which includes bias, false information, offensive language, and outdated facts. LLMs learn all of it."},
 
   // Section 3: Context Windows
-  {sec:"Section 3 â€” Context Windows",
+  {sec:"Section 3 — Context Windows",
    q:"What is a context window?",
    opts:["The time window during which a model was trained","The browser window used to access an AI chatbot","The maximum number of tokens a model can process at once","The number of conversations a model can handle simultaneously"],
    ans:2,exp:"A context window is the maximum number of tokens an LLM can read and generate within a single session. Once exceeded, earlier content is dropped."},
   {
    q:"A student has a 2-hour tutoring session with an AI. After 90 minutes, the AI seems to forget the student's name, even though they introduced themselves at the start. What is most likely happening?",
    opts:["The AI was updated mid-session","The context window was exceeded, so early messages were dropped","The AI chose not to remember personal information","The student's name was not stored in the AI's database"],
-   ans:1,exp:"When a conversation exceeds the context window token limit, the model drops the earliest content. The name â€” mentioned at the start â€” was lost."},
+   ans:1,exp:"When a conversation exceeds the context window token limit, the model drops the earliest content. The name — mentioned at the start — was lost."},
   {
    q:"Which statement about LLM memory is most accurate?",
    opts:["LLMs remember everything across all conversations","LLMs have unlimited short-term memory within one session","LLMs have no persistent memory between sessions by default","LLMs store user preferences permanently in their training data"],
    ans:2,exp:"By default, LLMs have no persistent memory between sessions. The app may save history and re-send it, but the model itself resets. Within a session, memory is limited by the context window."},
 
   // Section 4: Hallucinations
-  {sec:"Section 4 â€” Hallucinations",
+  {sec:"Section 4 — Hallucinations",
    q:"What is an AI hallucination?",
    opts:["When an AI refuses to answer a question","When an AI generates confident but false or fabricated information","When an AI copies text directly from its training data","When an AI gives a very slow response"],
-   ans:1,exp:"A hallucination is when an LLM generates false or made-up information confidently â€” because it's always predicting plausible text, not checking truth."},
+   ans:1,exp:"A hallucination is when an LLM generates false or made-up information confidently — because it's always predicting plausible text, not checking truth."},
   {
    q:"A lawyer submits a legal brief that cites three court cases the AI generated. None of the cases actually exist. This is an example of:",
    opts:["A context window error","A training data cutoff issue","An AI hallucination","A fine-tuning failure"],
-   ans:2,exp:"This is a hallucination â€” the AI generated realistic-sounding but completely fabricated case names by following the pattern of how legal citations are written."},
+   ans:2,exp:"This is a hallucination — the AI generated realistic-sounding but completely fabricated case names by following the pattern of how legal citations are written."},
   {
    q:"Which of the following is NOT one of the three main causes of hallucinations?",
    opts:["Pattern matching without true understanding","Gaps in training data","The model deliberately making up facts to seem helpful","Ambiguous or unclear prompts"],
-   ans:2,exp:"LLMs don't deliberately fabricate information. They have no concept of intention. Hallucinations result from pattern matching, data gaps, and ambiguous prompts â€” not deception."},
+   ans:2,exp:"LLMs don't deliberately fabricate information. They have no concept of intention. Hallucinations result from pattern matching, data gaps, and ambiguous prompts — not deception."},
   {
-   q:"A student asks an AI: 'Tell me about Einstein's Nobel Prize.' The AI states he won it for the theory of relativity. This is actually wrong â€” he won it for the photoelectric effect. What type of hallucination is this?",
-   opts:["A complete fabrication with no basis in fact","A partial hallucination â€” mostly correct but wrong on a key detail","A context window error causing confusion","A bias error from the training data"],
+   q:"A student asks an AI: 'Tell me about Einstein's Nobel Prize.' The AI states he won it for the theory of relativity. This is actually wrong — he won it for the photoelectric effect. What type of hallucination is this?",
+   opts:["A complete fabrication with no basis in fact","A partial hallucination — mostly correct but wrong on a key detail","A context window error causing confusion","A bias error from the training data"],
    ans:1,exp:"This is the most dangerous type of hallucination: partially correct, highly plausible, but wrong on a critical detail. It's easy to miss because the overall claim sounds right."},
 
   // Section 5: Other limitations
-  {sec:"Section 5 â€” Other Limitations",
+  {sec:"Section 5 — Other Limitations",
    q:"Why can't an LLM tell you about news from last week (without additional tools)?",
    opts:["LLMs are not connected to the internet by design and never will be","LLMs have a training data cutoff date and no real-time access by default","The context window prevents processing recent information","Recent news uses too many tokens"],
    ans:1,exp:"LLMs are trained on data up to a cutoff date. Without tools like web search, they have no knowledge of events after that date."},
   {
    q:"An LLM produces job suggestions that consistently recommend 'nurse' for women and 'engineer' for men. What best explains this?",
    opts:["The model was programmed with these gender rules","The model has no concept of gender and is guessing randomly","The model learned these associations from biased patterns in its training data","The model is performing a deliberate social experiment"],
-   ans:2,exp:"Bias in training data leads to biased outputs. If the historical text used for training associates certain jobs with certain genders, the model learns â€” and reproduces â€” those associations."},
+   ans:2,exp:"Bias in training data leads to biased outputs. If the historical text used for training associates certain jobs with certain genders, the model learns — and reproduces — those associations."},
   {
    q:"Why might an LLM perform significantly better in English than in Arabic?",
    opts:["Arabic is grammatically more complex than English","The model was programmed to prioritise English","There is far more English-language content in the training data","Arabic uses a different alphabet which LLMs cannot tokenise"],
-   ans:2,exp:"The internet has vastly more English content than Arabic. LLMs learn from what exists â€” so the richness, nuance, and accuracy of English outputs far exceeds Arabic ones."},
+   ans:2,exp:"The internet has vastly more English content than Arabic. LLMs learn from what exists — so the richness, nuance, and accuracy of English outputs far exceeds Arabic ones."},
 
   // Section 6: Application
-  {sec:"Section 6 â€” Applying Your Knowledge",
+  {sec:"Section 6 — Applying Your Knowledge",
    q:"You are designing an AI tutoring chatbot for long study sessions. Which limitation is most critical to design around?",
    opts:["The training data cutoff date","The context window limit causing the AI to forget earlier conversation","The model's bias toward English-language content","The model's inability to access the internet"],
    ans:1,exp:"Long sessions risk exceeding the context window, causing the AI to forget key information (the student's name, topic, progress). Good design saves this context separately and reinserts it."},
   {
    q:"Which of the following best describes the relationship between pattern recognition and understanding in LLMs?",
-   opts:["They are the same thing â€” pattern recognition IS understanding","Pattern recognition produces understanding over time with enough data","LLMs recognise statistical patterns but do not comprehend meaning the way humans do","LLMs understand meaning first, then express it through patterns"],
+   opts:["They are the same thing — pattern recognition IS understanding","Pattern recognition produces understanding over time with enough data","LLMs recognise statistical patterns but do not comprehend meaning the way humans do","LLMs understand meaning first, then express it through patterns"],
    ans:2,exp:"This is the fundamental distinction: LLMs are sophisticated pattern-matching systems. They can write about grief, justice, or love without experiencing or understanding any of these concepts."}
 ];
 
@@ -195,11 +193,11 @@ function select(qi,oi){
   const card=document.getElementById('card-'+qi);
   if(oi===q.ans){
     fb.className='feedback show correct';
-    fb.textContent='âœ“ Correct! '+q.exp;
+    fb.textContent='✓ Correct! '+q.exp;
     card.classList.add('correct');
   }else{
     fb.className='feedback show wrong';
-    fb.textContent='âœ— Incorrect. '+q.exp;
+    fb.textContent='✗ Incorrect. '+q.exp;
     card.classList.add('wrong');
   }
   updateLive();
@@ -219,7 +217,7 @@ function submitAll(){
   const correct=answered.filter((a,i)=>a!==null&&a===questions[i].ans).length;
   const pct=Math.round(correct/questions.length*100);
   let grade,msg;
-  if(pct>=90){grade='A';msg='Excellent â€” you have a strong grasp of LLM fundamentals and limitations.'}
+  if(pct>=90){grade='A';msg='Excellent — you have a strong grasp of LLM fundamentals and limitations.'}
   else if(pct>=75){grade='B';msg='Good work! Review the questions you missed before retaking.'}
   else if(pct>=60){grade='C';msg='Passing. Focus on hallucinations, context windows, and key distinctions.'}
   else{grade='D / F';msg='Needs revision. Go back over the Week 1 and Week 2 slides and your handout.'}
@@ -236,4 +234,3 @@ build();
 </script>
 </body>
 </html>
-
