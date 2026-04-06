@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Math/add-sub.html">
+
     <title>Grade 4: Addition & Subtraction in Thousands</title>
     <link rel="icon" type="image/png" href="../common logo.png">
     <style>
@@ -510,42 +512,42 @@
 </head>
 <body>
     <div class="container">
-        <button class="back-btn hidden" onclick="showMenu()">← Back to Menu</button>
+        <button class="back-btn hidden" onclick="showMenu()">â† Back to Menu</button>
         
         <div class="header">
             <div class="header-with-nav">
-                <a href="../math-index.html" class="nav-button">📚 Classes</a>
-                <h1>🎓 Grade 4 Math: Thousands</h1>
+                <a href="../math-index.html" class="nav-button">ðŸ“š Classes</a>
+                <h1>ðŸŽ“ Grade 4 Math: Thousands</h1>
             </div>
         </div>
 
         <div class="stats">
-            <div class="stat-box">⭐ Score: <span id="score">0</span></div>
-            <div class="stat-box">🔥 Streak: <span id="streak">0</span></div>
-            <div class="stat-box">✅ Completed: <span id="completed">0</span></div>
+            <div class="stat-box">â­ Score: <span id="score">0</span></div>
+            <div class="stat-box">ðŸ”¥ Streak: <span id="streak">0</span></div>
+            <div class="stat-box">âœ… Completed: <span id="completed">0</span></div>
         </div>
 
         <div id="menu-screen">
             <div class="operation-selector">
-                <button class="op-btn active" onclick="setOperation('addition')">➕ Addition</button>
-                <button class="op-btn" onclick="setOperation('subtraction')">➖ Subtraction</button>
+                <button class="op-btn active" onclick="setOperation('addition')">âž• Addition</button>
+                <button class="op-btn" onclick="setOperation('subtraction')">âž– Subtraction</button>
             </div>
 
             <div class="menu">
                 <div class="mode-card mental" onclick="startMode('mental')">
-                    <h2>🧠 Mental Math</h2>
+                    <h2>ðŸ§  Mental Math</h2>
                     <p>Break numbers down and solve in your head!</p>
                 </div>
                 <div class="mode-card expanded" onclick="startMode('expanded')">
-                    <h2>📊 Expanded Method</h2>
+                    <h2>ðŸ“Š Expanded Method</h2>
                     <p>Work by place values: thousands, hundreds, tens, ones</p>
                 </div>
                 <div class="mode-card formal" onclick="startMode('formal')">
-                    <h2>📝 Formal Method</h2>
+                    <h2>ðŸ“ Formal Method</h2>
                     <p>Column method with carrying/borrowing</p>
                 </div>
                 <div class="mode-card story" onclick="startMode('story')">
-                    <h2>📖 Story Problems</h2>
+                    <h2>ðŸ“– Story Problems</h2>
                     <p>Real-world challenges!</p>
                 </div>
             </div>
@@ -567,38 +569,38 @@
         var additionStories = [
             {
                 story: "A library has {num1} books. They receive a donation of {num2} more books. How many books does the library have now?",
-                emoji: "📚"
+                emoji: "ðŸ“š"
             },
             {
                 story: "A farmer harvests {num1} apples in the morning and {num2} apples in the afternoon. How many apples in total?",
-                emoji: "🍎"
+                emoji: "ðŸŽ"
             },
             {
                 story: "A school has {num1} students. Next year, {num2} new students will enroll. How many students total?",
-                emoji: "🏫"
+                emoji: "ðŸ«"
             },
             {
                 story: "{num1} people visit a museum on Saturday. {num2} people visit on Sunday. How many visitors in total?",
-                emoji: "🏛️"
+                emoji: "ðŸ›ï¸"
             }
         ];
 
         var subtractionStories = [
             {
                 story: "A store has {num1} items in stock. They sell {num2} items. How many items are left?",
-                emoji: "🏪"
+                emoji: "ðŸª"
             },
             {
                 story: "A stadium has {num1} seats. {num2} seats are occupied. How many seats are empty?",
-                emoji: "🏟️"
+                emoji: "ðŸŸï¸"
             },
             {
                 story: "A factory produces {num1} toys. They ship {num2} toys to stores. How many toys remain at the factory?",
-                emoji: "🏭"
+                emoji: "ðŸ­"
             },
             {
                 story: "A parking lot has space for {num1} cars. Currently {num2} cars are parked. How many more cars can fit?",
-                emoji: "🅿️"
+                emoji: "ðŸ…¿ï¸"
             }
         ];
 
@@ -647,7 +649,7 @@
             
             if (currentMode === 'mental') {
                 html = '<div class="problem-area">' +
-                    '<h2 style="color: #667eea; margin-bottom: 20px;">🧠 Mental Math Challenge - ' + opName + '</h2>' +
+                    '<h2 style="color: #667eea; margin-bottom: 20px;">ðŸ§  Mental Math Challenge - ' + opName + '</h2>' +
                     '<div class="problem-display">' + currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() + '</div>' +
                     '<p style="text-align: center; margin-bottom: 20px; font-size: 1.1em;">Break it down by place values!</p>' +
                     '<div class="estimate-box">' +
@@ -658,7 +660,7 @@
                     '<input type="number" id="answer" placeholder="Your final answer...">' +
                     '<div class="button-group">' +
                     '<button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>' +
-                    '<button class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>' +
+                    '<button class="btn btn-hint" onclick="showHint()">ðŸ’¡ Need a Hint?</button>' +
                     '</div>' +
                     '</div>' +
                     '<div id="hint-area"></div>' +
@@ -691,7 +693,7 @@
                 }
                 
                 html = '<div class="problem-area">' +
-                    '<h2 style="color: #667eea; margin-bottom: 20px;">📊 Expanded Method - ' + opName + '</h2>' +
+                    '<h2 style="color: #667eea; margin-bottom: 20px;">ðŸ“Š Expanded Method - ' + opName + '</h2>' +
                     '<div class="problem-display">' + currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() + '</div>' +
                     '<div class="estimate-box">' +
                     '<label>First, estimate by rounding:</label>' +
@@ -716,7 +718,7 @@
                     '<input type="number" id="answer" placeholder="Your final answer...">' +
                     '<div class="button-group">' +
                     '<button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>' +
-                    '<button class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>' +
+                    '<button class="btn btn-hint" onclick="showHint()">ðŸ’¡ Need a Hint?</button>' +
                     '</div>' +
                     '</div>' +
                     '<div id="hint-area"></div>' +
@@ -725,15 +727,15 @@
             } else if (currentMode === 'formal') {
                 var num1Str = currentProblem.num1.toString().padStart(5, '0');
                 var num2Str = currentProblem.num2.toString().padStart(5, '0');
-                var opSymbol = currentOperation === 'addition' ? '+' : '−';
+                var opSymbol = currentOperation === 'addition' ? '+' : 'âˆ’';
                 var opName = currentOperation === 'addition' ? 'Addition' : 'Subtraction';
                 
                 html = '<div class="problem-area">' +
-                    '<h2 style="color: #667eea; margin-bottom: 20px;">📝 Formal Method - ' + opName + '</h2>';
+                    '<h2 style="color: #667eea; margin-bottom: 20px;">ðŸ“ Formal Method - ' + opName + '</h2>';
                 
                 // Add hint for subtraction
                 if (currentOperation === 'subtraction') {
-                    html += '<div style="font-size: 12px; color: #999; margin-bottom: 10px; font-style: italic;">💡 Long-tap a number to borrow</div>';
+                    html += '<div style="font-size: 12px; color: #999; margin-bottom: 10px; font-style: italic;">ðŸ’¡ Long-tap a number to borrow</div>';
                 }
                 
                 html += '<div class="formal-math-container">' +
@@ -782,7 +784,7 @@
                     '</div>' +
                     '<div class="button-group">' +
                     '<button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>' +
-                    '<button class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>' +
+                    '<button class="btn btn-hint" onclick="showHint()">ðŸ’¡ Need a Hint?</button>' +
                     '</div>' +
                     '<div id="feedback-area"></div>' +
                     '</div>';
@@ -838,7 +840,7 @@
                 var story = problem.story.replace('{num1}', currentProblem.num1.toLocaleString()).replace('{num2}', currentProblem.num2.toLocaleString());
                 
                 html = '<div class="problem-area">' +
-                    '<h2 style="color: #667eea; margin-bottom: 20px;">📖 Story Problem</h2>' +
+                    '<h2 style="color: #667eea; margin-bottom: 20px;">ðŸ“– Story Problem</h2>' +
                     '<div class="story-box">' +
                     problem.emoji + ' ' + story +
                     '</div>' +
@@ -850,7 +852,7 @@
                     '<input type="number" id="answer" placeholder="Your final answer...">' +
                     '<div class="button-group">' +
                     '<button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>' +
-                    '<button class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>' +
+                    '<button class="btn btn-hint" onclick="showHint()">ðŸ’¡ Need a Hint?</button>' +
                     '</div>' +
                     '</div>' +
                     '<div id="hint-area"></div>' +
@@ -873,7 +875,7 @@
                 var t2 = Math.floor(n2 / 1000) * 1000;
                 var tResult = currentOperation === 'addition' ? (t1 + t2) : (t1 - t2);
                 hint = '<div class="hint-box">' +
-                    '<strong>💡 Hint:</strong><br>' +
+                    '<strong>ðŸ’¡ Hint:</strong><br>' +
                     'Break it down:<br>' +
                     '1. Work with thousands: ' + t1.toLocaleString() + ' ' + opSymbol + ' ' + t2.toLocaleString() + ' = ' + tResult.toLocaleString() + '<br>' +
                     '2. Work with the rest: ' + (n1-t1).toLocaleString() + ' ' + opSymbol + ' ' + (n2-t2).toLocaleString() + '<br>' +
@@ -881,19 +883,19 @@
                     '</div>';
             } else if (currentMode === 'expanded') {
                 hint = '<div class="hint-box">' +
-                    '<strong>💡 Hint:</strong> Add or subtract each place value shown above, then combine all the results!' +
+                    '<strong>ðŸ’¡ Hint:</strong> Add or subtract each place value shown above, then combine all the results!' +
                     '</div>';
             } else if (currentMode === 'formal') {
                 var tip = currentOperation === 'addition' ? 
                     'Start from the ones place. If you get 10 or more, carry to the next column!' :
                     'Start from the ones place. If the top digit is smaller, borrow from the next column!';
                 hint = '<div class="hint-box">' +
-                    '<strong>💡 Hint:</strong> ' + tip +
+                    '<strong>ðŸ’¡ Hint:</strong> ' + tip +
                     '</div>';
             } else if (currentMode === 'story') {
                 var opWord = currentOperation === 'addition' ? 'addition' : 'subtraction';
                 hint = '<div class="hint-box">' +
-                    '<strong>💡 Hint:</strong> This is a ' + opWord + ' problem! Calculate ' + currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() +
+                    '<strong>ðŸ’¡ Hint:</strong> This is a ' + opWord + ' problem! Calculate ' + currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() +
                     '</div>';
             }
             
@@ -1007,24 +1009,24 @@
                     if (!isNaN(estimate)) {
                         var diff = Math.abs(estimate - currentProblem.answer);
                         if (diff <= 1000) {
-                            estimateMsg = '<br>🎯 Great estimation!';
+                            estimateMsg = '<br>ðŸŽ¯ Great estimation!';
                         }
                     }
                 }
                 
                 feedbackArea.innerHTML = '<div class="feedback correct">' +
-                    '✅ Correct! Well done! ' + estimateMsg +
+                    'âœ… Correct! Well done! ' + estimateMsg +
                     '<div class="solution-box">' +
                     currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() + ' = ' + currentProblem.answer.toLocaleString() +
                     '</div>' +
                     '<div class="button-group">' +
-                    '<button class="btn btn-primary" onclick="generateNewProblem()">Next Problem →</button>' +
+                    '<button class="btn btn-primary" onclick="generateNewProblem()">Next Problem â†’</button>' +
                     '</div>' +
                     '</div>';
             } else {
                 streak = 0;
                 feedbackArea.innerHTML = '<div class="feedback incorrect">' +
-                    '❌ Not quite right. Try again!' +
+                    'âŒ Not quite right. Try again!' +
                     '<div class="button-group" style="margin-top: 15px;">' +
                     '<button class="btn btn-primary" onclick="clearAnswer()">Try Again</button>' +
                     '<button class="btn btn-secondary" onclick="showSolution()">Show Solution</button>' +
@@ -1064,7 +1066,7 @@
                 currentProblem.num1.toLocaleString() + ' ' + opSymbol + ' ' + currentProblem.num2.toLocaleString() + ' = ' + currentProblem.answer.toLocaleString() +
                 '</div>' +
                 '<div class="button-group">' +
-                '<button class="btn btn-primary" onclick="generateNewProblem()">Next Problem →</button>' +
+                '<button class="btn btn-primary" onclick="generateNewProblem()">Next Problem â†’</button>' +
                 '</div>' +
                 '</div>';
             completed++;

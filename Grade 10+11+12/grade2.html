@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade 10+11+12/grade2.html">
+
 <title>LLM Quiz Grader</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -387,7 +389,7 @@
 <header>
   <div>
     <div class="header-title">Quiz Grader</div>
-    <div class="header-sub">LLM Fundamentals — Weeks 1 &amp; 2</div>
+    <div class="header-sub">LLM Fundamentals â€” Weeks 1 &amp; 2</div>
   </div>
   <div class="header-badge">24 questions</div>
 </header>
@@ -408,7 +410,7 @@
       <button class="grade-btn" onclick="grade()">Grade</button>
     </div>
     <div class="counter" id="counter">0 / 24 letters entered</div>
-    <div class="hint-text">type or paste 24 letters (a b c d only) — spaces ignored</div>
+    <div class="hint-text">type or paste 24 letters (a b c d only) â€” spaces ignored</div>
     <div class="error-msg" id="error"></div>
   </div>
 
@@ -448,7 +450,7 @@
   </div>
 </main>
 
-<footer>LLM Fundamentals Quiz Grader &nbsp;·&nbsp; Answer key: D A B B A C B C D D A C D B A B D B C A A B C D</footer>
+<footer>LLM Fundamentals Quiz Grader &nbsp;Â·&nbsp; Answer key: D A B B A C B C D D A C D B A B D B C A A B C D</footer>
 
 <script>
   const KEY = 'dabbackdbdacdbabdbcaabcd'.split('');
@@ -500,7 +502,7 @@
       cell.innerHTML =
         `<div class="q-num">Q${i+1}</div>` +
         `<div class="q-ans">${raw[i].toUpperCase()}</div>` +
-        (!ok ? `<div class="q-correct-ans">✓${AK[i].toUpperCase()}</div>` : '');
+        (!ok ? `<div class="q-correct-ans">âœ“${AK[i].toUpperCase()}</div>` : '');
       grid.appendChild(cell);
     }
 
@@ -524,7 +526,7 @@
     const wl = document.getElementById('wrong-list');
     wl.innerHTML = '';
     if (wrongs.length === 0) {
-      wl.innerHTML = '<div class="all-correct">Perfect score — all correct!</div>';
+      wl.innerHTML = '<div class="all-correct">Perfect score â€” all correct!</div>';
     } else {
       wrongs.forEach(w => {
         const li = document.createElement('li');
@@ -532,7 +534,7 @@
         li.innerHTML =
           `<span class="wi-num">Q${w.q}</span>` +
           `<span class="wi-got">${w.got.toUpperCase()}</span>` +
-          `<span class="wi-arrow">→</span>` +
+          `<span class="wi-arrow">â†’</span>` +
           `<span class="wi-correct">${w.ans.toUpperCase()}</span>`;
         wl.appendChild(li);
       });

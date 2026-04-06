@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 2 Student Packet — AI System Design</title>
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade 10+11+12/AI System Design/week2-student.html">
+
+<title>Week 2 Student Packet â€” AI System Design</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -121,18 +123,18 @@ li { font-size:0.91rem; margin-bottom:5px; }
 </head>
 <body>
 <div class="action-buttons no-print">
-  <button class="btn-action" onclick="autoSaveData()">💾 Save Progress</button>
-  <button class="btn-action" onclick="exportToPDF()">📥 Export as PDF</button>
-  <button class="btn-action secondary" onclick="window.print()">🖨️ Print</button>
-  <button class="btn-action secondary" onclick="clearAllData()">🗑️ Clear All</button>
+  <button class="btn-action" onclick="autoSaveData()">ðŸ’¾ Save Progress</button>
+  <button class="btn-action" onclick="exportToPDF()">ðŸ“¥ Export as PDF</button>
+  <button class="btn-action secondary" onclick="window.print()">ðŸ–¨ï¸ Print</button>
+  <button class="btn-action secondary" onclick="clearAllData()">ðŸ—‘ï¸ Clear All</button>
 </div>
 
 <div class="info-box no-print">
-  💾 <strong>Auto-Save:</strong> Your work is automatically saved as you type. You can close the browser and come back later.
+  ðŸ’¾ <strong>Auto-Save:</strong> Your work is automatically saved as you type. You can close the browser and come back later.
 </div>
 
 <div class="doc-header">
-  <div class="doc-badge">Week 2 · Student Packet</div>
+  <div class="doc-badge">Week 2 Â· Student Packet</div>
   <h1>AI System Design<br>Guide & Worksheet</h1>
   <p>Complete the system design today. Start your pitch deck before Week 3.</p>
   <div class="meta-row">
@@ -143,39 +145,39 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
 <!-- PART 1: GUIDE -->
 <div class="section">
-  <div class="section-title">Part 1 — Reference Guide</div>
+  <div class="section-title">Part 1 â€” Reference Guide</div>
 
-  <h2>The Input → Model → Output → Feedback Loop</h2>
+  <h2>The Input â†’ Model â†’ Output â†’ Feedback Loop</h2>
   <p>Every AI system follows this structure. Map your system to it before anything else.</p>
   <div class="flow">
-    <div class="flow-box"><div class="fb-label">📥 Input</div><p>What data enters the system? (text, image, sensor, user click…)</p></div>
-    <div class="flow-box"><div class="fb-label">⚙️ Model</div><p>What ML type? What has it been trained on?</p></div>
-    <div class="flow-box"><div class="fb-label">📤 Output</div><p>Prediction? Classification? Generated content? Score?</p></div>
-    <div class="flow-box"><div class="fb-label">🔁 Feedback</div><p>How does it improve over time?</p></div>
+    <div class="flow-box"><div class="fb-label">ðŸ“¥ Input</div><p>What data enters the system? (text, image, sensor, user clickâ€¦)</p></div>
+    <div class="flow-box"><div class="fb-label">âš™ï¸ Model</div><p>What ML type? What has it been trained on?</p></div>
+    <div class="flow-box"><div class="fb-label">ðŸ“¤ Output</div><p>Prediction? Classification? Generated content? Score?</p></div>
+    <div class="flow-box"><div class="fb-label">ðŸ” Feedback</div><p>How does it improve over time?</p></div>
   </div>
 
   <h2 style="margin-top:24px;">Types of Bias to Watch For</h2>
   <table class="bias-table">
     <tr><th>Bias Type</th><th>What it means</th><th>Example</th></tr>
-    <tr><td><b>Historical Bias</b></td><td>Training data reflects past injustices</td><td>Hiring model trained on historical resumes — underrepresents women in senior roles</td></tr>
+    <tr><td><b>Historical Bias</b></td><td>Training data reflects past injustices</td><td>Hiring model trained on historical resumes â€” underrepresents women in senior roles</td></tr>
     <tr><td><b>Sampling Bias</b></td><td>Certain groups underrepresented in training data</td><td>Facial recognition trained mostly on lighter-skinned faces fails on darker skin tones</td></tr>
     <tr><td><b>Label Bias</b></td><td>Human labelers bring their own assumptions</td><td>Sentiment labels on text reflect the labeler's culture, not universal sentiment</td></tr>
-    <tr><td><b>Feedback Loop Bias</b></td><td>Model outputs shape future training data</td><td>A content recommender shows more extreme content → users engage more → model amplifies it</td></tr>
+    <tr><td><b>Feedback Loop Bias</b></td><td>Model outputs shape future training data</td><td>A content recommender shows more extreme content â†’ users engage more â†’ model amplifies it</td></tr>
     <tr><td><b>Measurement Bias</b></td><td>The metric used doesn't capture the real goal</td><td>Optimising for clicks instead of user satisfaction produces addictive but unhelpful content</td></tr>
   </table>
 
   <div class="guide-box gold" style="margin-top:16px;">
-    <h3 style="color:var(--gold);">On Mitigation — Be Specific</h3>
+    <h3 style="color:var(--gold);">On Mitigation â€” Be Specific</h3>
     <p>Saying "we'll use unbiased data" is not a strategy. Good answers include: <em>auditing data for demographic balance</em>, <em>using fairness metrics during evaluation</em>, <em>building in human review for high-stakes decisions</em>, or <em>being transparent about limitations in the UI</em>.</p>
   </div>
 
   <h2 style="margin-top:24px;">LLM-Specific Concerns</h2>
   <p>If your system uses a language model (chatbot, content generator, Q&A tool), you must also address:</p>
   <ul style="margin-top:8px;">
-    <li><b>Hallucinations</b> — LLMs can confidently state false things. How do you handle this?</li>
-    <li><b>Language/cultural bias</b> — Most LLMs are Western/English-centric. Relevant for Arabic or Lebanese use cases?</li>
-    <li><b>Prompt injection</b> — Can malicious users hijack your system through crafted inputs?</li>
-    <li><b>Environmental cost</b> — Large models are energy-intensive. Is the benefit justified?</li>
+    <li><b>Hallucinations</b> â€” LLMs can confidently state false things. How do you handle this?</li>
+    <li><b>Language/cultural bias</b> â€” Most LLMs are Western/English-centric. Relevant for Arabic or Lebanese use cases?</li>
+    <li><b>Prompt injection</b> â€” Can malicious users hijack your system through crafted inputs?</li>
+    <li><b>Environmental cost</b> â€” Large models are energy-intensive. Is the benefit justified?</li>
   </ul>
 
   <h2 style="margin-top:24px;">Your Pitch Deck Structure</h2>
@@ -188,50 +190,50 @@ li { font-size:0.91rem; margin-bottom:5px; }
     <div class="pitch-slide"><div class="ps-num">Slide 6</div><div class="ps-title">Future Work</div><div class="ps-hint">What's next? What would you build with more resources?</div></div>
   </div>
 
-  <h2 style="margin-top:28px;">🏆 How You'll Be Judged</h2>
+  <h2 style="margin-top:28px;">ðŸ† How You'll Be Judged</h2>
   <p style="margin-bottom:16px;">Your team's final pitch will be scored on these 5 criteria. Use this as YOUR self-assessment guide while designing.</p>
   <div class="rubric-grid">
     <div class="rubric-item">
-      <div class="r-title">🎨 Originality</div>
+      <div class="r-title">ðŸŽ¨ Originality</div>
       <div class="r-desc">Is the idea novel and creative? Does it solve a real, specific problem in a unique way?</div>
       <div class="r-score">/ 5 points</div>
     </div>
     <div class="rubric-item">
-      <div class="r-title">🎯 Real-World Usefulness</div>
+      <div class="r-title">ðŸŽ¯ Real-World Usefulness</div>
       <div class="r-desc">Does your system solve a genuine problem for real people? Would they actually use it?</div>
       <div class="r-score">/ 5 points</div>
     </div>
     <div class="rubric-item">
-      <div class="r-title">🎤 Clarity of Pitch</div>
+      <div class="r-title">ðŸŽ¤ Clarity of Pitch</div>
       <div class="r-desc">Can the audience understand your idea in 5-7 minutes? Is your explanation clear and engaging?</div>
       <div class="r-score">/ 5 points</div>
     </div>
     <div class="rubric-item">
-      <div class="r-title">🧠 AI Knowledge</div>
+      <div class="r-title">ðŸ§  AI Knowledge</div>
       <div class="r-desc">Do you name the ML type? Can you explain HOW your system works (not just WHAT it does)?</div>
       <div class="r-score">/ 5 points</div>
     </div>
     <div class="rubric-item">
-      <div class="r-title">⚡ Feasibility</div>
+      <div class="r-title">âš¡ Feasibility</div>
       <div class="r-desc">Is the scope realistic? Are your data requirements reasonable? Could this actually be built?</div>
       <div class="r-score">/ 5 points</div>
     </div>
   </div>
   <p style="margin-top:16px; font-size:0.88rem; color:var(--muted);"><strong>Total: 25 points.</strong> BONUS: +2 points if you address bias/ethics proactively (students often skip this, but judges LOVE teams that own their challenges).</p>
 
-  <h2 style="margin-top:28px;">📖 Real-World Bias Case Studies</h2>
-  <p style="margin-bottom: 16px;">Learn from these real cases of AI bias. These aren't hypothetical — they happened, caused harm, and are lessons for your project.</p>
+  <h2 style="margin-top:28px;">ðŸ“– Real-World Bias Case Studies</h2>
+  <p style="margin-bottom: 16px;">Learn from these real cases of AI bias. These aren't hypothetical â€” they happened, caused harm, and are lessons for your project.</p>
 
   <div class="case-study">
-    <h4>🚨 Case 1: COMPAS Recidivism Algorithm (Criminal Justice)</h4>
+    <h4>ðŸš¨ Case 1: COMPAS Recidivism Algorithm (Criminal Justice)</h4>
     <p><strong>What happened:</strong> A system called COMPAS predicted the likelihood that released prisoners would re-offend. Black defendants were flagged as "high risk" at nearly twice the rate of white defendants.</p>
-    <p><strong>Root cause:</strong> The algorithm was trained on historical crime data, which reflects decades of racial bias in policing and sentencing. More arrests of Black people → model learned "Black = higher risk."</p>
+    <p><strong>Root cause:</strong> The algorithm was trained on historical crime data, which reflects decades of racial bias in policing and sentencing. More arrests of Black people â†’ model learned "Black = higher risk."</p>
     <p><strong>Harm:</strong> Black people were kept in prison longer based on a statistical fiction.</p>
     <p><strong>Lesson for you:</strong> Historical data encodes historical racism. Always ask: "What biases are baked into my training data from society's past?"</p>
   </div>
 
   <div class="case-study">
-    <h4>💼 Case 2: Amazon Hiring Algorithm (Gender Bias)</h4>
+    <h4>ðŸ’¼ Case 2: Amazon Hiring Algorithm (Gender Bias)</h4>
     <p><strong>What happened:</strong> Amazon built an AI recruiter to screen job applications for technical positions. The system systematically rejected qualified women.</p>
     <p><strong>Root cause:</strong> Amazon trained it on 10 years of hiring data. In tech roles, most hires were men (due to historical bias in the field). The AI learned "tech = male." When women applied, they scored lower.</p>
     <p><strong>Harm:</strong> Women's careers blocked. Amazon's diversity efforts failed. Amazon shut down the tool.</p>
@@ -239,15 +241,15 @@ li { font-size:0.91rem; margin-bottom:5px; }
   </div>
 
   <div class="case-study">
-    <h4>🏥 Case 3: Medical Risk Algorithm (Healthcare Discrimination)</h4>
+    <h4>ðŸ¥ Case 3: Medical Risk Algorithm (Healthcare Discrimination)</h4>
     <p><strong>What happened:</strong> A widely-used algorithm in U.S. hospitals predicted which patients needed extra medical care resources. It systematically under-flagged Black patients.</p>
     <p><strong>Root cause:</strong> The algorithm used healthcare spending as a proxy for illness. Because the healthcare system has historically spent less on Black patients, the AI thought they were less sick when they weren't.</p>
     <p><strong>Harm:</strong> Black patients were denied needed treatments. They suffered preventable complications.</p>
-    <p><strong>Lesson for you:</strong> Proxies matter. Never use a variable that correlates with a protected group (race, gender) as a proxy for something else. "Spending ≠ illness; skin tone ≠ risk."</p>
+    <p><strong>Lesson for you:</strong> Proxies matter. Never use a variable that correlates with a protected group (race, gender) as a proxy for something else. "Spending â‰  illness; skin tone â‰  risk."</p>
   </div>
 
   <div class="case-study">
-    <h4>📸 Case 4: Facial Recognition (Surveillance Bias)</h4>
+    <h4>ðŸ“¸ Case 4: Facial Recognition (Surveillance Bias)</h4>
     <p><strong>What happened:</strong> Facial recognition systems used by police had error rates of 1% for light-skinned faces but 35% for dark-skinned faces.</p>
     <p><strong>Root cause:</strong> Training data oversampled lighter skin tones. Most popular datasets were from Western sources with predominantly light-skinned faces.</p>
     <p><strong>Harm:</strong> Black people were wrongly arrested based on AI misidentification. An innocent man in Detroit spent time in jail.</p>
@@ -255,9 +257,9 @@ li { font-size:0.91rem; margin-bottom:5px; }
   </div>
 
   <div class="guide-box blue" style="margin-top:20px;">
-    <h3 style="color:var(--blue);">🎯 What These Cases Teach</h3>
+    <h3 style="color:var(--blue);">ðŸŽ¯ What These Cases Teach</h3>
     <ul>
-      <li><strong>Historical data is biased:</strong> Past injustices → present data → future discrimination</li>
+      <li><strong>Historical data is biased:</strong> Past injustices â†’ present data â†’ future discrimination</li>
       <li><strong>Proxies hide discrimination:</strong> Using spending as "health," or past hiring as "merit" encodes bias</li>
       <li><strong>Representation matters:</strong> AI systems trained on majority groups fail on minorities</li>
       <li><strong>High stakes = high responsibility:</strong> Criminal justice, hiring, healthcare need extra scrutiny</li>
@@ -269,60 +271,60 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
 <!-- PART 2: WORKSHEET -->
 <div class="section">
-  <div class="section-title">Part 2 — System Design Worksheet</div>
+  <div class="section-title">Part 2 â€” System Design Worksheet</div>
 
-  <h2>Q1 — What Does It Do?</h2>
+  <h2>Q1 â€” What Does It Do?</h2>
   <div class="ws-field">
     <label>Describe your system in 2 sentences from the user's perspective</label>
     <textarea placeholder="Example: A user uploads a photo of a skin lesion. The system classifies it as low, medium, or high risk and recommends whether to see a doctor."></textarea>
   </div>
 
-  <h2 style="margin-top:20px;">Q2 — How Does It Learn?</h2>
+  <h2 style="margin-top:20px;">Q2 â€” How Does It Learn?</h2>
   <div class="ws-field">
     <label>ML Type</label>
     <div class="lines"><input class="line" type="text" placeholder="e.g. Supervised classification, generative LLM, recommendation system..."></div>
   </div>
   <div class="ws-field">
-    <label>Training process — how does the model learn to do its task?</label>
+    <label>Training process â€” how does the model learn to do its task?</label>
     <textarea placeholder="What examples does it learn from? What is it trying to optimise for?"></textarea>
   </div>
   <div class="ws-field">
-    <label>If using an LLM — which one, and how is it used? (fine-tuned, prompted, RAG...)</label>
+    <label>If using an LLM â€” which one, and how is it used? (fine-tuned, prompted, RAG...)</label>
     <textarea placeholder="Or write N/A if your system doesn't use an LLM"></textarea>
   </div>
 
-  <h2 style="margin-top:20px;">Q3 — What Data Does It Need?</h2>
+  <h2 style="margin-top:20px;">Q3 â€” What Data Does It Need?</h2>
   <div class="ws-field">
-    <label>Data Sources — Where would the training data come from?</label>
+    <label>Data Sources â€” Where would the training data come from?</label>
     <textarea placeholder="Be specific. Public datasets? User-collected? Scraped? Licensed?"></textarea>
   </div>
   <div class="ws-field">
-    <label>Data Format & Volume — What type of data and roughly how much?</label>
+    <label>Data Format & Volume â€” What type of data and roughly how much?</label>
     <div class="lines">
       <input class="line" type="text" placeholder="Format: (images, text, tabular, audio...)">
       <input class="line" type="text" placeholder="Estimated volume needed:">
     </div>
   </div>
   <div class="ws-field">
-    <label>Bias Risk — Which type(s) of bias could affect your data?</label>
+    <label>Bias Risk â€” Which type(s) of bias could affect your data?</label>
     <textarea placeholder="Refer to the bias table in Part 1. Name specific types and explain why they apply to your system."></textarea>
   </div>
   <div class="ws-field">
-    <label>Mitigation — How specifically would you address these biases?</label>
-    <textarea placeholder="Be specific. Not just 'good data' — what process, metric, or safeguard?"></textarea>
+    <label>Mitigation â€” How specifically would you address these biases?</label>
+    <textarea placeholder="Be specific. Not just 'good data' â€” what process, metric, or safeguard?"></textarea>
   </div>
 
-  <h2 style="margin-top:20px;">Q4 — Where Can It Go Wrong?</h2>
+  <h2 style="margin-top:20px;">Q4 â€” Where Can It Go Wrong?</h2>
   <div class="ws-field">
-    <label>Failure Cases — Give 2 specific scenarios where your system produces wrong or harmful outputs</label>
+    <label>Failure Cases â€” Give 2 specific scenarios where your system produces wrong or harmful outputs</label>
     <textarea placeholder="Scenario 1: ...&#10;Scenario 2: ..."></textarea>
   </div>
   <div class="ws-field">
-    <label>Adversarial / Edge Cases — Can users trick or confuse your system?</label>
+    <label>Adversarial / Edge Cases â€” Can users trick or confuse your system?</label>
     <textarea placeholder="What unusual inputs might break it? What could a malicious user try?"></textarea>
   </div>
 
-  <h2 style="margin-top:20px;">Q5 — Ethics & Limitations</h2>
+  <h2 style="margin-top:20px;">Q5 â€” Ethics & Limitations</h2>
   <div class="ethics-grid">
     <div class="ethics-card">
       <div class="eq">Who could be harmed if it's wrong?</div>
@@ -344,25 +346,25 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
   <h2 style="margin-top:20px;">Future Work</h2>
   <div class="ws-field">
-    <label>If you had 6 more months and a full team — what would you build next?</label>
+    <label>If you had 6 more months and a full team â€” what would you build next?</label>
     <textarea placeholder="Expansions, improvements, new features, research directions..."></textarea>
   </div>
 
   <h2 style="margin-top:24px;">Pitch Deck Checklist</h2>
   <p style="margin-bottom:10px;">Before Week 3, confirm your draft deck has all of these:</p>
   <div class="checklist">
-    <div class="check-item"><input type="checkbox"><label><b>Slide 1: The Problem</b><span>Opens with a hook — story, stat, or scenario. Not a definition of AI.</span></label></div>
-    <div class="check-item"><input type="checkbox"><label><b>Slide 2–3: Solution + How it Works</b><span>ML type named explicitly. Includes a diagram, mockup, or user flow visual.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 1: The Problem</b><span>Opens with a hook â€” story, stat, or scenario. Not a definition of AI.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Slide 2â€“3: Solution + How it Works</b><span>ML type named explicitly. Includes a diagram, mockup, or user flow visual.</span></label></div>
     <div class="check-item"><input type="checkbox"><label><b>Slide 4: Data & Bias</b><span>Specific data sources + named bias type + specific mitigation strategy.</span></label></div>
     <div class="check-item"><input type="checkbox"><label><b>Slide 5: Ethics, Limits & Failures</b><span>Honest. At least 2 failure scenarios. Real ethical risks named.</span></label></div>
     <div class="check-item"><input type="checkbox"><label><b>Slide 6: Future Work</b><span>Ambitious but grounded. Shows depth of thinking beyond the MVP.</span></label></div>
     <div class="check-item"><input type="checkbox"><label><b>Visuals > Text</b><span>Each slide has a visual. No slide is a wall of bullet points.</span></label></div>
-    <div class="check-item"><input type="checkbox"><label><b>Fits 5–7 minutes</b><span>Practice run complete — you know your timing.</span></label></div>
+    <div class="check-item"><input type="checkbox"><label><b>Fits 5â€“7 minutes</b><span>Practice run complete â€” you know your timing.</span></label></div>
   </div>
 </div>
 
 <div class="doc-footer">
-  <span>AI Innovation Challenge · Week 2 of 4</span>
+  <span>AI Innovation Challenge Â· Week 2 of 4</span>
   <span>Bring your draft pitch deck to Week 3</span>
 </div>
 
@@ -425,3 +427,4 @@ li { font-size:0.91rem; margin-bottom:5px; }
     }
   }
 </script>
+

@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Math/gr3math.html">
+
     <title>Grade 3 Formal Math - Addition & Subtraction</title>
     <link rel="icon" type="image/png" href="../common logo.png">
     <style>
@@ -397,7 +399,7 @@
 <body>
     <div class="container">
         <div class="header-with-nav">
-            <a href="../math-index.html" class="nav-button">📚 Classes</a>
+            <a href="../math-index.html" class="nav-button">ðŸ“š Classes</a>
             <h1>Grade 3 Formal Math</h1>
         </div>
         <p class="subtitle">Addition & Subtraction (Numbers up to 9999)</p>
@@ -527,7 +529,7 @@
             problemDiv.className = 'problem';
             problemDiv.id = `problem-${index}`;
             
-            const operation = problem.operation === 'addition' ? '+' : '−';
+            const operation = problem.operation === 'addition' ? '+' : 'âˆ’';
             const num1Str = String(problem.num1).padStart(4, '0');
             const num2Str = String(problem.num2).padStart(4, '0');
             
@@ -536,7 +538,7 @@
             
             // Add hint for subtraction
             if (problem.operation === 'subtraction') {
-                html += `<div style="font-size: 12px; color: #999; margin-bottom: 10px; font-style: italic;">💡 Long-tap a number to borrow</div>`;
+                html += `<div style="font-size: 12px; color: #999; margin-bottom: 10px; font-style: italic;">ðŸ’¡ Long-tap a number to borrow</div>`;
             }
             
             html += `
@@ -776,7 +778,7 @@
             }
             
             const feedbackDiv = document.getElementById(`feedback-${problemIndex}`);
-            feedbackDiv.textContent = allCorrect ? '✓ Correct!' : '✗ Needs Review';
+            feedbackDiv.textContent = allCorrect ? 'âœ“ Correct!' : 'âœ— Needs Review';
             feedbackDiv.className = 'feedback ' + (allCorrect ? 'correct' : 'incorrect');
             
             problem.solved = true;
@@ -904,7 +906,7 @@
             // Calculate and display final score
             const finalScoreDiv = document.getElementById('finalScore');
             if (accuracy === 100) {
-                finalScoreDiv.textContent = `🎉 Perfect Score! ${correctProblems}/${completedProblems} ✓`;
+                finalScoreDiv.textContent = `ðŸŽ‰ Perfect Score! ${correctProblems}/${completedProblems} âœ“`;
                 // Trigger confetti for perfect score
                 createConfetti();
             } else if (accuracy >= 80) {

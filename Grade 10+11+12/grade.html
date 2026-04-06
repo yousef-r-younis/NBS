@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade 10+11+12/grade.html">
+
     <title>MCQ Exam Auto-Grader</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="common logo.png">
@@ -353,9 +355,9 @@
                 row.innerHTML = `
                     <td>${i + 1}</td>
                     <td>${correctAns.toUpperCase()}</td>
-                    <td>${studentAns.toUpperCase() || '—'}</td>
+                    <td>${studentAns.toUpperCase() || 'â€”'}</td>
                     <td>${points.toFixed(1)}</td>
-                    <td>${isCorrect ? '✓' : '✗'}</td>
+                    <td>${isCorrect ? 'âœ“' : 'âœ—'}</td>
                 `;
                 tbody.appendChild(row);
             }
@@ -370,3 +372,4 @@
     </script>
 </body>
 </html>
+

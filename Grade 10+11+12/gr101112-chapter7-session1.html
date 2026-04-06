@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1 — How LLMs Work & Why They Fail</title>
+    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade 10+11+12/gr101112-chapter7-session1.html">
+
+    <title>Week 1 â€” How LLMs Work & Why They Fail</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -374,7 +376,7 @@
 
 <body>
     <div class="topbar">
-        <span>Grades 10–11 | Week 1: How LLMs Work & Why They Fail</span>
+        <span>Grades 10â€“11 | Week 1: How LLMs Work & Why They Fail</span>
         <span class="slide-counter" id="counter">1 / 22</span>
     </div>
     <div class="presentation">
@@ -382,12 +384,12 @@
         <!-- 1: Title -->
         <div class="slide title-slide active">
             <h1>How LLMs Work & Why They Fail</h1>
-            <div class="subtitle">Week 1 of 3 — AI Course • Grades 10–11</div>
+            <div class="subtitle">Week 1 of 3 â€” AI Course â€¢ Grades 10â€“11</div>
             <p style="margin-top:30px;font-size:1.2em;color:#aaa;">50 Minutes | Theory + Concepts + Discussion</p>
             <div style="margin-top:40px;display:flex;gap:30px;justify-content:center;flex-wrap:wrap">
                 <div
                     style="background:rgba(0,212,255,.1);border:1px solid #00d4ff;padding:12px 24px;border-radius:20px;color:#00d4ff;font-weight:600">
-                    Week 1: Theory ← You are here</div>
+                    Week 1: Theory â† You are here</div>
                 <div
                     style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);padding:12px 24px;border-radius:20px;color:#aaa">
                     Week 2: Hands-On Activities</div>
@@ -402,17 +404,17 @@
             <div class="section-tag">Overview</div>
             <h2>Today's Lesson</h2>
             <div class="step-box"><span class="num">1</span>
-                <p><strong>What is an LLM?</strong> — The big picture <span style="color:#aaa">(8 min)</span></p>
+                <p><strong>What is an LLM?</strong> â€” The big picture <span style="color:#aaa">(8 min)</span></p>
             </div>
             <div class="step-box"><span class="num">2</span>
-                <p><strong>Tokens & Training</strong> — How LLMs actually work <span style="color:#aaa">(12 min)</span>
+                <p><strong>Tokens & Training</strong> â€” How LLMs actually work <span style="color:#aaa">(12 min)</span>
                 </p>
             </div>
             <div class="step-box"><span class="num">3</span>
-                <p><strong>Context Windows</strong> — AI's short-term memory <span style="color:#aaa">(8 min)</span></p>
+                <p><strong>Context Windows</strong> â€” AI's short-term memory <span style="color:#aaa">(8 min)</span></p>
             </div>
             <div class="step-box"><span class="num">4</span>
-                <p><strong>Why LLMs Fail</strong> — Hallucinations & other limits <span style="color:#aaa">(15
+                <p><strong>Why LLMs Fail</strong> â€” Hallucinations & other limits <span style="color:#aaa">(15
                         min)</span></p>
             </div>
             <div class="step-box"><span class="num">5</span>
@@ -422,29 +424,29 @@
 
         <!-- 3: Opening Hook -->
         <div class="slide">
-            <div class="section-tag">Part 1 — What is an LLM?</div>
+            <div class="section-tag">Part 1 â€” What is an LLM?</div>
             <h2>Before We Start...</h2>
             <div class="discussion">
                 <h4>Opening Question</h4>
                 <p style="font-size:1.2em">Who has used ChatGPT, Claude, or Gemini? What did you use it for?</p>
-                <p style="color:#aaa;margin-top:10px">And — has anyone ever seen it give a wrong or weird answer?</p>
+                <p style="color:#aaa;margin-top:10px">And â€” has anyone ever seen it give a wrong or weird answer?</p>
             </div>
             <div class="box" style="margin-top:25px">
-                <p>By the end of today you'll understand <strong>exactly why</strong> those wrong answers happen — and
+                <p>By the end of today you'll understand <strong>exactly why</strong> those wrong answers happen â€” and
                     be able to explain it to someone else.</p>
             </div>
         </div>
 
         <!-- 4: What is an LLM -->
         <div class="slide">
-            <div class="section-tag">Part 1 — What is an LLM?</div>
+            <div class="section-tag">Part 1 â€” What is an LLM?</div>
             <h2>Large Language Model</h2>
             <div class="box">
                 <p style="font-size:1.25em;">An AI trained on <strong>massive amounts of text</strong> to predict what
                     word (or token) comes next</p>
             </div>
             <div class="analogy" style="margin-top:20px">
-                <p style="text-align:center;font-size:1.25em">💡 Think: <strong>autocomplete on your phone</strong> —
+                <p style="text-align:center;font-size:1.25em">ðŸ’¡ Think: <strong>autocomplete on your phone</strong> â€”
                     but trained on billions of pages of text and vastly more sophisticated</p>
             </div>
             <div class="two-col" style="margin-top:20px">
@@ -466,36 +468,36 @@
 
         <!-- 5: Tokens intro -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>Tokens: The Building Blocks</h2>
             <div class="big-text">LLMs don't read <span style="color:#aaa">words</span> like we do.</div>
             <div class="big-text" style="margin-top:10px">They read <span class="highlight">tokens.</span></div>
             <div class="box" style="margin-top:25px">
-                <p style="font-size:1.2em;text-align:center">1 token ≈ <strong>¾ of a word</strong>, or about <strong>4
+                <p style="font-size:1.2em;text-align:center">1 token â‰ˆ <strong>Â¾ of a word</strong>, or about <strong>4
                         characters</strong></p>
             </div>
         </div>
 
         <!-- 6: Token examples -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>Tokens in Practice</h2>
             <div class="two-col">
                 <div class="card"><strong>"Hello world"</strong>
                     <p>= 2 tokens</p>
                 </div>
                 <div class="card"><strong>"Unbelievable"</strong>
-                    <p>= 3 tokens<br><span style="color:#aaa;font-size:.9em">un · believ · able</span></p>
+                    <p>= 3 tokens<br><span style="color:#aaa;font-size:.9em">un Â· believ Â· able</span></p>
                 </div>
                 <div class="card"><strong>"I love pizza"</strong>
                     <p>= 4 tokens</p>
                 </div>
                 <div class="card"><strong>"Artificial intelligence"</strong>
-                    <p>≈ 5–6 tokens</p>
+                    <p>â‰ˆ 5â€“6 tokens</p>
                 </div>
             </div>
             <div class="activity" style="margin-top:20px">
-                <h4>Quick Activity — Pair up</h4>
+                <h4>Quick Activity â€” Pair up</h4>
                 <p>Guess the token count: <strong>"The quick brown fox jumps over the lazy dog"</strong></p>
                 <p style="color:#aaa;margin-top:8px">Answer: ~10 tokens. Why does this matter? Every model has a token
                     limit.</p>
@@ -504,44 +506,44 @@
 
         <!-- 7: Why tokens matter -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>Why Tokens Matter</h2>
             <ul>
-                <li>Every LLM has a <strong>token limit</strong> — how much it can read and generate at once</li>
-                <li>Token limits affect <strong>pricing</strong> — companies charge per token used</li>
-                <li>Token limits create <strong>context windows</strong> — we'll get to that shortly</li>
-                <li>The AI isn't reading the way you read — it's processing statistical units</li>
+                <li>Every LLM has a <strong>token limit</strong> â€” how much it can read and generate at once</li>
+                <li>Token limits affect <strong>pricing</strong> â€” companies charge per token used</li>
+                <li>Token limits create <strong>context windows</strong> â€” we'll get to that shortly</li>
+                <li>The AI isn't reading the way you read â€” it's processing statistical units</li>
             </ul>
             <div class="discussion" style="margin-top:20px">
                 <h4>Think About It</h4>
                 <p>If a model costs $0.01 per 1,000 tokens, and your app sends 500 messages a day averaging 200 tokens
-                    each — how much does that cost per month?</p>
-                <p style="color:#aaa;margin-top:8px">Answer: 500 × 200 = 100,000 tokens/day × 30 = 3M tokens =
+                    each â€” how much does that cost per month?</p>
+                <p style="color:#aaa;margin-top:8px">Answer: 500 Ã— 200 = 100,000 tokens/day Ã— 30 = 3M tokens =
                     $30/month. Real product design involves this kind of thinking.</p>
             </div>
         </div>
 
         <!-- 8: Training process -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>How LLMs Are Trained</h2>
             <div class="diagram">
                 <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px">
-                    <div class="dia-box">1. Collect Data<div class="dia-sub">Books, web, code,<br>Wikipedia, Reddit…
+                    <div class="dia-box">1. Collect Data<div class="dia-sub">Books, web, code,<br>Wikipedia, Redditâ€¦
                         </div>
                     </div>
-                    <span class="arrow">→</span>
+                    <span class="arrow">â†’</span>
                     <div class="dia-box">2. Learn Patterns<div class="dia-sub">Predict next token,<br>billions of times
                         </div>
                     </div>
-                    <span class="arrow">→</span>
+                    <span class="arrow">â†’</span>
                     <div class="dia-box">3. Fine-Tune<div class="dia-sub">Specialise for<br>a specific task</div>
                     </div>
                 </div>
             </div>
             <div class="discussion" style="margin-top:15px">
                 <h4>Class Question</h4>
-                <p>"If we train an LLM on internet data — what problems could that cause?"</p>
+                <p>"If we train an LLM on internet data â€” what problems could that cause?"</p>
                 <p style="color:#aaa;font-size:.95em;margin-top:8px">Expected: bias, misinformation, offensive content,
                     outdated information, underrepresentation of some languages</p>
             </div>
@@ -549,7 +551,7 @@
 
         <!-- 9: Training deeper -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>What "Learning Patterns" Actually Means</h2>
             <div class="box">
                 <p style="font-size:1.3em;text-align:center">"The cat sat on the ___"</p>
@@ -558,7 +560,7 @@
             <p>It gets feedback on which predictions are statistically likely.</p>
             <p>It repeats this <strong>billions of times</strong> across billions of sentences.</p>
             <div class="warning" style="margin-top:20px">
-                <h4>⚠️ Key Point</h4>
+                <h4>âš ï¸ Key Point</h4>
                 <p>The model is learning <strong>statistical patterns</strong>, not facts about the world. This
                     distinction explains almost every limitation we'll cover today.</p>
             </div>
@@ -566,7 +568,7 @@
 
         <!-- 10: Fine-tuning -->
         <div class="slide">
-            <div class="section-tag">Part 2 — Tokens & Training</div>
+            <div class="section-tag">Part 2 â€” Tokens & Training</div>
             <h2>Fine-Tuning</h2>
             <p>After basic training, companies specialise the model for specific tasks or behaviours:</p>
             <div class="two-col" style="margin-top:15px">
@@ -587,33 +589,33 @@
 
         <!-- 11: Context Windows -->
         <div class="slide">
-            <div class="section-tag">Part 3 — Context Windows</div>
+            <div class="section-tag">Part 3 â€” Context Windows</div>
             <h2>Context Windows</h2>
             <div class="analogy">
-                <p style="text-align:center;font-size:1.25em">🧠 Imagine a friend who can only remember the <strong>last
-                        10 sentences</strong> you said — everything before that is gone.</p>
+                <p style="text-align:center;font-size:1.25em">ðŸ§  Imagine a friend who can only remember the <strong>last
+                        10 sentences</strong> you said â€” everything before that is gone.</p>
             </div>
             <ul style="margin-top:15px">
                 <li>LLMs have <strong>no persistent memory</strong> between conversations by default</li>
-                <li>Each conversation has a <strong>token limit</strong> — this is the context window</li>
+                <li>Each conversation has a <strong>token limit</strong> â€” this is the context window</li>
                 <li>Once exceeded, the model <strong>forgets the beginning</strong></li>
-                <li>The app might save history — but the <em>model</em> doesn't remember you</li>
+                <li>The app might save history â€” but the <em>model</em> doesn't remember you</li>
             </ul>
         </div>
 
         <!-- 12: Context window example -->
         <div class="slide">
-            <div class="section-tag">Part 3 — Context Windows</div>
-            <h2>Context Window — In Practice</h2>
+            <div class="section-tag">Part 3 â€” Context Windows</div>
+            <h2>Context Window â€” In Practice</h2>
             <div class="box">
                 <p><strong>Example:</strong> You have a 10,000-word tutoring session with a model that has an 8,000-word
                     limit.</p>
-                <p style="margin-top:10px">→ The model silently forgets the first 2,000 words.</p>
-                <p style="margin-top:10px">→ If you refer back to something from the start, the model has no idea what
+                <p style="margin-top:10px">â†’ The model silently forgets the first 2,000 words.</p>
+                <p style="margin-top:10px">â†’ If you refer back to something from the start, the model has no idea what
                     you mean.</p>
             </div>
             <div class="activity" style="margin-top:20px">
-                <h4>Design Challenge — 3 minutes</h4>
+                <h4>Design Challenge â€” 3 minutes</h4>
                 <p>You're building an AI study buddy. A student uses it for 2 hours. How do you stop the model losing
                     important context?</p>
                 <p style="color:#aaa;font-size:.95em;margin-top:8px">Ideas to draw out: summarise key facts at
@@ -623,12 +625,12 @@
 
         <!-- 13: Hallucinations intro -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
             <h2>Hallucinations</h2>
             <div class="big-text">When AI <span class="highlight">confidently states false information</span></div>
             <div class="warning" style="margin-top:25px">
-                <h4>⚠️ Most Important Point Today</h4>
-                <p>The AI is <strong>not lying</strong>. It has no concept of truth. It is always doing the same thing —
+                <h4>âš ï¸ Most Important Point Today</h4>
+                <p>The AI is <strong>not lying</strong>. It has no concept of truth. It is always doing the same thing â€”
                     predicting the most plausible next token. Sometimes that token is wrong.</p>
             </div>
             <div class="two-col" style="margin-top:15px">
@@ -643,13 +645,13 @@
 
         <!-- 14: Why hallucinations happen -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
             <h2>3 Causes of Hallucinations</h2>
             <div class="step-box"><span class="num">1</span>
                 <div>
                     <p><strong>Pattern matching without understanding</strong></p>
                     <p style="font-size:.95em;color:#aaa;margin-top:5px">LLM sees "[Country]'s capital is [City]" enough
-                        times. Ask about a made-up country — it invents a plausible city.</p>
+                        times. Ask about a made-up country â€” it invents a plausible city.</p>
                 </div>
             </div>
             <div class="step-box"><span class="num">2</span>
@@ -662,7 +664,7 @@
             <div class="step-box"><span class="num">3</span>
                 <div>
                     <p><strong>Ambiguous prompts</strong></p>
-                    <p style="font-size:.95em;color:#aaa;margin-top:5px">"Tell me about the Paris incident" — which one?
+                    <p style="font-size:.95em;color:#aaa;margin-top:5px">"Tell me about the Paris incident" â€” which one?
                         The model assumes and presents assumptions as facts.</p>
                 </div>
             </div>
@@ -670,50 +672,50 @@
 
         <!-- 15: Spot the hallucination -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
-            <h2>Spot the Hallucination 🎯</h2>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
+            <h2>Spot the Hallucination ðŸŽ¯</h2>
             <div class="activity">
                 <h4>Class Activity</h4>
                 <p>I'll show you 3 statements. For each: <strong>Real fact or Hallucination?</strong> Discuss with a
                     partner for 30 seconds, then we vote.</p>
             </div>
             <div class="box" style="margin-top:20px">
-                <p><strong>Statement 1:</strong> "The Eiffel Tower was built between 1887 and 1889." → <span
-                        style="color:#4caf50">✓ Real</span></p>
+                <p><strong>Statement 1:</strong> "The Eiffel Tower was built between 1887 and 1889." â†’ <span
+                        style="color:#4caf50">âœ“ Real</span></p>
             </div>
             <div class="box">
-                <p><strong>Statement 2:</strong> "The Great Wall of China is visible from space with the naked eye." →
-                    <span style="color:#ff6464">✗ Myth — widely repeated, so LLMs repeat it too</span></p>
+                <p><strong>Statement 2:</strong> "The Great Wall of China is visible from space with the naked eye." â†’
+                    <span style="color:#ff6464">âœ— Myth â€” widely repeated, so LLMs repeat it too</span></p>
             </div>
             <div class="box">
-                <p><strong>Statement 3:</strong> "Einstein won the Nobel Prize for his theory of relativity." → <span
-                        style="color:#ffc107">⚠️ Partially wrong — he won it for the photoelectric effect. Most
+                <p><strong>Statement 3:</strong> "Einstein won the Nobel Prize for his theory of relativity." â†’ <span
+                        style="color:#ffc107">âš ï¸ Partially wrong â€” he won it for the photoelectric effect. Most
                         dangerous type of hallucination.</span></p>
             </div>
         </div>
 
         <!-- 16: Other limitations -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
             <h2>Other Key Limitations</h2>
             <div class="two-col">
                 <div>
                     <div class="box">
-                        <p>📅 <strong>No real-time info</strong><br>Training has a cutoff date. No live news, weather,
+                        <p>ðŸ“… <strong>No real-time info</strong><br>Training has a cutoff date. No live news, weather,
                             prices, or recent events without external tools.</p>
                     </div>
                     <div class="box">
-                        <p>🤖 <strong>No true understanding</strong><br>Pattern recognition ≠ comprehension. No lived
+                        <p>ðŸ¤– <strong>No true understanding</strong><br>Pattern recognition â‰  comprehension. No lived
                             experience, emotions, or common sense reasoning.</p>
                     </div>
                 </div>
                 <div>
                     <div class="box">
-                        <p>⚖️ <strong>Biased outputs</strong><br>Reflects biases in training data — gender, culture, and
+                        <p>âš–ï¸ <strong>Biased outputs</strong><br>Reflects biases in training data â€” gender, culture, and
                             language. English hugely overrepresented vs other languages.</p>
                     </div>
                     <div class="box">
-                        <p>🧠 <strong>Context window limits</strong><br>Forgets long conversations. Critical to design
+                        <p>ðŸ§  <strong>Context window limits</strong><br>Forgets long conversations. Critical to design
                             around if building real products.</p>
                     </div>
                 </div>
@@ -722,11 +724,11 @@
 
         <!-- 17: Key distinctions -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
             <h2>Common Misconceptions</h2>
             <div class="two-col">
                 <div class="card" style="border-color:#ff6464">
-                    <strong style="color:#ff6464">❌ Wrong ideas</strong>
+                    <strong style="color:#ff6464">âŒ Wrong ideas</strong>
                     <ul style="margin-left:15px;margin-top:10px;font-size:.95em">
                         <li>"LLMs lie when they hallucinate"</li>
                         <li>"LLMs understand language like humans"</li>
@@ -735,10 +737,10 @@
                     </ul>
                 </div>
                 <div class="card" style="border-color:#4caf50">
-                    <strong style="color:#4caf50">✓ Correct understanding</strong>
+                    <strong style="color:#4caf50">âœ“ Correct understanding</strong>
                     <ul style="margin-left:15px;margin-top:10px;font-size:.95em">
-                        <li>LLMs predict plausible text — they don't know truth</li>
-                        <li>Pattern recognition ≠ comprehension</li>
+                        <li>LLMs predict plausible text â€” they don't know truth</li>
+                        <li>Pattern recognition â‰  comprehension</li>
                         <li>Gaps + ambiguous prompts still cause hallucinations</li>
                         <li>Context window = short-term only, resets each session</li>
                     </ul>
@@ -748,7 +750,7 @@
 
         <!-- 18: Why it matters for Arabic -->
         <div class="slide">
-            <div class="section-tag">Part 4 — Why LLMs Fail</div>
+            <div class="section-tag">Part 4 â€” Why LLMs Fail</div>
             <h2>A Question Closer to Home</h2>
             <div class="discussion">
                 <h4>Class Discussion</h4>
@@ -757,12 +759,12 @@
             </div>
             <div class="box" style="margin-top:20px">
                 <p><strong>Answer:</strong> The internet has vastly more English-language content than Arabic. The model
-                    learned from what existed — so its English patterns are far richer, more nuanced, and more accurate
+                    learned from what existed â€” so its English patterns are far richer, more nuanced, and more accurate
                     than its Arabic ones.</p>
             </div>
             <div class="warning" style="margin-top:15px">
                 <h4>Bigger implication</h4>
-                <p>This means AI tools built on these models may <strong>serve Arabic speakers worse</strong> — a real
+                <p>This means AI tools built on these models may <strong>serve Arabic speakers worse</strong> â€” a real
                     equity issue in AI development.</p>
             </div>
         </div>
@@ -770,15 +772,15 @@
         <!-- 19: Week summary -->
         <div class="slide">
             <div class="section-tag">Summary</div>
-            <h2>Week 1 — Everything in One Slide</h2>
+            <h2>Week 1 â€” Everything in One Slide</h2>
             <div class="two-col">
                 <div>
                     <p style="color:#00d4ff;font-weight:700;margin-bottom:10px">How LLMs Work</p>
                     <div class="box" style="margin-bottom:10px">
-                        <p><strong>Tokens:</strong> unit of text (~¾ word)</p>
+                        <p><strong>Tokens:</strong> unit of text (~Â¾ word)</p>
                     </div>
                     <div class="box" style="margin-bottom:10px">
-                        <p><strong>Training:</strong> data → patterns → fine-tune</p>
+                        <p><strong>Training:</strong> data â†’ patterns â†’ fine-tune</p>
                     </div>
                     <div class="box">
                         <p><strong>Context window:</strong> short-term memory with a hard token limit</p>
@@ -787,7 +789,7 @@
                 <div>
                     <p style="color:#ff6464;font-weight:700;margin-bottom:10px">Why They Fail</p>
                     <div class="box" style="border-color:#ff6464;margin-bottom:10px">
-                        <p><strong>Hallucinations:</strong> 3 causes — patterns, data gaps, bad prompts</p>
+                        <p><strong>Hallucinations:</strong> 3 causes â€” patterns, data gaps, bad prompts</p>
                     </div>
                     <div class="box" style="border-color:#ff6464;margin-bottom:10px">
                         <p><strong>No real-time info:</strong> knowledge cutoff</p>
@@ -802,9 +804,9 @@
         <!-- 20: Exit Ticket -->
         <div class="slide">
             <div class="section-tag">Exit Ticket</div>
-            <h2>Before You Go ✍️</h2>
+            <h2>Before You Go âœï¸</h2>
             <div class="exit-ticket">
-                <h4>Exit Ticket — write your answers on a piece of paper</h4>
+                <h4>Exit Ticket â€” write your answers on a piece of paper</h4>
                 <p style="margin-top:5px">Answer all 3 in 5 minutes:</p>
             </div>
             <div class="step-box" style="margin-top:15px"><span class="num">1</span>
@@ -817,7 +819,7 @@
                 <p>Why might an AI product work better for some groups of people than others?</p>
             </div>
             <div class="preview-box" style="margin-top:20px">
-                <h4>📅 Next Week</h4>
+                <h4>ðŸ“… Next Week</h4>
                 <p>You'll test a real AI tool, try to make it hallucinate, and explore what jobs exist in AI. Come ready
                     to experiment.</p>
             </div>
@@ -825,11 +827,11 @@
 
     </div>
     <div class="nav">
-        <button class="nav-btn" id="prevBtn" onclick="prev()">← Prev</button>
+        <button class="nav-btn" id="prevBtn" onclick="prev()">â† Prev</button>
         <div class="progress">
             <div class="progress-fill" id="pbar"></div>
         </div>
-        <button class="nav-btn" id="nextBtn" onclick="next()">Next →</button>
+        <button class="nav-btn" id="nextBtn" onclick="next()">Next â†’</button>
     </div>
     <script>
         let cur = 0;
