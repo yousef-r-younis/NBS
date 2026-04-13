@@ -4,7 +4,7 @@
     <link rel="canonical" href="https://nbs-lns-ai.pages.dev/Grade 10+11+12/AI System Design/week3-student.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 3 Student Packet — Pitch Coaching</title>
+<title>Week 3 Student Packet — Poster Coaching</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,7 +40,7 @@ li { font-size:0.91rem; margin-bottom:5px; }
 .rubric tr:nth-child(even) td { background:#fff8e8; }
 .rubric .criteria { font-weight:600; color:var(--text); }
 
-/* DELIVERY CARD GRID */
+/* DO/DONT GRID */
 .delivery-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
 .del-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px; }
 .del-card .do { color:var(--green); font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700; margin-bottom:4px; }
@@ -69,7 +69,18 @@ li { font-size:0.91rem; margin-bottom:5px; }
 .score-btn { border:1px solid var(--border); background:var(--bg); border-radius:6px; padding:5px 12px; font-size:0.82rem; font-family:'Syne',sans-serif; cursor:pointer; font-weight:700; }
 .score-btn.selected { background:var(--accent); border-color:var(--accent); color:#fff; }
 
-/* FINAL ACTION */
+/* CHECKLIST */
+.checklist { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+.check-item { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--card); border:1px solid var(--border); border-radius:8px; }
+.check-item input[type=checkbox] { margin-top:2px; accent-color:var(--accent); transform:scale(1.2); flex-shrink:0; }
+.check-item label { font-size:0.88rem; }
+.check-item label b { display:block; margin-bottom:2px; }
+.check-item label span { color:var(--muted); font-size:0.82rem; }
+
+/* CHECKLIST SECTION HEADER */
+.check-section-label { font-family:'Syne',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin:20px 0 8px; font-weight:700; }
+
+/* ACTION ITEMS */
 .action-list { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
 .action-item { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
 .action-item .num { font-family:'Syne',sans-serif; font-weight:800; color:var(--accent); min-width:22px; }
@@ -81,35 +92,33 @@ li { font-size:0.91rem; margin-bottom:5px; }
 .ws-field textarea:focus { border-color:var(--accent); }
 .ws-field .line { border:none; border-bottom:1px solid var(--border); height:28px; width:100%; background:transparent; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); outline:none; }
 
+/* COACHING TIPS */
+.coaching-tip { background:#fffbf0; border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:12px 14px; margin-bottom:12px; font-size:0.82rem; }
+.coaching-tip strong { color:var(--accent); }
+
 .page-break { margin-top:40px; border-top:2px dashed var(--border); padding-top:32px; }
 .doc-footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:0.78rem; color:var(--muted); }
 
 /* ACTION BUTTONS */
-.action-buttons {
-  display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;
-}
-.btn-action {
-  display: inline-block; background: var(--accent); color: #fff; border: none; font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
-}
-.btn-action:hover { background: #a77105; transform: translateY(-2px); }
-.btn-action.secondary { background: var(--text); color: white; }
-.btn-action.secondary:hover { background: #000; }
+.action-buttons { display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+.btn-action { display:inline-block; background:var(--accent); color:#fff; border:none; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; padding:9px 16px; border-radius:8px; cursor:pointer; transition:all 0.3s ease; }
+.btn-action:hover { background:#a77105; transform:translateY(-2px); }
+.btn-action.secondary { background:var(--text); color:white; }
+.btn-action.secondary:hover { background:#000; }
 
 /* INFO BOX */
-.info-box {
-  background: rgba(201, 146, 13, 0.05); border-left: 4px solid var(--accent); padding: 12px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.82rem; color: #2a2d3e;
-}
+.info-box { background:rgba(201,146,13,0.05); border-left:4px solid var(--accent); padding:12px 14px; border-radius:6px; margin-bottom:12px; font-size:0.82rem; color:#2a2d3e; }
 
-/* COACHING TIPS */
-.coaching-tip {
-  background: #fffbf0; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; font-size: 0.82rem;
-}
-.coaching-tip strong { color: var(--accent); }
-
-.print-btn { display:inline-block; background:var(--accent); color:#fff; border:none; font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:700; padding:9px 20px; border-radius:8px; cursor:pointer; margin-bottom:24px; }
+/* FORM FIELD PREVIEW */
+.form-section { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px 20px; margin-bottom:12px; }
+.form-section .fs-label { font-family:'Syne',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:6px; }
+.form-section .fs-hint { font-size:0.8rem; color:var(--muted); margin-bottom:8px; }
+.form-section textarea { width:100%; border:1px solid var(--border); border-radius:6px; padding:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); resize:vertical; min-height:80px; outline:none; }
+.form-section textarea:focus { border-color:var(--accent); }
 </style>
 </head>
 <body>
+
 <div class="action-buttons no-print">
   <button class="btn-action" onclick="autoSaveData()">💾 Save Progress</button>
   <button class="btn-action" onclick="exportToPDF()">📥 Export as PDF</button>
@@ -123,8 +132,8 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
 <div class="doc-header">
   <div class="doc-badge">Week 3 · Student Packet</div>
-  <h1>Pitch Coaching<br>Guide & Peer Feedback Sheet</h1>
-  <p>Use Part 1 to sharpen your pitch. Use Part 2 during practice presentations to give structured feedback.</p>
+  <h1>Poster Coaching<br>Guide & Peer Feedback Sheet</h1>
+  <p>Use Part 1 to sharpen your poster content. Use Part 2 to draft your answers. Use Part 3 to give structured peer feedback.</p>
   <div class="meta-row">
     <div class="meta-item"><b>Team Name:</b> _______________________</div>
     <div class="meta-item"><b>Date:</b> _______________________</div>
@@ -133,10 +142,20 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
 <!-- PART 1: GUIDE -->
 <div class="section">
-  <div class="section-title">Part 1 — Pitch Coaching Guide</div>
+  <div class="section-title">Part 1 — Coaching Guide</div>
 
-  <h2>The Judging Rubric</h2>
-  <p>This is exactly how your pitch will be scored. Read it before you practise.</p>
+  <h2>What's Happening This Week</h2>
+  <p>Your team reads your draft answers out loud. The class gives feedback. You take notes, improve your answers, then submit the <strong>Google Form officially</strong> before the deadline. Your poster gets printed from that submission — so what you submit is what goes on the wall at the exhibition.</p>
+
+  <div class="guide-box" style="margin-top:16px;">
+    <h3>The Poster Workflow</h3>
+    <p><strong>Week 3 (today):</strong> Prepare draft answers → read them out loud → get feedback → note what to fix.</p>
+    <p><strong>After Week 3:</strong> Finalize your answers → submit the Google Form officially (or edit your existing submission).</p>
+    <p><strong>Before Week 4:</strong> Form deadline passes → teacher runs the poster generator → A3 posters printed for the exhibition.</p>
+  </div>
+
+  <h2 style="margin-top:24px;">The Judging Rubric</h2>
+  <p>This is exactly how your project will be scored at the exhibition. Your poster answers map directly to these criteria.</p>
   <table class="rubric">
     <tr><th style="width:35%;">Criteria</th><th>3 — Strong</th><th>2 — Developing</th><th>1 — Weak</th></tr>
     <tr><td class="criteria">Problem Clarity</td><td>Real, specific, compelling</td><td>Somewhat clear</td><td>Vague or generic</td></tr>
@@ -145,91 +164,145 @@ li { font-size:0.91rem; margin-bottom:5px; }
     <tr><td class="criteria">Ethics & Impact</td><td>Specific harm named + safeguards explained</td><td>Acknowledged but not addressed</td><td>Not addressed</td></tr>
     <tr><td class="criteria">Limitations & Failures</td><td>2+ specific failure scenarios</td><td>Vague acknowledgment</td><td>"It will always work"</td></tr>
     <tr><td class="criteria">Future Work</td><td>Ambitious, specific, grounded</td><td>Generic ("add features")</td><td>Not included</td></tr>
-    <tr><td class="criteria">Pitch Quality</td><td>Clear, confident, strong visuals</td><td>Mostly clear, some rough spots</td><td>Hard to follow</td></tr>
+    <tr><td class="criteria">Real-World Examples</td><td>Named + compared to your system</td><td>Named but not compared</td><td>Not included</td></tr>
   </table>
-  <p style="font-size:0.82rem; color:var(--muted);">Final score = 50% judge rubric + 50% audience popular vote at the exhibition.</p>
+  <p style="font-size:0.82rem; color:var(--muted);">Final score = 60% judge rubric + 40% audience ranked-choice vote at the exhibition.</p>
 
-  <h2 style="margin-top:24px;">Delivery: Do's and Don'ts</h2>
+  <h2 style="margin-top:24px;">Section-by-Section Coaching Tips</h2>
+
+  <div class="coaching-tip">
+    <strong>The Problem — Make them feel it</strong><br>
+    Not: "Healthcare is important in Lebanon." Instead: "Elderly patients in Lebanese households miss medication doses regularly because there is no reminder system their families can monitor remotely." Specific person, specific situation, specific gap.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>The AI Solution — Name the ML type like it's obvious</strong><br>
+    Not: "We use AI to solve this." Instead: "We use a classification model that takes symptom inputs and outputs a recommended specialist category." ML type named. Input named. Output named. Why AI and not a simpler tool — addressed.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>How It Works — Step by step, not vague</strong><br>
+    Walk through it like you're explaining to someone who has never used your system. Step 1: user does X. Step 2: system processes Y. Step 3: output is Z. Don't skip steps. Don't say "the AI analyzes the data" — what data? What analysis?
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Data & Bias — Specific = credible</strong><br>
+    Name the bias type. "We might have sampling bias because our training data comes from one hospital in Beirut, which means rural patients are underrepresented." Then name the mitigation: "We would collect data from at least 3 different regions." Vagueness loses points. Specificity wins judges.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Ethics & Impact — Own the risks</strong><br>
+    "Our system is safe" is the worst answer. Give a real harm scenario: "If the model misclassifies a serious symptom as low-risk, the patient delays seeking help and their condition worsens." Then give a real safeguard: "We include a disclaimer that the system does not replace a doctor and flags any output as a suggestion only."
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Limitations & Risks — Two concrete failure cases</strong><br>
+    Format: user does X → system outputs Y → consequence is Z. Example: "A user types symptoms in Lebanese dialect → the NLP model trained on MSA fails to parse correctly → outputs a wrong classification." Two of these. Specific. Real.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Future Work — Dream big, stay grounded</strong><br>
+    Not: "We would add more features." Instead: "In Phase 2, we would integrate with pharmacy databases to auto-flag drug interactions. In Phase 3, we would build a family monitoring dashboard." Specific phases. Specific additions. Shows you've thought beyond the MVP.
+  </div>
+
+  <div class="coaching-tip">
+    <strong>Real-World Examples — Compare, don't just list</strong><br>
+    Not: "Google Maps does something similar." Instead: "Google Maps uses traffic prediction similar to ours, but it is not optimized for Beirut's road network or local shortcuts. Our system trains specifically on Lebanese commute data." Name it, then say what makes yours different or more relevant.
+  </div>
+
+  <h2 style="margin-top:24px;">Writing for a Poster — Important Constraints</h2>
+  <div class="guide-box blue">
+    <h3 style="color:var(--blue);">Your answers go directly onto the A3 poster</h3>
+    <ul style="margin-top:8px;">
+      <li>Write in <strong>full sentences</strong> — not bullet points. The poster layout expects prose.</li>
+      <li>Keep each answer to <strong>3–5 sentences maximum</strong> — it needs to fit in its section on the A3 sheet.</li>
+      <li>Avoid filler phrases like "In conclusion" or "As mentioned above" — every sentence should add information.</li>
+      <li>Read each answer aloud. If it sounds robotic or vague, rewrite it.</li>
+    </ul>
+  </div>
+
+  <h2 style="margin-top:24px;">What Good Feedback Looks Like</h2>
   <div class="delivery-grid">
-    <div class="del-card"><div class="do">✅ DO</div><p>Open with a story, stat, or scenario that makes the problem feel real.</p></div>
-    <div class="del-card"><div class="dont">❌ DON'T</div><p>Open with "Hi we're Team X and today we'll be talking about..."</p></div>
-    <div class="del-card"><div class="do">✅ DO</div><p>Use your slides as visual cues. Speak to the audience, not the screen.</p></div>
-    <div class="del-card"><div class="dont">❌ DON'T</div><p>Read bullet points off slides word for word.</p></div>
-    <div class="del-card"><div class="do">✅ DO</div><p>Be honest about limitations and bias. It builds credibility.</p></div>
-    <div class="del-card"><div class="dont">❌ DON'T</div><p>Say "our AI will be 99% accurate" or "there are no ethical concerns."</p></div>
-    <div class="del-card"><div class="do">✅ DO</div><p>Practice out loud, timed. Know your section cold.</p></div>
-    <div class="del-card"><div class="dont">❌ DON'T</div><p>Run over time. 7+ minutes signals you haven't prepared.</p></div>
-  </div>
-
-  <h2 style="margin-top:24px;">🎤 Section-Specific Coaching Tips</h2>
-  <div class="coaching-tip">
-    <strong>Slide 1 — The Problem (Hook them first 20 seconds)</strong><br>
-    Start with a story or stat that makes the problem feel <em>real and urgent</em>. Not: "Healthcare is important." Instead: "My grandmother forgets to take her medications every week, and nobody catches it until she gets sick." Make the audience feel it. This is your one chance to grab attention.
-  </div>
-
-  <div class="coaching-tip">
-    <strong>Slide 2 — The Solution (Show, don't tell)</strong><br>
-    Describe from the user's perspective: "She receives a reminder at 8am. She taps a button to confirm. The system tracks her compliance." Use a mockup, screenshot, or video. Saying "AI-powered medication tracking" means nothing; showing it means everything.
-  </div>
-
-  <div class="coaching-tip">
-    <strong>Slide 3 — How It Works (Name the ML type like it's obvious)</strong><br>
-    Don't say "we use machine learning." Say "we use a classification model trained on historical compliance data." Name it. Explain the training process in 2–3 sentences. Include a simple diagram showing: data in → model → prediction out. If you use an LLM, say which one and how (fine-tuned, prompted, RAG).
-  </div>
-
-  <div class="coaching-tip">
-    <strong>Slide 4 — Data & Bias (Specific = credible)</strong><br>
-    Name the bias type you're concerned about. "We might have sampling bias because our training data comes from a hospital in one city. We're addressing it by collecting data from clinics in 3 different regions." Vagueness loses points; specificity wins judges.
-  </div>
-
-  <div class="coaching-tip">
-    <strong>Slide 5 — Ethics, Limits & Failures (Own the problems)</strong><br>
-    Give 2 concrete failure scenarios: "If the system sends a reminder at 2am instead of 8am due to a timezone bug, the elderly user sleeps through it." "If the model was trained primarily on younger patients, it might misjudge adherence for older demographics." Honesty disarms skeptics and builds credibility.
-  </div>
-
-  <div class="coaching-tip">
-    <strong>Slide 6 — Future Work (Dream big, stay grounded)</strong><br>
-    Don't just say "add more features." Say: "In Phase 2, we'd integrate with pharmacies to auto-refill prescriptions when doses run low. In Phase 3, we'd build a predictive model to forecast compliance drop-offs before they happen." Ambitious but doable = impressive.
-  </div>
-
-  <div class="guide-box blue" style="margin-top:16px;">
-    <h3 style="color:var(--blue);">Handling Q&A</h3>
-    <p>After your pitch, judges and classmates may ask questions. Strong answers start with: <em>"That's a great point — here's how we've thought about it..."</em> If you don't know: <em>"We haven't fully solved that yet — but our current thinking is..."</em> is far better than a defensive or vague response. <strong>Never lie or exaggerate.</strong> Judges respect honesty.</p>
+    <div class="del-card"><div class="do">✅ DO</div><p>Be specific: "Your bias section names the type but doesn't say how you'd fix it."</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Be vague: "I didn't really understand the bias part."</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Frame challenges as questions: "How would your system handle inputs in Lebanese dialect?"</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Attack the idea: "This idea doesn't make sense."</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Give a concrete suggestion: "Add a specific safeguard to your ethics section."</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Give empty praise: "It was really good, I liked it."</p></div>
+    <div class="del-card"><div class="do">✅ DO</div><p>Point to the rubric: "Your limitations section would score a 1 right now — you need two specific failure cases."</p></div>
+    <div class="del-card"><div class="dont">❌ DON'T</div><p>Be discouraging: "You're going to lose." Challenge the content, not the team.</p></div>
   </div>
 </div>
 
-<!-- PART 2: SELF-REVIEW -->
+<!-- PART 2: DRAFT ANSWERS -->
 <div class="section">
-  <div class="section-title">Part 2 — Self-Review Before You Present</div>
-  <p style="margin-bottom:14px;">Fill this in as a team before your practice pitch.</p>
-  <div class="self-review">
-    <div class="sr-item">
-      <div class="sr-q"><b>Opening hook</b><span>What's our opening line or scenario? Would a stranger feel the problem immediately?</span></div>
-      <textarea placeholder="Our opening is..."></textarea>
-    </div>
-    <div class="sr-item">
-      <div class="sr-q"><b>ML type & why</b><span>Do we clearly name and justify our ML type? Could someone explain it back to us?</span></div>
-      <textarea placeholder="We use ___ because..."></textarea>
-    </div>
-    <div class="sr-item">
-      <div class="sr-q"><b>Bias — named & mitigated</b><span>Which specific bias type? What specific mitigation? Is it vague or concrete?</span></div>
-      <textarea placeholder="Bias type: ___ / Mitigation: ___"></textarea>
-    </div>
-    <div class="sr-item">
-      <div class="sr-q"><b>2 failure scenarios</b><span>Can we describe two specific cases where our system produces a wrong or harmful output?</span></div>
-      <textarea placeholder="Failure 1: ___ / Failure 2: ___"></textarea>
-    </div>
-    <div class="sr-item">
-      <div class="sr-q"><b>Timing</b><span>Have we timed this out loud? Are we within 5–7 minutes?</span></div>
-      <textarea placeholder="Last timed run: ___ min ___ sec"></textarea>
-    </div>
+  <div class="section-title">Part 2 — Draft Your Answers</div>
+  <p style="margin-bottom:16px;">Write your draft answers here before class. This is what your team will read out loud for peer feedback. After feedback, finalize and submit the Google Form.</p>
+
+  <div class="form-section">
+    <div class="fs-label">The Problem</div>
+    <div class="fs-hint">What issue are you solving? Who has it? How bad is it? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">The AI Solution</div>
+    <div class="fs-hint">What does your system do? What ML type does it use and why? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">How It Works</div>
+    <div class="fs-hint">Step by step — how does the AI process input and produce output? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">Data & Bias</div>
+    <div class="fs-hint">What data is needed? What specific bias type could appear? What's your mitigation? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">Ethics & Impact</div>
+    <div class="fs-hint">Who could be harmed if it's wrong? What specific safeguards exist? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">Limitations & Risks</div>
+    <div class="fs-hint">Give 2 specific failure scenarios: user does X → system outputs Y → consequence is Z. (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">Future Work</div>
+    <div class="fs-hint">What would you improve or expand given more time and resources? Be specific. (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="form-section">
+    <div class="fs-label">Real-World Examples</div>
+    <div class="fs-hint">Name at least one existing system similar to yours. How does yours differ or improve on it? (3–5 sentences)</div>
+    <textarea placeholder="Write your draft answer here..."></textarea>
+  </div>
+
+  <div class="guide-box" style="margin-top:16px;">
+    <h3>Before You Read Out Loud — Self Check</h3>
+    <ul style="margin-top:8px;">
+      <li>Is the ML type named explicitly in the AI Solution answer?</li>
+      <li>Is a specific bias type named in the Data & Bias answer?</li>
+      <li>Are there two concrete failure scenarios in Limitations & Risks?</li>
+      <li>Does every answer stay within 3–5 sentences?</li>
+      <li>Does any answer still say "our AI is safe" or "we'll use good data"? Rewrite it.</li>
+    </ul>
   </div>
 </div>
 
-<!-- PART 3: PEER FEEDBACK (REPEATABLE) -->
+<!-- PART 3: PEER FEEDBACK -->
 <div class="page-break">
   <div class="section-title" style="font-family:'Syne',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px;">Part 3 — Peer Feedback Sheet <span style="flex:1; height:1px; background:var(--border); display:block;"></span></div>
-  <p style="margin-bottom:6px; font-size:0.82rem; color:var(--muted);">Complete one per team you observe. Use specific, constructive language.</p>
+  <p style="margin-bottom:6px; font-size:0.82rem; color:var(--muted);">Complete one per team you give feedback to. Use specific, constructive language.</p>
 
   <div class="ws-field" style="margin-bottom:16px;">
     <label>Team You're Giving Feedback To</label>
@@ -237,7 +310,7 @@ li { font-size:0.91rem; margin-bottom:5px; }
   </div>
 
   <h2>Rubric Scores</h2>
-  <p style="margin-bottom:12px; font-size:0.82rem; color:var(--muted);">Circle or click a score for each criterion. 3 = Strong, 2 = Developing, 1 = Weak.</p>
+  <p style="margin-bottom:12px; font-size:0.82rem; color:var(--muted);">Score each section as you listen. 3 = Strong, 2 = Developing, 1 = Weak.</p>
 
   <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
@@ -273,7 +346,7 @@ li { font-size:0.91rem; margin-bottom:5px; }
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
-      <span style="font-size:0.88rem; font-weight:600;">Limitations & Failures</span>
+      <span style="font-size:0.88rem; font-weight:600;">Limitations & Risks</span>
       <div class="score-row" style="margin:0;">
         <button class="score-btn" onclick="toggleScore(this)">3</button>
         <button class="score-btn" onclick="toggleScore(this)">2</button>
@@ -281,7 +354,7 @@ li { font-size:0.91rem; margin-bottom:5px; }
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
-      <span style="font-size:0.88em; font-weight:600;">Future Work</span>
+      <span style="font-size:0.88rem; font-weight:600;">Future Work</span>
       <div class="score-row" style="margin:0;">
         <button class="score-btn" onclick="toggleScore(this)">3</button>
         <button class="score-btn" onclick="toggleScore(this)">2</button>
@@ -289,7 +362,7 @@ li { font-size:0.91rem; margin-bottom:5px; }
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 16px;">
-      <span style="font-size:0.88rem; font-weight:600;">Pitch Quality</span>
+      <span style="font-size:0.88rem; font-weight:600;">Real-World Examples</span>
       <div class="score-row" style="margin:0;">
         <button class="score-btn" onclick="toggleScore(this)">3</button>
         <button class="score-btn" onclick="toggleScore(this)">2</button>
@@ -300,54 +373,66 @@ li { font-size:0.91rem; margin-bottom:5px; }
 
   <div class="pf-section">
     <div class="pf-title green">⭐ What worked — be specific</div>
-    <label>One thing that was clear, compelling, or well-argued (not just "it was good")</label>
-    <textarea placeholder="The ___ was effective because..."></textarea>
+    <label>One section that was clear, specific, and well-argued (not just "it was good")</label>
+    <textarea placeholder="The ___ section was effective because..."></textarea>
   </div>
 
   <div class="pf-section">
     <div class="pf-title gold">🔍 One challenge — frame as a question</div>
-    <label>Something you weren't convinced by, or a gap you noticed</label>
-    <textarea placeholder="How would your system handle the case where...? / I wasn't sure about... because..."></textarea>
+    <label>Something you weren't convinced by, or a gap you noticed in one of the sections</label>
+    <textarea placeholder="How would your system handle the case where...? / I wasn't sure about ___ because..."></textarea>
   </div>
 
   <div class="pf-section">
     <div class="pf-title blue">💡 One concrete suggestion</div>
-    <label>Something specific they could add, change, or clarify</label>
-    <textarea placeholder="I'd suggest adding a slide about ___ / Being more specific about ___ would help because..."></textarea>
+    <label>Something specific they could rewrite, add, or clarify before submitting the form</label>
+    <textarea placeholder="I'd suggest being more specific about ___ in the ___ section because..."></textarea>
   </div>
 </div>
 
 <!-- PART 4: ACTION ITEMS -->
 <div class="section" style="margin-top:32px;">
   <div class="section-title">Part 4 — Post-Feedback Action Items</div>
-  <p style="margin-bottom:12px;">After receiving feedback from classmates and your teacher, list your top 3 improvements to make before the exhibition.</p>
+  <p style="margin-bottom:12px;">After receiving feedback, list the top 3 things you will fix before submitting the Google Form.</p>
   <div class="action-list">
-    <div class="action-item"><span class="num">1</span><input type="text" placeholder="I will improve: ___"></div>
-    <div class="action-item"><span class="num">2</span><input type="text" placeholder="I will improve: ___"></div>
-    <div class="action-item"><span class="num">3</span><input type="text" placeholder="I will improve: ___"></div>
+    <div class="action-item"><span class="num">1</span><input type="text" placeholder="I will fix: ___"></div>
+    <div class="action-item"><span class="num">2</span><input type="text" placeholder="I will fix: ___"></div>
+    <div class="action-item"><span class="num">3</span><input type="text" placeholder="I will fix: ___"></div>
   </div>
   <div class="ws-field" style="margin-top:12px;">
-    <label>Slide that needs the most work</label>
-    <input class="line" type="text" placeholder="Which slide, and what specifically needs to change?">
+    <label>Section that needs the most rewriting</label>
+    <input class="line" type="text" placeholder="Which section, and what specifically needs to change?">
+  </div>
+  <div class="guide-box green" style="margin-top:16px;">
+    <h3 style="color:var(--green);">Before You Submit the Google Form</h3>
+    <div class="checklist" style="margin-top:10px;">
+      <div class="check-item"><input type="checkbox"><label><b>All 8 sections answered in full sentences</b><span>No bullet points — prose only, 3–5 sentences each</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>ML type named explicitly</b><span>Not just "AI" or "machine learning"</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>Specific bias type named + specific mitigation</b><span>Not "we'll use good data"</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>Two concrete failure scenarios in Limitations</b><span>User does X → system outputs Y → consequence is Z</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>Real-world example named AND compared</b><span>Not just listed — say how yours differs</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>Project title finalized</b><span>This appears large on the poster — make it count</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>All member names correct and complete</b><span>Check spelling — this goes on the printed poster</span></label></div>
+      <div class="check-item"><input type="checkbox"><label><b>At least one photo uploaded</b><span>Team photo, diagram, mockup — anything visual</span></label></div>
+    </div>
   </div>
 </div>
 
 <div class="doc-footer">
   <span>AI Innovation Challenge · Week 3 of 4</span>
-  <span>Final deck due to teacher the night before the exhibition</span>
+  <span>Submit the Google Form before the deadline — your poster is printed from it</span>
 </div>
 
 <script>
 const STORAGE_KEY = 'week3-data';
 
-// Toggle score buttons
 function toggleScore(btn) {
   const row = btn.closest('.score-row');
   row.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
+  autoSaveData();
 }
 
-// Auto-save localStorage
 window.addEventListener('load', function() {
   loadFromLocalStorage();
   setupAutoSave();
@@ -359,10 +444,7 @@ function setupAutoSave() {
     el.addEventListener('change', autoSaveData);
     el.addEventListener('blur', autoSaveData);
   });
-
-  // Also save score selections
-  const buttons = document.querySelectorAll('.score-btn');
-  buttons.forEach(btn => {
+  document.querySelectorAll('.score-btn').forEach(btn => {
     btn.addEventListener('click', autoSaveData);
   });
 }
@@ -370,56 +452,49 @@ function setupAutoSave() {
 function autoSaveData() {
   const inputs = document.querySelectorAll('input, textarea');
   const data = {};
-  inputs.forEach((el, idx) => {
-    data[`field_${idx}`] = el.value;
-  });
+  inputs.forEach((el, idx) => { data[`field_${idx}`] = el.value; });
 
-  // Save selected scores
   const scores = {};
   document.querySelectorAll('.score-row').forEach((row, idx) => {
     const selected = row.querySelector('.score-btn.selected');
     if (selected) scores[`score_${idx}`] = selected.textContent;
   });
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ inputs: data, scores: scores }));
-  console.log('Data saved!');
+  const checkboxes = {};
+  document.querySelectorAll('input[type=checkbox]').forEach((cb, idx) => {
+    checkboxes[`cb_${idx}`] = cb.checked;
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ inputs: data, scores, checkboxes }));
 }
 
 function loadFromLocalStorage() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const { inputs, scores } = JSON.parse(saved);
-
-      // Restore text inputs
-      const all_inputs = document.querySelectorAll('input, textarea');
-      all_inputs.forEach((el, idx) => {
-        if (inputs && inputs[`field_${idx}`]) {
-          el.value = inputs[`field_${idx}`];
+  if (!saved) return;
+  try {
+    const { inputs, scores, checkboxes } = JSON.parse(saved);
+    const all_inputs = document.querySelectorAll('input, textarea');
+    all_inputs.forEach((el, idx) => {
+      if (inputs && inputs[`field_${idx}`]) el.value = inputs[`field_${idx}`];
+    });
+    if (scores) {
+      document.querySelectorAll('.score-row').forEach((row, idx) => {
+        if (scores[`score_${idx}`]) {
+          const btn = Array.from(row.querySelectorAll('.score-btn')).find(b => b.textContent === scores[`score_${idx}`]);
+          if (btn) btn.classList.add('selected');
         }
       });
-
-      // Restore score selections
-      if (scores) {
-        document.querySelectorAll('.score-row').forEach((row, idx) => {
-          if (scores[`score_${idx}`]) {
-            const btn = Array.from(row.querySelectorAll('.score-btn')).find(
-              b => b.textContent === scores[`score_${idx}`]
-            );
-            if (btn) btn.classList.add('selected');
-          }
-        });
-      }
-
-      console.log('Data loaded from storage!');
-    } catch (e) {
-      console.log('Could not load data');
     }
-  }
+    if (checkboxes) {
+      document.querySelectorAll('input[type=checkbox]').forEach((cb, idx) => {
+        if (checkboxes[`cb_${idx}`] !== undefined) cb.checked = checkboxes[`cb_${idx}`];
+      });
+    }
+  } catch (e) { console.log('Could not load data'); }
 }
 
 function exportToPDF() {
-  alert('Click "Print" below and select "Save as PDF" to download your feedback sheet.');
+  alert('Click "Print" below and select "Save as PDF" to download your work.');
   window.print();
 }
 
@@ -428,7 +503,7 @@ function clearAllData() {
     localStorage.removeItem(STORAGE_KEY);
     document.querySelectorAll('input, textarea').forEach(el => el.value = '');
     document.querySelectorAll('.score-btn').forEach(btn => btn.classList.remove('selected'));
-    console.log('All data cleared');
+    document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
   }
 }
 </script>
