@@ -390,7 +390,30 @@
     <div class="header-title">Quiz Grader</div>
     <div class="header-sub">LLM Fundamentals — Weeks 1 &amp; 2</div>
   </div>
-  <div class="header-badge">24 questions</div>
+  <div style="display: flex; gap: 1rem; align-items: center;">
+    <div class="header-badge">24 questions</div>
+    <select id="version-select" style="
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      cursor: pointer;
+    ">
+      <option value="A">Version A</option>
+      <option value="B">Version B</option>
+      <option value="C">Version C</option>
+      <option value="D">Version D</option>
+      <option value="E">Version E</option>
+      <option value="F">Version F</option>
+      <option value="G">Version G</option>
+      <option value="H">Version H</option>
+      <option value="I">Version I</option>
+      <option value="J">Version J</option>
+    </select>
+  </div>
 </header>
 
 <main>
@@ -449,19 +472,36 @@
   </div>
 </main>
 
-<footer>LLM Fundamentals Quiz Grader &nbsp;·&nbsp; Answer key: D A B B A C B C D D A C D C A B D B C A A B C D</footer>
+<footer>LLM Fundamentals Quiz Grader &nbsp;·&nbsp; Version <span id="footer-version">A</span> &nbsp;·&nbsp; 24 questions</footer>
 
 <script>
-  const KEY = 'dabbackdbdacdbabdbcaabcd'.split('');
+  const ANSWER_KEYS = {
+    'A': 'cbccccbabadaadccdcbaacbd'.split(''),
+    'B': 'acaddddabccaacbcbbbcabba'.split(''),
+    'C': 'aacacbcdcacbbdacdabdddba'.split(''),
+    'D': 'ccddbdacddddcbccaccccaac'.split(''),
+    'E': 'cdaacabcbbcdccbccbcbacad'.split(''),
+    'F': 'abdaabdbdabdcadbaabbdbdb'.split(''),
+    'G': 'ccbdcbdabdbadacbcdbdbbdd'.split(''),
+    'H': 'cccddbdbddbbdddbabcccbba'.split(''),
+    'I': 'dbaddbaaccaabdddbdcadabb'.split(''),
+    'J': 'badacbabaccdbbbacbbabbcb'.split('')
+  };
 
-  // Corrected key: d a b b a c b d c d a c d b a b d b c a a b c d
-  const ANSWER_KEY = 'dabbacbdcdacdcabdbcaaabcd'.split('');
-
-  // Final key matching our quiz
-  const AK = ['d','a','b','b','a','c','b','c','d','d','a','c','d','c','a','b','d','b','c','a','a','b','c','d'];
-
+  let currentVersion = 'A';
   const inp = document.getElementById('inp');
   const counter = document.getElementById('counter');
+  const versionSelect = document.getElementById('version-select');
+  const footerVersion = document.getElementById('footer-version');
+
+  versionSelect.addEventListener('change', (e) => {
+    currentVersion = e.target.value;
+    footerVersion.textContent = currentVersion;
+    inp.value = '';
+    counter.textContent = '0 / 24 letters entered';
+    document.getElementById('output').style.display = 'none';
+    document.getElementById('error').style.display = 'none';
+  });
 
   inp.addEventListener('input', () => {
     const clean = inp.value.replace(/[^abcdABCD]/gi, '').toLowerCase();
@@ -478,6 +518,7 @@
     const raw = inp.value.replace(/\s/g,'').toLowerCase().replace(/[^abcd]/g,'');
     const err = document.getElementById('error');
     const out = document.getElementById('output');
+    const AK = ANSWER_KEYS[currentVersion];
 
     if (raw.length !== 24) {
       err.textContent = 'Need exactly 24 answers (a/b/c/d). Got ' + raw.length + '.';
