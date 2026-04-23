@@ -44,31 +44,23 @@
             font-size: clamp(2.4rem, 6vw, 4.5rem);
             font-weight: 700;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, #00d4ff, #a855f7, #00d4ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 4s linear infinite;
+            color: #ffff00;
             text-align: center;
+            text-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
         }
 
-        @keyframes shimmer {
-            0% {
-                background-position: 0%
-            }
-
-            100% {
-                background-position: 200%
-            }
-        }
-
-        .sub {
+.sub {
             font-size: 1.1rem;
             color: #d1d5db;
             margin-bottom: 8px;
             text-align: center;
             max-width: 560px;
+            animation: float-in 1s ease-out;
+        }
+
+        @keyframes float-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .instructor {
@@ -79,8 +71,9 @@
         }
 
         .instructor span {
-            color: #00d4ff;
-            font-weight: 600;
+            color: #ffff00;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
         }
 
         .grid {
@@ -94,27 +87,27 @@
 
         .card {
             border-radius: 16px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 0, 0.5);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
             padding: 24px;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.12);
+            box-shadow: 0 0 20px rgba(255, 16, 240, 0.15), inset 0 0 20px rgba(255, 255, 0, 0.05);
             position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 48px rgba(0, 212, 255, 0.25);
-            border-color: rgba(0, 212, 255, 0.6);
+.card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 0 40px rgba(255, 16, 240, 0.4), 0 0 80px rgba(255, 255, 0, 0.3), inset 0 0 30px rgba(255, 255, 0, 0.1);
+            border-color: rgba(255, 16, 240, 0.8);
         }
 
         .cap-badge {
             position: absolute;
             top: -12px;
             right: 20px;
-            background: linear-gradient(90deg, #00d4ff, #a855f7);
+            background: linear-gradient(90deg, #ff10f0, #ffff00);
             padding: 4px 14px;
             border-radius: 100px;
             font-size: 0.72rem;
@@ -123,6 +116,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            box-shadow: 0 0 15px rgba(255, 16, 240, 0.6);
         }
 
         .card-top {
@@ -137,6 +131,10 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 6px;
+            background: linear-gradient(90deg, #ff10f0, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .card-desc {
@@ -153,15 +151,17 @@
         }
 
         .chevron {
-            color: #00d4ff;
+            color: #ffff00;
             font-size: 22px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
             flex-shrink: 0;
             margin-top: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
         }
 
         .chevron.open {
             transform: rotate(180deg);
+            color: #ff10f0;
         }
 
         .chapter-list {
@@ -178,7 +178,7 @@
 
         .chapter-inner {
             padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 0, 0.2);
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -192,14 +192,17 @@
             color: #d1d5db;
             text-decoration: none;
             font-size: 0.9rem;
-            transition: background 0.2s, color 0.2s, transform 0.2s;
+            transition: background 0.2s, color 0.2s, transform 0.2s, text-shadow 0.2s;
             text-align: left;
+            border-left: 2px solid transparent;
         }
 
         .ch-link:hover {
-            background: rgba(0, 212, 255, 0.1);
-            color: #fff;
+            background: linear-gradient(90deg, rgba(255, 255, 0, 0.15), rgba(255, 16, 240, 0.1));
+            color: #ffff00;
             transform: translateX(8px);
+            border-left-color: #ff10f0;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.6);
         }
 
         footer {
@@ -350,6 +353,7 @@
         const canvas = document.getElementById('c');
         const ctx = canvas.getContext('2d');
         let particles = [];
+        const neonColors = ['#ffff00', '#ff10f0', '#00d4ff', '#ff4d00', '#00ffff'];
 
         function resize() {
             canvas.width = window.innerWidth;
@@ -358,14 +362,16 @@
 
         function init() {
             particles = [];
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 150; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    r: Math.random() * 2 + 0.5,
-                    o: Math.random() * 0.5 + 0.3
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: (Math.random() - 0.5) * 0.8,
+                    r: Math.random() * 2.5 + 0.5,
+                    o: Math.random() * 0.6 + 0.2,
+                    color: neonColors[Math.floor(Math.random() * neonColors.length)],
+                    pulse: Math.random() * Math.PI * 2
                 });
             }
         }
@@ -373,26 +379,44 @@
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
+            particles.forEach((p, idx) => {
                 p.x += p.vx; p.y += p.vy;
+                p.pulse += 0.01;
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // Subtle pulsing opacity
+                const pulseO = p.o + Math.sin(p.pulse) * 0.1;
+
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255,255,255,${p.o})`;
+                ctx.fillStyle = p.color.replace(')', `,${pulseO})`).replace('rgb', 'rgba');
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 15;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color.replace(')', `,${pulseO * 0.5})`).replace('rgb', 'rgba');
                 ctx.fill();
             });
+
+            ctx.shadowColor = 'transparent';
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
+                    if (dist < 150) {
+                        const gradient = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                        gradient.addColorStop(0, particles[i].color + '40');
+                        gradient.addColorStop(1, particles[j].color + '40');
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255,255,255,${0.1 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.5;
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
                 }
