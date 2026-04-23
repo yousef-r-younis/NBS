@@ -362,7 +362,8 @@
 
         function init() {
             particles = [];
-            for (let i = 0; i < 150; i++) {
+            const particleCount = window.innerWidth < 768 ? 30 : 150;
+            for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
