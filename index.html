@@ -220,6 +220,31 @@
             .page {
                 padding: 32px 16px 32px;
             }
+
+            .card {
+                backdrop-filter: blur(5px);
+                box-shadow: 0 0 10px rgba(255, 16, 240, 0.1), inset 0 0 10px rgba(255, 255, 0, 0.02);
+            }
+
+            .card:hover {
+                box-shadow: 0 0 20px rgba(255, 16, 240, 0.2), 0 0 40px rgba(255, 255, 0, 0.15), inset 0 0 15px rgba(255, 255, 0, 0.05);
+            }
+
+            h1 {
+                text-shadow: 0 0 10px rgba(255, 255, 0, 0.2);
+            }
+
+            .chevron {
+                text-shadow: 0 0 5px rgba(255, 255, 0, 0.3);
+            }
+
+            .instructor span {
+                text-shadow: 0 0 5px rgba(255, 255, 0, 0.2);
+            }
+
+            .ch-link:hover {
+                text-shadow: 0 0 5px rgba(255, 255, 0, 0.4);
+            }
         }
     </style>
 </head>
@@ -362,7 +387,7 @@
 
         function init() {
             particles = [];
-            const particleCount = window.innerWidth < 768 ? 30 : 150;
+            const particleCount = window.innerWidth < 768 ? 15 : 150;
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -404,12 +429,13 @@
             });
 
             ctx.shadowColor = 'transparent';
+            const connectionDist = window.innerWidth < 768 ? 80 : 150;
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
+                    if (dist < connectionDist) {
                         const gradient = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
                         gradient.addColorStop(0, particles[i].color + '40');
                         gradient.addColorStop(1, particles[j].color + '40');
