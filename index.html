@@ -1,342 +1,407 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <link rel="canonical" href="https://nbs-lns-ai.pages.dev/index.html">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech & AI Classes</title>
-    <link rel="icon" type="image/png" href="common logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1A154F;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d0520 50%, #000 100%);
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
+            color: #fff;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        header {
-            text-align: center;
-            color: #1A154F;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: #F5BA38;
-            border-radius: 15px;
+        .page {
             position: relative;
-        }
-        
-        .math-nav-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #1A154F;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-        }
-        
-        .math-nav-btn:hover {
-            background-color: #0f0b36;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px 40px;
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: none;
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00d4ff, #a855f7, #00d4ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+            text-align: center;
         }
 
-        .subtitle {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #1A154F;
+        @keyframes shimmer {
+            0% {
+                background-position: 0%
+            }
+
+            100% {
+                background-position: 200%
+            }
+        }
+
+        .sub {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            margin-bottom: 8px;
+            text-align: center;
+            max-width: 560px;
         }
 
         .instructor {
-            font-size: 1.1em;
-            color: #1A154F;
-            margin-top: 10px;
-            font-weight: 500;
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
-        .grade-section {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .grade-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        .grade-header {
-            background: #F5BA38;
-            color: #1A154F;
-            padding: 20px 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            font-weight: bold;
-        }
-
-        .grade-header:hover {
-            background: #e5aa28;
-        }
-
-        .grade-title {
-            font-size: 1.5em;
+        .instructor span {
+            color: #00d4ff;
             font-weight: 600;
         }
 
-        .arrow {
-            transition: transform 0.3s;
-            font-size: 1.2em;
+        .grid {
+            width: 100%;
+            max-width: 860px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
-        .arrow.open {
+        .card {
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            padding: 24px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.12);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(0, 212, 255, 0.25);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .cap-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: linear-gradient(90deg, #00d4ff, #a855f7);
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 12px;
+            color: #9ca3af;
+            font-size: 18px;
+        }
+
+        .chevron {
+            color: #00d4ff;
+            font-size: 22px;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .chevron.open {
             transform: rotate(180deg);
         }
 
-        .class-list {
-            max-height: 0;
+        .chapter-list {
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
         }
 
-        .class-list.open {
-            max-height: 1000px;
+        .chapter-list.open {
+            max-height: 600px;
+            opacity: 1;
         }
 
-        .class-content {
-            padding: 25px;
+        .chapter-inner {
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 16px;
         }
 
-        .class-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #F5BA38;
-            transition: all 0.2s;
-        }
-
-        .class-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-
-        .class-item a {
-            text-decoration: none;
-            color: #495057;
-            font-size: 1.1em;
+        .ch-link {
             display: block;
+            padding: 9px 14px;
+            border-radius: 10px;
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            text-align: left;
         }
 
-        .class-item a:hover {
-            color: #1A154F;
+        .ch-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: #fff;
+            transform: translateX(8px);
         }
 
-        .class-number {
-            font-weight: 600;
-            color: #F5BA38;
-        }
-
-        .empty-state {
+        footer {
+            color: #6b7280;
+            font-size: 0.82rem;
             text-align: center;
-            padding: 30px;
-            color: #6c757d;
-            font-style: italic;
+            margin-top: 8px;
+        }
+
+        @media(max-width:500px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 32px 16px 32px;
+            }
         }
     </style>
-    <meta name="google-site-verification" content="Na4PcbJ-Sp6H_S8NSxCY7nTjt4270EmS27a2WU3JtzQ" />
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <img src="common logo2.png" alt="LNS & NBS Logo" style="max-width: 300px; ">
-            <h1>Tech & AI Classes</h1>
-            <p class="subtitle">Explore coding, technology, and artificial intelligence</p>
-            <p class="instructor">Instructor: Mr. Yousef Younis</p>
-        </header>
+    <canvas id="c"></canvas>
+    <div class="page">
+        <h1>Tech &amp; AI Classes</h1>
+        <p class="sub">Explore coding, technology, and artificial intelligence</p>
+        <p class="instructor">with <span>Mr. Yousef Younis</span></p>
 
-        <!-- Grade 3-4 -->
-        <div class="grade-section">
-            <div class="grade-header" onclick="toggleSection('grade34')">
-                <span class="grade-title">Grade 3-4</span>
-                <span class="arrow" id="arrow-grade34">▼</span>
-            </div>
-            <div class="class-list" id="grade34">
-                <div class="class-content">
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter1.html"><span class="class-number">Chapter #1:</span> What is a Computer?</a>
+        <div class="grid">
+
+            <!-- Grade 3-4 -->
+            <div class="card" onclick="toggle(this)">
+                <div class="card-top">
+                    <div>
+                        <div class="card-title">Grades 3–4</div>
+                        <div class="card-desc">Introduction to computers, AI basics, and creative technology</div>
+                        <div class="card-icons">🤖 💻 🎨</div>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter2.html"><span class="class-number">Chapter #2:</span> How Do Computers Think?</a>
+                    <div class="chevron">▾</div>
+                </div>
+                <div class="chapter-list">
+                    <div class="chapter-inner">
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter1.html">Chapter 1 — What is a Computer?</a>
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter2.html">Chapter 2 — How Do Computers Think?</a>
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter3.html">Chapter 3 — Scratch</a>
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter4.html">Chapter 4 — AI Basics for Kids</a>
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter5.html">Chapter 5 — AI Applications You Know!</a>
+                        <a class="ch-link" href="Grade 3+4/gr34-chapter6.html">Chapter 6 — How AI Helps Us!</a>
+                        <a class="ch-link" href="Grade 3+4/gallery.html">🎨 AI Art Gallery</a>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter3.html"><span class="class-number">Chapter #3:</span> Scratch</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter4.html"><span class="class-number">Chapter #4:</span> AI Basics for Kids</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter5.html"><span class="class-number">Chapter #5:</span> AI Applications You Know!</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gr34-chapter6.html"><span class="class-number">Chapter #6:</span> How AI Helps Us!</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 3+4/gallery.html"><span class="class-number">🎨</span> AI Art Gallery</a>
-                    </div>
-                    <!-- Add more classes here -->
                 </div>
             </div>
-        </div>
 
-        <!-- Grade 5-6 -->
-        <div class="grade-section">
-            <div class="grade-header" onclick="toggleSection('grade56')">
-                <span class="grade-title">Grade 5-6</span>
-                <span class="arrow" id="arrow-grade56">▼</span>
-            </div>
-            <div class="class-list" id="grade56">
-                <div class="class-content">
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter1.html"><span class="class-number">Chapter #1:</span> What's a Computer?</a>
+            <!-- Grade 5-6 -->
+            <div class="card" onclick="toggle(this)">
+                <div class="card-top">
+                    <div>
+                        <div class="card-title">Grades 5–6</div>
+                        <div class="card-desc">Computational thinking, logic gates, and online safety</div>
+                        <div class="card-icons">🧠 🔗 🛡️</div>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter2.html"><span class="class-number">Chapter #2:</span> How Do Computers Think?</a>
+                    <div class="chevron">▾</div>
+                </div>
+                <div class="chapter-list">
+                    <div class="chapter-inner">
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter1.html">Chapter 1 — What's a Computer?</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter2.html">Chapter 2 — How Do Computers Think?</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter3.html">Chapter 3 — Logic Gates</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter4.html">Chapter 4 — AI Basics</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter5.html">Chapter 5 — Powerpoint Basics</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter8.html">Chapter 6 — Being Smart &amp; Safe
+                            Online</a>
+                        <a class="ch-link" href="Grade 5+6/gr56-chapter7.html">Chapter 7 — AI in Action</a>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter3.html"><span class="class-number">Chapter #3:</span> Logic Gates</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter4.html"><span class="class-number">Chapter #4:</span> AI Basics</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter5.html"><span class="class-number">Chapter #5:</span> Powerpoint Basics</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter8.html"><span class="class-number">Chapter #6:</span> Being Smart & Safe Online</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 5+6/gr56-chapter7.html"><span class="class-number">Chapter #7:</span>  AI in Action</a>
-                    </div>
-
-                    <!-- Add more classes here -->
                 </div>
             </div>
-        </div>
 
-        <!-- Grade 7-8 -->
-        <div class="grade-section">
-            <div class="grade-header" onclick="toggleSection('grade78')">
-                <span class="grade-title">Grade 7-8</span>
-                <span class="arrow" id="arrow-grade78">▼</span>
-            </div>
-            <div class="class-list" id="grade78">
-                <div class="class-content">
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter1.html"><span class="class-number">Chapter #1:</span> What's a Computer?</a>
+            <!-- Grade 7-8 -->
+            <div class="card" onclick="toggle(this)">
+                <div class="card-top">
+                    <div>
+                        <div class="card-title">Grades 7–8</div>
+                        <div class="card-desc">Advanced programming, Python, and understanding AI systems</div>
+                        <div class="card-icons">🐍 🌐 ⚙️</div>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter2.html"><span class="class-number">Chapter #2:</span> How Do Computers Think?</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter1+2-summary.html"><span class="class-number">Summary:</span> Chapter 1 + 2</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter3.html"><span class="class-number">Chapter #3:</span> What is AI?</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter4.html"><span class="class-number">Chapter #4:</span> Powerpoint Basics</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter5.html"><span class="class-number">Chapter #5:</span> Python Programming Basics</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter6.html"><span class="class-number">Chapter #6:</span> Understanding AI Systems</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 7+8/gr78-chapter7.html"><span class="class-number">Chapter #7:</span> Building for the Web</a>
-                    </div>
-                    <!-- Add more classes here -->
+                    <div class="chevron">▾</div>
+                </div>
+                <div class="chapter-list">
+                    <div class="chapter-inner">
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter1.html">Chapter 1 — What's a Computer?</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter2.html">Chapter 2 — How Do Computers Think?</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter1+2-summary.html">Summary — Chapter 1 + 2</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter3.html">Chapter 3 — What is AI?</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter4.html">Chapter 4 — Powerpoint Basics</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter5.html">Chapter 5 — Python Programming Basics</a>
+                        <a class="ch-link" href="Grade 7+8/gr78-chapter6.html">Chapter 6 — Understanding AI Systems</a>
+                   </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Grade 10-11-12 -->
-        <div class="grade-section">
-            <div class="grade-header" onclick="toggleSection('grade101112')">
-                <span class="grade-title">Grade 10-11-12</span>
-                <span class="arrow" id="arrow-grade101112">▼</span>
-            </div>
-            <div class="class-list" id="grade101112">
-                <div class="class-content">
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter1.html"><span class="class-number">Chapter #1:</span> What is AI?</a>
+            <!-- Grade 10-11-12 -->
+            <div class="card" onclick="toggle(this)">
+                <div class="cap-badge">✦ Capstone</div>
+                <div class="card-top">
+                    <div>
+                        <div class="card-title">Grades 10–11–12</div>
+                        <div class="card-desc">Professional AI, LLMs, ethics, and innovation projects</div>
+                        <div class="card-icons">🚀 🧬 🏆</div>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter2.html"><span class="class-number">Chapter #2:</span> How Do Machines Learn?</a>
+                    <div class="chevron">▾</div>
+                </div>
+                <div class="chapter-list">
+                    <div class="chapter-inner">
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter1.html">Chapter 1 — What is AI?</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter2.html">Chapter 2 — How Do Machines
+                            Learn?</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter1+2-summary.html">Summary — Chapter 1 +
+                            2</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter3.html">Chapter 3 — MIT App Inventor AI
+                            Chatbot</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter4.html">Chapter 4 — Powerpoint
+                            Basics</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter5.html">Chapter 5 — AI Ethics Debate</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter6.html">Chapter 6 — AI Tools &amp;
+                            Practical Skills</a>
+                        <a class="ch-link" href="Grade 10+11+12/gr101112-chapter7.html">Chapter 7 — Foundations of
+                            LLMs</a>
+                        <a class="ch-link" href="Grade 10+11+12/AI System Design/index.html"
+                            style="color:#00d4ff;font-weight:600;">🚀 AI Innovation Challenge (Capstone)</a>
                     </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter1+2-summary.html"><span class="class-number">Summary:</span> Chapter 1 + 2</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter3.html"><span class="class-number">Chapter #3:</span> MIT App Inventor - Simple AI Chatbot App</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter4.html"><span class="class-number">Chapter #4:</span> Powerpoint Basics</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter5.html"><span class="class-number">Chapter #5:</span> AI Ethics Debate</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter6.html"><span class="class-number">Chapter #6:</span> AI Tools & Practical Skills</a>
-                    </div>
-                    <div class="class-item">
-                        <a href="Grade 10+11+12/gr101112-chapter7.html"><span class="class-number">Chapter #7:</span> Foundations of Large Language Models</a>
-                    </div>
-                    <div class="class-item" style="background: linear-gradient(135deg, #1A154F 0%, #F5BA38 100%); border-left: 4px solid #c9920d;">
-                        <a href="Grade 10+11+12/AI System Design/index.html" style="color: white; font-weight: 600;">🚀 <span class="class-number" style="color: #ffd700;">CAPSTONE:</span> AI Innovation Challenge</a>
-                    </div>
-
-                    <!-- Add more classes here -->
                 </div>
             </div>
+
         </div>
+        <footer>© 2026 Tech &amp; AI Classes · Empowering the next generation of innovators</footer>
     </div>
 
     <script>
-        function toggleSection(id) {
-            const section = document.getElementById(id);
-            const arrow = document.getElementById('arrow-' + id);
-            
-            section.classList.toggle('open');
-            arrow.classList.toggle('open');
+        function toggle(card) {
+            const list = card.querySelector('.chapter-list');
+            const chev = card.querySelector('.chevron');
+            const isOpen = list.classList.contains('open');
+            list.classList.toggle('open', !isOpen);
+            chev.classList.toggle('open', !isOpen);
         }
+
+        // Particle network (exact logic from Figma Make)
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < 120; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    r: Math.random() * 2 + 0.5,
+                    o: Math.random() * 0.5 + 0.3
+                });
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${p.o})`;
+                ctx.fill();
+            });
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255,255,255,${0.1 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        resize(); init(); animate();
+        window.addEventListener('resize', () => { resize(); init(); });
     </script>
 </body>
+
 </html>
