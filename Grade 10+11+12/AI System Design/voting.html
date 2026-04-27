@@ -357,11 +357,11 @@ body::after {
       <p>Enter the unique code from your card to access the voting system.</p>
       <div class="code-input-wrap">
         <input class="code-input" id="codeInput" type="text" maxlength="12" placeholder="ENTER CODE" autocomplete="off" spellcheck="false">
-        <button class="btn-enter" id="btnEnterCode" onclick="submitCode()">Go →</button>
+        <button class="btn-enter" id="btnEnterCode">Go →</button>
       </div>
       <div class="code-error" id="codeError"></div>
       <div style="margin-top:32px; font-size:0.78rem; color:var(--muted);">
-        Admin? <a href="#" onclick="showAdmin()" style="color:var(--gold); text-decoration:none; font-weight:700;">Access dashboard →</a>
+        Admin? <a href="#" id="adminLink" style="color:var(--gold); text-decoration:none; font-weight:700;">Access dashboard →</a>
       </div>
     </div>
   </div>
@@ -555,6 +555,8 @@ body::after {
           </table>
         </div>
 
+        <div id="scoringModeInfo" style="background:var(--gold-dim); border:1px solid var(--gold-border); border-radius:10px; padding:12px 16px; font-size:0.82rem; color:rgba(245,186,56,0.9); line-height:1.5; margin-bottom:20px;"></div>
+
         <div class="admin-controls">
           <button class="btn-control" onclick="refreshResults()">↻ Refresh Results</button>
           <button class="btn-control" onclick="exportCSV()">↓ Export CSV</button>
@@ -577,6 +579,17 @@ body::after {
           <input class="setup-input" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec" style="margin-bottom:12px;">
           <button class="btn-control" onclick="saveSheetUrl()">Save URL</button>
           <div class="code-error" id="sheetUrlMsg" style="color:var(--green); margin-top:8px;"></div>
+        </div>
+
+        <div class="setup-panel">
+          <h3>Scoring Method</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Choose how to grade groups. "Comparative" ranks groups against each other. "Absolute" grades against a perfect score (fairest for competitive environments).</p>
+          <select class="setup-input" id="scoringMethod" style="margin-bottom:12px;">
+            <option value="comparative">📊 Comparative - Groups ranked against each other</option>
+            <option value="absolute">⭐ Absolute Perfect Score - Judge: 21/21, Audience: varies by participation</option>
+          </select>
+          <button class="btn-control" onclick="saveScoringMethod()">Save Scoring Method</button>
+          <div class="code-error" id="scoringMethodMsg" style="color:var(--green); margin-top:8px;"></div>
         </div>
       </div>
 
@@ -604,13 +617,36 @@ body::after {
         <div id="codesOutput" style="display:none;">
           <div class="setup-panel">
             <h3>Student Codes</h3>
+            <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;"><span id="studentCodesCount">0</span> codes generated</p>
             <div id="studentCodesList" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:3px; color:var(--white); line-height:2; column-count:4; column-gap:16px;"></div>
-            <button class="btn-control" onclick="copyStudentCodes()" style="margin-top:12px;">Copy All Student Codes</button>
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+              <button class="btn-control" onclick="copyStudentCodes()">📋 Copy All</button>
+              <button class="btn-control" onclick="printStudentCodes()">🖨️ Print Codes</button>
+            </div>
           </div>
           <div class="setup-panel">
             <h3>Judge Codes</h3>
+            <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;"><span id="judgeCodesCount">0</span> codes generated</p>
             <div id="judgeCodesList" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:3px; color:var(--gold); line-height:2.2;"></div>
-            <button class="btn-control" onclick="copyJudgeCodes()" style="margin-top:12px;">Copy All Judge Codes</button>
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+              <button class="btn-control" onclick="copyJudgeCodes()">📋 Copy All</button>
+              <button class="btn-control" onclick="printJudgeCodes()">🖨️ Print Codes</button>
+            </div>
+          </div>
+
+          <div class="setup-panel">
+            <h3>Code Usage Status</h3>
+            <div id="codesUsageStats" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin-bottom:16px;">
+              <div style="background:rgba(46,184,122,0.1); border:1px solid rgba(46,184,122,0.3); border-radius:8px; padding:12px; text-align:center;">
+                <div style="font-size:1.8rem; color:var(--green); font-weight:700;" id="codesUnusedCount">0</div>
+                <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Codes Unused</div>
+              </div>
+              <div style="background:rgba(245,186,56,0.1); border:1px solid rgba(245,186,56,0.3); border-radius:8px; padding:12px; text-align:center;">
+                <div style="font-size:1.8rem; color:var(--gold); font-weight:700;" id="codesUsedCount">0</div>
+                <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Codes Used</div>
+              </div>
+            </div>
+            <div id="codesUsageTable" style="max-height:400px; overflow-y:auto; border:1px solid var(--gold-border); border-radius:8px;"></div>
           </div>
         </div>
       </div>
@@ -627,7 +663,8 @@ const STORAGE = {
   groups:    'lns_groups',
   codes:     'lns_codes',
   sheetUrl:  'lns_sheet_url',
-  judgeProgress: 'lns_judge_progress'
+  judgeProgress: 'lns_judge_progress',
+  scoringMethod: 'lns_scoring_method'
 };
 
 let state = {
@@ -636,7 +673,8 @@ let state = {
   groups: [],
   codes: {}, // Local fallback only
   sheetUrl: '',
-  judgeScored: [], 
+  judgeScored: [],
+  scoringMethod: 'comparative' // 'comparative' or 'absolute'
 };
 
 const CRITERIA = [
@@ -657,9 +695,20 @@ window.addEventListener('load', () => {
   renderCriteria();
   renderGroupInputs();
   populateGroupDropdowns();
+
+  // Event listeners for code entry
+  document.getElementById('btnEnterCode').addEventListener('click', submitCode);
   document.getElementById('codeInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') submitCode();
   });
+
+  // Event listener for admin link
+  document.getElementById('adminLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    showAdmin();
+  });
+
+  // Event listener for admin password
   document.getElementById('adminPwInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') checkAdminPw();
   });
@@ -677,6 +726,13 @@ function loadFromStorage() {
   if (u) {
     state.sheetUrl = u;
     document.getElementById('sheetsUrl').value = u;
+  }
+
+  const sm = localStorage.getItem(STORAGE.scoringMethod);
+  if (sm) {
+    state.scoringMethod = sm;
+    const el = document.getElementById('scoringMethod');
+    if (el) el.value = sm;
   }
 }
 
@@ -990,6 +1046,17 @@ function checkAdminPw() {
     document.getElementById('adminDashboard').classList.add('visible');
     renderGroupInputs();
     refreshResults();
+    // Load and display codes/usage status if they exist
+    if (Object.keys(state.codes).length > 0) {
+      document.getElementById('codesOutput').style.display = 'block';
+      const studentCodes = Object.keys(state.codes).filter(k => state.codes[k].type === 'student');
+      const judgeCodes = Object.keys(state.codes).filter(k => state.codes[k].type === 'judge');
+      document.getElementById('studentCodesList').innerHTML = studentCodes.map(c => `<div>${c}</div>`).join('');
+      document.getElementById('judgeCodesList').innerHTML = judgeCodes.map(c => `<div>${c}</div>`).join('');
+      document.getElementById('studentCodesCount').textContent = studentCodes.length;
+      document.getElementById('judgeCodesCount').textContent = judgeCodes.length;
+      updateCodeUsageStatus();
+    }
   } else {
     document.getElementById('adminPwError').textContent = 'Incorrect password.';
   }
@@ -1013,8 +1080,21 @@ async function refreshResults() {
     const res = await fetch(`${state.sheetUrl}?action=getResults`);
     const data = await res.json();
     renderResults(data);
+    displayScoringInfo(data);
   } catch(e) {
     renderLocalResults();
+  }
+}
+
+function displayScoringInfo(data) {
+  const infoEl = document.getElementById('scoringModeInfo');
+  if (!infoEl) return;
+
+  if (state.scoringMethod === 'absolute') {
+    const maxPossible = (data.totalVotes || 0) * 3;
+    infoEl.textContent = `⭐ ABSOLUTE SCORING: Judge score graded against perfect 21 points. Audience score graded against maximum possible (${maxPossible} pts = ${data.totalVotes || 0} voters × 3 points each). This method ensures no artificial boost — scores reflect true dominance.`;
+  } else {
+    infoEl.textContent = `📊 COMPARATIVE SCORING: Groups ranked against each other. Judge score normalized by max achievable (21 pts). Audience score normalized by highest-scoring group.`;
   }
 }
 
@@ -1047,13 +1127,23 @@ function renderResults(data) {
   document.getElementById('statVotes').textContent = data.totalVotes || 0;
   document.getElementById('statJudge').textContent = data.totalJudgeScores || 0;
   document.getElementById('statGroups').textContent = data.groups.length;
-  
+
   // Calculate remaining codes based on valid codes synced from server
   const totalCodesCount = data.totalCodes || 0;
   document.getElementById('statCodesLeft').textContent = (totalCodesCount - (data.totalVotes || 0)) || '—';
 
   const maxJudge = 21;
-  const maxAudience = Math.max(...data.groups.map(g => g.audiencePts || 0), 1);
+
+  // Calculate max audience based on scoring method
+  let maxAudience;
+  if (state.scoringMethod === 'absolute') {
+    // For absolute scoring: max possible = total votes * 3 (all students give 1st place)
+    maxAudience = (data.totalVotes || 0) * 3;
+    if (maxAudience === 0) maxAudience = 1; // Prevent division by zero
+  } else {
+    // For comparative: max is the highest single group score
+    maxAudience = Math.max(...data.groups.map(g => g.audiencePts || 0), 1);
+  }
 
   const scored = data.groups.map(g => {
     const judgeNorm = ((g.avgJudge || 0) / maxJudge) * 100;
@@ -1123,6 +1213,13 @@ function saveSheetUrl() {
   setTimeout(() => document.getElementById('sheetUrlMsg').textContent = '', 3000);
 }
 
+function saveScoringMethod() {
+  state.scoringMethod = document.getElementById('scoringMethod').value;
+  localStorage.setItem(STORAGE.scoringMethod, state.scoringMethod);
+  document.getElementById('scoringMethodMsg').textContent = '✓ Scoring method saved. Refresh results to apply changes.';
+  setTimeout(() => document.getElementById('scoringMethodMsg').textContent = '', 3000);
+}
+
 // ════════════════════════════════════════
 // CODE GENERATION
 // ════════════════════════════════════════
@@ -1174,7 +1271,11 @@ async function generateCodes() {
 
   document.getElementById('studentCodesList').innerHTML = studentCodes.map(c => `<div>${c}</div>`).join('');
   document.getElementById('judgeCodesList').innerHTML = judgeCodes.map(c => `<div>${c}</div>`).join('');
+  document.getElementById('studentCodesCount').textContent = studentCodes.length;
+  document.getElementById('judgeCodesCount').textContent = judgeCodes.length;
   document.getElementById('codesOutput').style.display = 'block';
+
+  updateCodeUsageStatus();
 
   btn.textContent = 'Generate Codes';
   btn.disabled = false;
@@ -1182,7 +1283,7 @@ async function generateCodes() {
 
 async function deleteCodes() {
   if (!confirm("Are you sure you want to delete ALL codes from the Google Sheet? This cannot be undone.")) return;
-  
+
   const btn = document.getElementById('btnDeleteCodes');
   btn.textContent = 'Deleting...';
   btn.disabled = true;
@@ -1204,12 +1305,14 @@ function copyStudentCodes() {
   const container = document.getElementById('studentCodesList');
   const codes = Array.from(container.children).map(div => div.textContent).join('\n');
   navigator.clipboard.writeText(codes);
+  alert('✓ Student codes copied to clipboard');
 }
 
 function copyJudgeCodes() {
   const container = document.getElementById('judgeCodesList');
   const codes = Array.from(container.children).map(div => div.textContent).join('\n');
   navigator.clipboard.writeText(codes);
+  alert('✓ Judge codes copied to clipboard');
 }
 
 function markCodeUsedLocal(code) {
@@ -1217,6 +1320,183 @@ function markCodeUsedLocal(code) {
     state.codes[code].used = true;
     localStorage.setItem(STORAGE.codes, JSON.stringify(state.codes));
   }
+}
+
+// Update code usage statistics
+function updateCodeUsageStatus() {
+  const codes = Object.entries(state.codes);
+  const unused = codes.filter(([_, c]) => !c.used);
+  const used = codes.filter(([_, c]) => c.used);
+
+  document.getElementById('codesUnusedCount').textContent = unused.length;
+  document.getElementById('codesUsedCount').textContent = used.length;
+
+  // Build usage table
+  const tableHtml = `
+    <table style="width:100%; border-collapse:collapse;">
+      <thead style="background:rgba(245,186,56,0.1);">
+        <tr>
+          <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">CODE</th>
+          <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">TYPE</th>
+          <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${codes.map(([code, cData]) => `
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:10px; font-family:'Barlow Condensed',sans-serif; letter-spacing:2px; color:var(--white);">${code}</td>
+            <td style="padding:10px; font-size:0.85rem; color:var(--muted);">${cData.type === 'student' ? '👤 Student' : '👨‍⚖️ Judge'}</td>
+            <td style="padding:10px; font-size:0.85rem; color:${cData.used ? 'var(--green)' : 'var(--muted)'};">
+              ${cData.used ? '✓ Used' : '— Unused'}
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.getElementById('codesUsageTable').innerHTML = tableHtml;
+}
+
+// Print student codes with square format (100 per page)
+function printStudentCodes() {
+  const container = document.getElementById('studentCodesList');
+  const codes = Array.from(container.children).map(div => div.textContent);
+
+  if (codes.length === 0) {
+    alert('No codes to print');
+    return;
+  }
+
+  const codesPerPage = 100;
+  const pages = [];
+
+  for (let i = 0; i < codes.length; i += codesPerPage) {
+    pages.push(codes.slice(i, i + codesPerPage));
+  }
+
+  let printContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Print Codes</title>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 10px; }
+        .page { page-break-after: always; padding: 20px; }
+        .page-header { text-align: center; margin-bottom: 20px; font-size: 14px; color: #666; }
+        .codes-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 10px;
+        }
+        .code-card {
+          width: 100%;
+          aspect-ratio: 1;
+          border: 2px solid #333;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 8px;
+          font-family: 'Courier New', monospace;
+          font-size: 18px;
+          font-weight: bold;
+          letter-spacing: 2px;
+          page-break-inside: avoid;
+        }
+        .code-card:before { content: '✂'; position: absolute; right: -3px; top: -3px; font-size: 12px; color: #999; }
+        .code-card-after { content: '✂'; position: absolute; left: -3px; bottom: -3px; font-size: 12px; color: #999; }
+        .page { position: relative; }
+        @media print {
+          body { padding: 0; }
+          .page { page-break-after: always; padding: 10px; margin: 0; }
+          .codes-grid { gap: 8px; }
+          .code-card { border: 1px solid #000; font-size: 16px; }
+        }
+      </style>
+    </head>
+    <body>
+      ${pages.map((pageData, idx) => `
+        <div class="page">
+          <div class="page-header">Student Voting Codes (Page ${idx + 1} of ${pages.length})</div>
+          <div class="codes-grid">
+            ${pageData.map(code => `<div class="code-card">${code}</div>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </body>
+    </html>
+  `;
+
+  const printWindow = window.open('', '', 'height=800,width=800');
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  setTimeout(() => printWindow.print(), 250);
+}
+
+// Print judge codes
+function printJudgeCodes() {
+  const container = document.getElementById('judgeCodesList');
+  const codes = Array.from(container.children).map(div => div.textContent);
+
+  if (codes.length === 0) {
+    alert('No codes to print');
+    return;
+  }
+
+  let printContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Print Judge Codes</title>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 10px; }
+        .page { page-break-after: always; padding: 20px; }
+        .page-header { text-align: center; margin-bottom: 20px; font-size: 14px; color: #666; }
+        .codes-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+        }
+        .code-card {
+          border: 2px solid #d4af37;
+          border-radius: 8px;
+          padding: 30px;
+          text-align: center;
+          background: #f9f5f0;
+        }
+        .code-label { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .code-text { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; letter-spacing: 3px; color: #d4af37; }
+        @media print {
+          body { padding: 0; }
+          .page { page-break-after: always; padding: 10px; margin: 0; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="page">
+        <div class="page-header">Judge Panel Access Codes</div>
+        <div class="codes-grid">
+          ${codes.map(code => `
+            <div class="code-card">
+              <div class="code-label">Judge Code</div>
+              <div class="code-text">${code}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const printWindow = window.open('', '', 'height=800,width=800');
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  setTimeout(() => printWindow.print(), 250);
 }
 
 // ════════════════════════════════════════
