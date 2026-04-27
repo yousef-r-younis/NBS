@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LNS AI Innovation Challenge — Voting</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1A154F;
+  --gold: #F5BA38;
+  --gold-dim: rgba(245,186,56,0.15);
+  --gold-border: rgba(245,186,56,0.3);
+  --white: #ffffff;
+  --off: #f4f4f8;
+  --muted: #8885a8;
+  --text: #1a1a2e;
+  --card: #ffffff;
+  --danger: #e0436a;
+  --green: #2eb87a;
+  --border: rgba(26,21,79,0.12);
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  min-height: 100vh;
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── BG DECORATION ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,186,56,0.12) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(245,186,56,0.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── VIEWS ── */
+.view { display: none; min-height: 100vh; position: relative; z-index: 1; }
+.view.active { display: flex; flex-direction: column; }
+
+/* ── HEADER ── */
+.app-header {
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--gold-border);
+  background: rgba(26,21,79,0.8);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 10;
+}
+.logo-mark {
+  width: 44px; height: 44px;
+  background: var(--gold);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.header-text .eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); opacity: 0.8;
+}
+.header-text .title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--white);
+}
+.header-badge {
+  margin-left: auto;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 100px;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  padding: 40px 32px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── CODE ENTRY ── */
+.code-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  gap: 0;
+}
+.code-screen .big-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.code-screen h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+.code-screen h1 span { color: var(--gold); }
+.code-screen p {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 36px;
+  max-width: 400px;
+}
+.code-input-wrap {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+}
+.code-input {
+  flex: 1;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.code-input::placeholder { color: rgba(255,255,255,0.2); letter-spacing: 2px; font-size: 1rem; }
+.code-input:focus { border-color: var(--gold); }
+.btn-enter {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-enter:hover:not(:disabled) { background: #ffc94d; transform: translateY(-2px); }
+.btn-enter:disabled { opacity: 0.7; cursor: not-allowed; }
+.code-error {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  font-weight: 600;
+  min-height: 20px;
+}
+
+/* ── SECTION HEADINGS ── */
+.section-heading { margin-bottom: 28px; }
+.section-heading .eyebrow {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+}
+.section-heading h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1; color: var(--white);
+}
+.section-heading p { color: var(--muted); font-size: 0.92rem; margin-top: 8px; line-height: 1.6; }
+
+/* ── VOTE CARDS ── */
+.vote-slots { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.vote-slot {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--gold-border);
+  border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;
+}
+.slot-rank { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); min-width: 36px; text-align: center; line-height: 1; }
+.slot-rank.r1 { color: #FFD700; }
+.slot-rank.r2 { color: #C0C0C0; }
+.slot-rank.r3 { color: #CD7F32; }
+.slot-pts { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; min-width: 40px; }
+.slot-select {
+  flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 10px 14px; color: var(--white); font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem; outline: none; cursor: pointer; transition: border-color 0.2s;
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F5BA38' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+}
+.slot-select:focus { border-color: var(--gold); }
+.slot-select option { background: var(--navy); }
+
+/* ── SUBMIT BTN ── */
+.btn-submit {
+  width: 100%; background: var(--gold); color: var(--navy); border: none;
+  border-radius: 14px; padding: 18px; font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 2px; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-submit:hover:not(:disabled) { background: #ffc94d; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,186,56,0.3); }
+.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ── JUDGE RUBRIC ── */
+.group-selector-wrap { margin-bottom: 28px; }
+.group-selector-wrap label { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.group-selector { width: 100%; background: rgba(255,255,255,0.08); border: 2px solid var(--gold-border); border-radius: 12px; padding: 14px 18px; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; outline: none; cursor: pointer; appearance: none; }
+.group-selector:focus { border-color: var(--gold); }
+.group-selector option { background: var(--navy); }
+
+.criteria-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.criteria-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 18px; }
+.criteria-item .c-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.criteria-item .c-hint { font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; }
+.score-btns { display: flex; gap: 8px; }
+.score-btn { flex: 1; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px 8px; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.15s; text-align: center; line-height: 1.3; }
+.score-btn:hover { border-color: var(--gold); color: var(--gold); }
+.score-btn.sel-1 { background: rgba(224,67,106,0.2); border-color: var(--danger); color: var(--danger); }
+.score-btn.sel-2 { background: rgba(245,186,56,0.15); border-color: var(--gold); color: var(--gold); }
+.score-btn.sel-3 { background: rgba(46,184,122,0.2); border-color: var(--green); color: var(--green); }
+
+.judge-notes-wrap { margin-bottom: 24px; }
+.judge-notes-wrap label { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.judge-notes { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 14px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 0.9rem; resize: vertical; min-height: 80px; outline: none; }
+.judge-notes:focus { border-color: var(--gold); }
+
+.judge-progress { background: rgba(255,255,255,0.05); border: 1px solid var(--gold-border); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--muted); }
+.judge-progress .scored { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--gold); font-size: 1rem; }
+
+/* ── SUCCESS SCREEN ── */
+.success-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; gap: 16px; }
+.success-screen .big-check { font-size: 5rem; animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-screen h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); }
+.success-screen p { color: var(--muted); max-width: 360px; }
+
+/* ── ADMIN ── */
+#adminView .main { max-width: 1100px; }
+.admin-login { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; gap: 16px; text-align: center; }
+.admin-login h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); }
+.admin-login p { color: var(--muted); margin-bottom: 12px; }
+.admin-pw-wrap { display: flex; gap: 10px; max-width: 360px; width: 100%; }
+.admin-pw { flex: 1; background: rgba(255,255,255,0.08); border: 2px solid var(--gold-border); border-radius: 10px; padding: 13px 16px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 1rem; outline: none; }
+.admin-pw:focus { border-color: var(--gold); }
+.btn-admin-enter { background: var(--gold); color: var(--navy); border: none; border-radius: 10px; padding: 13px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+.btn-admin-enter:hover { background: #ffc94d; }
+.admin-dashboard { display: none; }
+.admin-dashboard.visible { display: block; }
+
+.admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.stat-card { background: rgba(255,255,255,0.05); border: 1px solid var(--gold-border); border-radius: 14px; padding: 20px; text-align: center; }
+.stat-card .sv { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+.stat-card .sl { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+.results-table-wrap { background: rgba(255,255,255,0.03); border: 1px solid var(--gold-border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+.results-table { width: 100%; border-collapse: collapse; }
+.results-table th { background: rgba(245,186,56,0.12); font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 12px 16px; text-align: left; font-weight: 700; }
+.results-table th:not(:first-child) { text-align: center; }
+.results-table td { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; vertical-align: middle; }
+.results-table td:not(:first-child) { text-align: center; }
+.results-table tr:hover td { background: rgba(245,186,56,0.04); }
+.results-table .group-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+.results-table .rank-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; }
+.rank-badge.r1 { background: rgba(255,215,0,0.2); color: #FFD700; border: 1px solid #FFD700; }
+.rank-badge.r2 { background: rgba(192,192,192,0.15); color: #C0C0C0; border: 1px solid #C0C0C0; }
+.rank-badge.r3 { background: rgba(205,127,50,0.2); color: #CD7F32; border: 1px solid #CD7F32; }
+.rank-badge.rn { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.1); }
+
+.score-bar-wrap { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.score-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; width: 80px; overflow: hidden; }
+.score-bar-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.5s ease; }
+.score-bar-fill.audience { background: var(--green); }
+.score-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.9rem; min-width: 32px; }
+
+.final-score { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); }
+
+.admin-controls { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.btn-control { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--white); border-radius: 8px; padding: 9px 18px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+.btn-control:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+.btn-control.danger { border-color: rgba(224,67,106,0.4); color: var(--danger); }
+.btn-control.danger:hover:not(:disabled) { background: rgba(224,67,106,0.1); }
+.btn-control:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── NAV TABS ── */
+.nav-tabs { display: flex; gap: 8px; padding: 16px 32px; border-bottom: 1px solid var(--gold-border); background: rgba(26,21,79,0.5); }
+.tab-btn { background: transparent; border: 1px solid transparent; color: var(--muted); border-radius: 8px; padding: 7px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.tab-btn:hover { color: var(--gold); border-color: var(--gold-border); }
+.tab-btn.active { background: var(--gold-dim); border-color: var(--gold-border); color: var(--gold); }
+
+/* ── SETUP PANEL ── */
+.setup-panel { background: rgba(255,255,255,0.04); border: 1px solid var(--gold-border); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+.setup-panel h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.setup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.setup-input { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 9px 12px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 0.88rem; outline: none; width: 100%; }
+.setup-input:focus { border-color: var(--gold); }
+.setup-input::placeholder { color: rgba(255,255,255,0.25); }
+
+/* ── MISC ── */
+.divider { height: 1px; background: var(--gold-border); margin: 24px 0; }
+.info-note { background: var(--gold-dim); border: 1px solid var(--gold-border); border-radius: 10px; padding: 12px 16px; font-size: 0.82rem; color: rgba(245,186,56,0.9); margin-bottom: 20px; line-height: 1.5; }
+.already-voted { text-align: center; padding: 40px 20px; color: var(--muted); }
+.already-voted .icon { font-size: 3rem; margin-bottom: 12px; }
+.already-voted h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--danger); margin-bottom: 8px; }
+
+@media (max-width: 600px) {
+  .main { padding: 24px 16px; }
+  .app-header { padding: 16px; }
+  .nav-tabs { padding: 10px 16px; overflow-x: auto; }
+  .code-input-wrap { flex-direction: column; }
+  .score-btns { flex-wrap: wrap; }
+  .score-btn { min-width: calc(33% - 6px); }
+}
+</style>
+</head>
+<body>
+
+<div class="view active" id="landingView">
+  <header class="app-header">
+    <div class="logo-mark">LNS</div>
+    <div class="header-text">
+      <div class="eyebrow">Lebanese National School</div>
+      <div class="title">AI Innovation Challenge</div>
+    </div>
+    <span class="header-badge">2025–26</span>
+  </header>
+
+  <div class="main">
+    <div class="code-screen">
+      <div class="big-icon">🗳️</div>
+      <h1>Cast Your <span>Vote.</span></h1>
+      <p>Enter the unique code from your card to access the voting system.</p>
+      <div class="code-input-wrap">
+        <input class="code-input" id="codeInput" type="text" maxlength="12" placeholder="ENTER CODE" autocomplete="off" spellcheck="false">
+        <button class="btn-enter" id="btnEnterCode" onclick="submitCode()">Go →</button>
+      </div>
+      <div class="code-error" id="codeError"></div>
+      <div style="margin-top:32px; font-size:0.78rem; color:var(--muted);">
+        Admin? <a href="#" onclick="showAdmin()" style="color:var(--gold); text-decoration:none; font-weight:700;">Access dashboard →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="studentView">
+  <header class="app-header">
+    <div class="logo-mark">LNS</div>
+    <div class="header-text">
+      <div class="eyebrow">Student Vote</div>
+      <div class="title">Audience Choice</div>
+    </div>
+    <span class="header-badge" id="studentCodeBadge">—</span>
+  </header>
+
+  <div class="main">
+    <div id="studentAlreadyVoted" class="already-voted" style="display:none;">
+      <div class="icon">🔒</div>
+      <h3>Already Voted</h3>
+      <p>This code has already been used. Each code can only be used once.</p>
+      <button class="btn-submit" style="margin-top:24px; max-width: 300px; margin-inline: auto;" onclick="goHome()">🏠 Go Back Home</button>
+    </div>
+
+    <div id="studentVoteForm">
+      <div class="section-heading">
+        <div class="eyebrow">Audience Ranked Choice</div>
+        <h2>Choose Your Top 3</h2>
+        <p>Select your 1st, 2nd, and 3rd place teams. Each must be a different group. Your vote counts for 50% of the final score.</p>
+      </div>
+
+      <div class="info-note">
+        🏆 1st place = 3 points &nbsp;·&nbsp; 🥈 2nd place = 2 points &nbsp;·&nbsp; 🥉 3rd place = 1 point
+      </div>
+
+      <div class="vote-slots">
+        <div class="vote-slot">
+          <div class="slot-rank r1">1</div>
+          <div class="slot-pts">3 pts</div>
+          <select class="slot-select" id="vote1" onchange="validateVotes()">
+            <option value="">— Select a group —</option>
+          </select>
+        </div>
+        <div class="vote-slot">
+          <div class="slot-rank r2">2</div>
+          <div class="slot-pts">2 pts</div>
+          <select class="slot-select" id="vote2" onchange="validateVotes()">
+            <option value="">— Select a group —</option>
+          </select>
+        </div>
+        <div class="vote-slot">
+          <div class="slot-rank r3">3</div>
+          <div class="slot-pts">1 pt</div>
+          <select class="slot-select" id="vote3" onchange="validateVotes()">
+            <option value="">— Select a group —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="code-error" id="voteError" style="margin-bottom:16px;"></div>
+
+      <button class="btn-submit" id="submitVoteBtn" onclick="submitStudentVote()" disabled>
+        🗳️ Submit My Vote
+      </button>
+
+      <div id="voteSubmitting" style="display:none; text-align:center; padding:20px; color:var(--muted);">
+        Submitting your vote...
+      </div>
+    </div>
+
+    <div id="studentSuccess" class="success-screen" style="display:none;">
+      <div class="big-check">✅</div>
+      <h2>Vote Recorded!</h2>
+      <p>Your ranked-choice vote has been submitted. Results will be announced at the end of the exhibition.</p>
+      <button class="btn-submit" style="margin-top:24px; max-width: 300px;" onclick="goHome()">🏠 Go Back Home</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="judgeView">
+  <header class="app-header">
+    <div class="logo-mark">LNS</div>
+    <div class="header-text">
+      <div class="eyebrow">Judge Panel</div>
+      <div class="title">Rubric Scoring</div>
+    </div>
+    <span class="header-badge" id="judgeCodeBadge">—</span>
+  </header>
+
+  <div class="main" style="max-width:760px;">
+    <div id="judgeScoreForm">
+      <div class="section-heading">
+        <div class="eyebrow">Judge Scoring</div>
+        <h2>Score a Group</h2>
+        <p>Select the group you are scoring, then rate each criterion. You can score multiple groups — one submission per group.</p>
+      </div>
+
+      <div class="judge-progress">
+        <span>Groups scored so far:</span>
+        <span class="scored" id="judgeProgressText">0 / 12</span>
+      </div>
+
+      <div class="group-selector-wrap">
+        <label>Select Group to Score</label>
+        <select class="group-selector" id="judgeGroupSelect">
+          <option value="">— Choose a group —</option>
+        </select>
+      </div>
+
+      <div class="criteria-list" id="criteriaList">
+        </div>
+
+      <div class="judge-notes-wrap">
+        <label>Notes & Comments (optional)</label>
+        <textarea class="judge-notes" id="judgeNotes" placeholder="Any additional observations about this group's presentation..."></textarea>
+      </div>
+
+      <div class="code-error" id="judgeError" style="margin-bottom:16px;"></div>
+
+      <button class="btn-submit" id="submitJudgeBtn" onclick="submitJudgeScore()">
+        ✓ Submit Score for This Group
+      </button>
+    </div>
+
+    <div id="judgeSuccess" class="success-screen" style="display:none;">
+      <div class="big-check">✅</div>
+      <h2>Score Submitted!</h2>
+      <p id="judgeSuccessMsg">Score recorded for this group.</p>
+      
+      <div style="display:flex; flex-direction: column; gap:12px; margin-top:24px; width: 100%; max-width: 300px;">
+        <button class="btn-submit" style="font-size: 1.1rem; padding: 14px;" onclick="judgeScoreAnother()">Score Another Group →</button>
+        <button class="btn-control" style="background:rgba(255,255,255,0.05); padding: 14px;" onclick="goHome()">🏠 Home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="adminView">
+  <header class="app-header">
+    <button class="btn-control" onclick="exitAdmin()" style="margin-right: 12px; border-color: rgba(255,255,255,0.4);">← Exit Admin</button>
+    <div class="logo-mark">⚙️</div>
+    <div class="header-text">
+      <div class="eyebrow">Admin</div>
+      <div class="title">Live Results Dashboard</div>
+    </div>
+    <button class="btn-control" onclick="refreshResults()" style="margin-left:auto;">↻ Refresh</button>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="adminTab('results', this)">Live Results</button>
+    <button class="tab-btn" onclick="adminTab('setup', this)">Setup</button>
+    <button class="tab-btn" onclick="adminTab('codes', this)">Codes</button>
+  </div>
+
+  <div class="main">
+
+    <div class="admin-login" id="adminLogin">
+      <div style="font-size:3rem;">🔐</div>
+      <h2>Admin Access</h2>
+      <p>Enter the admin password to view live results.</p>
+      <div class="admin-pw-wrap">
+        <input class="admin-pw" id="adminPwInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter') checkAdminPw()">
+        <button class="btn-admin-enter" onclick="checkAdminPw()">Enter</button>
+      </div>
+      <div class="code-error" id="adminPwError"></div>
+    </div>
+
+    <div class="admin-dashboard" id="adminDashboard">
+
+      <div id="tab-results">
+        <div class="admin-stats" id="adminStats">
+          <div class="stat-card"><div class="sv" id="statVotes">0</div><div class="sl">Student Votes</div></div>
+          <div class="stat-card"><div class="sv" id="statJudge">0</div><div class="sl">Judge Scores</div></div>
+          <div class="stat-card"><div class="sv" id="statGroups">0</div><div class="sl">Groups</div></div>
+          <div class="stat-card"><div class="sv" id="statCodesLeft">—</div><div class="sl">Codes Remaining</div></div>
+        </div>
+
+        <div class="results-table-wrap">
+          <table class="results-table" id="resultsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Group</th>
+                <th>Judge Score <br><span style="font-weight:400; opacity:0.6;">/21 avg</span></th>
+                <th>Audience Pts</th>
+                <th>Final Score <br><span style="font-weight:400; opacity:0.6;">50/50</span></th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px;">No data yet — refresh to load results.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admin-controls">
+          <button class="btn-control" onclick="refreshResults()">↻ Refresh Results</button>
+          <button class="btn-control" onclick="exportCSV()">↓ Export CSV</button>
+        </div>
+      </div>
+
+      <div id="tab-setup" style="display:none;">
+        <div class="setup-panel">
+          <h3>Group Names</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Enter the names of all competing groups. These appear in the voting dropdowns.</p>
+          <div class="setup-grid" id="groupNameInputs">
+            </div>
+          <button class="btn-control" onclick="saveGroups()" style="margin-top:8px;">Save Group Names</button>
+          <div class="code-error" id="setupMsg" style="color:var(--green); margin-top:8px;"></div>
+        </div>
+
+        <div class="setup-panel">
+          <h3>Google Sheets Connection</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Paste your Google Apps Script Web App URL here. All votes and scores are saved to your Google Sheet.</p>
+          <input class="setup-input" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec" style="margin-bottom:12px;">
+          <button class="btn-control" onclick="saveSheetUrl()">Save URL</button>
+          <div class="code-error" id="sheetUrlMsg" style="color:var(--green); margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div id="tab-codes" style="display:none;">
+        <div class="setup-panel">
+          <h3>Generate Voting Codes</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Generate unique one-time codes to distribute at the door. Student codes are 4 characters. Judge codes are 6 characters. These will be automatically synced with your Google Sheet.</p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">Student Codes</label>
+              <input class="setup-input" id="numStudentCodes" type="number" value="38" min="1" max="200">
+            </div>
+            <div>
+              <label style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">Judge Codes</label>
+              <input class="setup-input" id="numJudgeCodes" type="number" value="5" min="1" max="20">
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn-control" id="btnGenCodes" onclick="generateCodes()">Generate Codes</button>
+            <button class="btn-control danger" id="btnDeleteCodes" onclick="deleteCodes()">🗑️ Delete All Codes</button>
+          </div>
+        </div>
+
+        <div id="codesOutput" style="display:none;">
+          <div class="setup-panel">
+            <h3>Student Codes</h3>
+            <div id="studentCodesList" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:3px; color:var(--white); line-height:2; column-count:4; column-gap:16px;"></div>
+            <button class="btn-control" onclick="copyStudentCodes()" style="margin-top:12px;">Copy All Student Codes</button>
+          </div>
+          <div class="setup-panel">
+            <h3>Judge Codes</h3>
+            <div id="judgeCodesList" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:3px; color:var(--gold); line-height:2.2;"></div>
+            <button class="btn-control" onclick="copyJudgeCodes()" style="margin-top:12px;">Copy All Judge Codes</button>
+          </div>
+        </div>
+      </div>
+
+    </div></div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// CONFIG & STATE
+// ════════════════════════════════════════
+const ADMIN_PASSWORD = '8xg76Wrva';
+const STORAGE = {
+  groups:    'lns_groups',
+  codes:     'lns_codes',
+  sheetUrl:  'lns_sheet_url',
+  judgeProgress: 'lns_judge_progress'
+};
+
+let state = {
+  currentCode: null,
+  codeType: null, // 'student' | 'judge'
+  groups: [],
+  codes: {}, // Local fallback only
+  sheetUrl: '',
+  judgeScored: [], 
+};
+
+const CRITERIA = [
+  { key: 'problem',     name: 'Problem Clarity',        hint: 'Real, specific, compelling — not vague or generic' },
+  { key: 'solution',    name: 'AI Solution + ML Type',  hint: 'ML type named, justified, and clearly explained' },
+  { key: 'data',        name: 'Data & Bias',             hint: 'Data sources named + bias type + specific mitigation' },
+  { key: 'ethics',      name: 'Ethics & Impact',         hint: 'Specific harm scenario named + safeguards explained' },
+  { key: 'limitations', name: 'Limitations & Risks',     hint: '2+ specific failure scenarios given' },
+  { key: 'future',      name: 'Future Work',             hint: 'Ambitious, specific, and grounded — not generic' },
+  { key: 'realworld',   name: 'Real-World Examples',     hint: 'Named + meaningfully compared to their system' },
+];
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+window.addEventListener('load', () => {
+  loadFromStorage();
+  renderCriteria();
+  renderGroupInputs();
+  populateGroupDropdowns();
+  document.getElementById('codeInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitCode();
+  });
+  document.getElementById('adminPwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkAdminPw();
+  });
+});
+
+function loadFromStorage() {
+  const g = localStorage.getItem(STORAGE.groups);
+  if (g) state.groups = JSON.parse(g);
+  else state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+
+  const c = localStorage.getItem(STORAGE.codes);
+  if (c) state.codes = JSON.parse(c);
+
+  const u = localStorage.getItem(STORAGE.sheetUrl);
+  if (u) {
+    state.sheetUrl = u;
+    document.getElementById('sheetsUrl').value = u;
+  }
+}
+
+// ════════════════════════════════════════
+// VIEWS
+// ════════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showAdmin() {
+  showView('adminView');
+}
+
+function exitAdmin() {
+  document.getElementById('adminPwInput').value = '';
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('adminDashboard').classList.remove('visible');
+  showView('landingView');
+}
+
+function goHome() {
+  // Clear stored temporary state
+  state.currentCode = null;
+  state.codeType = null;
+  document.getElementById('codeInput').value = '';
+  
+  // Reset Student View Form
+  document.getElementById('studentAlreadyVoted').style.display = 'none';
+  document.getElementById('studentSuccess').style.display = 'none';
+  document.getElementById('studentVoteForm').style.display = 'block';
+  document.getElementById('submitVoteBtn').style.display = 'flex';
+  document.getElementById('voteSubmitting').style.display = 'none';
+  ['vote1', 'vote2', 'vote3'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('submitVoteBtn').disabled = true;
+
+  // Reset Judge View Form
+  document.getElementById('judgeSuccess').style.display = 'none';
+  document.getElementById('judgeScoreForm').style.display = 'block';
+  document.getElementById('submitJudgeBtn').style.display = 'flex';
+  document.getElementById('judgeGroupSelect').value = '';
+  document.getElementById('judgeNotes').value = '';
+  document.querySelectorAll('.score-btn').forEach(b => b.className = 'score-btn');
+  judgeScores = {};
+  
+  showView('landingView');
+}
+
+// ════════════════════════════════════════
+// CODE VALIDATION
+// ════════════════════════════════════════
+async function submitCode() {
+  const raw = document.getElementById('codeInput').value.trim().toUpperCase();
+  const errEl = document.getElementById('codeError');
+  const btn = document.getElementById('btnEnterCode');
+  errEl.textContent = '';
+
+  if (!raw) {
+    errEl.textContent = 'Please enter your code.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Checking...';
+
+  let codeData = null;
+
+  // If a Sheet URL is connected, verify against Google Sheets, otherwise fallback to local
+  if (state.sheetUrl) {
+    try {
+      const res = await fetch(`${state.sheetUrl}?action=verifyCode&code=${raw}`);
+      const data = await res.json();
+      
+      if (!data.valid) {
+        errEl.textContent = data.error || 'Code not recognised. Check your card and try again.';
+        btn.disabled = false;
+        btn.textContent = 'Go →';
+        return;
+      }
+      codeData = { type: data.type, used: data.used };
+    } catch(e) {
+      console.error(e);
+      errEl.textContent = 'Network error verifying code. Try again.';
+      btn.disabled = false;
+      btn.textContent = 'Go →';
+      return;
+    }
+  } else {
+    // Fallback to local storage verification if no Sheets URL
+    codeData = state.codes[raw];
+    if (!codeData) {
+      errEl.textContent = 'Code not recognised. Check your card and try again.';
+      btn.disabled = false;
+      btn.textContent = 'Go →';
+      return;
+    }
+  }
+
+  if (codeData.used && codeData.type === 'student') {
+    errEl.textContent = 'This code has already been used.';
+    showView('studentView');
+    document.getElementById('studentAlreadyVoted').style.display = 'block';
+    document.getElementById('studentVoteForm').style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'Go →';
+    return;
+  }
+
+  state.currentCode = raw;
+  state.codeType = codeData.type;
+
+  if (codeData.type === 'student') {
+    document.getElementById('studentCodeBadge').textContent = raw;
+    populateVoteDropdowns();
+    showView('studentView');
+  } else if (codeData.type === 'judge') {
+    document.getElementById('judgeCodeBadge').textContent = raw;
+    loadJudgeProgress();
+    populateJudgeDropdown();
+    showView('judgeView');
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Go →';
+}
+
+// ════════════════════════════════════════
+// STUDENT VOTING
+// ════════════════════════════════════════
+function populateVoteDropdowns() {
+  ['vote1', 'vote2', 'vote3'].forEach(id => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '<option value="">— Select a group —</option>';
+    state.groups.forEach(g => {
+      if (g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
+    });
+  });
+}
+
+function validateVotes() {
+  const v1 = document.getElementById('vote1').value;
+  const v2 = document.getElementById('vote2').value;
+  const v3 = document.getElementById('vote3').value;
+  const err = document.getElementById('voteError');
+  const btn = document.getElementById('submitVoteBtn');
+
+  err.textContent = '';
+  btn.disabled = true;
+
+  if (!v1 || !v2 || !v3) return;
+
+  const vals = [v1, v2, v3];
+  const unique = new Set(vals);
+  if (unique.size < 3) {
+    err.textContent = 'You must choose three different groups.';
+    return;
+  }
+
+  btn.disabled = false;
+}
+
+async function submitStudentVote() {
+  const v1 = document.getElementById('vote1').value;
+  const v2 = document.getElementById('vote2').value;
+  const v3 = document.getElementById('vote3').value;
+
+  document.getElementById('submitVoteBtn').style.display = 'none';
+  document.getElementById('voteSubmitting').style.display = 'block';
+
+  const payload = {
+    type: 'student_vote',
+    code: state.currentCode,
+    first: v1,
+    second: v2,
+    third: v3,
+    timestamp: new Date().toISOString()
+  };
+
+  const success = await sendToSheets(payload);
+
+  if (success) {
+    markCodeUsedLocal(state.currentCode);
+    document.getElementById('studentVoteForm').style.display = 'none';
+    document.getElementById('studentSuccess').style.display = 'flex';
+  } else {
+    document.getElementById('voteSubmitting').style.display = 'none';
+    document.getElementById('submitVoteBtn').style.display = 'flex';
+    document.getElementById('voteError').textContent = 'Submission failed. Please try again or ask your teacher.';
+  }
+}
+
+// ════════════════════════════════════════
+// JUDGE SCORING
+// ════════════════════════════════════════
+function renderCriteria() {
+  const list = document.getElementById('criteriaList');
+  list.innerHTML = CRITERIA.map((c, i) => `
+    <div class="criteria-item" id="ci-${c.key}">
+      <div class="c-name">${c.name}</div>
+      <div class="c-hint">${c.hint}</div>
+      <div class="score-btns">
+        <button class="score-btn" onclick="selectScore('${c.key}', 1, this)">1<br><span style="font-weight:400; font-size:0.7rem;">Weak</span></button>
+        <button class="score-btn" onclick="selectScore('${c.key}', 2, this)">2<br><span style="font-weight:400; font-size:0.7rem;">Developing</span></button>
+        <button class="score-btn" onclick="selectScore('${c.key}', 3, this)">3<br><span style="font-weight:400; font-size:0.7rem;">Strong</span></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+let judgeScores = {};
+
+function selectScore(key, val, btn) {
+  const ci = document.getElementById(`ci-${key}`);
+  ci.querySelectorAll('.score-btn').forEach(b => b.className = 'score-btn');
+  btn.classList.add(`sel-${val}`);
+  judgeScores[key] = val;
+}
+
+function populateJudgeDropdown() {
+  const sel = document.getElementById('judgeGroupSelect');
+  sel.innerHTML = '<option value="">— Choose a group —</option>';
+  state.groups.forEach(g => {
+    if (g.trim()) {
+      const scored = state.judgeScored && state.judgeScored.includes(g);
+      sel.innerHTML += `<option value="${g}">${scored ? '✓ ' : ''}${g}</option>`;
+    }
+  });
+}
+
+function loadJudgeProgress() {
+  const key = `judge_progress_${state.currentCode}`;
+  const saved = localStorage.getItem(key);
+  state.judgeScored = saved ? JSON.parse(saved) : [];
+  updateJudgeProgress();
+}
+
+function updateJudgeProgress() {
+  const total = state.groups.filter(g => g.trim()).length;
+  const done = state.judgeScored ? state.judgeScored.length : 0;
+  document.getElementById('judgeProgressText').textContent = `${done} / ${total}`;
+}
+
+async function submitJudgeScore() {
+  const group = document.getElementById('judgeGroupSelect').value;
+  const notes = document.getElementById('judgeNotes').value;
+  const err = document.getElementById('judgeError');
+
+  err.textContent = '';
+
+  if (!group) { err.textContent = 'Please select a group.'; return; }
+
+  const missing = CRITERIA.filter(c => !judgeScores[c.key]);
+  if (missing.length > 0) {
+    err.textContent = `Please score all criteria. Missing: ${missing.map(c => c.name).join(', ')}.`;
+    return;
+  }
+
+  const total = CRITERIA.reduce((sum, c) => sum + (judgeScores[c.key] || 0), 0);
+
+  const payload = {
+    type: 'judge_score',
+    code: state.currentCode,
+    group,
+    scores: { ...judgeScores },
+    total,
+    notes,
+    timestamp: new Date().toISOString()
+  };
+
+  document.getElementById('submitJudgeBtn').disabled = true;
+  document.getElementById('submitJudgeBtn').textContent = 'Submitting...';
+
+  const success = await sendToSheets(payload);
+
+  if (success) {
+    if (!state.judgeScored) state.judgeScored = [];
+    if (!state.judgeScored.includes(group)) state.judgeScored.push(group);
+    localStorage.setItem(`judge_progress_${state.currentCode}`, JSON.stringify(state.judgeScored));
+    updateJudgeProgress();
+
+    document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/21 recorded for ${group}.`;
+    document.getElementById('judgeScoreForm').style.display = 'none';
+    document.getElementById('judgeSuccess').style.display = 'flex';
+  } else {
+    err.textContent = 'Submission failed. Please try again.';
+  }
+  
+  document.getElementById('submitJudgeBtn').disabled = false;
+  document.getElementById('submitJudgeBtn').textContent = '✓ Submit Score for This Group';
+}
+
+function judgeScoreAnother() {
+  judgeScores = {};
+  document.getElementById('judgeGroupSelect').value = '';
+  document.getElementById('judgeNotes').value = '';
+  document.getElementById('judgeError').textContent = '';
+  renderCriteria();
+  populateJudgeDropdown();
+  document.getElementById('judgeSuccess').style.display = 'none';
+  document.getElementById('judgeScoreForm').style.display = 'block';
+}
+
+// ════════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════════
+function checkAdminPw() {
+  const pw = document.getElementById('adminPwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDashboard').classList.add('visible');
+    renderGroupInputs();
+    refreshResults();
+  } else {
+    document.getElementById('adminPwError').textContent = 'Incorrect password.';
+  }
+}
+
+function adminTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['results', 'setup', 'codes'].forEach(t => {
+    const el = document.getElementById(`tab-${t}`);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+  });
+}
+
+async function refreshResults() {
+  if (!state.sheetUrl) {
+    renderLocalResults();
+    return;
+  }
+  try {
+    const res = await fetch(`${state.sheetUrl}?action=getResults`);
+    const data = await res.json();
+    renderResults(data);
+  } catch(e) {
+    renderLocalResults();
+  }
+}
+
+function renderLocalResults() {
+  const groups = state.groups.filter(g => g.trim());
+  document.getElementById('statGroups').textContent = groups.length;
+  document.getElementById('statVotes').textContent = '—';
+  document.getElementById('statJudge').textContent = '—';
+  document.getElementById('statCodesLeft').textContent = Object.values(state.codes).filter(c => !c.used && c.type === 'student').length || '—';
+
+  const tbody = document.getElementById('resultsBody');
+  if (!groups.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px;">No groups configured yet. Go to Setup tab.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = groups.map((g, i) => `
+    <tr>
+      <td><span class="rank-badge rn">${i+1}</span></td>
+      <td><div class="group-name">${g}</div></td>
+      <td style="color:var(--muted);">—</td>
+      <td style="color:var(--muted);">—</td>
+      <td class="final-score">—</td>
+    </tr>
+  `).join('');
+}
+
+function renderResults(data) {
+  if (!data || !data.groups) { renderLocalResults(); return; }
+
+  document.getElementById('statVotes').textContent = data.totalVotes || 0;
+  document.getElementById('statJudge').textContent = data.totalJudgeScores || 0;
+  document.getElementById('statGroups').textContent = data.groups.length;
+  
+  // Calculate remaining codes based on valid codes synced from server
+  const totalCodesCount = data.totalCodes || 0;
+  document.getElementById('statCodesLeft').textContent = (totalCodesCount - (data.totalVotes || 0)) || '—';
+
+  const maxJudge = 21;
+  const maxAudience = Math.max(...data.groups.map(g => g.audiencePts || 0), 1);
+
+  const scored = data.groups.map(g => {
+    const judgeNorm = ((g.avgJudge || 0) / maxJudge) * 100;
+    const audienceNorm = ((g.audiencePts || 0) / maxAudience) * 100;
+    const final = (judgeNorm * 0.5) + (audienceNorm * 0.5);
+    return { ...g, judgeNorm, audienceNorm, final };
+  }).sort((a, b) => b.final - a.final);
+
+  const tbody = document.getElementById('resultsBody');
+  tbody.innerHTML = scored.map((g, i) => {
+    const rank = i + 1;
+    const rankClass = rank <= 3 ? `r${rank}` : 'rn';
+    const judgeBar = Math.round((g.judgeNorm || 0));
+    const audBar = Math.round((g.audienceNorm || 0));
+    return `
+    <tr>
+      <td><span class="rank-badge ${rankClass}">${rank}</span></td>
+      <td><div class="group-name">${g.name}</div></td>
+      <td>
+        <div class="score-bar-wrap">
+          <div class="score-bar"><div class="score-bar-fill" style="width:${judgeBar}%"></div></div>
+          <span class="score-val">${g.avgJudge ? g.avgJudge.toFixed(1) : '—'}</span>
+        </div>
+      </td>
+      <td>
+        <div class="score-bar-wrap">
+          <div class="score-bar"><div class="score-bar-fill audience" style="width:${audBar}%"></div></div>
+          <span class="score-val">${g.audiencePts || 0}</span>
+        </div>
+      </td>
+      <td class="final-score">${g.final ? g.final.toFixed(1) : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════
+// SETUP — GROUPS
+// ════════════════════════════════════════
+function renderGroupInputs() {
+  const wrap = document.getElementById('groupNameInputs');
+  if (!wrap) return;
+  wrap.innerHTML = Array.from({length: 12}, (_, i) => `
+    <input class="setup-input" id="gname-${i}" placeholder="Group ${i+1}" value="${state.groups[i] || ''}">
+  `).join('');
+}
+
+function saveGroups() {
+  state.groups = Array.from({length: 12}, (_, i) => {
+    const el = document.getElementById(`gname-${i}`);
+    return el ? el.value.trim() : '';
+  });
+  localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
+  populateGroupDropdowns();
+  document.getElementById('setupMsg').textContent = '✓ Group names saved.';
+  setTimeout(() => document.getElementById('setupMsg').textContent = '', 3000);
+}
+
+function populateGroupDropdowns() {
+  populateVoteDropdowns();
+  populateJudgeDropdown();
+}
+
+function saveSheetUrl() {
+  state.sheetUrl = document.getElementById('sheetsUrl').value.trim();
+  localStorage.setItem(STORAGE.sheetUrl, state.sheetUrl);
+  document.getElementById('sheetUrlMsg').textContent = '✓ URL saved.';
+  setTimeout(() => document.getElementById('sheetUrlMsg').textContent = '', 3000);
+}
+
+// ════════════════════════════════════════
+// CODE GENERATION
+// ════════════════════════════════════════
+function generateCode(length) {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i = 0; i < length; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
+
+async function generateCodes() {
+  const btn = document.getElementById('btnGenCodes');
+  btn.disabled = true;
+  btn.textContent = 'Generating & Saving...';
+
+  const nStudent = parseInt(document.getElementById('numStudentCodes').value) || 38;
+  const nJudge = parseInt(document.getElementById('numJudgeCodes').value) || 5;
+
+  const newCodes = { ...state.codes }; // keep local copy just in case
+  const studentCodes = [];
+  const judgeCodes = [];
+  const payloadCodes = [];
+
+  for (let i = 0; i < nStudent; i++) {
+    let code;
+    do { code = generateCode(4); } while (newCodes[code]);
+    newCodes[code] = { type: 'student', used: false };
+    studentCodes.push(code);
+    payloadCodes.push({ code: code, type: 'student' });
+  }
+
+  for (let i = 0; i < nJudge; i++) {
+    let code;
+    do { code = generateCode(6); } while (newCodes[code]);
+    newCodes[code] = { type: 'judge', used: false };
+    judgeCodes.push(code);
+    payloadCodes.push({ code: code, type: 'judge' });
+  }
+
+  state.codes = newCodes;
+  localStorage.setItem(STORAGE.codes, JSON.stringify(state.codes));
+
+  // Sync to Google Sheets!
+  if (state.sheetUrl) {
+    await sendToSheets({ type: 'save_codes', codes: payloadCodes });
+  }
+
+  document.getElementById('studentCodesList').innerHTML = studentCodes.map(c => `<div>${c}</div>`).join('');
+  document.getElementById('judgeCodesList').innerHTML = judgeCodes.map(c => `<div>${c}</div>`).join('');
+  document.getElementById('codesOutput').style.display = 'block';
+
+  btn.textContent = 'Generate Codes';
+  btn.disabled = false;
+}
+
+async function deleteCodes() {
+  if (!confirm("Are you sure you want to delete ALL codes from the Google Sheet? This cannot be undone.")) return;
+  
+  const btn = document.getElementById('btnDeleteCodes');
+  btn.textContent = 'Deleting...';
+  btn.disabled = true;
+
+  if (state.sheetUrl) {
+    await sendToSheets({ type: 'delete_codes' });
+  }
+
+  state.codes = {};
+  localStorage.removeItem(STORAGE.codes);
+  document.getElementById('codesOutput').style.display = 'none';
+
+  btn.textContent = '🗑️ Delete All Codes';
+  btn.disabled = false;
+  alert("Codes successfully deleted.");
+}
+
+function copyStudentCodes() {
+  const container = document.getElementById('studentCodesList');
+  const codes = Array.from(container.children).map(div => div.textContent).join('\n');
+  navigator.clipboard.writeText(codes);
+}
+
+function copyJudgeCodes() {
+  const container = document.getElementById('judgeCodesList');
+  const codes = Array.from(container.children).map(div => div.textContent).join('\n');
+  navigator.clipboard.writeText(codes);
+}
+
+function markCodeUsedLocal(code) {
+  if (state.codes[code]) {
+    state.codes[code].used = true;
+    localStorage.setItem(STORAGE.codes, JSON.stringify(state.codes));
+  }
+}
+
+// ════════════════════════════════════════
+// GOOGLE SHEETS
+// ════════════════════════════════════════
+async function sendToSheets(payload) {
+  if (!state.sheetUrl) {
+    console.warn('No Google Sheets URL configured. Submission stored locally only.');
+    const key = `pending_${Date.now()}`;
+    localStorage.setItem(key, JSON.stringify(payload));
+    return true; 
+  }
+  try {
+    const res = await fetch(state.sheetUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return true;
+  } catch(e) {
+    console.error('Sheets error:', e);
+    const key = `pending_${Date.now()}`;
+    localStorage.setItem(key, JSON.stringify(payload));
+    return true; 
+  }
+}
+
+// ════════════════════════════════════════
+// EXPORT
+// ════════════════════════════════════════
+function exportCSV() {
+  const rows = [['Group', 'Judge Score (avg)', 'Audience Points', 'Final Score']];
+  const tbody = document.getElementById('resultsBody');
+  tbody.querySelectorAll('tr').forEach(tr => {
+    const cells = tr.querySelectorAll('td');
+    if (cells.length >= 5) {
+      rows.push([
+        cells[1].textContent.trim(),
+        cells[2].textContent.trim(),
+        cells[3].textContent.trim(),
+        cells[4].textContent.trim()
+      ]);
+    }
+  });
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lns_ai_results.csv';
+  a.click();
+}
+</script>
+</body>
+</html>
