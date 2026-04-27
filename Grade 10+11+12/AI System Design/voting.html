@@ -646,6 +646,7 @@ body::after {
                 <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Codes Used</div>
               </div>
             </div>
+            <button class="btn-control" onclick="updateCodeUsageStatus()" style="margin-bottom:12px;">↻ Refresh Code Status</button>
             <div id="codesUsageTable" style="max-height:400px; overflow-y:auto; border:1px solid var(--gold-border); border-radius:8px;"></div>
           </div>
         </div>
@@ -1046,17 +1047,8 @@ function checkAdminPw() {
     document.getElementById('adminDashboard').classList.add('visible');
     renderGroupInputs();
     refreshResults();
-    // Load and display codes/usage status if they exist
-    if (Object.keys(state.codes).length > 0) {
-      document.getElementById('codesOutput').style.display = 'block';
-      const studentCodes = Object.keys(state.codes).filter(k => state.codes[k].type === 'student');
-      const judgeCodes = Object.keys(state.codes).filter(k => state.codes[k].type === 'judge');
-      document.getElementById('studentCodesList').innerHTML = studentCodes.map(c => `<div>${c}</div>`).join('');
-      document.getElementById('judgeCodesList').innerHTML = judgeCodes.map(c => `<div>${c}</div>`).join('');
-      document.getElementById('studentCodesCount').textContent = studentCodes.length;
-      document.getElementById('judgeCodesCount').textContent = judgeCodes.length;
-      updateCodeUsageStatus();
-    }
+    // Fetch code usage status from Sheets if available
+    updateCodeUsageStatus();
   } else {
     document.getElementById('adminPwError').textContent = 'Incorrect password.';
   }
@@ -1069,6 +1061,11 @@ function adminTab(tab, btn) {
     const el = document.getElementById(`tab-${t}`);
     if (el) el.style.display = t === tab ? 'block' : 'none';
   });
+
+  // Refresh code usage status when codes tab is opened
+  if (tab === 'codes') {
+    updateCodeUsageStatus();
+  }
 }
 
 async function refreshResults() {
@@ -1322,8 +1319,61 @@ function markCodeUsedLocal(code) {
   }
 }
 
-// Update code usage statistics
-function updateCodeUsageStatus() {
+// Update code usage statistics from Google Sheets
+async function updateCodeUsageStatus() {
+  if (!state.sheetUrl) {
+    // Fallback to local storage if no Sheets URL
+    updateCodeUsageStatusLocal();
+    return;
+  }
+
+  try {
+    const res = await fetch(`${state.sheetUrl}?action=getCodes`);
+    const data = await res.json();
+
+    if (!data.codes || !Array.isArray(data.codes)) {
+      updateCodeUsageStatusLocal();
+      return;
+    }
+
+    const unused = data.codes.filter(c => !c.used);
+    const used = data.codes.filter(c => c.used);
+
+    document.getElementById('codesUnusedCount').textContent = unused.length;
+    document.getElementById('codesUsedCount').textContent = used.length;
+
+    // Build usage table from Sheets data
+    const tableHtml = `
+      <table style="width:100%; border-collapse:collapse;">
+        <thead style="background:rgba(245,186,56,0.1);">
+          <tr>
+            <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">CODE</th>
+            <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">TYPE</th>
+            <th style="padding:10px; text-align:left; font-size:0.75rem; color:var(--gold); border-bottom:1px solid var(--gold-border);">STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.codes.map(cData => `
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:10px; font-family:'Barlow Condensed',sans-serif; letter-spacing:2px; color:var(--white);">${cData.code}</td>
+              <td style="padding:10px; font-size:0.85rem; color:var(--muted);">${cData.type === 'student' ? '👤 Student' : '👨‍⚖️ Judge'}</td>
+              <td style="padding:10px; font-size:0.85rem; color:${cData.used ? 'var(--green)' : 'var(--muted)'};">
+                ${cData.used ? '✓ Used' : '— Unused'}
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+    document.getElementById('codesUsageTable').innerHTML = tableHtml;
+  } catch(e) {
+    console.error('Error fetching codes from Sheets:', e);
+    updateCodeUsageStatusLocal();
+  }
+}
+
+// Fallback: Update code usage statistics from local storage
+function updateCodeUsageStatusLocal() {
   const codes = Object.entries(state.codes);
   const unused = codes.filter(([_, c]) => !c.used);
   const used = codes.filter(([_, c]) => c.used);
@@ -1331,7 +1381,7 @@ function updateCodeUsageStatus() {
   document.getElementById('codesUnusedCount').textContent = unused.length;
   document.getElementById('codesUsedCount').textContent = used.length;
 
-  // Build usage table
+  // Build usage table from local data
   const tableHtml = `
     <table style="width:100%; border-collapse:collapse;">
       <thead style="background:rgba(245,186,56,0.1);">
