@@ -575,9 +575,10 @@ body::after {
 
         <div class="setup-panel">
           <h3>Google Sheets Connection</h3>
-          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Paste your Google Apps Script Web App URL here. All votes and scores are saved to your Google Sheet.</p>
-          <input class="setup-input" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec" style="margin-bottom:12px;">
-          <button class="btn-control" onclick="saveSheetUrl()">Save URL</button>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:16px;">Your Google Apps Script Web App URL is already connected. All votes and scores are automatically saved to your Google Sheet.</p>
+          <input class="setup-input" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec" style="margin-bottom:12px;" readonly>
+          <button class="btn-control" onclick="copySheetUrl()" style="margin-bottom:8px;">📋 Copy URL</button>
+          <button class="btn-control" onclick="resetSheetUrl()" style="margin-bottom:8px;">🔄 Reset URL</button>
           <div class="code-error" id="sheetUrlMsg" style="color:var(--green); margin-top:8px;"></div>
         </div>
 
@@ -673,7 +674,7 @@ let state = {
   codeType: null, // 'student' | 'judge'
   groups: [],
   codes: {}, // Local fallback only
-  sheetUrl: '',
+  sheetUrl: 'https://script.google.com/macros/s/AKfycby3F3er3pv3pB55mKmtIjs6ailA3xQ7PLFbBm93LkqhhzMlCka4juf3gzXUQhPY5s5C/exec',
   judgeScored: [],
   scoringMethod: 'comparative' // 'comparative' or 'absolute'
 };
@@ -726,7 +727,6 @@ function loadFromStorage() {
   const u = localStorage.getItem(STORAGE.sheetUrl);
   if (u) {
     state.sheetUrl = u;
-    document.getElementById('sheetsUrl').value = u;
   }
 
   const sm = localStorage.getItem(STORAGE.scoringMethod);
@@ -734,6 +734,12 @@ function loadFromStorage() {
     state.scoringMethod = sm;
     const el = document.getElementById('scoringMethod');
     if (el) el.value = sm;
+  }
+
+  // Display the sheet URL in the input field
+  const sheetsUrlEl = document.getElementById('sheetsUrl');
+  if (sheetsUrlEl) {
+    sheetsUrlEl.value = state.sheetUrl;
   }
 }
 
@@ -1207,6 +1213,21 @@ function saveSheetUrl() {
   state.sheetUrl = document.getElementById('sheetsUrl').value.trim();
   localStorage.setItem(STORAGE.sheetUrl, state.sheetUrl);
   document.getElementById('sheetUrlMsg').textContent = '✓ URL saved.';
+  setTimeout(() => document.getElementById('sheetUrlMsg').textContent = '', 3000);
+}
+
+function copySheetUrl() {
+  const url = document.getElementById('sheetsUrl').value;
+  navigator.clipboard.writeText(url);
+  document.getElementById('sheetUrlMsg').textContent = '✓ URL copied to clipboard.';
+  setTimeout(() => document.getElementById('sheetUrlMsg').textContent = '', 3000);
+}
+
+function resetSheetUrl() {
+  state.sheetUrl = 'https://script.google.com/macros/s/AKfycby3F3er3pv3pB55mKmtIjs6ailA3xQ7PLFbBm93LkqhhzMlCka4juf3gzXUQhPY5s5C/exec';
+  localStorage.setItem(STORAGE.sheetUrl, state.sheetUrl);
+  document.getElementById('sheetsUrl').value = state.sheetUrl;
+  document.getElementById('sheetUrlMsg').textContent = '✓ URL reset to default.';
   setTimeout(() => document.getElementById('sheetUrlMsg').textContent = '', 3000);
 }
 
