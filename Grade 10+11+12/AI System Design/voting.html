@@ -751,38 +751,36 @@ function loadFromStorage() {
 
 async function fetchGroupsFromSheets() {
   if (!state.sheetUrl) {
-    // If no sheet URL, ensure we at least have something
-    if (!state.groups || state.groups.length === 0) {
-      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
-    }
+    console.log('No sheet URL configured');
     return;
   }
 
   try {
+    console.log('Fetching groups from:', state.sheetUrl);
     const res = await fetch(`${state.sheetUrl}?action=getGroups`);
     const data = await res.json();
+    console.log('Groups response:', data);
 
     if (data.success && data.groups && data.groups.length > 0) {
       state.groups = data.groups;
       localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
+      console.log('Groups updated in state:', state.groups);
       renderGroupInputs();
       populateGroupDropdowns();
-      console.log('Groups fetched from Sheets:', state.groups);
-    } else if (state.groups.length === 0) {
-      // Fallback to defaults if fetch succeeds but no groups
-      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
-      console.log('No groups in Sheets, using defaults');
+    } else {
+      console.log('No groups returned or response not successful');
+      if (!state.groups || state.groups.length === 0) {
+        state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+      }
     }
   } catch (e) {
     console.error('Error fetching groups from Sheets:', e);
-    // Fallback: use localStorage or defaults
     const stored = localStorage.getItem(STORAGE.groups);
     if (stored) {
       state.groups = JSON.parse(stored);
-      console.log('Using stored groups from localStorage:', state.groups);
+      console.log('Using stored groups:', state.groups);
     } else if (!state.groups || state.groups.length === 0) {
       state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
-      console.log('Using default groups');
     }
   }
 }
@@ -927,12 +925,12 @@ function populateVoteDropdowns() {
     const sel = document.getElementById(id);
     sel.innerHTML = '<option value="">— Select a group —</option>';
 
-    // Ensure groups exist
-    const groups = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
-
-    groups.forEach(g => {
-      if (g && g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
-    });
+    // Use actual groups from state (not fallback)
+    if (state.groups && state.groups.length > 0) {
+      state.groups.forEach(g => {
+        if (g && g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
+      });
+    }
   });
 }
 
@@ -1019,15 +1017,15 @@ function populateJudgeDropdown() {
   const sel = document.getElementById('judgeGroupSelect');
   sel.innerHTML = '<option value="">— Choose a group —</option>';
 
-  // Ensure groups exist
-  const groups = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
-
-  groups.forEach(g => {
-    if (g && g.trim()) {
-      const scored = state.judgeScored && state.judgeScored.includes(g);
-      sel.innerHTML += `<option value="${g}">${scored ? '✓ ' : ''}${g}</option>`;
-    }
-  });
+  // Use actual groups from state (not fallback)
+  if (state.groups && state.groups.length > 0) {
+    state.groups.forEach(g => {
+      if (g && g.trim()) {
+        const scored = state.judgeScored && state.judgeScored.includes(g);
+        sel.innerHTML += `<option value="${g}">${scored ? '✓ ' : ''}${g}</option>`;
+      }
+    });
+  }
 }
 
 function loadJudgeProgress() {
