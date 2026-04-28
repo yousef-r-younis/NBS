@@ -750,20 +750,39 @@ function loadFromStorage() {
 }
 
 async function fetchGroupsFromSheets() {
+  if (!state.sheetUrl) {
+    // If no sheet URL, ensure we at least have something
+    if (!state.groups || state.groups.length === 0) {
+      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+    }
+    return;
+  }
+
   try {
     const res = await fetch(`${state.sheetUrl}?action=getGroups`);
     const data = await res.json();
+
     if (data.success && data.groups && data.groups.length > 0) {
       state.groups = data.groups;
       localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
       renderGroupInputs();
       populateGroupDropdowns();
+      console.log('Groups fetched from Sheets:', state.groups);
+    } else if (state.groups.length === 0) {
+      // Fallback to defaults if fetch succeeds but no groups
+      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+      console.log('No groups in Sheets, using defaults');
     }
   } catch (e) {
     console.error('Error fetching groups from Sheets:', e);
-    // Fallback to localStorage or empty if nothing is available
-    if (!state.groups || state.groups.length === 0) {
-      state.groups = [];
+    // Fallback: use localStorage or defaults
+    const stored = localStorage.getItem(STORAGE.groups);
+    if (stored) {
+      state.groups = JSON.parse(stored);
+      console.log('Using stored groups from localStorage:', state.groups);
+    } else if (!state.groups || state.groups.length === 0) {
+      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+      console.log('Using default groups');
     }
   }
 }
@@ -907,8 +926,12 @@ function populateVoteDropdowns() {
   ['vote1', 'vote2', 'vote3'].forEach(id => {
     const sel = document.getElementById(id);
     sel.innerHTML = '<option value="">— Select a group —</option>';
-    state.groups.forEach(g => {
-      if (g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
+
+    // Ensure groups exist
+    const groups = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+
+    groups.forEach(g => {
+      if (g && g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
     });
   });
 }
@@ -995,8 +1018,12 @@ function selectScore(key, val, btn) {
 function populateJudgeDropdown() {
   const sel = document.getElementById('judgeGroupSelect');
   sel.innerHTML = '<option value="">— Choose a group —</option>';
-  state.groups.forEach(g => {
-    if (g.trim()) {
+
+  // Ensure groups exist
+  const groups = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+
+  groups.forEach(g => {
+    if (g && g.trim()) {
       const scored = state.judgeScored && state.judgeScored.includes(g);
       sel.innerHTML += `<option value="${g}">${scored ? '✓ ' : ''}${g}</option>`;
     }
@@ -1256,8 +1283,17 @@ function renderResults(data) {
 function renderGroupInputs() {
   const wrap = document.getElementById('groupNameInputs');
   if (!wrap) return;
+
+  // Ensure we have at least 12 groups to display
+  const groupsToRender = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => '');
+
+  // Pad to 12 if needed
+  while (groupsToRender.length < 12) {
+    groupsToRender.push('');
+  }
+
   wrap.innerHTML = Array.from({length: 12}, (_, i) => `
-    <input class="setup-input" id="gname-${i}" placeholder="Group ${i+1}" value="${state.groups[i] || ''}">
+    <input class="setup-input" id="gname-${i}" placeholder="Group ${i+1}" value="${groupsToRender[i] || ''}">
   `).join('');
 }
 

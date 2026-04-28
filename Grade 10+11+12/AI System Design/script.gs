@@ -102,6 +102,14 @@ function handleVerifyCode(code) {
 
 function handleGetGroups() {
   const sheet = getOrCreateSheet(SHEETS.groups, ['Group Name']);
+
+  // If sheet is empty (only header), initialize with defaults
+  if (sheet.getLastRow() <= 1) {
+    for (let i = 1; i <= 12; i++) {
+      sheet.appendRow([`Group ${i}`]);
+    }
+  }
+
   const data = sheet.getDataRange().getValues();
   const groups = [];
   for (let i = 1; i < data.length; i++) {
