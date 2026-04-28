@@ -757,12 +757,14 @@ async function fetchGroupsFromSheets() {
 
   try {
     console.log('Fetching groups from:', state.sheetUrl);
-    const res = await fetch(`${state.sheetUrl}?action=getGroups`);
+    // Use getResults to fetch groups (same as admin dashboard)
+    const res = await fetch(`${state.sheetUrl}?action=getResults`);
     const data = await res.json();
-    console.log('Groups response:', data);
+    console.log('Results response:', data);
 
     if (data.success && data.groups && data.groups.length > 0) {
-      state.groups = data.groups;
+      // Extract just the group names from the results
+      state.groups = data.groups.map(g => g.name);
       localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
       console.log('Groups updated in state:', state.groups);
       renderGroupInputs();
