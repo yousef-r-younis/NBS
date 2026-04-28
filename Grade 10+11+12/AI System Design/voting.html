@@ -692,16 +692,17 @@ const CRITERIA = [
 // ════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   loadFromStorage();
   renderCriteria();
-  renderGroupInputs();
-  populateGroupDropdowns();
 
   // Fetch groups from Google Sheets if connected
   if (state.sheetUrl) {
-    fetchGroupsFromSheets();
+    await fetchGroupsFromSheets();
   }
+
+  renderGroupInputs();
+  populateGroupDropdowns();
 
   // Event listeners for code entry
   document.getElementById('btnEnterCode').addEventListener('click', submitCode);
@@ -837,7 +838,7 @@ async function submitCode() {
     try {
       const res = await fetch(`${state.sheetUrl}?action=verifyCode&code=${raw}`);
       const data = await res.json();
-      
+
       if (!data.valid) {
         errEl.textContent = data.error || 'Code not recognised. Check your card and try again.';
         btn.disabled = false;
@@ -878,15 +879,23 @@ async function submitCode() {
 
   if (codeData.type === 'student') {
     document.getElementById('studentCodeBadge').textContent = raw;
+    // Re-fetch groups to ensure they're up to date
+    if (state.sheetUrl) {
+      await fetchGroupsFromSheets();
+    }
     populateVoteDropdowns();
     showView('studentView');
   } else if (codeData.type === 'judge') {
     document.getElementById('judgeCodeBadge').textContent = raw;
+    // Re-fetch groups to ensure they're up to date
+    if (state.sheetUrl) {
+      await fetchGroupsFromSheets();
+    }
     loadJudgeProgress();
     populateJudgeDropdown();
     showView('judgeView');
   }
-  
+
   btn.disabled = false;
   btn.textContent = 'Go →';
 }
