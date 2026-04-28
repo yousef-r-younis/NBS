@@ -698,6 +698,11 @@ window.addEventListener('load', () => {
   renderGroupInputs();
   populateGroupDropdowns();
 
+  // Fetch groups from Google Sheets if connected
+  if (state.sheetUrl) {
+    fetchGroupsFromSheets();
+  }
+
   // Event listeners for code entry
   document.getElementById('btnEnterCode').addEventListener('click', submitCode);
   document.getElementById('codeInput').addEventListener('keydown', e => {
@@ -719,7 +724,7 @@ window.addEventListener('load', () => {
 function loadFromStorage() {
   const g = localStorage.getItem(STORAGE.groups);
   if (g) state.groups = JSON.parse(g);
-  else state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+  // Don't set hardcoded defaults here — they come from Google Sheets now
 
   const c = localStorage.getItem(STORAGE.codes);
   if (c) state.codes = JSON.parse(c);
@@ -740,6 +745,25 @@ function loadFromStorage() {
   const sheetsUrlEl = document.getElementById('sheetsUrl');
   if (sheetsUrlEl) {
     sheetsUrlEl.value = state.sheetUrl;
+  }
+}
+
+async function fetchGroupsFromSheets() {
+  try {
+    const res = await fetch(`${state.sheetUrl}?action=getGroups`);
+    const data = await res.json();
+    if (data.success && data.groups && data.groups.length > 0) {
+      state.groups = data.groups;
+      localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
+      renderGroupInputs();
+      populateGroupDropdowns();
+    }
+  } catch (e) {
+    console.error('Error fetching groups from Sheets:', e);
+    // Fallback to localStorage or empty if nothing is available
+    if (!state.groups || state.groups.length === 0) {
+      state.groups = [];
+    }
   }
 }
 
@@ -1053,7 +1077,10 @@ function checkAdminPw() {
     document.getElementById('adminDashboard').classList.add('visible');
     renderGroupInputs();
     refreshResults();
-    // Fetch code usage status from Sheets if available
+    // Fetch groups and code usage status from Sheets if available
+    if (state.sheetUrl) {
+      fetchGroupsFromSheets();
+    }
     updateCodeUsageStatus();
   } else {
     document.getElementById('adminPwError').textContent = 'Incorrect password.';
@@ -1197,8 +1224,15 @@ function saveGroups() {
   state.groups = Array.from({length: 12}, (_, i) => {
     const el = document.getElementById(`gname-${i}`);
     return el ? el.value.trim() : '';
-  });
+  }).filter(g => g); // Remove empty strings
+
   localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
+
+  // Save to Google Sheets
+  if (state.sheetUrl) {
+    sendToSheets({ type: 'save_groups', groups: state.groups });
+  }
+
   populateGroupDropdowns();
   document.getElementById('setupMsg').textContent = '✓ Group names saved.';
   setTimeout(() => document.getElementById('setupMsg').textContent = '', 3000);

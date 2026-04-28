@@ -27,17 +27,21 @@ function doPost(e) {
     if (payload.type === 'judge_score') {
       return handleJudgeScore(payload);
     }
-    
+
     if (payload.type === 'save_codes') {
       return handleSaveCodes(payload, false);
     }
-    
+
     if (payload.type === 'append_codes') {
       return handleSaveCodes(payload, true);
     }
-    
+
     if (payload.type === 'delete_codes') {
       return handleDeleteCodes(payload);
+    }
+
+    if (payload.type === 'save_groups') {
+      return handleSaveGroups(payload);
     }
 
     return jsonResponse({ success: false, error: 'Unknown payload type' });
@@ -53,13 +57,17 @@ function doGet(e) {
   if (action === 'getResults') {
     return handleGetResults();
   }
-  
+
   if (action === 'getCodes') {
     return handleGetCodes();
   }
-  
+
   if (action === 'verifyCode') {
     return handleVerifyCode(e.parameter.code);
+  }
+
+  if (action === 'getGroups') {
+    return handleGetGroups();
   }
 
   if (action === 'setup') {
@@ -77,7 +85,7 @@ function doGet(e) {
 function handleVerifyCode(code) {
   const sheet = getOrCreateSheet(SHEETS.codes, ['Code', 'Type', 'Used']);
   const data = sheet.getDataRange().getValues();
-  
+
   for (let i = 1; i < data.length; i++) {
     if (data[i][0] === code) {
       const isUsed = data[i][2] === true || data[i][2] === 'TRUE' || data[i][2] === 'true';
@@ -88,8 +96,39 @@ function handleVerifyCode(code) {
       });
     }
   }
-  
+
   return jsonResponse({ valid: false, error: 'Code not recognised. Check your card and try again.' });
+}
+
+function handleGetGroups() {
+  const sheet = getOrCreateSheet(SHEETS.groups, ['Group Name']);
+  const data = sheet.getDataRange().getValues();
+  const groups = [];
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0]) {
+      groups.push(data[i][0].toString().trim());
+    }
+  }
+  return jsonResponse({ success: true, groups: groups });
+}
+
+function handleSaveGroups(payload) {
+  const sheet = getOrCreateSheet(SHEETS.groups, ['Group Name']);
+  const groups = payload.groups || [];
+
+  // Clear existing data (keep header)
+  const lastRow = sheet.getLastRow();
+  if (lastRow > 1) {
+    sheet.getRange(2, 1, lastRow - 1, 1).clearContent();
+  }
+
+  // Add new groups
+  if (groups.length > 0) {
+    const rows = groups.map(g => [g]);
+    sheet.getRange(2, 1, rows.length, 1).setValues(rows);
+  }
+
+  return jsonResponse({ success: true });
 }
 
 function handleGetCodes() {
