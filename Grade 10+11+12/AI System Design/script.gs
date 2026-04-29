@@ -101,12 +101,12 @@ function handleVerifyCode(code) {
 }
 
 function handleGetGroups() {
-  const sheet = getOrCreateSheet(SHEETS.groups, ['Group Name']);
+  const sheet = getOrCreateSheet(SHEETS.groups, ['Name', 'Members', 'Section', 'Photo']);
 
   // If sheet is empty (only header), initialize with defaults
   if (sheet.getLastRow() <= 1) {
-    for (let i = 1; i <= 12; i++) {
-      sheet.appendRow([`Group ${i}`]);
+    for (let i = 1; i <= 11; i++) {
+      sheet.appendRow([`Group ${i}`, '', 'Grade 10+11+12', `group${i}.jpg`]);
     }
   }
 
@@ -114,26 +114,36 @@ function handleGetGroups() {
   const groups = [];
   for (let i = 1; i < data.length; i++) {
     if (data[i][0]) {
-      groups.push(data[i][0].toString().trim());
+      groups.push({
+        name: data[i][0].toString().trim(),
+        members: (data[i][1] || '').toString().trim(),
+        section: (data[i][2] || 'Grade 10+11+12').toString().trim(),
+        photo: (data[i][3] || `group${i}.jpg`).toString().trim()
+      });
     }
   }
   return jsonResponse({ success: true, groups: groups });
 }
 
 function handleSaveGroups(payload) {
-  const sheet = getOrCreateSheet(SHEETS.groups, ['Group Name']);
+  const sheet = getOrCreateSheet(SHEETS.groups, ['Name', 'Members', 'Section', 'Photo']);
   const groups = payload.groups || [];
 
   // Clear existing data (keep header)
   const lastRow = sheet.getLastRow();
   if (lastRow > 1) {
-    sheet.getRange(2, 1, lastRow - 1, 1).clearContent();
+    sheet.getRange(2, 1, lastRow - 1, 4).clearContent();
   }
 
   // Add new groups
   if (groups.length > 0) {
-    const rows = groups.map(g => [g]);
-    sheet.getRange(2, 1, rows.length, 1).setValues(rows);
+    const rows = groups.map(g => [
+      g.name || '',
+      g.members || '',
+      g.section || 'Grade 10+11+12',
+      g.photo || ''
+    ]);
+    sheet.getRange(2, 1, rows.length, 4).setValues(rows);
   }
 
   return jsonResponse({ success: true });
@@ -280,22 +290,27 @@ function handleJudgeScore(payload) {
 function handleGetResults() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  // Get groups list
+  // Get groups list with all fields
   const groupsSheet = ss.getSheetByName(SHEETS.groups);
-  let groups = [];
+  let groupsList = [];
   if (groupsSheet) {
     const gData = groupsSheet.getDataRange().getValues();
-    groups = gData.slice(1).map(r => r[0]).filter(g => g && g.toString().trim());
+    groupsList = gData.slice(1).map(r => ({
+      name: (r[0] || '').toString().trim(),
+      members: (r[1] || '').toString().trim(),
+      section: (r[2] || 'Grade 10+11+12').toString().trim(),
+      photo: (r[3] || '').toString().trim()
+    })).filter(g => g.name);
   }
 
-  if (!groups.length) {
+  if (!groupsList.length) {
     return jsonResponse({ success: false, error: 'No groups configured.' });
   }
 
   // ── AUDIENCE VOTE TALLY ──
   const votesSheet = ss.getSheetByName(SHEETS.votes);
   const audiencePts = {};
-  groups.forEach(g => audiencePts[g] = 0);
+  groupsList.forEach(g => audiencePts[g.name] = 0);
 
   if (votesSheet && votesSheet.getLastRow() > 1) {
     const voteData = votesSheet.getDataRange().getValues().slice(1);
@@ -315,7 +330,7 @@ function handleGetResults() {
   // ── JUDGE SCORE AVERAGE ──
   const judgesSheet = ss.getSheetByName(SHEETS.judges);
   const judgeData = {};
-  groups.forEach(g => judgeData[g] = { scores: [], count: 0 });
+  groupsList.forEach(g => judgeData[g.name] = { scores: [], count: 0 });
 
   let totalJudgeScores = 0;
 
@@ -338,17 +353,17 @@ function handleGetResults() {
     ? (codesSheet.getDataRange().getValues().slice(1).filter(r => r[1] === 'student').length) : 0;
 
   // ── COMBINE & CALCULATE FINAL ──
-  const maxAudience = Math.max(...groups.map(g => audiencePts[g] || 0), 1);
+  const maxAudience = Math.max(...groupsList.map(g => audiencePts[g.name] || 0), 1);
   const maxJudge = 21;
 
-  const result = groups.map(g => {
-    const scores = judgeData[g] ? judgeData[g].scores : [];
+  const result = groupsList.map(g => {
+    const scores = judgeData[g.name] ? judgeData[g.name].scores : [];
     const avgJudge = scores.length
       ? scores.reduce((a, b) => a + b, 0) / scores.length
       : null;
 
     const judgeNorm  = avgJudge !== null ? (avgJudge / maxJudge) * 100 : null;
-    const audNorm    = (audiencePts[g] / maxAudience) * 100;
+    const audNorm    = (audiencePts[g.name] / maxAudience) * 100;
 
     let final = null;
     if (judgeNorm !== null) {
@@ -356,10 +371,13 @@ function handleGetResults() {
     }
 
     return {
-      name:        g,
+      name:        g.name,
+      members:     g.members,
+      section:     g.section,
+      photo:       g.photo,
       avgJudge:    avgJudge !== null ? Math.round(avgJudge * 10) / 10 : null,
       judgeCount:  scores.length,
-      audiencePts: audiencePts[g],
+      audiencePts: audiencePts[g.name],
       final:       final !== null ? Math.round(final * 10) / 10 : null
     };
   });
@@ -417,14 +435,14 @@ function setupSheets() {
     'Total (/21)', 'Notes'
   ]);
 
-  getOrCreateSheet(SHEETS.groups, ['Group Name']);
+  getOrCreateSheet(SHEETS.groups, ['Name', 'Members', 'Section', 'Photo']);
   getOrCreateSheet(SHEETS.codes,  ['Code', 'Type', 'Used']);
 
   // Add sample groups to Groups sheet if empty
   const groupsSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEETS.groups);
   if (groupsSheet.getLastRow() <= 1) {
-    for (let i = 1; i <= 12; i++) {
-      groupsSheet.appendRow([`Group ${i}`]);
+    for (let i = 1; i <= 11; i++) {
+      groupsSheet.appendRow([`Group ${i}`, '', 'Grade 10+11+12', `group${i}.jpg`]);
     }
   }
 }
