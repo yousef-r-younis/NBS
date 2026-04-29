@@ -718,7 +718,7 @@ let state = {
   codeType: null, // 'student' | 'judge'
   groups: [], // Array of { name: string, photo: string }
   codes: {}, // Local fallback only
-  sheetUrl: 'https://script.google.com/macros/s/AKfycbwsPI6EQC4p9hCzeTqKQxRRyqg9DbK-ZWG1I5dw1fqIoBCiZvkhB8uVugWkrDS8wCoX/exec',
+  sheetUrl: 'https://script.google.com/macros/s/AKfycbyvCM0Th1uynE5dk1zA-7JGjkgi3AltxJl6Xlk3T-RLijmlMFhcLHuRz5bpS3WRpNRe/exec',
   judgeScored: [],
   scoringMethod: 'comparative', // 'comparative' or 'absolute'
   groupPhotos: {} // Map of group name to photo filename
@@ -1492,7 +1492,7 @@ function copySheetUrl() {
 }
 
 function resetSheetUrl() {
-  state.sheetUrl = 'https://script.google.com/macros/s/AKfycbwsPI6EQC4p9hCzeTqKQxRRyqg9DbK-ZWG1I5dw1fqIoBCiZvkhB8uVugWkrDS8wCoX/exec';
+  state.sheetUrl = 'https://script.google.com/macros/s/AKfycbyvCM0Th1uynE5dk1zA-7JGjkgi3AltxJl6Xlk3T-RLijmlMFhcLHuRz5bpS3WRpNRe/exec';
   localStorage.setItem(STORAGE.sheetUrl, state.sheetUrl);
   document.getElementById('sheetsUrl').value = state.sheetUrl;
   document.getElementById('sheetUrlMsg').textContent = '✓ URL reset to default.';
