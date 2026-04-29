@@ -328,13 +328,45 @@ body::after {
 .already-voted .icon { font-size: 3rem; margin-bottom: 12px; }
 .already-voted h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--danger); margin-bottom: 8px; }
 
+/* ── JUDGE & STUDENT GRIDS ── */
+.group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.group-card { position: relative; cursor: pointer; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); transition: all 0.2s; }
+.group-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.group-card.voted { border-color: var(--gold); background: rgba(245,186,56,0.1); }
+.group-card.selected { border-color: var(--gold); background: rgba(245,186,56,0.2); }
+.group-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.group-card .card-label { padding: 10px 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--white); text-align: center; line-height: 1.2; }
+.group-card::after { content: '✓'; position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; background: var(--gold); color: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; opacity: 0; transition: opacity 0.2s; }
+.group-card.voted::after { opacity: 1; }
+
+.student-grid { margin-bottom: 28px; }
+.student-grid .section-heading { margin-bottom: 16px; }
+.student-grid .group-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.student-grid .group-card { border: 1px solid rgba(255,255,255,0.1); }
+.student-grid .group-card img { height: 110px; }
+.student-grid .group-card .card-label { padding: 8px 6px; font-size: 0.7rem; }
+
+.judge-grid-section { margin-bottom: 24px; }
+.judge-grid-section .section-heading { margin-bottom: 20px; }
+.judge-grid-container { display: none; }
+.judge-grid-container.active { display: block; }
+.judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.judge-grid-container .group-card img { height: 160px; }
+.back-to-grid-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--muted); border-radius: 8px; padding: 10px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
+.back-to-grid-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+@media (max-width: 768px) {
+  .group-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+  .judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .judge-grid-container .group-card img { height: 130px; }
+  .group-card img { height: 110px; }
+}
+
 @media (max-width: 600px) {
-  .main { padding: 24px 16px; }
-  .app-header { padding: 16px; }
-  .nav-tabs { padding: 10px 16px; overflow-x: auto; }
-  .code-input-wrap { flex-direction: column; }
-  .score-btns { flex-wrap: wrap; }
-  .score-btn { min-width: calc(33% - 6px); }
+  .group-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+  .judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .group-card img { height: 100px; }
+  .judge-grid-container .group-card img { height: 100px; }
 }
 </style>
 </head>
@@ -390,6 +422,11 @@ body::after {
         <div class="eyebrow">Audience Ranked Choice</div>
         <h2>Choose Your Top 3</h2>
         <p>Select your 1st, 2nd, and 3rd place teams. Each must be a different group. Your vote counts for 50% of the final score.</p>
+      </div>
+
+      <div class="student-grid">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;">All Groups</div>
+        <div class="group-grid" id="studentGroupGrid"></div>
       </div>
 
       <div class="info-note">
@@ -451,23 +488,30 @@ body::after {
   </header>
 
   <div class="main" style="max-width:760px;">
-    <div id="judgeScoreForm">
+    <div id="judgeGridContainer" class="judge-grid-section active">
       <div class="section-heading">
-        <div class="eyebrow">Judge Scoring</div>
-        <h2>Score a Group</h2>
-        <p>Select the group you are scoring, then rate each criterion. You can score multiple groups — one submission per group.</p>
+        <div class="eyebrow">Judge Panel</div>
+        <h2>Select a Group</h2>
+        <p>Click a group card to score it. Already-scored groups have a checkmark.</p>
+      </div>
+
+      <div class="judge-grid-container active">
+        <div class="group-grid" id="judgeGroupGrid"></div>
       </div>
 
       <div class="judge-progress">
         <span>Groups scored so far:</span>
         <span class="scored" id="judgeProgressText">0 / 12</span>
       </div>
+    </div>
 
-      <div class="group-selector-wrap">
-        <label>Select Group to Score</label>
-        <select class="group-selector" id="judgeGroupSelect">
-          <option value="">— Choose a group —</option>
-        </select>
+    <button class="back-to-grid-btn" id="backToJudgeGridBtn" onclick="backToJudgeGrid()" style="display:none;">← Back to Groups</button>
+
+    <div id="judgeScoreForm">
+      <div class="section-heading">
+        <div class="eyebrow">Judge Scoring</div>
+        <h2>Score a Group</h2>
+        <p>Rate each criterion below. Then submit to record your score.</p>
       </div>
 
       <div class="criteria-list" id="criteriaList">
@@ -672,11 +716,12 @@ const STORAGE = {
 let state = {
   currentCode: null,
   codeType: null, // 'student' | 'judge'
-  groups: [],
+  groups: [], // Array of { name: string, photo: string }
   codes: {}, // Local fallback only
   sheetUrl: 'https://script.google.com/macros/s/AKfycbwsPI6EQC4p9hCzeTqKQxRRyqg9DbK-ZWG1I5dw1fqIoBCiZvkhB8uVugWkrDS8wCoX/exec',
   judgeScored: [],
-  scoringMethod: 'comparative' // 'comparative' or 'absolute'
+  scoringMethod: 'comparative', // 'comparative' or 'absolute'
+  groupPhotos: {} // Map of group name to photo filename
 };
 
 const CRITERIA = [
@@ -763,8 +808,18 @@ async function fetchGroupsFromSheets() {
     console.log('Results response:', data);
 
     if (data.success && data.groups && data.groups.length > 0) {
-      // Extract just the group names from the results
-      state.groups = data.groups.map(g => g.name);
+      // Extract group names and photos from the results
+      state.groups = data.groups.map(g => ({
+        name: g.name,
+        photo: g.photo || ''  // Photo filename from Sheets
+      }));
+
+      // Build photo map for quick lookup
+      state.groupPhotos = {};
+      state.groups.forEach(g => {
+        state.groupPhotos[g.name] = g.photo;
+      });
+
       localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
       console.log('Groups updated in state:', state.groups);
       renderGroupInputs();
@@ -772,7 +827,10 @@ async function fetchGroupsFromSheets() {
     } else {
       console.log('No groups returned or response not successful');
       if (!state.groups || state.groups.length === 0) {
-        state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+        state.groups = Array.from({length: 12}, (_, i) => ({
+          name: `Group ${i + 1}`,
+          photo: `group${i + 1}.jpg`
+        }));
       }
     }
   } catch (e) {
@@ -782,7 +840,10 @@ async function fetchGroupsFromSheets() {
       state.groups = JSON.parse(stored);
       console.log('Using stored groups:', state.groups);
     } else if (!state.groups || state.groups.length === 0) {
-      state.groups = Array.from({length: 12}, (_, i) => `Group ${i + 1}`);
+      state.groups = Array.from({length: 12}, (_, i) => ({
+        name: `Group ${i + 1}`,
+        photo: `group${i + 1}.jpg`
+      }));
     }
   }
 }
@@ -823,7 +884,9 @@ function goHome() {
 
   // Reset Judge View Form
   document.getElementById('judgeSuccess').style.display = 'none';
-  document.getElementById('judgeScoreForm').style.display = 'block';
+  document.getElementById('judgeScoreForm').style.display = 'none';
+  document.getElementById('judgeGridContainer').style.display = 'block';
+  document.getElementById('backToJudgeGridBtn').style.display = 'none';
   document.getElementById('submitJudgeBtn').style.display = 'flex';
   document.getElementById('judgeGroupSelect').value = '';
   document.getElementById('judgeNotes').value = '';
@@ -903,6 +966,7 @@ async function submitCode() {
       await fetchGroupsFromSheets();
     }
     populateVoteDropdowns();
+    renderStudentGrid();
     showView('studentView');
   } else if (codeData.type === 'judge') {
     document.getElementById('judgeCodeBadge').textContent = raw;
@@ -912,11 +976,87 @@ async function submitCode() {
     }
     loadJudgeProgress();
     populateJudgeDropdown();
+    renderJudgeGrid();
     showView('judgeView');
   }
 
   btn.disabled = false;
   btn.textContent = 'Go →';
+}
+
+// ════════════════════════════════════════
+// JUDGE GRID & SELECTION
+// ════════════════════════════════════════
+function renderJudgeGrid() {
+  const grid = document.getElementById('judgeGroupGrid');
+  if (!grid) return;
+
+  if (!state.groups || state.groups.length === 0) return;
+
+  grid.innerHTML = state.groups.map(g => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    const photo = typeof g === 'string' ? '' : g.photo;
+    const isVoted = state.judgeScored && state.judgeScored.includes(groupName);
+
+    return `
+      <div class="group-card ${isVoted ? 'voted' : ''}" onclick="selectJudgeGroupFromGrid('${groupName}')">
+        <img src="./pics/${photo || 'placeholder.jpg'}" alt="${groupName}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Crect fill=%22%231a154f%22 width=%22160%22 height=%22160%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 fill=%22%238885a8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+        <div class="card-label">${groupName}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectJudgeGroupFromGrid(groupName) {
+  document.getElementById('judgeGroupSelect').value = groupName;
+  document.getElementById('judgeGridContainer').style.display = 'none';
+  document.getElementById('judgeScoreForm').style.display = 'block';
+  document.getElementById('backToJudgeGridBtn').style.display = 'block';
+  judgeScores = {};
+  renderCriteria();
+}
+
+function backToJudgeGrid() {
+  document.getElementById('judgeGridContainer').style.display = 'block';
+  document.getElementById('judgeScoreForm').style.display = 'none';
+  document.getElementById('backToJudgeGridBtn').style.display = 'none';
+  document.getElementById('judgeGroupSelect').value = '';
+  judgeScores = {};
+  renderJudgeGrid();
+}
+
+function updateJudgeGridCheckmarks() {
+  const cards = document.querySelectorAll('.group-card');
+  cards.forEach(card => {
+    const cardLabel = card.querySelector('.card-label').textContent.trim();
+    if (state.judgeScored && state.judgeScored.includes(cardLabel)) {
+      card.classList.add('voted');
+    } else {
+      card.classList.remove('voted');
+    }
+  });
+}
+
+// ════════════════════════════════════════
+// STUDENT GRID
+// ════════════════════════════════════════
+function renderStudentGrid() {
+  const grid = document.getElementById('studentGroupGrid');
+  if (!grid) return;
+
+  if (!state.groups || state.groups.length === 0) return;
+
+  grid.innerHTML = state.groups.map(g => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    const photo = typeof g === 'string' ? '' : g.photo;
+
+    return `
+      <div class="group-card">
+        <img src="./pics/${photo || 'placeholder.jpg'}" alt="${groupName}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%231a154f%22 width=%22120%22 height=%22120%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 fill=%22%238885a8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+        <div class="card-label">${groupName}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 // ════════════════════════════════════════
@@ -930,7 +1070,8 @@ function populateVoteDropdowns() {
     // Use actual groups from state (not fallback)
     if (state.groups && state.groups.length > 0) {
       state.groups.forEach(g => {
-        if (g && g.trim()) sel.innerHTML += `<option value="${g}">${g}</option>`;
+        const groupName = typeof g === 'string' ? g : g.name;
+        if (groupName && groupName.trim()) sel.innerHTML += `<option value="${groupName}">${groupName}</option>`;
       });
     }
   });
@@ -1022,9 +1163,10 @@ function populateJudgeDropdown() {
   // Use actual groups from state (not fallback)
   if (state.groups && state.groups.length > 0) {
     state.groups.forEach(g => {
-      if (g && g.trim()) {
-        const scored = state.judgeScored && state.judgeScored.includes(g);
-        sel.innerHTML += `<option value="${g}">${scored ? '✓ ' : ''}${g}</option>`;
+      const groupName = typeof g === 'string' ? g : g.name;
+      if (groupName && groupName.trim()) {
+        const scored = state.judgeScored && state.judgeScored.includes(groupName);
+        sel.innerHTML += `<option value="${groupName}">${scored ? '✓ ' : ''}${groupName}</option>`;
       }
     });
   }
@@ -1038,7 +1180,10 @@ function loadJudgeProgress() {
 }
 
 function updateJudgeProgress() {
-  const total = state.groups.filter(g => g.trim()).length;
+  const total = state.groups.filter(g => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    return groupName && groupName.trim();
+  }).length;
   const done = state.judgeScored ? state.judgeScored.length : 0;
   document.getElementById('judgeProgressText').textContent = `${done} / ${total}`;
 }
@@ -1080,9 +1225,11 @@ async function submitJudgeScore() {
     if (!state.judgeScored.includes(group)) state.judgeScored.push(group);
     localStorage.setItem(`judge_progress_${state.currentCode}`, JSON.stringify(state.judgeScored));
     updateJudgeProgress();
+    updateJudgeGridCheckmarks();
 
     document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/21 recorded for ${group}.`;
     document.getElementById('judgeScoreForm').style.display = 'none';
+    document.getElementById('backToJudgeGridBtn').style.display = 'none';
     document.getElementById('judgeSuccess').style.display = 'flex';
   } else {
     err.textContent = 'Submission failed. Please try again.';
@@ -1093,14 +1240,7 @@ async function submitJudgeScore() {
 }
 
 function judgeScoreAnother() {
-  judgeScores = {};
-  document.getElementById('judgeGroupSelect').value = '';
-  document.getElementById('judgeNotes').value = '';
-  document.getElementById('judgeError').textContent = '';
-  renderCriteria();
-  populateJudgeDropdown();
-  document.getElementById('judgeSuccess').style.display = 'none';
-  document.getElementById('judgeScoreForm').style.display = 'block';
+  backToJudgeGrid();
 }
 
 // ════════════════════════════════════════
@@ -1197,7 +1337,10 @@ function displayScoringInfo(data) {
 }
 
 function renderLocalResults() {
-  const groups = state.groups.filter(g => g.trim());
+  const groups = state.groups.filter(g => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    return groupName && groupName.trim();
+  });
   document.getElementById('statGroups').textContent = groups.length;
   document.getElementById('statVotes').textContent = '—';
   document.getElementById('statJudge').textContent = '—';
@@ -1208,15 +1351,18 @@ function renderLocalResults() {
     tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px;">No groups configured yet. Go to Setup tab.</td></tr>';
     return;
   }
-  tbody.innerHTML = groups.map((g, i) => `
+  tbody.innerHTML = groups.map((g, i) => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    return `
     <tr>
       <td><span class="rank-badge rn">${i+1}</span></td>
-      <td><div class="group-name">${g}</div></td>
+      <td><div class="group-name">${groupName}</div></td>
       <td style="color:var(--muted);">—</td>
       <td style="color:var(--muted);">—</td>
       <td class="final-score">—</td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function renderResults(data) {
@@ -1285,23 +1431,34 @@ function renderGroupInputs() {
   if (!wrap) return;
 
   // Ensure we have at least 12 groups to display
-  const groupsToRender = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => '');
+  const groupsToRender = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => ({ name: '', photo: '' }));
 
   // Pad to 12 if needed
   while (groupsToRender.length < 12) {
-    groupsToRender.push('');
+    groupsToRender.push({ name: '', photo: '' });
   }
 
-  wrap.innerHTML = Array.from({length: 12}, (_, i) => `
-    <input class="setup-input" id="gname-${i}" placeholder="Group ${i+1}" value="${groupsToRender[i] || ''}">
-  `).join('');
+  wrap.innerHTML = Array.from({length: 12}, (_, i) => {
+    const group = groupsToRender[i] || {};
+    const groupName = typeof group === 'string' ? group : (group.name || '');
+    const photo = typeof group === 'string' ? '' : (group.photo || '');
+    return `
+      <div style="display: flex; gap: 8px;">
+        <input class="setup-input" id="gname-${i}" placeholder="Group ${i+1}" value="${groupName}" style="flex: 1;">
+        <input class="setup-input" id="gphoto-${i}" placeholder="e.g. group${i+1}.jpg" value="${photo}" style="flex: 0 0 140px;">
+      </div>
+    `;
+  }).join('');
 }
 
 function saveGroups() {
   state.groups = Array.from({length: 12}, (_, i) => {
-    const el = document.getElementById(`gname-${i}`);
-    return el ? el.value.trim() : '';
-  }).filter(g => g); // Remove empty strings
+    const nameEl = document.getElementById(`gname-${i}`);
+    const photoEl = document.getElementById(`gphoto-${i}`);
+    const name = nameEl ? nameEl.value.trim() : '';
+    const photo = photoEl ? photoEl.value.trim() : '';
+    return name ? { name, photo } : null;
+  }).filter(g => g); // Remove empty/null entries
 
   localStorage.setItem(STORAGE.groups, JSON.stringify(state.groups));
 
@@ -1311,7 +1468,7 @@ function saveGroups() {
   }
 
   populateGroupDropdowns();
-  document.getElementById('setupMsg').textContent = '✓ Group names saved.';
+  document.getElementById('setupMsg').textContent = '✓ Group names and photos saved.';
   setTimeout(() => document.getElementById('setupMsg').textContent = '', 3000);
 }
 
