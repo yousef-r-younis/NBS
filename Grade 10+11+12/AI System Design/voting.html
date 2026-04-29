@@ -723,7 +723,8 @@ let state = {
   sheetUrl: 'https://script.google.com/macros/s/AKfycbyvCM0Th1uynE5dk1zA-7JGjkgi3AltxJl6Xlk3T-RLijmlMFhcLHuRz5bpS3WRpNRe/exec',
   judgeScored: [],
   scoringMethod: 'comparative', // 'comparative' or 'absolute'
-  groupPhotos: {} // Map of group name to photo filename
+  groupPhotos: {}, // Map of group name to photo filename
+  selectedJudgeGroup: null // Currently selected group for judging
 };
 
 const CRITERIA = [
@@ -896,7 +897,7 @@ function goHome() {
   document.getElementById('judgeGridContainer').style.display = 'block';
   document.getElementById('backToJudgeGridBtn').style.display = 'none';
   document.getElementById('submitJudgeBtn').style.display = 'flex';
-  document.getElementById('judgeGroupSelect').value = '';
+  state.selectedJudgeGroup = null;
   document.getElementById('judgeNotes').value = '';
   document.querySelectorAll('.score-btn').forEach(b => b.className = 'score-btn');
   judgeScores = {};
@@ -1026,7 +1027,7 @@ function renderJudgeGrid() {
 
 function selectJudgeGroupFromGrid(groupName) {
   console.log('Selected group:', groupName);
-  document.getElementById('judgeGroupSelect').value = groupName;
+  state.selectedJudgeGroup = groupName;
   document.getElementById('judgeGridContainer').style.display = 'none';
   document.getElementById('judgeScoreForm').style.display = 'block';
   document.getElementById('backToJudgeGridBtn').style.display = 'block';
@@ -1035,10 +1036,11 @@ function selectJudgeGroupFromGrid(groupName) {
 }
 
 function backToJudgeGrid() {
+  state.selectedJudgeGroup = null;
   document.getElementById('judgeGridContainer').style.display = 'block';
   document.getElementById('judgeScoreForm').style.display = 'none';
   document.getElementById('backToJudgeGridBtn').style.display = 'none';
-  document.getElementById('judgeGroupSelect').value = '';
+  document.getElementById('judgeNotes').value = '';
   judgeScores = {};
   renderJudgeGrid();
 }
@@ -1209,7 +1211,7 @@ function updateJudgeProgress() {
 }
 
 async function submitJudgeScore() {
-  const group = document.getElementById('judgeGroupSelect').value;
+  const group = state.selectedJudgeGroup;
   const notes = document.getElementById('judgeNotes').value;
   const err = document.getElementById('judgeError');
 
