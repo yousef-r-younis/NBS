@@ -1011,14 +1011,15 @@ function renderJudgeGrid() {
 
   console.log('Rendering judge grid with', state.groups.length, 'groups');
 
-  grid.innerHTML = state.groups.map(g => {
+  grid.innerHTML = state.groups.map((g, idx) => {
     const groupName = typeof g === 'string' ? g : g.name;
     const photo = typeof g === 'string' ? '' : g.photo;
+    const photoFilename = photo || `group${idx + 1}.jpg`; // Fall back to group1.jpg, group2.jpg, etc.
     const isVoted = state.judgeScored && state.judgeScored.includes(groupName);
 
     return `
       <div class="group-card ${isVoted ? 'voted' : ''}" onclick="selectJudgeGroupFromGrid('${groupName}')">
-        <img src="./pics/${photo || 'placeholder.jpg'}" alt="${groupName}">
+        <img src="./pics/${photoFilename}" alt="${groupName}">
         <div class="card-label">${groupName}</div>
       </div>
     `;
@@ -1066,13 +1067,14 @@ function renderStudentGrid() {
 
   if (!state.groups || state.groups.length === 0) return;
 
-  grid.innerHTML = state.groups.map(g => {
+  grid.innerHTML = state.groups.map((g, idx) => {
     const groupName = typeof g === 'string' ? g : g.name;
     const photo = typeof g === 'string' ? '' : g.photo;
+    const photoFilename = photo || `group${idx + 1}.jpg`; // Fall back to group1.jpg, group2.jpg, etc.
 
     return `
       <div class="group-card">
-        <img src="./pics/${photo || 'placeholder.jpg'}" alt="${groupName}">
+        <img src="./pics/${photoFilename}" alt="${groupName}">
         <div class="card-label">${groupName}</div>
       </div>
     `;
