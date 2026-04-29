@@ -989,7 +989,7 @@ async function submitCode() {
 // ════════════════════════════════════════
 function renderJudgeGrid() {
   const grid = document.getElementById('judgeGroupGrid');
-  if (!grid) return;
+  if (!grid) return; // Element doesn't exist yet
 
   if (!state.groups || state.groups.length === 0) return;
 
@@ -1042,7 +1042,7 @@ function updateJudgeGridCheckmarks() {
 // ════════════════════════════════════════
 function renderStudentGrid() {
   const grid = document.getElementById('studentGroupGrid');
-  if (!grid) return;
+  if (!grid) return; // Element doesn't exist yet
 
   if (!state.groups || state.groups.length === 0) return;
 
@@ -1158,6 +1158,8 @@ function selectScore(key, val, btn) {
 
 function populateJudgeDropdown() {
   const sel = document.getElementById('judgeGroupSelect');
+  if (!sel) return; // Element doesn't exist yet
+
   sel.innerHTML = '<option value="">— Choose a group —</option>';
 
   // Use actual groups from state (not fallback)
