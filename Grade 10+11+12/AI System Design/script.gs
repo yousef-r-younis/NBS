@@ -256,12 +256,13 @@ function handleJudgeScore(payload) {
     );
     if (rowIdx >= 0) {
       const s = payload.scores;
-      sheet.getRange(rowIdx + 1, 1, 1, 12).setValues([[
+      sheet.getRange(rowIdx + 1, 1, 1, 14).setValues([[
         payload.timestamp || new Date().toISOString(),
         payload.code,
         payload.group,
         s.problem || 0, s.solution || 0, s.data || 0,
         s.ethics || 0, s.limitations || 0, s.future || 0, s.realworld || 0,
+        s.presentation || 0, s.product || 0,
         payload.total || 0,
         payload.notes || ''
       ]]);
@@ -276,6 +277,7 @@ function handleJudgeScore(payload) {
     payload.group,
     s.problem || 0, s.solution || 0, s.data || 0,
     s.ethics || 0, s.limitations || 0, s.future || 0, s.realworld || 0,
+    s.presentation || 0, s.product || 0,
     payload.total || 0,
     payload.notes || ''
   ]);
