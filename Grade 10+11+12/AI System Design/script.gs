@@ -237,8 +237,8 @@ function handleJudgeScore(payload) {
   const headers = [
     'Timestamp', 'Judge Code', 'Group',
     'Problem', 'AI Solution', 'Data & Bias',
-    'Ethics', 'Limitations', 'Future Work', 'Real-World',
-    'Total (/21)', 'Notes'
+    'Ethics', 'Limitations', 'Future Work', 'Real-World', 'Presentation', 'Product',
+    'Total (/27)', 'Notes'
   ];
 
   const sheet = getOrCreateSheet(SHEETS.judges, headers);
@@ -338,7 +338,7 @@ function handleGetResults() {
     const jData = judgesSheet.getDataRange().getValues().slice(1);
     jData.forEach(row => {
       const group = row[2];
-      const total = parseFloat(row[10]) || 0;
+      const total = parseFloat(row[12]) || 0;
       if (judgeData.hasOwnProperty(group)) {
         judgeData[group].scores.push(total);
         judgeData[group].count++;
@@ -354,7 +354,7 @@ function handleGetResults() {
 
   // ── COMBINE & CALCULATE FINAL ──
   const maxAudience = Math.max(...groupsList.map(g => audiencePts[g.name] || 0), 1);
-  const maxJudge = 21;
+  const maxJudge = 27;
 
   const result = groupsList.map(g => {
     const scores = judgeData[g.name] ? judgeData[g.name].scores : [];
@@ -431,8 +431,8 @@ function setupSheets() {
   getOrCreateSheet(SHEETS.judges, [
     'Timestamp', 'Judge Code', 'Group',
     'Problem', 'AI Solution', 'Data & Bias',
-    'Ethics', 'Limitations', 'Future Work', 'Real-World',
-    'Total (/21)', 'Notes'
+    'Ethics', 'Limitations', 'Future Work', 'Real-World', 'Presentation', 'Product',
+    'Total (/27)', 'Notes'
   ]);
 
   getOrCreateSheet(SHEETS.groups, ['Name', 'Members', 'Section', 'Photo']);

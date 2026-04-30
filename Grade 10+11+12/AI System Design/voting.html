@@ -590,7 +590,7 @@ body::after {
               <tr>
                 <th>#</th>
                 <th>Group</th>
-                <th>Judge Score <br><span style="font-weight:400; opacity:0.6;">/21 avg</span></th>
+                <th>Judge Score <br><span style="font-weight:400; opacity:0.6;">/27 avg</span></th>
                 <th>Audience Pts</th>
                 <th>Final Score <br><span style="font-weight:400; opacity:0.6;">50/50</span></th>
               </tr>
@@ -728,13 +728,15 @@ let state = {
 };
 
 const CRITERIA = [
-  { key: 'problem',     name: 'Problem Clarity',        hint: 'Real, specific, compelling — not vague or generic' },
-  { key: 'solution',    name: 'AI Solution + ML Type',  hint: 'ML type named, justified, and clearly explained' },
-  { key: 'data',        name: 'Data & Bias',             hint: 'Data sources named + bias type + specific mitigation' },
-  { key: 'ethics',      name: 'Ethics & Impact',         hint: 'Specific harm scenario named + safeguards explained' },
-  { key: 'limitations', name: 'Limitations & Risks',     hint: '2+ specific failure scenarios given' },
-  { key: 'future',      name: 'Future Work',             hint: 'Ambitious, specific, and grounded — not generic' },
-  { key: 'realworld',   name: 'Real-World Examples',     hint: 'Named + meaningfully compared to their system' },
+  { key: 'problem',     name: 'Problem Clarity',        hint: 'Is the problem specific, well-defined, and genuinely worth solving?' },
+  { key: 'solution',    name: 'AI Solution + ML Type',  hint: 'Is a specific ML type named and justified? Explained clearly?' },
+  { key: 'data',        name: 'Data & Bias',             hint: 'Are data sources named? Is bias addressed with a plan for fairness?' },
+  { key: 'ethics',      name: 'Ethics & Impact',         hint: 'Is there a specific harm scenario with technical safeguards in place?' },
+  { key: 'limitations', name: 'Limitations & Risks',     hint: 'Are 2+ specific failure modes or weaknesses acknowledged?' },
+  { key: 'future',      name: 'Future Work',             hint: 'Is the roadmap ambitious, grounded, and exciting?' },
+  { key: 'realworld',   name: 'Real-World Examples',     hint: 'Named examples mentioned? How does their system differ uniquely?' },
+  { key: 'presentation', name: 'Presentation Skills',     hint: 'Was the pitch structured logically and delivered with confidence?' },
+  { key: 'product',     name: 'Product Persuasiveness',   hint: 'How convincing is the overall vision? Do you want this to exist?' },
 ];
 
 // ════════════════════════════════════════
@@ -1251,7 +1253,7 @@ async function submitJudgeScore() {
     updateJudgeProgress();
     updateJudgeGridCheckmarks();
 
-    document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/21 recorded for ${group}.`;
+    document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/27 recorded for ${group}.`;
     document.getElementById('judgeScoreForm').style.display = 'none';
     document.getElementById('backToJudgeGridBtn').style.display = 'none';
     document.getElementById('judgeSuccess').style.display = 'flex';
@@ -1354,9 +1356,9 @@ function displayScoringInfo(data) {
 
   if (state.scoringMethod === 'absolute') {
     const maxPossible = (data.totalVotes || 0) * 3;
-    infoEl.textContent = `⭐ ABSOLUTE SCORING: Judge score graded against perfect 21 points. Audience score graded against maximum possible (${maxPossible} pts = ${data.totalVotes || 0} voters × 3 points each). This method ensures no artificial boost — scores reflect true dominance.`;
+    infoEl.textContent = `⭐ ABSOLUTE SCORING: Judge score graded against perfect 27 points. Audience score graded against maximum possible (${maxPossible} pts = ${data.totalVotes || 0} voters × 3 points each). This method ensures no artificial boost — scores reflect true dominance.`;
   } else {
-    infoEl.textContent = `📊 COMPARATIVE SCORING: Groups ranked against each other. Judge score normalized by max achievable (21 pts). Audience score normalized by highest-scoring group.`;
+    infoEl.textContent = `📊 COMPARATIVE SCORING: Groups ranked against each other. Judge score normalized by max achievable (27 pts). Audience score normalized by highest-scoring group.`;
   }
 }
 
@@ -1400,7 +1402,7 @@ function renderResults(data) {
   const totalCodesCount = data.totalCodes || 0;
   document.getElementById('statCodesLeft').textContent = (totalCodesCount - (data.totalVotes || 0)) || '—';
 
-  const maxJudge = 21;
+  const maxJudge = 27;
 
   // Calculate max audience based on scoring method
   let maxAudience;
