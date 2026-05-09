@@ -345,13 +345,18 @@ body::after {
 .student-grid .group-grid { grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 12px; }
 .student-grid .group-card { border: 1px solid rgba(255,255,255,0.1); }
 .student-grid .group-card .card-label { padding: 8px 6px; font-size: 0.7rem; }
+/* New student tile layout: label shown under image */
+.group-tile { display: flex; flex-direction: column; align-items: center; }
+.group-tile .group-card { width: 100%; }
+.group-tile .group-card.img-only { aspect-ratio: 1; border-radius: 12px; overflow: hidden; }
+.group-tile .card-label.under { margin-top: 8px; padding: 6px 4px; font-size: 0.82rem; }
 
 .judge-grid-section { margin-bottom: 24px; }
 .judge-grid-section .section-heading { margin-bottom: 20px; }
 .judge-grid-container { display: none; }
 .judge-grid-container.active { display: block; }
 .judge-grid-container .group-grid { grid-template-columns: repeat(5, minmax(160px, 1fr)); gap: 16px; }
-.judge-grid-container .group-card img { height: 160px; }
+/* removed fixed height so images remain 1:1 inside .group-card aspect-ratio */
 .back-to-grid-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--muted); border-radius: 8px; padding: 10px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
 .back-to-grid-btn:hover { border-color: var(--gold); color: var(--gold); }
 
@@ -1071,9 +1076,11 @@ function renderStudentGrid() {
     const photoFilename = photo || `group${idx + 1}.jpg`; // Fall back to group1.jpg, group2.jpg, etc.
 
     return `
-      <div class="group-card">
-        <img src="./pics/${photoFilename}" alt="${groupName}">
-        <div class="card-label">${groupName}</div>
+      <div class="group-tile">
+        <div class="group-card img-only">
+          <img src="./pics/${photoFilename}" alt="${groupName}">
+        </div>
+        <div class="card-label under">${groupName}</div>
       </div>
     `;
   }).join('');
