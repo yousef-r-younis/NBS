@@ -330,7 +330,7 @@ body::after {
 .already-voted h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--danger); margin-bottom: 8px; }
 
 /* ── JUDGE & STUDENT GRIDS ── */
-.group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.group-grid { display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .group-card { position: relative; cursor: pointer; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); transition: all 0.2s; aspect-ratio: 1; }
 .group-card:hover { border-color: var(--gold); transform: translateY(-2px); }
 .group-card.voted { border-color: var(--gold); background: rgba(245,186,56,0.1); }
@@ -342,7 +342,7 @@ body::after {
 
 .student-grid { margin-bottom: 28px; }
 .student-grid .section-heading { margin-bottom: 16px; }
-.student-grid .group-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.student-grid .group-grid { grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 12px; }
 .student-grid .group-card { border: 1px solid rgba(255,255,255,0.1); }
 .student-grid .group-card .card-label { padding: 8px 6px; font-size: 0.7rem; }
 
@@ -350,7 +350,7 @@ body::after {
 .judge-grid-section .section-heading { margin-bottom: 20px; }
 .judge-grid-container { display: none; }
 .judge-grid-container.active { display: block; }
-.judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.judge-grid-container .group-grid { grid-template-columns: repeat(5, minmax(160px, 1fr)); gap: 16px; }
 .judge-grid-container .group-card img { height: 160px; }
 .back-to-grid-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--muted); border-radius: 8px; padding: 10px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
 .back-to-grid-btn:hover { border-color: var(--gold); color: var(--gold); }
@@ -499,7 +499,7 @@ body::after {
 
       <div class="judge-progress">
         <span>Groups scored so far:</span>
-        <span class="scored" id="judgeProgressText">0 / 12</span>
+        <span class="scored" id="judgeProgressText">0 / 10</span>
       </div>
     </div>
 
@@ -730,7 +730,7 @@ const CRITERIA = [
   { key: 'ethics',      name: 'Ethics & Impact',         hint: 'Is there a specific harm scenario with technical safeguards in place?' },
   { key: 'limitations', name: 'Limitations & Risks',     hint: 'Are 2+ specific failure modes or weaknesses acknowledged?' },
   { key: 'future',      name: 'Future Work',             hint: 'Is the roadmap ambitious, grounded, and exciting?' },
-  { key: 'realworld',   name: 'Real-World Examples',     hint: 'Named examples mentioned? How does their system differ uniquely?' },
+  { key: 'realworld',   name: 'PowerPoint Design',       hint: 'Does the presentation slide design look polished and convey the product effectively?' },
   { key: 'presentation', name: 'Presentation Skills',     hint: 'Was the pitch structured logically and delivered with confidence?' },
   { key: 'product',     name: 'Product Persuasiveness',   hint: 'How convincing is the overall vision? Do you want this to exist?' },
 ];
@@ -830,7 +830,7 @@ async function fetchGroupsFromSheets() {
     } else {
       console.log('No groups returned or response not successful');
       if (!state.groups || state.groups.length === 0) {
-        state.groups = Array.from({length: 12}, (_, i) => ({
+        state.groups = Array.from({length: 10}, (_, i) => ({
           name: `Group ${i + 1}`,
           members: '',
           section: '',
@@ -838,14 +838,14 @@ async function fetchGroupsFromSheets() {
         }));
       }
     }
-  } catch (e) {
+    } catch (e) {
     console.error('Error fetching groups from Sheets:', e);
     const stored = localStorage.getItem(STORAGE.groups);
     if (stored) {
       state.groups = JSON.parse(stored);
       console.log('Using stored groups:', state.groups);
     } else if (!state.groups || state.groups.length === 0) {
-      state.groups = Array.from({length: 12}, (_, i) => ({
+      state.groups = Array.from({length: 10}, (_, i) => ({
         name: `Group ${i + 1}`,
         members: '',
         section: '',
@@ -1452,15 +1452,15 @@ function renderGroupInputs() {
   const wrap = document.getElementById('groupNameInputs');
   if (!wrap) return;
 
-  // Ensure we have at least 12 groups to display
-  const groupsToRender = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 12}, (_, i) => ({ name: '', members: '', section: '', photo: '' }));
+  // Ensure we have at least 10 groups to display
+  const groupsToRender = state.groups && state.groups.length > 0 ? state.groups : Array.from({length: 10}, (_, i) => ({ name: '', members: '', section: '', photo: '' }));
 
-  // Pad to 12 if needed
-  while (groupsToRender.length < 12) {
+  // Pad to 10 if needed
+  while (groupsToRender.length < 10) {
     groupsToRender.push({ name: '', members: '', section: '', photo: '' });
   }
 
-  wrap.innerHTML = Array.from({length: 12}, (_, i) => {
+  wrap.innerHTML = Array.from({length: 10}, (_, i) => {
     const group = groupsToRender[i] || {};
     const groupName = typeof group === 'string' ? group : (group.name || '');
     const members = typeof group === 'string' ? '' : (group.members || '');
@@ -1477,7 +1477,7 @@ function renderGroupInputs() {
 }
 
 function saveGroups() {
-  state.groups = Array.from({length: 12}, (_, i) => {
+  state.groups = Array.from({length: 10}, (_, i) => {
     const nameEl = document.getElementById(`gname-${i}`);
     const membersEl = document.getElementById(`gmembers-${i}`);
     const photoEl = document.getElementById(`gphoto-${i}`);
