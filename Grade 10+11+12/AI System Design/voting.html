@@ -362,12 +362,14 @@ body::after {
 .back-to-grid-btn:hover { border-color: var(--gold); color: var(--gold); }
 
 @media (max-width: 768px) {
+  .main { padding: 24px 20px; }
   .group-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
   .judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
   .group-card .card-label { padding: 8px 6px; font-size: 0.7rem; }
 }
 
 @media (max-width: 600px) {
+  .main { padding: 16px 12px; }
   .group-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
   .judge-grid-container .group-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
 }
