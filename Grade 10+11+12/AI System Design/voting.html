@@ -9,25 +9,25 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #1A154F;
-  --gold: #F5BA38;
-  --gold-dim: rgba(245,186,56,0.15);
-  --gold-border: rgba(245,186,56,0.3);
-  --white: #ffffff;
-  --off: #f4f4f8;
-  --muted: #8885a8;
-  --text: #1a1a2e;
-  --card: #ffffff;
-  --danger: #e0436a;
-  --green: #2eb87a;
-  --border: rgba(26,21,79,0.12);
+  --navy: #F5F3FF;
+  --gold: #7C3AED;
+  --gold-dim: rgba(124, 58, 237, 0.1);
+  --gold-border: rgba(124, 58, 237, 0.2);
+  --white: #FFFFFF;
+  --off: #F5F3FF;
+  --muted: #6B7280;
+  --text: #1E1B2E;
+  --card: #FFFFFF;
+  --danger: #EF4444;
+  --green: #10B981;
+  --border: rgba(124, 58, 237, 0.15);
 }
 
 body {
   font-family: 'Barlow', sans-serif;
   background: var(--navy);
   min-height: 100vh;
-  color: var(--white);
+  color: var(--text);
   overflow-x: hidden;
 }
 
@@ -37,7 +37,7 @@ body::before {
   position: fixed;
   top: -100px; right: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(245,186,56,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
   pointer-events: none; z-index: 0;
 }
 body::after {
@@ -45,7 +45,7 @@ body::after {
   position: fixed;
   bottom: -100px; left: -100px;
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(245,186,56,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
   pointer-events: none; z-index: 0;
 }
 
@@ -60,7 +60,7 @@ body::after {
   align-items: center;
   gap: 16px;
   border-bottom: 1px solid var(--gold-border);
-  background: rgba(26,21,79,0.8);
+  background: rgba(237, 233, 254, 0.5);
   backdrop-filter: blur(10px);
   position: sticky; top: 0; z-index: 10;
 }
@@ -71,18 +71,18 @@ body::after {
   display: flex; align-items: center; justify-content: center;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem;
-  color: var(--navy);
+  color: var(--white);
   flex-shrink: 0;
 }
 .header-text .eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); opacity: 0.8;
+  color: var(--gold); opacity: 0.9;
 }
 .header-text .title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.1rem; font-weight: 700;
-  color: var(--white);
+  color: var(--text);
 }
 .header-badge {
   margin-left: auto;
@@ -128,7 +128,7 @@ body::after {
   font-size: clamp(2.5rem, 6vw, 4rem);
   line-height: 1;
   margin-bottom: 12px;
-  color: var(--white);
+  color: var(--text);
 }
 .code-screen h1 span { color: var(--gold); }
 .code-screen p {
@@ -145,7 +145,7 @@ body::after {
 }
 .code-input {
   flex: 1;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.6);
   border: 2px solid var(--gold-border);
   border-radius: 12px;
   padding: 16px 20px;
@@ -154,16 +154,16 @@ body::after {
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--text);
   outline: none;
   transition: border-color 0.2s;
   text-align: center;
 }
-.code-input::placeholder { color: rgba(255,255,255,0.2); letter-spacing: 2px; font-size: 1rem; }
+.code-input::placeholder { color: rgba(30, 27, 46, 0.3); letter-spacing: 2px; font-size: 1rem; }
 .code-input:focus { border-color: var(--gold); }
 .btn-enter {
   background: var(--gold);
-  color: var(--navy);
+  color: var(--white);
   border: none;
   border-radius: 12px;
   padding: 16px 24px;
@@ -174,7 +174,7 @@ body::after {
   transition: all 0.2s;
   white-space: nowrap;
 }
-.btn-enter:hover:not(:disabled) { background: #ffc94d; transform: translateY(-2px); }
+.btn-enter:hover:not(:disabled) { background: #9333EA; transform: translateY(-2px); }
 .btn-enter:disabled { opacity: 0.7; cursor: not-allowed; }
 .code-error {
   color: var(--danger);
@@ -192,14 +192,14 @@ body::after {
 }
 .section-heading h2 {
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1; color: var(--white);
+  line-height: 1; color: var(--text);
 }
 .section-heading p { color: var(--muted); font-size: 0.92rem; margin-top: 8px; line-height: 1.6; }
 
 /* ── VOTE CARDS ── */
 .vote-slots { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
 .vote-slot {
-  background: rgba(255,255,255,0.05); border: 1px solid var(--gold-border);
+  background: rgba(237, 233, 254, 0.4); border: 1px solid var(--gold-border);
   border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 16px;
 }
 .slot-rank { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); min-width: 36px; text-align: center; line-height: 1; }
@@ -208,32 +208,32 @@ body::after {
 .slot-rank.r3 { color: #CD7F32; }
 .slot-pts { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; min-width: 40px; }
 .slot-select {
-  flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px; padding: 10px 14px; color: var(--white); font-family: 'Barlow', sans-serif;
+  flex: 1; background: rgba(255,255,255,0.7); border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 8px; padding: 10px 14px; color: var(--text); font-family: 'Barlow', sans-serif;
   font-size: 0.92rem; outline: none; cursor: pointer; transition: border-color 0.2s;
-  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F5BA38' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237C3AED' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
   min-width: 0; overflow: hidden; text-overflow: ellipsis;
 }
 .slot-select:focus { border-color: var(--gold); }
-.slot-select option { background: var(--navy); }
+.slot-select option { background: var(--white); color: var(--text); }
 
 /* ── SUBMIT BTN ── */
 .btn-submit {
-  width: 100%; background: var(--gold); color: var(--navy); border: none;
+  width: 100%; background: var(--gold); color: var(--white); border: none;
   border-radius: 14px; padding: 18px; font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem; letter-spacing: 2px; cursor: pointer; transition: all 0.2s;
   display: flex; align-items: center; justify-content: center; gap: 10px;
 }
-.btn-submit:hover:not(:disabled) { background: #ffc94d; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,186,56,0.3); }
+.btn-submit:hover:not(:disabled) { background: #A855F7; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2); }
 .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
 /* ── JUDGE RUBRIC ── */
 .group-selector-wrap { margin-bottom: 28px; }
 .group-selector-wrap label { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-.group-selector { width: 100%; background: rgba(255,255,255,0.08); border: 2px solid var(--gold-border); border-radius: 12px; padding: 14px 18px; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; outline: none; cursor: pointer; appearance: none; }
+.group-selector { width: 100%; background: rgba(255,255,255,0.7); border: 2px solid var(--gold-border); border-radius: 12px; padding: 14px 18px; color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; outline: none; cursor: pointer; appearance: none; }
 .group-selector:focus { border-color: var(--gold); }
-.group-selector option { background: var(--navy); }
+.group-selector option { background: var(--white); color: var(--text); }
 
 .criteria-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
 .criteria-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 18px; }
