@@ -245,6 +245,8 @@ body::after {
 .score-btn.sel-1 { background: rgba(224,67,106,0.2); border-color: var(--danger); color: var(--danger); }
 .score-btn.sel-2 { background: rgba(245,186,56,0.15); border-color: var(--gold); color: var(--gold); }
 .score-btn.sel-3 { background: rgba(46,184,122,0.2); border-color: var(--green); color: var(--green); }
+.score-btn.sel-4 { background: rgba(46,184,122,0.3); border-color: var(--green); color: var(--green); }
+.score-btn.sel-5 { background: rgba(46,184,122,0.4); border-color: var(--green); color: var(--green); }
 
 .judge-notes-wrap { margin-bottom: 24px; }
 .judge-notes-wrap label { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
@@ -594,7 +596,7 @@ body::after {
               <tr>
                 <th>#</th>
                 <th>Group</th>
-                <th>Judge Score <br><span style="font-weight:400; opacity:0.6;">/27 avg</span></th>
+                <th>Judge Score <br><span style="font-weight:400; opacity:0.6;">/45 avg</span></th>
                 <th>Audience Pts</th>
                 <th>Final Score <br><span style="font-weight:400; opacity:0.6;">50/50</span></th>
               </tr>
@@ -1173,7 +1175,9 @@ function renderCriteria() {
       <div class="score-btns">
         <button class="score-btn" onclick="selectScore('${c.key}', 1, this)">1<br><span style="font-weight:400; font-size:0.7rem;">Weak</span></button>
         <button class="score-btn" onclick="selectScore('${c.key}', 2, this)">2<br><span style="font-weight:400; font-size:0.7rem;">Developing</span></button>
-        <button class="score-btn" onclick="selectScore('${c.key}', 3, this)">3<br><span style="font-weight:400; font-size:0.7rem;">Strong</span></button>
+        <button class="score-btn" onclick="selectScore('${c.key}', 3, this)">3<br><span style="font-weight:400; font-size:0.7rem;">Good</span></button>
+        <button class="score-btn" onclick="selectScore('${c.key}', 4, this)">4<br><span style="font-weight:400; font-size:0.7rem;">Very Good</span></button>
+        <button class="score-btn" onclick="selectScore('${c.key}', 5, this)">5<br><span style="font-weight:400; font-size:0.7rem;">Excellent</span></button>
       </div>
     </div>
   `).join('');
@@ -1261,7 +1265,7 @@ async function submitJudgeScore() {
     updateJudgeProgress();
     updateJudgeGridCheckmarks();
 
-    document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/27 recorded for ${group}.`;
+    document.getElementById('judgeSuccessMsg').textContent = `Score of ${total}/45 recorded for ${group}.`;
     document.getElementById('judgeScoreForm').style.display = 'none';
     document.getElementById('backToJudgeGridBtn').style.display = 'none';
     document.getElementById('judgeSuccess').style.display = 'flex';

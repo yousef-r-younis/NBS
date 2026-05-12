@@ -238,7 +238,7 @@ function handleJudgeScore(payload) {
     'Timestamp', 'Judge Code', 'Group',
     'Problem', 'AI Solution', 'Data & Bias',
     'Ethics', 'Limitations', 'Future Work', 'Real-World', 'Presentation', 'Product',
-    'Total (/27)', 'Notes'
+    'Total (/45)', 'Notes'
   ];
 
   const sheet = getOrCreateSheet(SHEETS.judges, headers);
@@ -356,7 +356,7 @@ function handleGetResults() {
 
   // ── COMBINE & CALCULATE FINAL ──
   const maxAudience = Math.max(...groupsList.map(g => audiencePts[g.name] || 0), 1);
-  const maxJudge = 27;
+  const maxJudge = 45;
 
   const result = groupsList.map(g => {
     const scores = judgeData[g.name] ? judgeData[g.name].scores : [];
