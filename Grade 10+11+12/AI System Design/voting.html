@@ -570,6 +570,7 @@ body::after {
     <button class="tab-btn active" onclick="adminTab('results', this)">Live Results</button>
     <button class="tab-btn" onclick="adminTab('setup', this)">Setup</button>
     <button class="tab-btn" onclick="adminTab('codes', this)">Codes</button>
+    <button class="tab-btn" onclick="adminTab('picker', this)">Random Picker</button>
   </div>
 
   <div class="main">
@@ -710,6 +711,29 @@ body::after {
         </div>
       </div>
 
+      <div id="tab-picker" style="display:none;">
+        <div class="setup-panel">
+          <h3>Random Group Picker</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:24px;">Click the button to randomly select a group to present. Already-picked groups appear with a strikethrough below.</p>
+
+          <button class="btn-control" id="pickBtn" onclick="pickRandomGroup()" style="background:var(--gold); color:#fff; border:none; padding:16px 32px; font-size:1.1rem; width:100%; margin-bottom:24px;">🎲 Pick Random Group</button>
+
+          <div id="pickerDisplay" style="background:rgba(124, 58, 237, 0.1); border:2px solid var(--gold-border); border-radius:14px; padding:32px; text-align:center; margin-bottom:24px; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">Current Pick:</div>
+            <div id="currentPick" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--gold); line-height:1;">—</div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:12px;">Picked Groups</div>
+            <div id="pickedList" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
+              <div style="color:var(--muted); font-size:0.9rem; grid-column:1/-1; text-align:center; padding:20px;">No groups picked yet</div>
+            </div>
+          </div>
+
+          <button class="btn-control danger" onclick="resetPicker()" style="width:100%;">🔄 Reset Picker</button>
+        </div>
+      </div>
+
     </div></div>
 </div>
 
@@ -723,7 +747,8 @@ const STORAGE = {
   codes:     'lns_codes',
   sheetUrl:  'lns_sheet_url',
   judgeProgress: 'lns_judge_progress',
-  scoringMethod: 'lns_scoring_method'
+  scoringMethod: 'lns_scoring_method',
+  pickedGroups: 'lns_picked_groups'
 };
 
 let state = {
@@ -735,7 +760,8 @@ let state = {
   judgeScored: [],
   scoringMethod: 'comparative', // 'comparative' or 'absolute'
   groupPhotos: {}, // Map of group name to photo filename
-  selectedJudgeGroup: null // Currently selected group for judging
+  selectedJudgeGroup: null, // Currently selected group for judging
+  pickedGroups: [] // Groups that have been randomly picked
 };
 
 const CRITERIA = [
@@ -801,6 +827,11 @@ function loadFromStorage() {
     state.scoringMethod = sm;
     const el = document.getElementById('scoringMethod');
     if (el) el.value = sm;
+  }
+
+  const pg = localStorage.getItem(STORAGE.pickedGroups);
+  if (pg) {
+    state.pickedGroups = JSON.parse(pg);
   }
 
   // Display the sheet URL in the input field
@@ -1309,7 +1340,7 @@ function checkAdminPw() {
 function adminTab(tab, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  ['results', 'setup', 'codes'].forEach(t => {
+  ['results', 'setup', 'codes', 'picker'].forEach(t => {
     const el = document.getElementById(`tab-${t}`);
     if (el) el.style.display = t === tab ? 'block' : 'none';
   });
@@ -1317,6 +1348,11 @@ function adminTab(tab, btn) {
   // Fetch and display codes when codes tab is opened
   if (tab === 'codes') {
     fetchAndDisplayCodes();
+  }
+
+  // Render picker when picker tab is opened
+  if (tab === 'picker') {
+    renderPickedGroups();
   }
 }
 
@@ -1935,6 +1971,77 @@ function exportCSV() {
   a.href = URL.createObjectURL(blob);
   a.download = 'lns_ai_results.csv';
   a.click();
+}
+
+// ════════════════════════════════════════
+// RANDOM GROUP PICKER
+// ════════════════════════════════════════
+function pickRandomGroup() {
+  if (!state.groups || state.groups.length === 0) {
+    alert('No groups configured yet. Go to Setup tab first.');
+    return;
+  }
+
+  const availableGroups = state.groups.filter(g => {
+    const groupName = typeof g === 'string' ? g : g.name;
+    return groupName && groupName.trim() && !state.pickedGroups.includes(groupName);
+  });
+
+  if (availableGroups.length === 0) {
+    alert('All groups have been picked! Click "Reset Picker" to start over.');
+    return;
+  }
+
+  const randomGroup = availableGroups[Math.floor(Math.random() * availableGroups.length)];
+  const groupName = typeof randomGroup === 'string' ? randomGroup : randomGroup.name;
+
+  // Add to picked list if not already there
+  if (!state.pickedGroups.includes(groupName)) {
+    state.pickedGroups.push(groupName);
+    localStorage.setItem(STORAGE.pickedGroups, JSON.stringify(state.pickedGroups));
+  }
+
+  // Display current pick
+  document.getElementById('currentPick').textContent = groupName;
+
+  renderPickedGroups();
+}
+
+function renderPickedGroups() {
+  const pickedList = document.getElementById('pickedList');
+
+  if (state.pickedGroups.length === 0) {
+    pickedList.innerHTML = '<div style="color:var(--muted); font-size:0.9rem; grid-column:1/-1; text-align:center; padding:20px;">No groups picked yet</div>';
+    return;
+  }
+
+  const allGroups = state.groups.map(g => typeof g === 'string' ? g : g.name).filter(n => n && n.trim());
+
+  pickedList.innerHTML = allGroups.map(groupName => {
+    const isPicked = state.pickedGroups.includes(groupName);
+    return `
+      <div style="
+        background:${isPicked ? 'rgba(124, 58, 237, 0.1)' : 'rgba(255,255,255,0.05)'};
+        border:1px solid ${isPicked ? 'var(--gold-border)' : 'rgba(255,255,255,0.1)'};
+        border-radius:10px;
+        padding:12px 16px;
+        text-align:center;
+        font-family:'Barlow Condensed',sans-serif;
+        font-weight:700;
+        color:${isPicked ? 'var(--text)' : 'var(--muted)'};
+        ${isPicked ? 'text-decoration: line-through; opacity: 0.6;' : ''}
+      ">${groupName}</div>
+    `;
+  }).join('');
+}
+
+function resetPicker() {
+  if (confirm('Reset the picker and clear all picked groups?')) {
+    state.pickedGroups = [];
+    localStorage.removeItem(STORAGE.pickedGroups);
+    document.getElementById('currentPick').textContent = '—';
+    renderPickedGroups();
+  }
 }
 </script>
 </body>
